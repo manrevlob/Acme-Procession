@@ -18,10 +18,67 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		
+		<bean class="converters.BrotherToStringConverter" />
+		<bean class="converters.StringToBrotherConverter" />
+		
+		<bean class="converters.ViewerToStringConverter" />
+		<bean class="converters.StringToViewerConverter" />
+		
+		<bean class="converters.AssessmentToStringConverter" />
+		<bean class="converters.StringToAssessmentConverter" />
+		
+		<bean class="converters.BrotherhoodToStringConverter" />
+		<bean class="converters.StringToBrotherhoodConverter" />
+		
+		<bean class="converters.ProcessionToStringConverter" />
+		<bean class="converters.StringToProcessionConverter" />
+		
+		<bean class="converters.StretchToStringConverter" />
+		<bean class="converters.StringToStretchConverter" />
+		
+		<bean class="converters.OrdinaryStretchToStringConverter" />
+		<bean class="converters.StringToOrdinaryStretchConverter" />
+		
+		<bean class="converters.CarvingStretchToStringConverter" />
+		<bean class="converters.StringToCarvingStretchConverter" />
+		
+		<bean class="converters.CostumeToStringConverter" />
+		<bean class="converters.StringToCostumeConverter" />
+		
+		<bean class="converters.CostumeReserveToStringConverter" />
+		<bean class="converters.StringToCostumeReserveConverter" />
+		
+		<bean class="converters.CostumeInvoiceToStringConverter" />
+		<bean class="converters.StringToCostumeInvoiceConverter" />
+		
+		<bean class="converters.BoxToStringConverter" />
+		<bean class="converters.StringToBoxConverter" />
+		
+		<bean class="converters.BoxReserveToStringConverter" />
+		<bean class="converters.StringToBoxReserveConverter" />
+		
+		<bean class="converters.BoxReserveToStringConverter" />
+		<bean class="converters.StringToBoxReserveConverter" />
+		
+		<bean class="converters.BoxInvoiceToStringConverter" />
+		<bean class="converters.StringToBoxInvoiceConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+		
+		<bean class="converters.MessageFolderToStringConverter" />
+		<bean class="converters.StringToMessageFolderConverter" />
+		
 	</util:list>
 	
 </beans>
