@@ -17,7 +17,7 @@ public class StringToFloatStretchConverter implements Converter<String, FloatStr
 
 	@Override
 	public FloatStretch convert(String text) {
-		Float result;
+		FloatStretch result;
 		int id;
 
 		try {
