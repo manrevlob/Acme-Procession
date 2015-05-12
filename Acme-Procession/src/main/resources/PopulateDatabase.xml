@@ -474,6 +474,10 @@
 				<ref bean="brotherhood1" />
 			</list>
 		</property>
+		<property name="ownBrotherhoods">
+			<list>
+			</list>
+		</property>
 		<property name="registrations">
 			<list>
 				<ref bean="registration5" />

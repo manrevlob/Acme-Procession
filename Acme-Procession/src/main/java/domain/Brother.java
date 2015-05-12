@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -37,7 +39,8 @@ public class Brother extends Customer {
 	}
 
 	@Valid
-	@ManyToMany(mappedBy = "bigBrothers")
+	@ManyToMany
+	@JoinTable(name = "bigBrother_ownBrotherhood", joinColumns = @JoinColumn(name = "bigBrother_id"), inverseJoinColumns = @JoinColumn(name = "ownBrotherhood_id"))
 	public Collection<Brotherhood> getOwnBrotherhoods() {
 		return ownBrotherhoods;
 	}
