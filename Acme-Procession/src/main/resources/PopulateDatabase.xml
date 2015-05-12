@@ -371,6 +371,70 @@
 	</bean>
 
 
+	<!-- Brotherhood -->
+
+	<bean id="brotherhood1" class="domain.Brotherhood">
+		<property name="name" value="Brotherhood1Name" />
+		<property name="foundationYear" value="1978" />
+		<property name="history" value="Brotherhood1History" />
+		<property name="brothers">
+			<list>
+				<ref bean="brother1" />
+				<ref bean="brother2" />
+				<ref bean="brother3" />
+			</list>
+		</property>
+		<property name="bigBrothers">
+			<list>
+				<ref bean="brother1" />
+			</list>
+		</property>
+		<property name="processions">
+			<list>
+				<ref bean="procession1" />
+				<ref bean="procession2" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving1" />
+				<ref bean="carving2" />
+				<ref bean="carving3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="brotherhood2" class="domain.Brotherhood">
+		<property name="name" value="Brotherhood2Name" />
+		<property name="foundationYear" value="2015" />
+		<property name="history" value="Brotherhood2History" />
+		<property name="brothers">
+			<list>
+				<ref bean="brother2" />
+				<ref bean="brother3" />
+				<ref bean="brother4" />
+			</list>
+		</property>
+		<property name="bigBrothers">
+			<list>
+				<ref bean="brother2" />
+				<ref bean="brother4" />
+			</list>
+		</property>
+		<property name="processions">
+			<list>
+				<ref bean="procession3" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving4" />
+				<ref bean="carving5" />
+			</list>
+		</property>
+	</bean>
+
+
 	<!-- Administrator -->
 
 	<bean id="administrator1" class="domain.Administrator">
@@ -576,70 +640,6 @@
 	</bean>
 
 
-	<!-- Brotherhood -->
-
-	<bean id="brotherhood1" class="domain.Brotherhood">
-		<property name="name" value="Brotherhood1Name" />
-		<property name="foundationYear" value="1978" />
-		<property name="history" value="Brotherhood1History" />
-		<property name="brothers">
-			<list>
-				<ref bean="brother1" />
-				<ref bean="brother2" />
-				<ref bean="brother3" />
-			</list>
-		</property>
-		<property name="bigBrothers">
-			<list>
-				<ref bean="brother1" />
-			</list>
-		</property>
-		<property name="processions">
-			<list>
-				<ref bean="procession1" />
-				<ref bean="procession2" />
-			</list>
-		</property>
-		<property name="carvings">
-			<list>
-				<ref bean="carving1" />
-				<ref bean="carving2" />
-				<ref bean="carving3" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="brotherhood2" class="domain.Brotherhood">
-		<property name="name" value="Brotherhood2Name" />
-		<property name="foundationYear" value="2015" />
-		<property name="history" value="Brotherhood2History" />
-		<property name="brothers">
-			<list>
-				<ref bean="brother2" />
-				<ref bean="brother3" />
-				<ref bean="brother4" />
-			</list>
-		</property>
-		<property name="bigBrothers">
-			<list>
-				<ref bean="brother2" />
-				<ref bean="brother4" />
-			</list>
-		</property>
-		<property name="processions">
-			<list>
-				<ref bean="procession3" />
-			</list>
-		</property>
-		<property name="carvings">
-			<list>
-				<ref bean="carving4" />
-				<ref bean="carving5" />
-			</list>
-		</property>
-	</bean>
-
-
 	<!-- Procession -->
 
 	<bean id="procession1" class="domain.Procession">
@@ -712,6 +712,74 @@
 			<list>
 				<ref bean="registration6" />
 				<ref bean="registration7" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- Carving -->
+
+	<bean id="carving1" class="domain.Carving">
+		<property name="name" value="Carving1Name" />
+		<property name="description" value="Carving1Description" />
+		<property name="author" value="Carving1Author" />
+		<property name="year" value="1971" />
+		<property name="comments" value="Carving1Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving2" class="domain.Carving">
+		<property name="name" value="Carving2Name" />
+		<property name="description" value="Carving2Description" />
+		<property name="author" value="Carving2Author" />
+		<property name="year" value="1989" />
+		<property name="comments" value="Carving2Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving3" class="domain.Carving">
+		<property name="name" value="Carving3Name" />
+		<property name="description" value="Carving3Description" />
+		<property name="author" value="Carving3Author" />
+		<property name="year" value="2007" />
+		<property name="comments" value="Carving3Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving4" class="domain.Carving">
+		<property name="name" value="Carving4Name" />
+		<property name="description" value="Carving4Description" />
+		<property name="author" value="Carving4Author" />
+		<property name="year" value="1815" />
+		<property name="comments" value="Carving4Comments" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving5" class="domain.Carving">
+		<property name="name" value="Carving5Name" />
+		<property name="description" value="Carving5Description" />
+		<property name="author" value="Carving5Author" />
+		<property name="year" value="1978" />
+		<property name="comments" value="Carving5Comments" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="associatedStretchs">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -968,74 +1036,6 @@
 		<property name="brother" ref="brother4" />
 		<property name="procession" ref="procession3" />
 		<property name="stretch" ref="ordinaryStretch4" />
-	</bean>
-
-
-	<!-- Carving -->
-
-	<bean id="carving1" class="domain.Carving">
-		<property name="name" value="Carving1Name" />
-		<property name="description" value="Carving1Description" />
-		<property name="author" value="Carving1Author" />
-		<property name="year" value="1971" />
-		<property name="comments" value="Carving1Comments" />
-		<property name="brotherhood" ref="brotherhood1" />
-		<property name="associatedStretchs">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="carving2" class="domain.Carving">
-		<property name="name" value="Carving2Name" />
-		<property name="description" value="Carving2Description" />
-		<property name="author" value="Carving2Author" />
-		<property name="year" value="1989" />
-		<property name="comments" value="Carving2Comments" />
-		<property name="brotherhood" ref="brotherhood1" />
-		<property name="associatedStretchs">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="carving3" class="domain.Carving">
-		<property name="name" value="Carving3Name" />
-		<property name="description" value="Carving3Description" />
-		<property name="author" value="Carving3Author" />
-		<property name="year" value="2007" />
-		<property name="comments" value="Carving3Comments" />
-		<property name="brotherhood" ref="brotherhood1" />
-		<property name="associatedStretchs">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="carving4" class="domain.Carving">
-		<property name="name" value="Carving4Name" />
-		<property name="description" value="Carving4Description" />
-		<property name="author" value="Carving4Author" />
-		<property name="year" value="1815" />
-		<property name="comments" value="Carving4Comments" />
-		<property name="brotherhood" ref="brotherhood2" />
-		<property name="associatedStretchs">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="carving5" class="domain.Carving">
-		<property name="name" value="Carving5Name" />
-		<property name="description" value="Carving5Description" />
-		<property name="author" value="Carving5Author" />
-		<property name="year" value="1978" />
-		<property name="comments" value="Carving5Comments" />
-		<property name="brotherhood" ref="brotherhood2" />
-		<property name="associatedStretchs">
-			<list>
-			</list>
-		</property>
 	</bean>
 
 </beans>

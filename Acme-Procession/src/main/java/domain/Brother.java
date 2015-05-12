@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Brother extends Customer {
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public Brother() {
@@ -29,7 +29,7 @@ public class Brother extends Customer {
 	Collection<Registration> registrations;
 
 	@Valid
-	@ManyToMany(mappedBy = "brothers")
+	@ManyToMany
 	public Collection<Brotherhood> getBrotherhoods() {
 		return brotherhoods;
 	}
@@ -40,7 +40,7 @@ public class Brother extends Customer {
 
 	@Valid
 	@ManyToMany
-	@JoinTable(name = "bigBrother_ownBrotherhood", joinColumns = @JoinColumn(name = "bigBrother_id"), inverseJoinColumns = @JoinColumn(name = "ownBrotherhood_id"))
+	@JoinTable(name = "bigBrother_ownBrotherhood", joinColumns = @JoinColumn(name = "bigBrothers_id"), inverseJoinColumns = @JoinColumn(name = "ownBrotherhoods_id"))
 	public Collection<Brotherhood> getOwnBrotherhoods() {
 		return ownBrotherhoods;
 	}

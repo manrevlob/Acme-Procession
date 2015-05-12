@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Brotherhood extends DomainEntity {
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public Brotherhood() {
@@ -64,7 +64,7 @@ public class Brotherhood extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToMany
+	@ManyToMany(mappedBy = "brotherhoods")
 	public Collection<Brother> getBrothers() {
 		return brothers;
 	}
@@ -75,7 +75,7 @@ public class Brotherhood extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToMany
+	@ManyToMany(mappedBy = "ownBrotherhoods")
 	public Collection<Brother> getBigBrothers() {
 		return bigBrothers;
 	}
