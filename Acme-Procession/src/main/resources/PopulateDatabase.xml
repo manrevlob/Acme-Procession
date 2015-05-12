@@ -61,6 +61,18 @@
 	</bean>
 
 	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="brother4" />
+		<property name="password" value="1424f57651c7a8ba1876265ba3128441" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="viewer1" />
 		<property name="password" value="839dbe2b729ce60b62811d254609016a" />
 		<property name="authorities">
@@ -72,7 +84,7 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount6" class="security.UserAccount">
+	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="viewer2" />
 		<property name="password" value="bf0d5c094b4f276a3096a2d9651e2f96" />
 		<property name="authorities">
@@ -334,6 +346,30 @@
 		</property>
 	</bean>
 
+	<bean id="inbox7" class="domain.MessageFolder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox7" class="domain.MessageFolder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox7" class="domain.MessageFolder">
+		<property name="name" value="Trashbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
 
 	<!-- Administrator -->
 
@@ -358,6 +394,8 @@
 		<property name="name" value="Brother1Name" />
 		<property name="surname" value="Brother1Surname" />
 		<property name="email" value="brother1@acme-procession.com" />
+		<property name="nationality" value="Spanish" />
+		<property name="creditCard" ref="creditCard1" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox2" />
@@ -367,18 +405,18 @@
 		</property>
 		<property name="brotherhoods">
 			<list>
-				<ref bean="brotherhood1"/>
+				<ref bean="brotherhood1" />
 			</list>
 		</property>
 		<property name="ownBrotherhoods">
 			<list>
-				<ref bean="brotherhood1"/>
+				<ref bean="brotherhood1" />
 			</list>
 		</property>
 		<property name="registrations">
 			<list>
-				<ref bean="registration1"/>
-				<ref bean="registration3"/>
+				<ref bean="registration1" />
+				<ref bean="registration3" />
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount2" />
@@ -388,6 +426,8 @@
 		<property name="name" value="Brother2Name" />
 		<property name="surname" value="Brother2Surname" />
 		<property name="email" value="brother2@acme-procession.com" />
+		<property name="nationality" value="Spanish" />
+		<property name="creditCard" ref="creditCard2" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox3" />
@@ -397,19 +437,20 @@
 		</property>
 		<property name="brotherhoods">
 			<list>
-				<ref bean="brotherhood2"/>
+				<ref bean="brotherhood2" />
 			</list>
 		</property>
 		<property name="ownBrotherhoods">
 			<list>
-				<ref bean="brotherhood1"/>
-				<ref bean="brotherhood2"/>
+				<ref bean="brotherhood1" />
+				<ref bean="brotherhood2" />
 			</list>
 		</property>
 		<property name="registrations">
 			<list>
-				<ref bean="registration2"/>
-				<ref bean="registration4"/>
+				<ref bean="registration2" />
+				<ref bean="registration4" />
+				<ref bean="registration6" />
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount3" />
@@ -419,6 +460,8 @@
 		<property name="name" value="Brother3Name" />
 		<property name="surname" value="Brother3Surname" />
 		<property name="email" value="brother3@acme-procession.com" />
+		<property name="nationality" value="English" />
+		<property name="creditCard" ref="creditCard3" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox4" />
@@ -426,7 +469,48 @@
 				<ref bean="trashbox4" />
 			</list>
 		</property>
+		<property name="brotherhoods">
+			<list>
+				<ref bean="brotherhood1" />
+			</list>
+		</property>
+		<property name="registrations">
+			<list>
+				<ref bean="registration5" />
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount4" />
+	</bean>
+
+	<bean id="brother4" class="domain.Brother">
+		<property name="name" value="Brother4Name" />
+		<property name="surname" value="Brother4Surname" />
+		<property name="email" value="brother4@acme-procession.com" />
+		<property name="nationality" value="Spanish" />
+		<property name="creditCard" ref="creditCard4" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox5" />
+				<ref bean="outbox5" />
+				<ref bean="trashbox5" />
+			</list>
+		</property>
+		<property name="brotherhoods">
+			<list>
+				<ref bean="brotherhood2" />
+			</list>
+		</property>
+		<property name="ownBrotherhoods">
+			<list>
+				<ref bean="brotherhood2" />
+			</list>
+		</property>
+		<property name="registrations">
+			<list>
+				<ref bean="registration6" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount5" />
 	</bean>
 
 
@@ -436,20 +520,8 @@
 		<property name="name" value="Viewer1Name" />
 		<property name="surname" value="Viewer1Surname" />
 		<property name="email" value="viewer1@acme-procession.com" />
-		<property name="messageFolders">
-			<list>
-				<ref bean="inbox5" />
-				<ref bean="outbox5" />
-				<ref bean="trashbox5" />
-			</list>
-		</property>
-		<property name="userAccount" ref="userAccount5" />
-	</bean>
-
-	<bean id="viewer2" class="domain.Viewer">
-		<property name="name" value="Viewer2Name" />
-		<property name="surname" value="Viewer2Surname" />
-		<property name="email" value="viewer2@acme-procession.com" />
+		<property name="nationality" value="Spanish" />
+		<property name="creditCard" ref="creditCard5" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox6" />
@@ -460,6 +532,22 @@
 		<property name="userAccount" ref="userAccount6" />
 	</bean>
 
+	<bean id="viewer2" class="domain.Viewer">
+		<property name="name" value="Viewer2Name" />
+		<property name="surname" value="Viewer2Surname" />
+		<property name="email" value="viewer2@acme-procession.com" />
+		<property name="nationality" value="English" />
+		<property name="creditCard" ref="creditCard6" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox7" />
+				<ref bean="outbox7" />
+				<ref bean="trashbox7" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount7" />
+	</bean>
+
 
 	<!-- Messages -->
 
@@ -467,19 +555,19 @@
 		<property name="moment" value="2015/05/11 19:45" />
 		<property name="subject" value="Saludo" />
 		<property name="body" value="Hola" />
-		<property name="sender" ref="administrator1" />
-		<property name="recipient" ref="pilgrim1" />
 		<property name="messageFolder" ref="outbox1" />
+		<property name="sender" ref="administrator1" />
+		<property name="recipient" ref="brother1" />
 		<property name="attachment" value="https://www.youtube.com/watch?v=0yfi-PxkDVs" />
 	</bean>
 
 	<bean id="message2" class="domain.Message">
-		<property name="sender" ref="administrator1" />
-		<property name="recipient" ref="brother1" />
 		<property name="moment" value="2015/05/11 19:45" />
 		<property name="subject" value="Saludo" />
 		<property name="body" value="Hola" />
 		<property name="messageFolder" ref="inbox2" />
+		<property name="sender" ref="administrator1" />
+		<property name="recipient" ref="brother1" />
 		<property name="attachment" value="https://www.youtube.com/watch?v=0yfi-PxkDVs" />
 	</bean>
 
@@ -494,6 +582,7 @@
 			<list>
 				<ref bean="brother1" />
 				<ref bean="brother2" />
+				<ref bean="brother3" />
 			</list>
 		</property>
 		<property name="bigBrothers">
@@ -511,6 +600,7 @@
 			<list>
 				<ref bean="carving1" />
 				<ref bean="carving2" />
+				<ref bean="carving3" />
 			</list>
 		</property>
 	</bean>
@@ -522,11 +612,14 @@
 		<property name="brothers">
 			<list>
 				<ref bean="brother2" />
+				<ref bean="brother3" />
+				<ref bean="brother4" />
 			</list>
 		</property>
 		<property name="bigBrothers">
 			<list>
 				<ref bean="brother2" />
+				<ref bean="brother4" />
 			</list>
 		</property>
 		<property name="processions">
@@ -536,7 +629,8 @@
 		</property>
 		<property name="carvings">
 			<list>
-				<ref bean="carving3" />
+				<ref bean="carving4" />
+				<ref bean="carving5" />
 			</list>
 		</property>
 	</bean>
@@ -548,37 +642,16 @@
 		<property name="startMoment" value="2015/04/06 19:15" />
 		<property name="endMoment" value="2015/04/07 01:30" />
 		<property name="locality" value="Locality1" />
-		<property name="itinerary" value="Street1&#xA;Street2&#xA;Street3" />
-		<property name="associatedCost" ref="Money1" />
-		<property name="comments" value="Procession1Comments" />
-		<property name="isClosed" value="false" /> <!-- Es falso pero no nos podremos apuntar por tiempo -->
-		<property name="brotherhood" ref="brotherhood1" />
-		<property name="stretchs">
-			<list>
-				<ref bean="ordinaryStretch1" />
-				<ref bean="floatStretch1" />
-			</list>
-		</property>
-		<property name="registrations">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="procession1" class="domain.Procession">
-		<property name="startMoment" value="2015/04/06 19:15" />
-		<property name="endMoment" value="2015/04/07 01:30" />
-		<property name="locality" value="Locality1" />
 		<property name="itinerary" value="Street A&#xA;Street B&#xA;Street C" />
-		<property name="associatedCost" ref="Money1" />
+		<property name="associatedCost" ref="money1" />
 		<property name="comments" value="Procession1Comments" />
-		<property name="isClosed" value="false" /> <!-- Es falso pero no nos podremos apuntar por tiempo -->
+		<property name="isClosedManually" value="false" /> <!-- Es falso pero no nos podremos apuntar por tiempo -->
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="stretchs">
+		<property name="stretchOrders">
 			<list>
-				<ref bean="ordinaryStretch1" />
-				<ref bean="ordinaryStretch2" />
-				<ref bean="floatStretch1" />
+				<ref bean="stretchOrder1" />
+				<ref bean="stretchOrder2" />
+				<ref bean="stretchOrder3" />
 			</list>
 		</property>
 		<property name="registrations">
@@ -594,21 +667,23 @@
 		<property name="endMoment" value="2016/04/23 01:30" />
 		<property name="locality" value="Locality1" />
 		<property name="itinerary" value="Street A&#xA;Street B&#xA;Street C" />
-		<property name="associatedCost" ref="Money2" />
+		<property name="associatedCost" ref="money2" />
 		<!-- WITHOUT COMMENTS -->
-		<property name="isClosed" value="false" />
+		<property name="isClosedManually" value="false" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="stretchs">
+		<property name="stretchOrders">
 			<list>
-				<ref bean="ordinaryStretch1" />
-				<ref bean="ordinaryStretch2" />
-				<ref bean="floatStretch1" />
+				<ref bean="stretchOrder4" />
+				<ref bean="stretchOrder5" />
+				<ref bean="stretchOrder6" />
+				<ref bean="stretchOrder7" />
 			</list>
 		</property>
 		<property name="registrations">
 			<list>
 				<ref bean="registration3" />
 				<ref bean="registration4" />
+				<ref bean="registration5" />
 			</list>
 		</property>
 	</bean>
@@ -618,20 +693,21 @@
 		<property name="endMoment" value="2016/04/24 20:00" />
 		<property name="locality" value="Locality1" />
 		<property name="itinerary" value="Street D&#xA;Street E&#xA;Street F" />
-		<property name="associatedCost" ref="Money3" />
+		<property name="associatedCost" ref="money3" />
 		<!-- WITHOUT COMMENTS -->
-		<property name="isClosed" value="false" />
+		<property name="isClosedManually" value="false" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="stretchs">
+		<property name="stretchOrders">
 			<list>
-				<ref bean="ordinaryStretch1" />
-				<ref bean="ordinaryStretch2" />
-				<ref bean="floatStretch1" />
+				<ref bean="stretchOrder8" />
+				<ref bean="stretchOrder9" />
+				<ref bean="stretchOrder10" />
 			</list>
 		</property>
 		<property name="registrations">
 			<list>
-				<ref bean="registration5" />
+				<ref bean="registration6" />
+				<ref bean="registration7" />
 			</list>
 		</property>
 	</bean>
@@ -642,11 +718,17 @@
 	<bean id="ordinaryStretch1" class="domain.OrdinaryStretch">
 		<property name="name" value="OrdinaryStretch1Name" />
 		<property name="description" value="OrdinaryStretch1Description" />
-		<property name="maxNumberOfBrothers" value="5" />
-		<property name="procession" ref="procession1" />
+		<property name="maxNumberOfBrothers" value="1" />
+		<property name="stretchOrders">
+			<list>
+				<ref bean="stretchOrder1" />
+				<ref bean="stretchOrder4" />
+			</list>
+		</property>
 		<property name="registrations">
 			<list>
 				<ref bean="registration1" />
+				<ref bean="registration3" />
 			</list>
 		</property>
 	</bean>
@@ -655,10 +737,17 @@
 		<property name="name" value="OrdinaryStretch2Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
 		<property name="maxNumberOfBrothers" value="5" />
-		<property name="procession" ref="procession1" />
+		<property name="stretchOrders">
+			<list>
+				<ref bean="stretchOrder2" />
+				<ref bean="stretchOrder6" />
+			</list>
+		</property>
 		<property name="registrations">
 			<list>
 				<ref bean="registration2" />
+				<ref bean="registration4" />
+				<ref bean="registration5" />
 			</list>
 		</property>
 	</bean>
@@ -666,11 +755,15 @@
 	<bean id="ordinaryStretch3" class="domain.OrdinaryStretch">
 		<property name="name" value="OrdinaryStretch3Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
-		<property name="maxNumberOfBrothers" value="5" />
-		<property name="procession" ref="procession1" />
+		<property name="maxNumberOfBrothers" value="3" />
+		<property name="stretchOrders">
+			<list>
+				<ref bean="stretchOrder8" />
+			</list>
+		</property>
 		<property name="registrations">
 			<list>
-				<ref bean="registration2" />
+				<ref bean="registration6" />
 			</list>
 		</property>
 	</bean>
@@ -678,11 +771,15 @@
 	<bean id="ordinaryStretch4" class="domain.OrdinaryStretch">
 		<property name="name" value="OrdinaryStretch2Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
-		<property name="maxNumberOfBrothers" value="5" />
-		<property name="procession" ref="procession1" />
+		<property name="maxNumberOfBrothers" value="1" />
+		<property name="stretchOrders">
+			<list>
+				<ref bean="stretchOrder9" />
+			</list>
+		</property>
 		<property name="registrations">
 			<list>
-				<ref bean="registration2" />
+				<ref bean="registration7" />
 			</list>
 		</property>
 	</bean>
@@ -693,9 +790,16 @@
 	<bean id="floatStretch1" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch1Name" />
 		<property name="description" value="FloatStretch1Description" />
-		<property name="procession" ref="procession1" />
-		<property name="carving">
+		<property name="stretchOrders">
 			<list>
+				<ref bean="stretchOrder3" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving1" />
+				<ref bean="carving2" />
+				<ref bean="carving3" />
 			</list>
 		</property>
 	</bean>
@@ -703,9 +807,15 @@
 	<bean id="floatStretch2" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch2Name" />
 		<property name="description" value="FloatStretch2Description" />
-		<property name="procession" ref="procession1" />
-		<property name="carving">
+		<property name="stretchOrders">
 			<list>
+				<ref bean="stretchOrder5" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving1" />
+				<ref bean="carving2" />
 			</list>
 		</property>
 	</bean>
@@ -713,15 +823,96 @@
 	<bean id="floatStretch3" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch3Name" />
 		<property name="description" value="FloatStretch3Description" />
-		<property name="procession" ref="procession2" />
-		<property name="carving">
+		<property name="stretchOrders">
 			<list>
+				<ref bean="stretchOrder7" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="floatStretch4" class="domain.FloatStretch">
+		<property name="name" value="FloatStretch3Name" />
+		<property name="description" value="FloatStretch3Description" />
+		<property name="stretchOrders">
+			<list>
+				<ref bean="stretchOrder10" />
+			</list>
+		</property>
+		<property name="carvings">
+			<list>
+				<ref bean="carving4" />
+				<ref bean="carving5" />
 			</list>
 		</property>
 	</bean>
 
 
 	<!-- StretchOrder -->
+
+	<bean id="stretchOrder1" class="domain.StretchOrder">
+		<property name="orderNumber" value="1" />
+		<property name="procession" ref="procession1" />
+		<property name="stretch" ref="ordinaryStretch1" />
+	</bean>
+
+	<bean id="stretchOrder2" class="domain.StretchOrder">
+		<property name="orderNumber" value="2" />
+		<property name="procession" ref="procession1" />
+		<property name="stretch" ref="ordinaryStretch2" />
+	</bean>
+
+	<bean id="stretchOrder3" class="domain.StretchOrder">
+		<property name="orderNumber" value="3" />
+		<property name="procession" ref="procession1" />
+		<property name="stretch" ref="floatStretch1" />
+	</bean>
+
+	<bean id="stretchOrder4" class="domain.StretchOrder">
+		<property name="orderNumber" value="1" />
+		<property name="procession" ref="procession2" />
+		<property name="stretch" ref="ordinaryStretch1" />
+	</bean>
+
+	<bean id="stretchOrder5" class="domain.StretchOrder">
+		<property name="orderNumber" value="2" />
+		<property name="procession" ref="procession2" />
+		<property name="stretch" ref="floatStretch2" />
+	</bean>
+
+	<bean id="stretchOrder6" class="domain.StretchOrder">
+		<property name="orderNumber" value="3" />
+		<property name="procession" ref="procession2" />
+		<property name="stretch" ref="ordinaryStretch2" />
+	</bean>
+
+	<bean id="stretchOrder7" class="domain.StretchOrder">
+		<property name="orderNumber" value="4" />
+		<property name="procession" ref="procession2" />
+		<property name="stretch" ref="floatStretch3" />
+	</bean>
+
+	<bean id="stretchOrder8" class="domain.StretchOrder">
+		<property name="orderNumber" value="1" />
+		<property name="procession" ref="procession3" />
+		<property name="stretch" ref="ordinaryStretch3" />
+	</bean>
+
+	<bean id="stretchOrder9" class="domain.StretchOrder">
+		<property name="orderNumber" value="2" />
+		<property name="procession" ref="procession3" />
+		<property name="stretch" ref="ordinaryStretch4" />
+	</bean>
+
+	<bean id="stretchOrder10" class="domain.StretchOrder">
+		<property name="orderNumber" value="3" />
+		<property name="procession" ref="procession3" />
+		<property name="stretch" ref="floatStretch4" />
+	</bean>
 
 
 	<!-- Registration -->
@@ -752,6 +943,95 @@
 		<property name="brother" ref="brother2" />
 		<property name="procession" ref="procession2" />
 		<property name="stretch" ref="ordinaryStretch2" />
+	</bean>
+
+	<bean id="registration5" class="domain.Registration">
+		<property name="moment" value="2015/05/12 15:11" />
+		<property name="brother" ref="brother3" />
+		<property name="procession" ref="procession2" />
+		<property name="stretch" ref="ordinaryStretch2" />
+	</bean>
+
+	<bean id="registration6" class="domain.Registration">
+		<property name="moment" value="2015/05/12 15:11" />
+		<property name="brother" ref="brother2" />
+		<property name="procession" ref="procession3" />
+		<property name="stretch" ref="ordinaryStretch3" />
+	</bean>
+
+	<bean id="registration7" class="domain.Registration">
+		<property name="moment" value="2015/05/12 15:11" />
+		<property name="brother" ref="brother4" />
+		<property name="procession" ref="procession3" />
+		<property name="stretch" ref="ordinaryStretch4" />
+	</bean>
+
+
+	<!-- Carving -->
+
+	<bean id="carving1" class="domain.Carving">
+		<property name="name" value="Carving1Name" />
+		<property name="description" value="Carving1Description" />
+		<property name="author" value="Carving1Author" />
+		<property name="year" value="1971" />
+		<property name="comments" value="Carving1Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving2" class="domain.Carving">
+		<property name="name" value="Carving2Name" />
+		<property name="description" value="Carving2Description" />
+		<property name="author" value="Carving2Author" />
+		<property name="year" value="1989" />
+		<property name="comments" value="Carving2Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving3" class="domain.Carving">
+		<property name="name" value="Carving3Name" />
+		<property name="description" value="Carving3Description" />
+		<property name="author" value="Carving3Author" />
+		<property name="year" value="2007" />
+		<property name="comments" value="Carving3Comments" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving4" class="domain.Carving">
+		<property name="name" value="Carving4Name" />
+		<property name="description" value="Carving4Description" />
+		<property name="author" value="Carving4Author" />
+		<property name="year" value="1815" />
+		<property name="comments" value="Carving4Comments" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="carving5" class="domain.Carving">
+		<property name="name" value="Carving5Name" />
+		<property name="description" value="Carving5Description" />
+		<property name="author" value="Carving5Author" />
+		<property name="year" value="1978" />
+		<property name="comments" value="Carving5Comments" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="associatedStretchs">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 </beans>

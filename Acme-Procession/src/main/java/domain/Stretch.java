@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -11,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Stretch extends DomainEntity {
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public Stretch() {
@@ -42,16 +44,16 @@ public class Stretch extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private Procession procession;
+	private Collection<StretchOrder> stretchOrders;
 
 	@Valid
-	@ManyToOne(optional = false)
-	public Procession getProcession() {
-		return procession;
+	@OneToMany(mappedBy = "stretch")
+	public Collection<StretchOrder> getStretchOrders() {
+		return stretchOrders;
 	}
 
-	public void setProcession(Procession procession) {
-		this.procession = procession;
+	public void setStretchOrders(Collection<StretchOrder> stretchOrders) {
+		this.stretchOrders = stretchOrders;
 	}
 
 }
