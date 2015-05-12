@@ -104,7 +104,7 @@ public class Procession extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 
 	private Brotherhood brotherhood;
-	private Collection<Stretch> stretch;
+	private Collection<Stretch> stretchs;
 	private Collection<Registration> registrations;
 
 	@Valid
@@ -121,12 +121,12 @@ public class Procession extends DomainEntity {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "procession")
-	public Collection<Stretch> getStretch() {
-		return stretch;
+	public Collection<Stretch> getStretchs() {
+		return stretchs;
 	}
 
-	public void setStretch(Collection<Stretch> stretch) {
-		this.stretch = stretch;
+	public void setStretchs(Collection<Stretch> stretchs) {
+		this.stretchs = stretchs;
 	}
 
 	@Valid
