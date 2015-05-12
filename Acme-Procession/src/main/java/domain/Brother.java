@@ -37,7 +37,7 @@ public class Brother extends Customer {
 	}
 
 	@Valid
-	@ManyToMany(mappedBy = "brothers")
+	@ManyToMany(mappedBy = "bigBrothers")
 	public Collection<Brotherhood> getOwnBrotherhoods() {
 		return ownBrotherhoods;
 	}

@@ -33,7 +33,7 @@ public class Procession extends DomainEntity {
 	private String itinerary;
 	private Money associatedCost;
 	private String comments;
-	private boolean isClosed;
+	private boolean isClosedManually;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -93,18 +93,18 @@ public class Procession extends DomainEntity {
 		this.comments = comments;
 	}
 
-	public boolean isClosed() {
-		return isClosed;
+	public boolean getIsClosedManually() {
+		return isClosedManually;
 	}
 
-	public void setClosed(boolean isClosed) {
-		this.isClosed = isClosed;
+	public void setIsClosedManually(boolean isClosedManually) {
+		this.isClosedManually = isClosedManually;
 	}
 
 	// Relationships ----------------------------------------------------------
 
 	private Brotherhood brotherhood;
-	private Collection<Stretch> stretchs;
+	private Collection<StretchOrder> stretchOrders;
 	private Collection<Registration> registrations;
 
 	@Valid
@@ -121,12 +121,12 @@ public class Procession extends DomainEntity {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "procession")
-	public Collection<Stretch> getStretchs() {
-		return stretchs;
+	public Collection<StretchOrder> getStretchOrders() {
+		return stretchOrders;
 	}
 
-	public void setStretchs(Collection<Stretch> stretchs) {
-		this.stretchs = stretchs;
+	public void setStretchOrders(Collection<StretchOrder> stretchOrders) {
+		this.stretchOrders = stretchOrders;
 	}
 
 	@Valid
