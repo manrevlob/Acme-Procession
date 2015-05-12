@@ -46,11 +46,14 @@
 		<bean class="converters.StretchToStringConverter" />
 		<bean class="converters.StringToStretchConverter" />
 		
+		<bean class="converters.StretchOrderToStringConverter" />
+		<bean class="converters.StringToStretchOrderConverter" />
+		
 		<bean class="converters.OrdinaryStretchToStringConverter" />
 		<bean class="converters.StringToOrdinaryStretchConverter" />
 		
-		<bean class="converters.CarvingStretchToStringConverter" />
-		<bean class="converters.StringToCarvingStretchConverter" />
+		<bean class="converters.CarvingToStringConverter" />
+		<bean class="converters.StringToCarvingConverter" />
 		
 		<bean class="converters.CostumeToStringConverter" />
 		<bean class="converters.StringToCostumeConverter" />

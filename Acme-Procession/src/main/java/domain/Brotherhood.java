@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -53,6 +54,12 @@ public class Brotherhood extends DomainEntity {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+	
+	// Derived attributes -----------------------------------------------------
+	@Transient
+	public Integer getNumberOfBrothers() {
+		return getBrothers().size();
 	}
 
 	// Relationships ----------------------------------------------------------

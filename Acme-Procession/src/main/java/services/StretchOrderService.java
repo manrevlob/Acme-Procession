@@ -6,39 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.StretchRepository;
-import domain.Stretch;
+import repositories.StretchOrderRepository;
+import domain.StretchOrder;
 
 @Service
 @Transactional
-public class StretchService {
+public class StretchOrderService {
 
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private StretchRepository stretchRepository;
+	private StretchOrderRepository stretchOrderRepository;
 
 	// Supporting services ----------------------------------------------------
 
 	// Constructors -----------------------------------------------------------
 
-	public StretchService() {
+	public StretchOrderService() {
 		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public Stretch findOne(int stretchId) {
-		Stretch result;
+	public StretchOrder findOne(int stretchOrderId) {
+		StretchOrder result;
 
-		result = stretchRepository.findOne(stretchId);
+		result = stretchOrderRepository.findOne(stretchOrderId);
 
 		return result;
 	}
 
-	public Collection<Stretch> findAll() {
-		Collection<Stretch> result;
+	public Collection<StretchOrder> findAll() {
+		Collection<StretchOrder> result;
 
-		result = stretchRepository.findAll();
+		result = stretchOrderRepository.findAll();
 
 		return result;
 	}

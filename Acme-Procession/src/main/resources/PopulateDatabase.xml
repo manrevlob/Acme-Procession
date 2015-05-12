@@ -387,6 +387,7 @@
 		<property name="bigBrothers">
 			<list>
 				<ref bean="brother1" />
+				<ref bean="brother3" />
 			</list>
 		</property>
 		<property name="processions">
@@ -506,7 +507,6 @@
 		</property>
 		<property name="ownBrotherhoods">
 			<list>
-				<ref bean="brotherhood1" />
 				<ref bean="brotherhood2" />
 			</list>
 		</property>
