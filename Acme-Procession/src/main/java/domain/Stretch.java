@@ -21,7 +21,6 @@ public class Stretch extends DomainEntity {
 
 	private String name;
 	private String description;
-	private int orderNumber;
 
 	@NotBlank
 	public String getName() {
@@ -39,14 +38,6 @@ public class Stretch extends DomainEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getOrderNumber() {
-		return orderNumber;
-	}
-
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
 	}
 
 	// Relationships ----------------------------------------------------------
