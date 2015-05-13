@@ -19,7 +19,7 @@ import domain.Brotherhood;
 @Controller
 @RequestMapping("/brotherhood/brother")
 public class BrotherhoodBrotherController extends AbstractController {
-	
+
 	// Services ---------------------------------------------------------------
 
 	@Autowired
@@ -93,7 +93,8 @@ public class BrotherhoodBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Brotherhood brotherhood, BindingResult binding) {
+	public ModelAndView save(@Valid Brotherhood brotherhood,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -101,10 +102,16 @@ public class BrotherhoodBrotherController extends AbstractController {
 		} else {
 			try {
 				brotherhoodService.save(brotherhood);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(brotherhood,
-						"brotherhood.commit.error");
+				if (oops.getMessage().equals("brotherhood.invalidYear.error")) {
+					result = createEditModelAndView(brotherhood,
+							"brotherhood.invalidYear.error");
+				} else {
+					result = createEditModelAndView(brotherhood,
+							"brotherhood.commit.error");
+				}
 			}
 		}
 
@@ -123,7 +130,8 @@ public class BrotherhoodBrotherController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(Brotherhood brotherhood, String message) {
+	protected ModelAndView createEditModelAndView(Brotherhood brotherhood,
+			String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("brotherhood/edit");

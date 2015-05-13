@@ -47,18 +47,28 @@ public class BrotherService {
 		return result;
 	}
 
+	public Brother save(Brother brother) {
+		Brother result;
+
+		Assert.notNull(brother);
+
+		result = brotherRepository.save(brother);
+
+		return result;
+	}
+
 	// Other business methods -------------------------------------------------
 
 	public Brother findByPrincipal() {
 		Brother result;
-	 	UserAccount userAccount;
-	 	
-	 	userAccount = LoginService.getPrincipal();
-	 	result = brotherRepository.findByPrincipal(userAccount.getId());
-	 	
-	 	Assert.notNull(result);
-	 	
-	 	return result;
-	 }
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		result = brotherRepository.findByPrincipal(userAccount.getId());
+
+		Assert.notNull(result);
+
+		return result;
+	}
 
 }
