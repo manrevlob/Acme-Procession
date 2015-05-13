@@ -24,10 +24,16 @@
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
 		
+		<value>/views/administrator/messages</value>
+		<value>/views/customer/messages</value>
 		<value>/views/cookies/messages</value>
 		<value>/views/terms/messages</value>
 		
+		<value>/views/message/messages</value>
+		<value>/views/messageFolder/messages</value>
+		<value>/views/carving/messages</value>
 		<value>/views/brotherhood/messages</value>
+		
 	</util:list>
 
 </beans>
