@@ -16,4 +16,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	
 	@Query("select r.status from Request r where r.brother.id = ?1 order by r.creationMoment")
 	Collection<String> AuthInnkeeper(int brotherId);
+	
+	@Query("select r from Request r where r.status = 'pending'")
+	Collection<Request> findAllRequestPending();
 }

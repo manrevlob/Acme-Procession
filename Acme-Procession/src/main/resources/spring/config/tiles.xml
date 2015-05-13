@@ -25,6 +25,7 @@
 		<value>/views/messageFolder/tiles.xml</value>
 		<value>/views/carving/tiles.xml</value>
 		<value>/views/brotherhood/tiles.xml</value>
+		<value>/views/request/tiles.xml</value>
 		
 	</util:list>
 

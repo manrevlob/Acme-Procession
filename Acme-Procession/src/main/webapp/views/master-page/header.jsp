@@ -24,6 +24,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" />[+] - (<security:authentication property="principal.username" />)</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="request/administrator/list.do"><spring:message code="master.page.administrator.request" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -34,6 +35,7 @@
 					<li class="arrow"></li>
 					<li><a href="brotherhood/brother/list.do"><spring:message code="master.page.brother.listMyBrotherhoods" /></a></li>
 					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
+					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

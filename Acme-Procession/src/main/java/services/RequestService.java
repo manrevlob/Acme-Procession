@@ -10,8 +10,10 @@ import org.springframework.util.Assert;
 
 import repositories.RequestRepository;
 import utilities.CodeGenerator;
+import domain.Administrator;
 import domain.Brother;
 import domain.Request;
+import forms.AddCommentToRequestForm;
 
 @Service
 @Transactional
@@ -26,6 +28,8 @@ public class RequestService {
 	private ActorService actorService;
 	@Autowired
 	private BrotherService brotherService;
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,8 +70,9 @@ public class RequestService {
 		Request result;
 
 		Assert.notNull(request);
-		Assert.isTrue(actorService.isBrother()
-				|| actorService.isAdministrator(), "Request.notUserValid.error");
+		Assert.isTrue(
+				actorService.isBrother() || actorService.isAdministrator(),
+				"Request.notUserValid.error");
 
 		result = requestRepository.save(request);
 
@@ -122,16 +127,103 @@ public class RequestService {
 		statusRequest = AuthBrother();
 
 		if (statusRequest.size() > 0) {
-			Assert.isTrue(!statusRequest.contains("pending"), "request.pending.error");
-			Assert.isTrue(!statusRequest.contains("accepted"), "request.accepted.error");
+			Assert.isTrue(!statusRequest.contains("pending"),
+					"request.pending.error");
+			Assert.isTrue(!statusRequest.contains("accepted"),
+					"request.accepted.error");
 		}
 	}
-	
-	public void saveRequest(Request request){
+
+	public void saveRequest(Request request) {
 		Assert.notNull(request, "Request.notValid.error");
-		Assert.isTrue(request.getStatus().equals("pending"), "request.notPending.error");
-		
+		Assert.isTrue(request.getStatus().equals("pending"),
+				"request.notPending.error");
+
 		save(request);
 	}
-	
+
+	public Collection<Request> findAllRequestPending() {
+		Collection<Request> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = requestRepository.findAllRequestPending();
+
+		return result;
+	}
+
+	public void acceptRequest(AddCommentToRequestForm addCommentToRequestForm) {
+		Request request;
+		Brother brother;
+		String comment;
+		Administrator administrator;
+		Collection<Request> requests;
+
+		Assert.isTrue(actorService.isAdministrator());
+		Assert.notNull(addCommentToRequestForm);
+
+		request = addCommentToRequestForm.getRequest();
+		comment = addCommentToRequestForm.getComment();
+
+		if (comment != null) {
+			request.setComments(comment);
+		}
+		Assert.isTrue(request.getStatus().equals("pending"));
+
+		administrator = administratorService.findByPrincipal();
+
+		request.setStatus("accepted");
+		request.setAdministrator(administrator);
+
+		request = save(request);
+
+		brother = request.getBrother();
+		brother.setIsAuthorized(true);
+
+		requests = administrator.getRequests();
+		requests.add(request);
+		administrator.setRequests(requests);
+
+		brotherService.save(brother);
+		administratorService.save(administrator);
+	}
+
+	public void rejectedRequest(AddCommentToRequestForm addCommentToRequestForm) {
+		Request request;
+		String comment;
+		Administrator administrator;
+		Collection<Request> requests;
+		String status;
+
+		Assert.isTrue(actorService.isAdministrator());
+		Assert.notNull(addCommentToRequestForm);
+
+		request = addCommentToRequestForm.getRequest();
+
+		status = "pending";
+
+		Assert.isTrue(request.getStatus().equals(status));
+
+		comment = addCommentToRequestForm.getComment();
+
+		if (comment == null || comment.length() == 0) {
+			throw new IllegalArgumentException("need comments");
+		}
+
+		request.setComments(comment);
+
+		administrator = administratorService.findByPrincipal();
+
+		request.setStatus("rejected");
+		request.setAdministrator(administrator);
+
+		request = save(request);
+
+		requests = administrator.getRequests();
+		requests.add(request);
+		administrator.setRequests(requests);
+
+		administratorService.save(administrator);
+	}
+
 }

@@ -22,6 +22,16 @@ public class Brother extends Customer {
 
 	// Attributes -------------------------------------------------------------
 
+	private boolean isAuthorized;
+
+	public boolean getIsAuthorized() {
+		return isAuthorized;
+	}
+
+	public void setIsAuthorized(boolean isAuthorized) {
+		this.isAuthorized = isAuthorized;
+	}
+
 	// Relationships ----------------------------------------------------------
 
 	private Collection<Brotherhood> brotherhoods;
@@ -59,12 +69,13 @@ public class Brother extends Customer {
 	public void setRegistrations(Collection<Registration> registrations) {
 		this.registrations = registrations;
 	}
-	
+
 	@Valid
 	@OneToMany(mappedBy = "brother")
 	public Collection<Request> getRequests() {
 		return requests;
 	}
+
 	public void setRequests(Collection<Request> requests) {
 		this.requests = requests;
 	}
