@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
+import domain.Brother;
 import domain.Brotherhood;
+import forms.AddBigBrotherForm;
 
 @Controller
 @RequestMapping("/brotherhood/brother")
@@ -24,6 +27,9 @@ public class BrotherhoodBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
+
+	@Autowired
+	private BrotherService brotherService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -117,8 +123,37 @@ public class BrotherhoodBrotherController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/addBigBrother", method = RequestMethod.GET)
+	public ModelAndView addOrganiser(@RequestParam int brotherhoodId) {
+		ModelAndView result;
+		AddBigBrotherForm addBigBrotherForm;
+		
+		addBigBrotherForm = new AddBigBrotherForm();
+		
+		addBigBrotherForm.setBrotherhood(brotherhoodService.findOneIfPrincipal(brotherhoodId));		
+		result = addBrotherModelAndView(addBigBrotherForm);
+		
+		return result;
+	}
 
-	// Details -----------------------------------------------------------------
+	@RequestMapping(value = "/addBigBrother", method = RequestMethod.POST, params = "save")
+	public ModelAndView addOrganiser(@Valid AddBigBrotherForm addBigBrotherForm, BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = addBrotherModelAndView(addBigBrotherForm);
+		} else {
+			try {
+				brotherhoodService.addBrother(addBigBrotherForm);
+				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+			} catch (Throwable oops) {
+				result = addBrotherModelAndView(addBigBrotherForm, "brotherhood.commit.error");
+			}
+		}
+
+		return result;
+	}
 
 	// Ancillary methods ------------------------------------------------------
 
@@ -138,6 +173,28 @@ public class BrotherhoodBrotherController extends AbstractController {
 		result.addObject("brotherhood", brotherhood);
 		result.addObject("message", message);
 
+		return result;
+	}
+
+	protected ModelAndView addBrotherModelAndView(AddBigBrotherForm addBigBrotherForm) {
+		ModelAndView result;
+		
+		result = addBrotherModelAndView(addBigBrotherForm, null);
+		
+		return result;
+	}
+
+	protected ModelAndView addBrotherModelAndView(AddBigBrotherForm addBigBrotherForm, String message) {
+		ModelAndView result;
+		Collection<Brother> brothers;
+		
+		brothers = brotherService.findAllBrothersNotAdded(addBigBrotherForm.getBrotherhood());
+		
+		result = new ModelAndView("brotherhood/addBigBrother");
+		result.addObject("addBigBrotherForm", addBigBrotherForm);
+		result.addObject("brothers", brothers);
+		result.addObject("message", message);
+		
 		return result;
 	}
 

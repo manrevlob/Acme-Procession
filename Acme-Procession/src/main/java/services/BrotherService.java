@@ -11,6 +11,7 @@ import repositories.BrotherRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Brother;
+import domain.Brotherhood;
 
 @Service
 @Transactional
@@ -67,6 +68,16 @@ public class BrotherService {
 		result = brotherRepository.findByPrincipal(userAccount.getId());
 
 		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Brother> findAllBrothersNotAdded(Brotherhood brotherhood) {
+		Collection<Brother> result;
+
+		Assert.notNull(brotherhood);
+
+		result = brotherRepository.findAllBrothersNotAdded(brotherhood.getId());
 
 		return result;
 	}

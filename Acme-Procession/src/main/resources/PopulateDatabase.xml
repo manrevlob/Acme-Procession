@@ -504,6 +504,7 @@
 		</property>
 		<property name="brotherhoods">
 			<list>
+				<ref bean="brotherhood1" />
 				<ref bean="brotherhood2" />
 			</list>
 		</property>
@@ -543,6 +544,7 @@
 		</property>
 		<property name="ownBrotherhoods">
 			<list>
+				<ref bean="brotherhood1" />
 			</list>
 		</property>
 		<property name="registrations">
