@@ -45,7 +45,14 @@
 	
 	<spring:message code="brotherhood.numberOfBrothers" var="numberOfBrothersHeader" />
 	<display:column property="numberOfBrothers" title="${numberOfBrothersHeader}" sortable="true" />
-	
+
+	<spring:message code="brotherhood.carvings" var="carvingsHeader" />
+	<display:column title="${carvingsHeader}">
+		<a href="carving/list.do?brotherhoodId=${row.id}">
+			[<jstl:out value="${carvingsHeader}"/>]
+		</a>
+	</display:column>
+
 </display:table>
 
 <div>

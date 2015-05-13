@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,14 +57,14 @@ public class BrotherhoodService {
 	public Brotherhood create() {
 		Brotherhood result;
 		Collection<Brother> collectionWithcreator;
-		
+
 		Assert.isTrue(actorService.isBrother());
 
 		result = new Brotherhood();
-		
+
 		collectionWithcreator = new ArrayList<Brother>();
 		collectionWithcreator.add(brotherService.findByPrincipal());
-		
+
 		result.setBrothers(collectionWithcreator);
 		result.setBigBrothers(collectionWithcreator);
 
@@ -72,10 +73,19 @@ public class BrotherhoodService {
 
 	public Brotherhood save(Brotherhood brotherhood) {
 		Brotherhood result;
+		int actualYear;
 
 		Assert.notNull(brotherhood);
+		
+		actualYear = Calendar.getInstance().get(Calendar.YEAR);
+		
+		Assert.isTrue(brotherhood.getFoundationYear() <= actualYear, "brotherhood.invalidYear.error");
 
 		result = brotherhoodRepository.save(brotherhood);
+
+		if (brotherhood.getId() == 0) {
+			updateCreatorBrotherhoods(result);
+		}
 
 		return result;
 	}
@@ -84,22 +94,43 @@ public class BrotherhoodService {
 
 	public Collection<Brotherhood> findMines() {
 		Collection<Brotherhood> result;
-		
+
 		Assert.isTrue(actorService.isBrother());
-		
-		result = brotherhoodRepository.findMines(brotherService.findByPrincipal());
-		
+
+		result = brotherhoodRepository.findMines(brotherService
+				.findByPrincipal());
+
 		return result;
 	}
 
 	public Collection<Brotherhood> findOwns() {
 		Collection<Brotherhood> result;
-		
+
 		Assert.isTrue(actorService.isBrother());
-		//TODO comprobar que tenga permisos
-		
-		result = brotherhoodRepository.findOwns(brotherService.findByPrincipal());
-		
+		// TODO comprobar que tenga permisos
+
+		result = brotherhoodRepository.findOwns(brotherService
+				.findByPrincipal());
+
 		return result;
+	}
+
+	public void updateCreatorBrotherhoods(Brotherhood brotherhood) {
+		Brother brother;
+		Collection<Brotherhood> newMyBrotherhoods;
+		Collection<Brotherhood> newOwnBrotherhoods;
+
+		brother = brotherService.findByPrincipal();
+
+		newMyBrotherhoods = brother.getBrotherhoods();
+		newOwnBrotherhoods = brother.getOwnBrotherhoods();
+
+		newMyBrotherhoods.add(brotherhood);
+		newOwnBrotherhoods.add(brotherhood);
+
+		brother.setBrotherhoods(newMyBrotherhoods);
+		brother.setOwnBrotherhoods(newOwnBrotherhoods);
+
+		brotherService.save(brother);
 	}
 }
