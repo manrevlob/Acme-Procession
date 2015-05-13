@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.BrotherhoodRepository;
 import domain.Brother;
 import domain.Brotherhood;
+import forms.AddBigBrotherForm;
 
 @Service
 @Transactional
@@ -92,6 +93,16 @@ public class BrotherhoodService {
 
 	// Other business methods -------------------------------------------------
 
+	public Brotherhood findOneIfPrincipal(int brotherhoodId) {
+		Brotherhood result;
+
+		result = brotherhoodRepository.findOne(brotherhoodId);
+		
+		Assert.isTrue(result.getBigBrothers().contains(brotherService.findByPrincipal()));
+
+		return result;
+	}
+
 	public Collection<Brotherhood> findMines() {
 		Collection<Brotherhood> result;
 
@@ -133,4 +144,30 @@ public class BrotherhoodService {
 
 		brotherService.save(brother);
 	}
+
+	public void addBrother(AddBigBrotherForm addBrotherForm) {
+		Brotherhood brotherhood;
+		Brother brother;
+		Collection<Brotherhood> newOwnBrotherhoods;
+		Collection<Brother> newBigBrothers;
+		
+		Assert.notNull(addBrotherForm);
+		Assert.isTrue(addBrotherForm.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		
+		brotherhood = addBrotherForm.getBrotherhood();
+		brother = addBrotherForm.getBrother();
+		
+		newOwnBrotherhoods = brother.getOwnBrotherhoods();
+		newOwnBrotherhoods.add(brotherhood);
+		
+		newBigBrothers = brotherhood.getBigBrothers();
+		newBigBrothers.add(brother);
+		
+		brotherhood.setBigBrothers(newBigBrothers);
+		brother.setOwnBrotherhoods(newOwnBrotherhoods);
+		
+		brotherService.save(brother);
+		save(brotherhood);
+	}
+
 }

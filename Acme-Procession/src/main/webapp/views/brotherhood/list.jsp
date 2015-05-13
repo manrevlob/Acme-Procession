@@ -37,6 +37,13 @@
 				[<jstl:out value="${editHeader}"/>]
 			</a>
 		</display:column>
+		
+		<spring:message code="brotherhood.addBigBrother" var="addBigBrotherHeader" />
+		<display:column title="${addBigBrotherHeader}">
+			<a href="brotherhood/brother/addBigBrother.do?brotherhoodId=${row.id}">
+				[<jstl:out value="${addBigBrotherHeader}"/>]
+			</a>
+		</display:column>
 	</security:authorize>
 	
 	<spring:message code="brotherhood.name" var="nameHeader" />
