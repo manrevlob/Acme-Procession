@@ -35,10 +35,7 @@
 	<acme:textbox code="administrator.surname" path="surname"/>
 
 	<acme:textbox code="administrator.email" path="email"/>
-	
-	<acme:textbox code="administrator.phone" path="phone"/>
-	
-	<acme:textbox code="administrator.homePage" path="homePage"/>
+
 	
 	<input type="submit" name="save"
 			value="<spring:message code="administrator.save" />"

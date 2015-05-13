@@ -67,7 +67,7 @@ public class AdministratorAdministratorController extends AbstractController{
 				
 				administrator = administratorService.create();
 				administrator = (Administrator) administratorService.convertToAdministrator(administrator, registrationAdminForm);
-				administratorService.save(administrator);
+				administratorService.registerToTheSystem(administrator);
 				
 				result = new ModelAndView("redirect:/");
 				
