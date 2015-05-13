@@ -82,6 +82,9 @@
 		<bean class="converters.MessageFolderToStringConverter" />
 		<bean class="converters.StringToMessageFolderConverter" />
 		
+		<bean class="converters.RequestToStringConverter" />
+		<bean class="converters.StringToRequestConverter" />
+		
 	</util:list>
 	
 </beans>
