@@ -32,6 +32,8 @@
 		<value>/views/carving/messages</value>
 		<value>/views/brotherhood/messages</value>
 		<value>/views/request/messages</value>
+		<value>/views/customer/messages</value>
+		<value>/views/administrator/messages</value>
 		
 	</util:list>
 

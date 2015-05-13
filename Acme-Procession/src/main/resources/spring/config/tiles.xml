@@ -26,6 +26,8 @@
 		<value>/views/carving/tiles.xml</value>
 		<value>/views/brotherhood/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
+		<value>/views/customer/tiles.xml</value>
+		<value>/views/administrator/tiles.xml</value>
 		
 	</util:list>
 

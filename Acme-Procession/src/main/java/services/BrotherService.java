@@ -1,6 +1,9 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BrotherRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.PasswordCode;
 import domain.Brother;
+import domain.MessageFolder;
 import domain.Brotherhood;
 
 @Service
@@ -23,6 +29,9 @@ public class BrotherService {
 	private BrotherRepository brotherRepository;
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private MessageFolderService messageFolderService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -31,6 +40,32 @@ public class BrotherService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+	
+	public Brother create() {
+		Brother result;
+		
+		result = new Brother();
+		
+		result.setUserAccount(createUserAccount());
+		result.setMessageFolders(createMessageFolders());
+		
+		return result;
+	}
+	
+	public void save(Brother brother) {
+		
+		Assert.notNull(brother);
+		
+		if(brother.getId()==0){
+			String passwordCoded;
+			
+			passwordCoded = PasswordCode.encode(brother.getUserAccount().getPassword());
+			brother.getUserAccount().setPassword(passwordCoded);
+			brother.setIsAuthorized(false);
+		}
+		
+		brotherRepository.save(brother);
+	}
 
 	public Brother findOne(int brotherId) {
 		Brother result;
@@ -48,16 +83,6 @@ public class BrotherService {
 		return result;
 	}
 
-	public Brother save(Brother brother) {
-		Brother result;
-
-		Assert.notNull(brother);
-
-		result = brotherRepository.save(brother);
-
-		return result;
-	}
-
 	// Other business methods -------------------------------------------------
 
 	public Brother findByPrincipal() {
@@ -71,6 +96,89 @@ public class BrotherService {
 
 		return result;
 	}
+	
+	public UserAccount createUserAccount() {
+		UserAccount result;
+		Collection<Authority> authorities;
+		Authority authority;
+		
+		authority = new Authority();
+		authority.setAuthority("BROTHER");
+		
+		authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		
+		result = new UserAccount();
+		result.setAuthorities(authorities);
+		
+		return result;
+	}
+	
+	public Collection<MessageFolder> createMessageFolders() {
+		Collection<MessageFolder> result;
+		MessageFolder inbox;
+		MessageFolder outbox;
+		MessageFolder trashbox;
+		
+		inbox = new MessageFolder();
+		outbox = new MessageFolder();
+		trashbox = new MessageFolder();
+		
+		result = new ArrayList<MessageFolder>();
+		result.add(inbox);
+		result.add(outbox);
+		result.add(trashbox);
+		
+		return result;
+	}
+	
+	public void registerToTheSystem(Brother brother) {
+		Integer year;
+	 	Integer month;
+
+	 	year = Calendar.getInstance().get(Calendar.YEAR);
+	 	month = Calendar.getInstance().get(Calendar.MONTH);
+		
+	 	Assert.isTrue(brother.getCreditCard().getExpirationYear()>= year);
+	 	
+	 	if(brother.getCreditCard().getExpirationYear().equals(year)){
+	 		Assert.isTrue(brother.getCreditCard().getExpirationMonth() > month, "credit card expired");
+	 	}
+	 	
+	 	brother.setMessageFolders(saveSystemFolders(brother));
+	 	 	
+	 	save(brother);
+	}
+	
+	public Collection<MessageFolder> saveSystemFolders(Brother brother) {
+		List<MessageFolder> result;
+		List<MessageFolder> aux;
+		MessageFolder inbox;
+		MessageFolder outbox;
+		MessageFolder trashbox;
+		
+		aux = (List<MessageFolder>)brother.getMessageFolders();
+		inbox = aux.get(0);
+		outbox = aux.get(1);
+		trashbox = aux.get(2);
+		
+		
+		inbox.setName("Inbox");
+		outbox.setName("Outbox");
+		trashbox.setName("Trashbox");
+		
+		inbox = messageFolderService.save(inbox);
+		outbox = messageFolderService.save(outbox);
+		trashbox = messageFolderService.save(trashbox);
+		
+		result = new ArrayList<MessageFolder>();
+		result.add(inbox);
+		result.add(outbox);
+		result.add(trashbox);
+		
+		return result;
+	}
+
 
 	public Collection<Brother> findAllBrothersNotAdded(Brotherhood brotherhood) {
 		Collection<Brother> result;

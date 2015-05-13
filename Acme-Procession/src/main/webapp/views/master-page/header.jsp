@@ -25,6 +25,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="request/administrator/list.do"><spring:message code="master.page.administrator.request" /></a></li>
+					<li><a href="administrator/administrator/registerAdministrator.do"><spring:message code="master.page.registerAdministrator" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -50,6 +51,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="customer/registerViewer.do"><spring:message code="master.page.registerAsViewer" /></a></li>
+			<li><a class="fNiv" href="customer/registerBrother.do"><spring:message code="master.page.registerAsBrother" /></a></li>
 		</security:authorize>
 		
 		<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
