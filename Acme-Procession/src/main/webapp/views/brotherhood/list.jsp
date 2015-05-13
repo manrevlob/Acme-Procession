@@ -62,6 +62,13 @@
 		</a>
 	</display:column>
 
+	<spring:message code="brotherhood.processions" var="processionsHeader" />
+	<display:column title="${processionsHeader}">
+		<a href="procession/list.do?brotherhoodId=${row.id}">
+			[<jstl:out value="${processionsHeader}"/>]
+		</a>
+	</display:column>
+
 	<spring:message code="brotherhood.carvings" var="carvingsHeader" />
 	<display:column title="${carvingsHeader}">
 		<a href="carving/list.do?brotherhoodId=${row.id}">

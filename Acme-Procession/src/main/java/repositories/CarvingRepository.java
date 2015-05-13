@@ -12,6 +12,6 @@ import domain.Carving;
 public interface CarvingRepository extends JpaRepository<Carving, Integer> {
 
 	@Query("select c from Carving c where c.brotherhood.id = ?1")
-	Collection<Carving> findAllByBrotherhood(int brotherhoodId);
+	Collection<Carving> findByBrotherhood(int brotherhoodId);
 	
 }

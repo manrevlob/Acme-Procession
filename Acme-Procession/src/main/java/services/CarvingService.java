@@ -74,10 +74,10 @@ public class CarvingService {
 
 	// Other business methods -------------------------------------------------
 
-	public Collection<Carving> findAllByBrotherhood(int brotherhoodId) {
+	public Collection<Carving> findByBrotherhood(int brotherhoodId) {
 		Collection<Carving> result;
 
-		result = carvingRepository.findAllByBrotherhood(brotherhoodId);
+		result = carvingRepository.findByBrotherhood(brotherhoodId);
 
 		return result;
 	}

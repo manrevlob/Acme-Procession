@@ -85,6 +85,12 @@
 		<bean class="converters.RequestToStringConverter" />
 		<bean class="converters.StringToRequestConverter" />
 		
+		<bean class="converters.RegistrationToStringConverter" />
+		<bean class="converters.StringToRegistrationConverter" />
+		
+		<bean class="converters.RegistrationInvoiceToStringConverter" />
+		<bean class="converters.StringToRegistrationInvoiceConverter" />
+		
 	</util:list>
 	
 </beans>
