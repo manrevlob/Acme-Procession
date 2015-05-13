@@ -461,6 +461,7 @@
 		<property name="email" value="brother1@acme-procession.com" />
 		<property name="nationality" value="Spanish" />
 		<property name="creditCard" ref="creditCard1" />
+		<property name="isAuthorized" value="false" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox2" />
@@ -493,6 +494,7 @@
 		<property name="email" value="brother2@acme-procession.com" />
 		<property name="nationality" value="Spanish" />
 		<property name="creditCard" ref="creditCard2" />
+		<property name="isAuthorized" value="false" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox3" />
@@ -526,6 +528,7 @@
 		<property name="email" value="brother3@acme-procession.com" />
 		<property name="nationality" value="English" />
 		<property name="creditCard" ref="creditCard3" />
+		<property name="isAuthorized" value="false" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox4" />
@@ -556,6 +559,7 @@
 		<property name="email" value="brother4@acme-procession.com" />
 		<property name="nationality" value="Spanish" />
 		<property name="creditCard" ref="creditCard4" />
+		<property name="isAuthorized" value="false" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox5" />

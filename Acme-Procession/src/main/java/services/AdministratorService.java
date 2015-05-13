@@ -5,8 +5,12 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.LoginService;
+import security.UserAccount;
+import utilities.PasswordCode;
 import domain.Administrator;
 
 @Service
@@ -19,6 +23,9 @@ public class AdministratorService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+
 	// Constructors -----------------------------------------------------------
 
 	public AdministratorService() {
@@ -26,6 +33,14 @@ public class AdministratorService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+
+	public Administrator create() {
+		Administrator result;
+
+		result = new Administrator();
+		
+		return result;
+	}
 
 	public Administrator findOne(int administratorId) {
 		Administrator result;
@@ -43,6 +58,32 @@ public class AdministratorService {
 		return result;
 	}
 
-	// Other business methods -------------------------------------------------
+	public void save(Administrator administrator) {
+		Assert.notNull(administrator);
+		Assert.isTrue(actorService.isAdministrator());
 
+		if (administrator.getId() == 0) {
+			String passwordCoded;
+
+			passwordCoded = PasswordCode.encode(administrator.getUserAccount()
+					.getPassword());
+			administrator.getUserAccount().setPassword(passwordCoded);
+		}
+
+		administratorRepository.save(administrator);
+	}
+
+	// Other business methods -------------------------------------------------
+	public Administrator findByPrincipal() {
+		Administrator administrator;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		administrator = administratorRepository.findByPrincipal(userAccount
+				.getId());
+
+		Assert.notNull(administrator);
+
+		return administrator;
+	}
 }
