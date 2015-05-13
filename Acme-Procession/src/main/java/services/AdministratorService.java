@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import utilities.PasswordCode;
 import domain.Administrator;
+import forms.RegistrationAdminForm;
 
 @Service
 @Transactional
@@ -74,6 +77,7 @@ public class AdministratorService {
 	}
 
 	// Other business methods -------------------------------------------------
+	
 	public Administrator findByPrincipal() {
 		Administrator administrator;
 		UserAccount userAccount;
@@ -86,4 +90,51 @@ public class AdministratorService {
 
 		return administrator;
 	}
+	
+	public UserAccount createUserAccount() {
+		UserAccount result;
+		Collection<Authority> authorities;
+		Authority authority;
+		
+		authority = new Authority();
+		authority.setAuthority("ADMINISTRATOR");
+		
+		authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		
+		result = new UserAccount();
+		result.setAuthorities(authorities);
+		
+		return result;
+	}
+	
+	
+	public Administrator convertToAdministrator(Administrator administrator,RegistrationAdminForm registrationAdminForm) {
+		Assert.notNull(registrationAdminForm);
+		Assert.notNull(administrator);
+
+		administrator.setName(registrationAdminForm.getName());
+		administrator.setSurname(registrationAdminForm.getSurname());
+		administrator.setEmail(registrationAdminForm.getEmail());
+
+		administrator.getUserAccount().setUsername(registrationAdminForm.getUsername());
+		
+		administrator.getUserAccount().setPassword(registrationAdminForm.getPassword());
+
+		return administrator;
+	}
+	
+	public void checkPassword(RegistrationAdminForm registrationAdminForm) {
+		String password;
+		String secondPassword;
+		
+		password = registrationAdminForm.getPassword();
+		secondPassword = registrationAdminForm.getSecondPassword();
+		
+		if(!password.equals(secondPassword)){
+			throw new IllegalArgumentException("passwords dont match");
+		}
+		
+	}
+	
 }
