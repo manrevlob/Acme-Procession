@@ -34,6 +34,7 @@ public class CarvingBrotherController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	// Create -----------------------------------------------------------------
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -47,6 +48,7 @@ public class CarvingBrotherController extends AbstractController {
 	}
 
 	// Edit -------------------------------------------------------------------
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int carvingId) {
 		ModelAndView result;

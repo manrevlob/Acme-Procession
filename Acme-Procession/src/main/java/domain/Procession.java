@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -99,6 +101,25 @@ public class Procession extends DomainEntity {
 
 	public void setIsClosedManually(boolean isClosedManually) {
 		this.isClosedManually = isClosedManually;
+	}
+
+	// Derived attributes -----------------------------------------------------
+	@Transient
+	public Integer getNumberOfRegistrations() {
+		return getRegistrations().size();
+	}
+	
+	@Transient
+	public boolean getIsClosed() {
+		boolean oneWeekBeforeArrived;
+		Calendar actualDateLessOneWeek;
+		
+		actualDateLessOneWeek = Calendar.getInstance();
+		actualDateLessOneWeek.add(Calendar.WEEK_OF_YEAR, -1);
+		
+		oneWeekBeforeArrived = getStartMoment().before(actualDateLessOneWeek.getTime());
+		
+		return getIsClosedManually() || oneWeekBeforeArrived;
 	}
 
 	// Relationships ----------------------------------------------------------

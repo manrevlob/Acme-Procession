@@ -44,8 +44,12 @@
 
 		<security:intercept-url pattern="/brotherhood/**" access="permitAll" /> 
 		<security:intercept-url pattern="/brotherhood/brother/**" access="hasRole('BROTHER')" /> 
+		
+		<security:intercept-url pattern="/procession/**" access="permitAll" /> 
+		<security:intercept-url pattern="/procession/brother/**" access="hasRole('BROTHER')" /> 
 	
-		<security:intercept-url pattern="/carving/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/carving/**" access="permitAll" /> 
+		<security:intercept-url pattern="/carving/brother/**" access="hasRole('BROTHER')" /> 
 		
 		<security:intercept-url pattern="/request/brother/**" access="hasRole('BROTHER')" /> 
 		<security:intercept-url pattern="/request/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
