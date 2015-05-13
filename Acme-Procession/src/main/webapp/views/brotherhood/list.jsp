@@ -30,12 +30,14 @@
 
 <display:table name="brotherhoods" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<spring:message code="brotherhood.details" var="detailsHeader" />
-	<display:column title="${detailsHeader}">
-		<a href="brotherhood/details.do?brotherhoodId=${row.id}">
-			[<jstl:out value="${detailsHeader}"/>]
-		</a>
-	</display:column>
+	<security:authorize  access="hasRole('BROTHER')">
+		<spring:message code="brotherhood.edit" var="editHeader" />
+		<display:column title="${editHeader}">
+			<a href="brotherhood/brother/edit.do?brotherhoodId=${row.id}">
+				[<jstl:out value="${editHeader}"/>]
+			</a>
+		</display:column>
+	</security:authorize>
 	
 	<spring:message code="brotherhood.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
@@ -45,6 +47,13 @@
 	
 	<spring:message code="brotherhood.numberOfBrothers" var="numberOfBrothersHeader" />
 	<display:column property="numberOfBrothers" title="${numberOfBrothersHeader}" sortable="true" />
+
+	<spring:message code="brotherhood.details" var="detailsHeader" />
+	<display:column title="${detailsHeader}">
+		<a href="brotherhood/details.do?brotherhoodId=${row.id}">
+			[<jstl:out value="${detailsHeader}"/>]
+		</a>
+	</display:column>
 
 	<spring:message code="brotherhood.carvings" var="carvingsHeader" />
 	<display:column title="${carvingsHeader}">
