@@ -38,7 +38,7 @@ public class Brotherhood extends DomainEntity {
 		this.name = name;
 	}
 
-	@Min(0)
+	@Min(1500)
 	public int getFoundationYear() {
 		return foundationYear;
 	}
