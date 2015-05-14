@@ -168,7 +168,7 @@
 	</bean>
 
 	<bean id="money3" class="domain.Money">
-		<property name="amount" value="14.92" />
+		<property name="amount" value="15" />
 		<property name="currency" value="Euro" />
 	</bean>
 
@@ -195,6 +195,11 @@
 	<bean id="money8" class="domain.Money">
 		<property name="amount" value="26.08" />
 		<property name="currency" value="Libra" />
+	</bean>
+	
+	<bean id="money9" class="domain.Money">
+		<property name="amount" value="30" />
+		<property name="currency" value="Euro" />
 	</bean>
 
 
@@ -449,6 +454,13 @@
 				<ref bean="trashbox1" />
 			</list>
 		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="box1" />
+				<ref bean="box2" />
+				<ref bean="box3" />
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
@@ -604,6 +616,11 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount6" />
+		<property name="boxReserves">
+			<list>
+				<ref bean="boxReserve1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="viewer2" class="domain.Viewer">
@@ -617,6 +634,11 @@
 				<ref bean="inbox7" />
 				<ref bean="outbox7" />
 				<ref bean="trashbox7" />
+			</list>
+		</property>
+		<property name="boxReserves">
+			<list>
+				<ref bean="boxReserve2" />
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount7" />
@@ -1042,6 +1064,88 @@
 		<property name="brother" ref="brother4" />
 		<property name="procession" ref="procession3" />
 		<property name="stretch" ref="ordinaryStretch4" />
+	</bean>
+	
+	<!-- Box -->
+	
+	<bean id="box1" class="domain.Box">
+		<property name="name" value="Box 1" />
+		<property name="description" value="box1description" />
+		<property name="locality" value="box1locality" />
+		<property name="location" value="box1location" />
+		<property name="numberOfChairs" value="15" />
+		<property name="price" ref="money3"  />
+		<property name="administrator" ref="administrator1" />
+		<property name="boxInstances">
+			<list>
+				<ref bean="boxInstance1" />
+				<ref bean="boxInstance2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="box2" class="domain.Box">
+		<property name="name" value="Box 2" />
+		<property name="description" value="box2description" />
+		<property name="locality" value="box2locality" />
+		<property name="location" value="box2location" />
+		<property name="numberOfChairs" value="20" />
+		<property name="price" ref="money3"  />
+		<property name="administrator" ref="administrator1" />
+		<property name="boxInstances">
+			<list>
+				<ref bean="boxInstance3" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="box3" class="domain.Box">
+		<property name="name" value="Box 3" />
+		<property name="description" value="box3description" />
+		<property name="locality" value="box3locality" />
+		<property name="location" value="box3location" />
+		<property name="numberOfChairs" value="10" />
+		<property name="price" ref="money5"  />
+		<property name="administrator" ref="administrator1" />
+	</bean>
+	
+	<!-- BoxInstance -->
+	
+	<bean id="boxInstance1" class="domain.BoxInstance">
+		<property name="date" value="16/06/2015" />
+		<property name="box" ref="box1"  />
+	</bean>
+	
+	<bean id="boxInstance2" class="domain.BoxInstance">
+		<property name="date" value="18/06/2015" />
+		<property name="box" ref="box1"/>
+	</bean>
+	
+	<bean id="boxInstance3" class="domain.BoxInstance">
+		<property name="date" value="15/06/2015" />
+		<property name="box" ref="box2"/>
+	</bean>
+	
+	<!-- BoxReserve -->
+	
+	<bean id="boxReserve1" class="domain.BoxReserve">
+		<property name="date" value="16/05/2015 12:00" />
+		<property name="reserveCode" value="codeReserve1" />
+		<property name="numberOfChair" value="2" />
+		<property name="createMoment" value="05/05/2015 12:00" />
+		<property name="totalCost" ref="money9"  />
+		<property name="boxInstance" ref="boxInstance1" />
+		<property name="viewer" ref="viewer1" />
+	</bean>
+	
+	<bean id="boxReserve2" class="domain.BoxReserve">
+		<property name="date" value="15/05/2015 12:00" />
+		<property name="reserveCode" value="codeReserve2" />
+		<property name="numberOfChair" value="2" />
+		<property name="createMoment" value="04/03/2015 12:00" />
+		<property name="totalCost" ref="money9"  />
+		<property name="boxInstance" ref="boxInstance2" />
+		<property name="viewer" ref="viewer2" />
 	</bean>
 
 </beans>
