@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.RegistrationRepository;
+import domain.Procession;
 import domain.Registration;
+import domain.Stretch;
 
 @Service
 @Transactional
@@ -43,5 +45,13 @@ public class RegistrationService {
 		return result;
 	}
 	// Other business methods -------------------------------------------------
+
+	public Collection<Registration> findByProcessionAndStretch(Procession procession, Stretch stretch) {
+		Collection<Registration> result;
+		
+		result = registrationRepository.findByProcessionIdAndStretchId(procession.getId(), stretch.getId());
+		
+		return result;
+	}
 
 }

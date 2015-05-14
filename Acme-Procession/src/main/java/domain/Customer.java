@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Customer extends Actor {
+public abstract class Customer extends Actor {
 	
 	// Constructors -----------------------------------------------------------
 
