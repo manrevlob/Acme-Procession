@@ -127,6 +127,7 @@ public class Procession extends DomainEntity {
 	private Brotherhood brotherhood;
 	private Collection<StretchOrder> stretchOrders;
 	private Collection<Registration> registrations;
+	private Collection<Assessment> assessments;
 
 	@Valid
 	@NotNull
@@ -158,6 +159,15 @@ public class Procession extends DomainEntity {
 
 	public void setRegistrations(Collection<Registration> registrations) {
 		this.registrations = registrations;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "procession")
+	public Collection<Assessment> getAssessments() {
+		return assessments;
+	}
+	public void setAssessments(Collection<Assessment> assessments) {
+		this.assessments = assessments;
 	}
 
 }

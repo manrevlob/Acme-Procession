@@ -60,6 +60,8 @@
 		<security:intercept-url pattern="/request/brother/**" access="hasRole('BROTHER')" /> 
 		<security:intercept-url pattern="/request/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		
+		<security:intercept-url pattern="/assessment/viewer/**" access="hasRole('VIEWER')" /> 
+		
 		<security:intercept-url pattern="/administrator/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<security:intercept-url pattern="/customer/register*" access="hasRole('ROLE_ANONYMOUS')" />
