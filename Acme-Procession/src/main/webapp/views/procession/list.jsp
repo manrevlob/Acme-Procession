@@ -57,6 +57,13 @@
 	<spring:message code="procession.numberOfRegistrations" var="numberOfRegistrationsHeader" />
 	<display:column property="numberOfRegistrations" title="${numberOfRegistrationsHeader}" sortable="true" />
 
+	<spring:message code="procession.stretches" var="stretchesHeader" />
+	<display:column title="${stretchesHeader}">
+		<a href="stretchOrder/list.do?processionId=${row.id}">
+			[<jstl:out value="${stretchesHeader}"/>]
+		</a>
+	</display:column>
+	
 	<spring:message code="procession.details" var="detailsHeader" />
 	<display:column title="${detailsHeader}">
 		<a href="procession/details.do?processionId=${row.id}">

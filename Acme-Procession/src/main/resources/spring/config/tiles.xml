@@ -26,6 +26,9 @@
 		<value>/views/carving/tiles.xml</value>
 		<value>/views/brotherhood/tiles.xml</value>
 		<value>/views/procession/tiles.xml</value>
+		<value>/views/stretchOrder/tiles.xml</value>
+		<value>/views/ordinaryStretch/tiles.xml</value>
+		<value>/views/floatStretch/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>

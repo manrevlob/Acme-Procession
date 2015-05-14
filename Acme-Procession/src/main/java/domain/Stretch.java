@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Stretch extends DomainEntity {
+public abstract class Stretch extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 

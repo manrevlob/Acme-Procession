@@ -55,13 +55,6 @@
 	<spring:message code="brotherhood.numberOfBrothers" var="numberOfBrothersHeader" />
 	<display:column property="numberOfBrothers" title="${numberOfBrothersHeader}" sortable="true" />
 
-	<spring:message code="brotherhood.details" var="detailsHeader" />
-	<display:column title="${detailsHeader}">
-		<a href="brotherhood/details.do?brotherhoodId=${row.id}">
-			[<jstl:out value="${detailsHeader}"/>]
-		</a>
-	</display:column>
-
 	<spring:message code="brotherhood.processions" var="processionsHeader" />
 	<display:column title="${processionsHeader}">
 		<a href="procession/list.do?brotherhoodId=${row.id}">
@@ -73,6 +66,13 @@
 	<display:column title="${carvingsHeader}">
 		<a href="carving/list.do?brotherhoodId=${row.id}">
 			[<jstl:out value="${carvingsHeader}"/>]
+		</a>
+	</display:column>
+
+	<spring:message code="brotherhood.details" var="detailsHeader" />
+	<display:column title="${detailsHeader}">
+		<a href="brotherhood/details.do?brotherhoodId=${row.id}">
+			[<jstl:out value="${detailsHeader}"/>]
 		</a>
 	</display:column>
 
