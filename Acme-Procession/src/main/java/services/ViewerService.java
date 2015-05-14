@@ -11,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ViewerRepository;
-import security.Authority;
+import security.LoginService;
 import security.UserAccount;
+import security.Authority;
 import utilities.PasswordCode;
 import domain.Brother;
 import domain.MessageFolder;
@@ -80,6 +81,7 @@ public class ViewerService {
 
 		return result;
 	}
+
 	// Other business methods -------------------------------------------------
 	
 	public UserAccount createUserAccount() {
@@ -161,6 +163,18 @@ public class ViewerService {
 		result.add(outbox);
 		result.add(trashbox);
 		
+		return result;
+	}
+
+	public Viewer findByPrincipal() {
+		Viewer result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		result = viewerRepository.findByPrincipal(userAccount.getId());
+
+		Assert.notNull(result);
+
 		return result;
 	}
 
