@@ -20,7 +20,9 @@ public class Viewer extends Customer {
 	// Attributes -------------------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
+	
 	private Collection<Assessment> assessments;
+	private Collection<BoxReserve> boxReserves;
 
 	@Valid
 	@OneToMany(mappedBy = "viewer")
@@ -30,6 +32,16 @@ public class Viewer extends Customer {
 	public void setAssessments(Collection<Assessment> assessments) {
 		this.assessments = assessments;
 	}
+		
+	@Valid
+	@OneToMany(mappedBy = "viewer")
+	public Collection<BoxReserve> getBoxReserves() {
+		return boxReserves;
+	}
+
+	public void setBoxReserves(Collection<BoxReserve> boxReserves) {
+		this.boxReserves = boxReserves;
+	}
 	
-	
+
 }
