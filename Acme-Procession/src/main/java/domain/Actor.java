@@ -85,4 +85,7 @@ public abstract class Actor extends DomainEntity {
 		this.userAccount = userAccount;
 	}
 
+
+	
+
 }

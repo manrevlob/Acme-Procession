@@ -115,7 +115,7 @@ public class CustomerController extends AbstractController {
 				brotherService.registerToTheSystem(brother);
 				
 				
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 				
 			}catch(IllegalArgumentException exp){
 					if(exp.getMessage().equals("passwords dont match")){
@@ -159,7 +159,7 @@ public class CustomerController extends AbstractController {
 				viewerService.registerToTheSystem(viewer);
 				
 				
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 			
 			}catch(IllegalArgumentException exp){
 				if(exp.getMessage().equals("passwords dont match")){
