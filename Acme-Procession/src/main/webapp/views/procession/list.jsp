@@ -70,6 +70,15 @@
 			[<jstl:out value="${detailsHeader}"/>]
 		</a>
 	</display:column>
+	
+	<security:authorize  access="hasRole('VIEWER')">
+		<spring:message code="procession.assessments" var="assessmentHeader" />
+		<display:column title="${assessmentHeader}">
+			<a href="assessment/viewer/assessById.do?processionId=${row.id}">
+				[<jstl:out value="${assessmentHeader}"/>]
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 

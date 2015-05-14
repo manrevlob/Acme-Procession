@@ -45,6 +45,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.viewer" />[+] - (<security:authentication property="principal.username" />)</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="assessment/viewer/list.do"><spring:message code="master.page.viewer.assessByViewer" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

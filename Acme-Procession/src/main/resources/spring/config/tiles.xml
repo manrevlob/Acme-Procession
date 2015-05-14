@@ -32,6 +32,7 @@
 		<value>/views/request/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
+		<value>/views/assessment/tiles.xml</value>
 		
 	</util:list>
 
