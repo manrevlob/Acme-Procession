@@ -38,6 +38,8 @@
 					<li class="arrow"></li>
 					<li><a href="brotherhood/brother/list.do"><spring:message code="master.page.brother.listMyBrotherhoods" /></a></li>
 					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
+					<li><a href="ordinaryStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnOrdinary" /></a></li>
+					<li><a href="floatStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnFloat" /></a></li>
 					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 				</ul>
 			</li>
@@ -54,8 +56,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="customer/registerViewer.do"><spring:message code="master.page.registerAsViewer" /></a></li>
 			<li><a class="fNiv" href="customer/registerBrother.do"><spring:message code="master.page.registerAsBrother" /></a></li>
+			<li><a class="fNiv" href="customer/registerViewer.do"><spring:message code="master.page.registerAsViewer" /></a></li>
 		</security:authorize>
 		
 		<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
