@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -44,7 +45,18 @@ public abstract class Stretch extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
+	private Brotherhood brotherhood;
 	private Collection<StretchOrder> stretchOrders;
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return brotherhood;
+	}
+
+	public void setBrotherhood(Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
+	}
 
 	@Valid
 	@OneToMany(mappedBy = "stretch")

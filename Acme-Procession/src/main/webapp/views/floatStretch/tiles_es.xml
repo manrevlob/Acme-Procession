@@ -16,8 +16,13 @@
        
 <tiles-definitions>
 
+	<definition name="floatStretch/list" extends="master.page">
+		<put-attribute name="title" value="Listar tramos de paso" />
+		<put-attribute name="body" value="/views/floatStretch/list.jsp" />
+	</definition>
+
 	<definition name="floatStretch/edit" extends="master.page">
-		<put-attribute name="title" value="Editar tramos ordinarios" />
+		<put-attribute name="title" value="Editar tramos de paso" />
 		<put-attribute name="body" value="/views/floatStretch/edit.jsp" />
 	</definition>
 

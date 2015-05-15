@@ -67,6 +67,7 @@ public class Brotherhood extends DomainEntity {
 	private Collection<Brother> brothers;
 	private Collection<Brother> bigBrothers;
 	private Collection<Procession> processions;
+	private Collection<Stretch> stretches;
 	private Collection<Carving> carvings;
 
 	@Valid
@@ -99,6 +100,16 @@ public class Brotherhood extends DomainEntity {
 
 	public void setProcessions(Collection<Procession> processions) {
 		this.processions = processions;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "brotherhood")
+	public Collection<Stretch> getStretches() {
+		return stretches;
+	}
+
+	public void setStretches(Collection<Stretch> stretches) {
+		this.stretches = stretches;
 	}
 
 	@Valid

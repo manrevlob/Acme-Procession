@@ -29,6 +29,13 @@
 				[<jstl:out value="${editHeader}"/>]
 			</a>
 		</display:column>
+		
+		<spring:message code="stretch.delete" var="deleteHeader" />
+		<display:column title="${deleteHeader}">
+			<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}&processionId=${row.procession.id}">
+				[<jstl:out value="${deleteHeader}"/>]
+			</a>
+		</display:column>
 
 		<spring:message code="stretch.register" var="registerHeader" />
 		<display:column title="${registerHeader}">
@@ -64,13 +71,6 @@
 					[<jstl:out value="${moveToDownHeader}"/>]
 				</a>
 			</jstl:if>
-		</display:column>
-
-		<spring:message code="stretch.delete" var="deleteHeader" />
-		<display:column title="${deleteHeader}">
-			<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}&processionId=${row.procession.id}">
-				[<jstl:out value="${deleteHeader}"/>]
-			</a>
 		</display:column>
 	</security:authorize>
 

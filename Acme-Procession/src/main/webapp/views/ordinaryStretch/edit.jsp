@@ -25,7 +25,17 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="procession" />
+	
+	<jstl:choose>
+		<jstl:when test="${ordinaryStretch.id != 0}">
+			<form:hidden path="brotherhood" />
+			<spring:message code="stretch.brotherhood"/>: 
+			<jstl:out value="${ordinaryStretch.brotherhood.name}"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
+		</jstl:otherwise>
+	</jstl:choose>
 
 	<acme:textbox code="stretch.name" path="name" />
 
@@ -33,15 +43,13 @@
 
 	<acme:textbox code="stretch.maxNumberOfBrothers" path="maxNumberOfBrothers" />
 
-	<acme:submit name="save" code="procession.save" />
+	<acme:submit name="save" code="stretch.save" /> 
 	
-	<jstl:if test="${procession.id != 0}">
-		<acme:submit name="delete" code="procession.delete" />
-	</jstl:if>
+	<jstl:if test="${ordinaryStretch.id != 0}">
+		<acme:submit name="delete" code="stretch.delete" />
+	</jstl:if> 
+	
+	<acme:cancel url="ordinaryStretch/brother/listOwns.do"
+		code="stretch.cancel" />
 
 </form:form>
-
-<div>
-	<acme:cancel url="brotherhood/brother/listOwns.do"
-		code="stretch.cancel" />
-</div>

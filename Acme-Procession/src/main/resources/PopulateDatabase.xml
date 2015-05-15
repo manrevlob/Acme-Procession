@@ -401,6 +401,15 @@
 				<ref bean="procession2" />
 			</list>
 		</property>
+		<property name="stretches">
+			<list>
+				<ref bean="ordinaryStretch1" />
+				<ref bean="ordinaryStretch2" />
+				<ref bean="floatStretch1" />
+				<ref bean="floatStretch2" />
+				<ref bean="floatStretch3" />
+			</list>
+		</property>
 		<property name="carvings">
 			<list>
 				<ref bean="carving1" />
@@ -430,6 +439,13 @@
 		<property name="processions">
 			<list>
 				<ref bean="procession3" />
+			</list>
+		</property>
+		<property name="stretches">
+			<list>
+				<ref bean="ordinaryStretch3" />
+				<ref bean="ordinaryStretch4" />
+				<ref bean="floatStretch4" />
 			</list>
 		</property>
 		<property name="carvings">
@@ -819,6 +835,7 @@
 		<property name="name" value="OrdinaryStretch1Name" />
 		<property name="description" value="OrdinaryStretch1Description" />
 		<property name="maxNumberOfBrothers" value="1" />
+		<property name="brotherhood" ref="brotherhood1" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder1" />
@@ -837,6 +854,7 @@
 		<property name="name" value="OrdinaryStretch2Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
 		<property name="maxNumberOfBrothers" value="5" />
+		<property name="brotherhood" ref="brotherhood1" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder2" />
@@ -856,6 +874,7 @@
 		<property name="name" value="OrdinaryStretch3Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
 		<property name="maxNumberOfBrothers" value="3" />
+		<property name="brotherhood" ref="brotherhood2" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder8" />
@@ -872,6 +891,7 @@
 		<property name="name" value="OrdinaryStretch2Name" />
 		<property name="description" value="OrdinaryStretch2Description" />
 		<property name="maxNumberOfBrothers" value="1" />
+		<property name="brotherhood" ref="brotherhood2" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder9" />
@@ -890,6 +910,7 @@
 	<bean id="floatStretch1" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch1Name" />
 		<property name="description" value="FloatStretch1Description" />
+		<property name="brotherhood" ref="brotherhood1" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder3" />
@@ -907,6 +928,7 @@
 	<bean id="floatStretch2" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch2Name" />
 		<property name="description" value="FloatStretch2Description" />
+		<property name="brotherhood" ref="brotherhood1" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder5" />
@@ -923,6 +945,7 @@
 	<bean id="floatStretch3" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch3Name" />
 		<property name="description" value="FloatStretch3Description" />
+		<property name="brotherhood" ref="brotherhood1" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder7" />
@@ -938,6 +961,7 @@
 	<bean id="floatStretch4" class="domain.FloatStretch">
 		<property name="name" value="FloatStretch3Name" />
 		<property name="description" value="FloatStretch3Description" />
+		<property name="brotherhood" ref="brotherhood2" />
 		<property name="stretchOrders">
 			<list>
 				<ref bean="stretchOrder10" />
