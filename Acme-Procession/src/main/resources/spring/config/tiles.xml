@@ -34,6 +34,7 @@
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/assessment/tiles.xml</value>
 		<value>/views/box/tiles.xml</value>
+		<value>/views/boxInstance/tiles.xml</value>
 		
 	</util:list>
 
