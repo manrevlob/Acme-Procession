@@ -26,6 +26,8 @@
 					<li class="arrow"></li>
 					<li><a href="request/administrator/list.do"><spring:message code="master.page.administrator.request" /></a></li>
 					<li><a href="administrator/administrator/registerAdministrator.do"><spring:message code="master.page.registerAdministrator" /></a></li>
+					<li><a href="box/administrator/list.do"><spring:message code="master.page.administrator.boxes" /></a></li>
+					<li><a href="box/administrator/listOwns.do"><spring:message code="master.page.administrator.boxesOwns" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
