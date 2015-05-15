@@ -64,6 +64,8 @@
 		
 		<security:intercept-url pattern="/administrator/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		
+		<security:intercept-url pattern="/box/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
 		<security:intercept-url pattern="/customer/register*" access="hasRole('ROLE_ANONYMOUS')" />
 	
 		<security:intercept-url pattern="/law/**" access="permitAll" />
