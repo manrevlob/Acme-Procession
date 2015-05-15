@@ -40,6 +40,7 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/assessment/messages</value>
 		<value>/views/box/messages</value>
+		<value>/views/boxInstance/messages</value>
 		
 	</util:list>
 
