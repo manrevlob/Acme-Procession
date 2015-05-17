@@ -1138,11 +1138,21 @@
 	<bean id="boxInstance1" class="domain.BoxInstance">
 		<property name="date" value="16/06/2015" />
 		<property name="box" ref="box1"  />
+		<property name="boxReserves">
+			<list>
+				<ref bean="boxReserve1" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="boxInstance2" class="domain.BoxInstance">
 		<property name="date" value="18/06/2015" />
 		<property name="box" ref="box1"/>
+		<property name="boxReserves">
+			<list>
+				<ref bean="boxReserve2" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="boxInstance3" class="domain.BoxInstance">
