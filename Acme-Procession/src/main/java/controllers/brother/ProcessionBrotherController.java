@@ -14,9 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import services.ProcessionService;
+import services.StretchService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Procession;
+import domain.Stretch;
+import forms.AddStretchToProcessionForm;
 
 @Controller
 @RequestMapping("/procession/brother")
@@ -31,6 +34,9 @@ public class ProcessionBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
+
+	@Autowired
+	private StretchService stretchService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -100,6 +106,47 @@ public class ProcessionBrotherController extends AbstractController {
 			}
 		}
 
+		return result;
+	}
+
+	@RequestMapping(value = "/addStage", method = RequestMethod.GET)
+	public ModelAndView addStage(@RequestParam int processionId) {
+		ModelAndView result;
+		AddStretchToProcessionForm addStretchToProcessionForm;
+		Collection<Stretch> availableStretches;
+		Procession procession;
+		
+		procession = processionService.findOneIfPrincipal(processionId);
+		availableStretches = stretchService.findAvailables(procession);
+		
+		addStretchToProcessionForm = new AddStretchToProcessionForm();
+		addStretchToProcessionForm.setProcession(procession);
+		
+		result = new ModelAndView("procession/addStretch");
+		result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+		result.addObject("availableStretches", availableStretches);
+		
+		return result;
+	}
+		
+	@RequestMapping(value = "/addStage", method = RequestMethod.POST, params = "addStage")
+	public ModelAndView addStageSave(@Valid AddStretchToProcessionForm addStretchToProcessionForm, BindingResult binding) {
+		ModelAndView result;
+		
+		if (binding.hasErrors()) {
+			result = new ModelAndView("procession/addStretch");
+			result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+		} else {
+			try {
+				processionService.addStretch(addStretchToProcessionForm);
+				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+			} catch (Throwable oops) {
+				result = new ModelAndView("procession/addStretch");
+				result.addObject("message", "procession.commit.error");
+				result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+			}
+		}
+		
 		return result;
 	}
 

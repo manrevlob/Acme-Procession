@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.StretchRepository;
+import domain.Procession;
 import domain.Stretch;
 
 @Service
@@ -44,5 +45,13 @@ public class StretchService {
 	}
 	
 	// Other business methods -------------------------------------------------
+
+	public Collection<Stretch> findAvailables(Procession procession) {
+		Collection<Stretch> result;
+		
+		result = stretchRepository.findAvailableStretches(procession);
+		
+		return result;
+	}
 
 }

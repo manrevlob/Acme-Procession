@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.StretchOrderRepository;
 import domain.Procession;
+import domain.Stretch;
 import domain.StretchOrder;
 
 @Service
@@ -54,6 +55,14 @@ public class StretchOrderService {
 		return result;
 	}
 
+	public StretchOrder create() {
+		StretchOrder result;
+		
+		result = new StretchOrder();
+		
+		return result;
+	}
+
 	public StretchOrder save(StretchOrder stretchOrder) {
 		StretchOrder result;
 
@@ -71,6 +80,32 @@ public class StretchOrderService {
 	}
 	
 	// Other business methods -------------------------------------------------
+
+	public StretchOrder findOneIfPrincipal(int stretchOrderId) {
+		StretchOrder result;
+		
+		result = findOne(stretchOrderId);
+		
+		// Comprobamos que el usuario tiene permisos en la hermandad relacionada.
+		Assert.isTrue(result.getStretch().getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		
+		return result;
+	}
+
+	public StretchOrder createByStretchAndProcession(Stretch stretch, Procession procession) {
+		StretchOrder result;
+		int orderNumber;
+		
+		result = create();
+
+		orderNumber = procession.getStretchOrders().size() + 1;
+
+		result.setOrderNumber(orderNumber);
+		result.setStretch(stretch);
+		result.setProcession(procession);
+		
+		return result;
+	}
 
 	public Collection<StretchOrder> findByProcession(Procession procession) {
 		Collection<StretchOrder> result;
