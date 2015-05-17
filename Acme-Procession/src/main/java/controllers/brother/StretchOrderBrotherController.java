@@ -36,9 +36,9 @@ public class StretchOrderBrotherController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	// Creation ---------------------------------------------------------------
-	
+
 	// Edition ----------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/moveToUp", method = RequestMethod.GET)
 	public ModelAndView moveToUp(@RequestParam int stretchOrderId, @RequestParam int processionId) {
 		ModelAndView result;

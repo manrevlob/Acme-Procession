@@ -31,4 +31,9 @@
 		<put-attribute name="body" value="/views/procession/details.jsp" />
 	</definition>
 
+	<definition name="procession/addStretch" extends="master.page">
+		<put-attribute name="title" value="Add stretch" />
+		<put-attribute name="body" value="/views/procession/addStrecth.jsp" />
+	</definition>
+
 </tiles-definitions>

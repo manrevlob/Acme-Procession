@@ -10,6 +10,9 @@ import org.springframework.util.Assert;
 import repositories.ProcessionRepository;
 import domain.Brotherhood;
 import domain.Procession;
+import domain.Stretch;
+import domain.StretchOrder;
+import forms.AddStretchToProcessionForm;
 
 @Service
 @Transactional
@@ -30,6 +33,9 @@ public class ProcessionService {
 
 	@Autowired
 	private BrotherService brotherService;
+
+	@Autowired
+	private StretchOrderService stretchOrderService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -106,6 +112,28 @@ public class ProcessionService {
 		Assert.isTrue(result.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
 		
 		return result;
+	}
+
+	public void addStretch(AddStretchToProcessionForm addStretchToProcessionForm) {
+		Procession procession;
+		Stretch stretch;
+		StretchOrder stretchOrder;
+		Collection<StretchOrder> stretchOders;
+
+		procession = addStretchToProcessionForm.getProcession();
+		stretch = addStretchToProcessionForm.getStretch();
+
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(stretch.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(stretch.getBrotherhood().equals(procession.getBrotherhood()));
+
+		stretchOrder = stretchOrderService.createByStretchAndProcession(stretch, procession);
+
+		stretchOders = procession.getStretchOrders();
+		stretchOders.add(stretchOrder);
+		procession.setStretchOrders(stretchOders);
+
+		save(procession);
 	}
 
 }
