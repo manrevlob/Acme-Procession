@@ -1167,6 +1167,7 @@
 		<property name="reserveCode" value="codeReserve1" />
 		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="05/05/2015 12:00" />
+		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance1" />
 		<property name="viewer" ref="viewer1" />
@@ -1177,6 +1178,7 @@
 		<property name="reserveCode" value="codeReserve2" />
 		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="05/03/2015 12:00" />
+		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance2" />
 		<property name="viewer" ref="viewer2" />
