@@ -20,11 +20,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="boxInstance/administrator/edit.do" modelAttribute="box">
+<form:form action="boxInstance/administrator/edit.do" modelAttribute="boxInstance">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="box" />
+	<form:hidden path="boxReserves" />
 	
 	<acme:textbox code="boxInstance.date" path="date" />
 	
