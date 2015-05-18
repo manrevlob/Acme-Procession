@@ -1176,7 +1176,7 @@
 		<property name="date" value="15/05/2015 12:00" />
 		<property name="reserveCode" value="codeReserve2" />
 		<property name="numberOfChair" value="2" />
-		<property name="createMoment" value="04/03/2015 12:00" />
+		<property name="createMoment" value="05/03/2015 12:00" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance2" />
 		<property name="viewer" ref="viewer2" />
