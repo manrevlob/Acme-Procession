@@ -39,7 +39,7 @@
 
 		<spring:message code="stretch.register" var="registerHeader" />
 		<display:column title="${registerHeader}">
-			<a href="ordinaryStretch/brother/register.do?ordinaryStretchId=${row.stretch.id}">
+			<a href="stretchOrder/brother/register.do?stretchOrderId=${row.id}">
 				[<jstl:out value="${registerHeader}"/>]
 			</a>
 		</display:column>
