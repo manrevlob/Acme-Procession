@@ -52,6 +52,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="assessment/viewer/list.do"><spring:message code="master.page.viewer.assessByViewer" /></a></li>
+					<li><a href="boxReserve/viewer/list.do"><spring:message code="master.page.viewer.boxReserveByViewer" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
