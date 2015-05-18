@@ -489,7 +489,7 @@
 		<property name="email" value="brother1@acme-procession.com" />
 		<property name="nationality" value="Spanish" />
 		<property name="creditCard" ref="creditCard1" />
-		<property name="isAuthorized" value="false" />
+		<property name="isAuthorized" value="true" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox2" />
@@ -522,7 +522,7 @@
 		<property name="email" value="brother2@acme-procession.com" />
 		<property name="nationality" value="Spanish" />
 		<property name="creditCard" ref="creditCard2" />
-		<property name="isAuthorized" value="false" />
+		<property name="isAuthorized" value="true" />
 		<property name="messageFolders">
 			<list>
 				<ref bean="inbox3" />
@@ -1180,6 +1180,42 @@
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance2" />
 		<property name="viewer" ref="viewer2" />
+	</bean>
+
+
+	<!-- Request -->
+
+	<bean id="request1" class="domain.Request">
+		<property name="code" value="jht34298udjh" />
+		<property name="title" value="Request1Title" />
+		<property name="creationMoment" value="2015/05/02 20:25" />
+		<property name="description" value="Request1Description" />
+		<property name="status" value="accepted" />
+		<property name="comments" value="Request1Comments" />
+		<property name="administrator" ref="administrator1" />
+		<property name="brother" ref="brother1" />
+	</bean>
+
+	<bean id="request2" class="domain.Request">
+		<property name="code" value="854th5s9th9e" />
+		<property name="title" value="Request2Title" />
+		<property name="creationMoment" value="2015/05/03 11:54" />
+		<property name="description" value="Request2Description" />
+		<property name="status" value="rejected" />
+		<!-- Without comments -->
+		<property name="administrator" ref="administrator1" />
+		<property name="brother" ref="brother2" />
+	</bean>
+
+	<bean id="request3" class="domain.Request">
+		<property name="code" value="etrh8s5rgt87" />
+		<property name="title" value="Request3Title" />
+		<property name="creationMoment" value="2015/05/03 09:11" />
+		<property name="description" value="Request3Description" />
+		<property name="status" value="accepted" />
+		<property name="comments" value="Request3Comments" />
+		<property name="administrator" ref="administrator1" />
+		<property name="brother" ref="brother2" />
 	</bean>
 
 </beans>
