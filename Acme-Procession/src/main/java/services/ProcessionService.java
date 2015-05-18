@@ -135,5 +135,14 @@ public class ProcessionService {
 
 		save(procession);
 	}
+	
+	public Collection<Procession> findAllAvailables(){
+		Collection<Procession> result;
+		Assert.isTrue(actorService.isBrother());
+		
+		result = processionRepository.findAllAvailables();
+		
+		return result;
+	}
 
 }
