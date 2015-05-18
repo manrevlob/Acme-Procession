@@ -112,5 +112,15 @@ public class RegistrationService {
 
 		return result;
 	}
+	
+	public Collection<Registration> findAllByBrother(int brotherId){
+		Collection<Registration> result;
+		
+		Assert.isTrue(actorService.isBrother());
+		
+		result = registrationRepository.findAllByBrother(brotherId);
+		
+		return result;
+	}
 
 }
