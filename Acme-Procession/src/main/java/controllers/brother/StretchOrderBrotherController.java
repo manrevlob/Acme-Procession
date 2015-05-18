@@ -48,7 +48,9 @@ public class StretchOrderBrotherController extends AbstractController {
 
 		try {
 			registrationService.save(registration);
+			result = new ModelAndView("redirect:/registration/brother/list.do");
 		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:/stretchOrder/list.do?processionId=" + stretchOrder.getProcession().getId());
 			if (oops.getMessage().equals(
 					"registration.otherRegistrationCreated.error")) {
 				error = "registration.otherRegistrationCreated.error";
@@ -61,7 +63,6 @@ public class StretchOrderBrotherController extends AbstractController {
 			}
 		}
 
-		result = new ModelAndView("redirect:/stretchOrder/list.do?processionId=" + stretchOrder.getProcession().getId());
 		result.addObject("error", error);
 
 		return result;
