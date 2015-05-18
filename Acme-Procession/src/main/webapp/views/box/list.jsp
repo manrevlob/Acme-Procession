@@ -33,6 +33,13 @@
 	
 	<security:authorize  access="hasRole('ADMINISTRATOR')">
 	
+		<spring:message code="boxInstance.create" var="createHeader" />
+		<display:column title="${createHeader}">
+			<a href="boxInstance/administrator/create.do?boxId=${row.id}">
+				[<jstl:out value="${createHeader}"/>]
+			</a>
+		</display:column>
+		
 		<spring:message code="box.edit" var="editHeader" />
 		<display:column title="${editHeader}">
 			<a href="box/administrator/edit.do?boxId=${row.id}">
@@ -66,6 +73,17 @@
 			[<jstl:out value="${detailsHeader}"/>]
 		</a>
 	</display:column>
+	
+	<security:authorize  access="hasRole('ADMINISTRATOR')">
+		
+		<spring:message code="box.listInstance" var="listInstanceHeader" />
+		<display:column title="${listInstanceHeader}">
+			<a href="boxInstance/administrator/list.do?boxId=${row.id}">
+				[<jstl:out value="${listInstanceHeader}"/>]
+			</a>
+		</display:column>
+		
+	</security:authorize>
 
 </display:table>
 
