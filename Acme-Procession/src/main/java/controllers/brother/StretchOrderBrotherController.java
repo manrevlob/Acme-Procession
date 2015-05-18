@@ -36,7 +36,7 @@ public class StretchOrderBrotherController extends AbstractController {
 
 	// Register ---------------------------------------------------------------
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam int stretchOrderId) {
+	public ModelAndView register(@RequestParam int stretchOrderId) {
 		ModelAndView result;
 		StretchOrder stretchOrder;
 		Registration registration;
@@ -53,12 +53,15 @@ public class StretchOrderBrotherController extends AbstractController {
 					"registration.otherRegistrationCreated.error")) {
 				error = "registration.otherRegistrationCreated.error";
 			} else {
-				error = "stretch.commit.error";
+				if (oops.getMessage().equals("registration.registerIsClosed.error")) {
+					error = "registration.registerIsClosed.error";
+				} else {
+					error = "stretch.commit.error";
+				}
 			}
 		}
 
-		result = new ModelAndView("stretchOrder/list");
-		result.addObject("processionId", stretchOrder.getProcession().getId());
+		result = new ModelAndView("redirect:/stretchOrder/list.do?processionId=" + stretchOrder.getProcession().getId());
 		result.addObject("error", error);
 
 		return result;
@@ -119,8 +122,8 @@ public class StretchOrderBrotherController extends AbstractController {
 		try {
 			stretchOrderService.deleteAndReorder(stretchOrder, stretchOrders);
 		} catch (Throwable oops) {
-			if (oops.getMessage().equals("stretch.delete.error")) {
-				error = "stretch.delete.error";
+			if (oops.getMessage().equals("stretch.deleteWithRegistrations.error")) {
+				error = "stretch.deleteWithRegistrations.error";
 			} else {
 				error = "stretch.commit.error";
 			}

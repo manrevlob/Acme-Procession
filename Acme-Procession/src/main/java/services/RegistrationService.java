@@ -83,6 +83,8 @@ public class RegistrationService {
 	public void save(Registration registration) {
 		Assert.notNull(registration);
 		Assert.isTrue(actorService.isBrother());
+		// Comprobamos que el registro no está cerrado
+		Assert.isTrue(!registration.getProcession().getIsClosed(), "registration.registerIsClosed.error");
 		// Comprobamos si el hermano ya esta registrado en esa misma procession
 		Assert.isTrue(findByProcessionAndBrother(
 				registration.getProcession().getId(),

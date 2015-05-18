@@ -156,7 +156,7 @@ public class StretchOrderService {
 		
 		Assert.isTrue(actorService.isBrother());
 		// Comprobamos que aún no haya un registro en la dupla tramo-procesión indicada.
-		Assert.isTrue(registrationService.findByProcessionAndStretch(stretchOrder.getProcession(), stretchOrder.getStretch()).size() == 0);
+		Assert.isTrue(registrationService.findByProcessionAndStretch(stretchOrder.getProcession(), stretchOrder.getStretch()).size() == 0, "stretch.deleteWithRegistrations.error");
 		// Comprobamos que el hermano tiene permisos.
 		Assert.isTrue(stretchOrder.getProcession().getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
 		
