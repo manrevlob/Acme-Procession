@@ -41,6 +41,7 @@
 					<li><a href="ordinaryStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnOrdinary" /></a></li>
 					<li><a href="floatStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnFloat" /></a></li>
 					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
+					<li><a href="procession/brother/listAvailables.do"><spring:message code="master.page.brother.processionAvailable" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

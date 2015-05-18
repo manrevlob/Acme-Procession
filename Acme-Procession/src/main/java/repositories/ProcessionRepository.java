@@ -16,4 +16,7 @@ public interface ProcessionRepository extends
 	@Query("select p from Procession p where p.brotherhood = ?1")
 	Collection<Procession> findByBrotherhood(Brotherhood brotherhood);
 
+	@Query("select p from Procession p where p.isClosedManually is false and datediff(CURRENT_TIMESTAMP, p.startMoment) < 7")
+	Collection<Procession> findAllAvailables();
+	
 }

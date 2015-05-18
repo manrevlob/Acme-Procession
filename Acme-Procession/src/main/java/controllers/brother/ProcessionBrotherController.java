@@ -46,6 +46,19 @@ public class ProcessionBrotherController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
+	@RequestMapping(value = "/listAvailables", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Procession> processions;
+
+		processions = processionService.findAllAvailables();
+
+		result = new ModelAndView("procession/list");
+		result.addObject("processions", processions);
+
+		return result;
+	}
+
 	// Create -----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -82,9 +95,11 @@ public class ProcessionBrotherController extends AbstractController {
 		} else {
 			try {
 				processionService.save(procession);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(procession, "procession.commit.error");
+				result = createEditModelAndView(procession,
+						"procession.commit.error");
 			}
 		}
 
@@ -92,7 +107,8 @@ public class ProcessionBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid Procession procession, BindingResult binding) {
+	public ModelAndView delete(@Valid Procession procession,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -100,9 +116,11 @@ public class ProcessionBrotherController extends AbstractController {
 		} else {
 			try {
 				processionService.delete(procession);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(procession, "procession.commit.error");
+				result = createEditModelAndView(procession,
+						"procession.commit.error");
 			}
 		}
 
@@ -115,38 +133,44 @@ public class ProcessionBrotherController extends AbstractController {
 		AddStretchToProcessionForm addStretchToProcessionForm;
 		Collection<Stretch> availableStretches;
 		Procession procession;
-		
+
 		procession = processionService.findOneIfPrincipal(processionId);
 		availableStretches = stretchService.findAvailables(procession);
-		
+
 		addStretchToProcessionForm = new AddStretchToProcessionForm();
 		addStretchToProcessionForm.setProcession(procession);
-		
+
 		result = new ModelAndView("procession/addStretch");
-		result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+		result.addObject("addStretchToProcessionForm",
+				addStretchToProcessionForm);
 		result.addObject("availableStretches", availableStretches);
-		
+
 		return result;
 	}
-		
+
 	@RequestMapping(value = "/addStage", method = RequestMethod.POST, params = "addStage")
-	public ModelAndView addStageSave(@Valid AddStretchToProcessionForm addStretchToProcessionForm, BindingResult binding) {
+	public ModelAndView addStageSave(
+			@Valid AddStretchToProcessionForm addStretchToProcessionForm,
+			BindingResult binding) {
 		ModelAndView result;
-		
+
 		if (binding.hasErrors()) {
 			result = new ModelAndView("procession/addStretch");
-			result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+			result.addObject("addStretchToProcessionForm",
+					addStretchToProcessionForm);
 		} else {
 			try {
 				processionService.addStretch(addStretchToProcessionForm);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/brother/listOwns.do");
 			} catch (Throwable oops) {
 				result = new ModelAndView("procession/addStretch");
 				result.addObject("message", "procession.commit.error");
-				result.addObject("addStretchToProcessionForm", addStretchToProcessionForm);
+				result.addObject("addStretchToProcessionForm",
+						addStretchToProcessionForm);
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -164,7 +188,7 @@ public class ProcessionBrotherController extends AbstractController {
 			String message) {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
-		
+
 		brotherhoods = brotherhoodService.findOwns();
 
 		result = new ModelAndView("procession/edit");
