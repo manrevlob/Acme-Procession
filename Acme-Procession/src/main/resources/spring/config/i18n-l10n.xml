@@ -41,6 +41,7 @@
 		<value>/views/assessment/messages</value>
 		<value>/views/box/messages</value>
 		<value>/views/boxInstance/messages</value>
+		<value>/views/registration/messages</value>
 		
 	</util:list>
 
