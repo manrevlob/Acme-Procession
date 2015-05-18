@@ -23,19 +23,18 @@ import domain.OrdinaryStretch;
 public class OrdinaryStretchBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
-	
-	@Autowired
-	private OrdinaryStretchService ordinaryStretchService;
 
 	@Autowired
+	private OrdinaryStretchService ordinaryStretchService;
+	@Autowired
 	private BrotherhoodService brotherhoodService;
-	
+
 	// Constructors -----------------------------------------------------------
-	
+
 	public OrdinaryStretchBrotherController() {
 		super();
 	}
-	
+
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/listOwns", method = RequestMethod.GET)
@@ -75,14 +74,16 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 		ModelAndView result;
 		OrdinaryStretch ordinaryStretch;
 
-		ordinaryStretch = ordinaryStretchService.findOneIfPrincipal(ordinaryStretchId);
+		ordinaryStretch = ordinaryStretchService
+				.findOneIfPrincipal(ordinaryStretchId);
 		result = createEditModelAndView(ordinaryStretch);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid OrdinaryStretch ordinaryStretch, BindingResult binding) {
+	public ModelAndView save(@Valid OrdinaryStretch ordinaryStretch,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -90,9 +91,11 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 		} else {
 			try {
 				ordinaryStretchService.save(ordinaryStretch);
-				result = new ModelAndView("redirect:/ordinaryStretch/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/ordinaryStretch/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(ordinaryStretch, "stretch.commit.error");
+				result = createEditModelAndView(ordinaryStretch,
+						"stretch.commit.error");
 			}
 		}
 
@@ -100,7 +103,8 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid OrdinaryStretch ordinaryStretch, BindingResult binding) {
+	public ModelAndView delete(@Valid OrdinaryStretch ordinaryStretch,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -108,9 +112,11 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 		} else {
 			try {
 				ordinaryStretchService.delete(ordinaryStretch);
-				result = new ModelAndView("redirect:/ordinaryStretch/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/ordinaryStretch/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(ordinaryStretch, "stretch.commit.error");
+				result = createEditModelAndView(ordinaryStretch,
+						"stretch.commit.error");
 			}
 		}
 
@@ -119,7 +125,8 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(OrdinaryStretch ordinaryStretch) {
+	protected ModelAndView createEditModelAndView(
+			OrdinaryStretch ordinaryStretch) {
 		ModelAndView result;
 
 		result = createEditModelAndView(ordinaryStretch, null);
@@ -127,11 +134,11 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(OrdinaryStretch ordinaryStretch,
-			String message) {
+	protected ModelAndView createEditModelAndView(
+			OrdinaryStretch ordinaryStretch, String message) {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
-		
+
 		brotherhoods = brotherhoodService.findOwns();
 
 		result = new ModelAndView("ordinaryStretch/edit");

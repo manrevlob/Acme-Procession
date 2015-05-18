@@ -15,4 +15,7 @@ public interface RegistrationRepository extends
 	@Query("select r from Registration r where r.procession.id = ?1 and r.stretch.id = ?2")
 	Collection<Registration> findByProcessionIdAndStretchId(int processionId, int stretchId);
 
+	@Query("select r from Registration r where r.procession.id = ?1 and r.brother.id = ?2")
+	Collection<Registration> findByProcessionAndBrother(int processionId, int brotherId);
+	
 }
