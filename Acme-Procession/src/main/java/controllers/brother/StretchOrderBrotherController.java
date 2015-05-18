@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ProcessionService;
 import services.RegistrationService;
 import services.StretchOrderService;
 import controllers.AbstractController;
-import domain.Procession;
 import domain.Registration;
 import domain.StretchOrder;
 
@@ -27,8 +25,6 @@ public class StretchOrderBrotherController extends AbstractController {
 	private StretchOrderService stretchOrderService;
 	@Autowired
 	private RegistrationService registrationService;
-	@Autowired
-	private ProcessionService processionService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -50,17 +46,19 @@ public class StretchOrderBrotherController extends AbstractController {
 		registration = registrationService.create(stretchOrder);
 		error = null;
 
-		try{
+		try {
 			registrationService.save(registration);
-		}catch(Throwable oops){
-			if (oops.getMessage().equals("registration.otherRegistrastionCreated.error")) {
-				error = "registration.otherRegistrastionCreated.error";
+		} catch (Throwable oops) {
+			if (oops.getMessage().equals(
+					"registration.otherRegistrationCreated.error")) {
+				error = "registration.otherRegistrationCreated.error";
+			} else {
+				error = "stretch.commit.error";
 			}
 		}
-		
-		result = new ModelAndView(
-				"redirect:/stretchOrder/list.do?processionId="
-						+ stretchOrder.getProcession().getId());
+
+		result = new ModelAndView("stretchOrder/list");
+		result.addObject("processionId", stretchOrder.getProcession().getId());
 		result.addObject("error", error);
 
 		return result;
@@ -71,58 +69,67 @@ public class StretchOrderBrotherController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/moveToUp", method = RequestMethod.GET)
-	public ModelAndView moveToUp(@RequestParam int stretchOrderId,
-			@RequestParam int processionId) {
+	public ModelAndView moveToUp(@RequestParam int stretchOrderId) {
 		ModelAndView result;
-		Procession procession;
 		StretchOrder stretchOrder;
 		Collection<StretchOrder> stretchOrders;
 
-		procession = processionService.findOne(processionId);
 		stretchOrder = stretchOrderService.findOne(stretchOrderId);
-		stretchOrders = stretchOrderService.findByProcession(procession);
+		stretchOrders = stretchOrderService.findByProcession(stretchOrder
+				.getProcession());
 		stretchOrderService.moveToUp(stretchOrder, stretchOrders);
 
 		result = new ModelAndView(
-				"redirect:/stretchOrder/list.do?processionId=" + processionId);
+				"redirect:/stretchOrder/list.do?processionId="
+						+ stretchOrder.getProcession().getId());
 
 		return result;
 	}
 
 	@RequestMapping(value = "/moveToDown", method = RequestMethod.GET)
-	public ModelAndView moveToDown(@RequestParam int stretchOrderId,
-			@RequestParam int processionId) {
+	public ModelAndView moveToDown(@RequestParam int stretchOrderId) {
 		ModelAndView result;
-		Procession procession;
 		StretchOrder stretchOrder;
 		Collection<StretchOrder> stretchOrders;
 
-		procession = processionService.findOne(processionId);
 		stretchOrder = stretchOrderService.findOne(stretchOrderId);
-		stretchOrders = stretchOrderService.findByProcession(procession);
+		stretchOrders = stretchOrderService.findByProcession(stretchOrder
+				.getProcession());
 		stretchOrderService.moveToDown(stretchOrder, stretchOrders);
 
 		result = new ModelAndView(
-				"redirect:/stretchOrder/list.do?processionId=" + processionId);
+				"redirect:/stretchOrder/list.do?processionId="
+						+ stretchOrder.getProcession().getId());
 
 		return result;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam int stretchOrderId,
-			@RequestParam int processionId) {
+	public ModelAndView delete(@RequestParam int stretchOrderId) {
 		ModelAndView result;
-		Procession procession;
 		StretchOrder stretchOrder;
 		Collection<StretchOrder> stretchOrders;
+		String error;
 
-		procession = processionService.findOne(processionId);
 		stretchOrder = stretchOrderService.findOne(stretchOrderId);
-		stretchOrders = stretchOrderService.findByProcession(procession);
-		stretchOrderService.deleteAndReorder(stretchOrder, stretchOrders);
+		stretchOrders = stretchOrderService.findByProcession(stretchOrder
+				.getProcession());
+		error = null;
+
+		try {
+			stretchOrderService.deleteAndReorder(stretchOrder, stretchOrders);
+		} catch (Throwable oops) {
+			if (oops.getMessage().equals("stretch.delete.error")) {
+				error = "stretch.delete.error";
+			} else {
+				error = "stretch.commit.error";
+			}
+		}
 
 		result = new ModelAndView(
-				"redirect:/stretchOrder/list.do?processionId=" + processionId);
+				"redirect:/stretchOrder/list.do?processionId="
+						+ stretchOrder.getProcession().getId());
+		result.addObject("error", error);
 
 		return result;
 	}

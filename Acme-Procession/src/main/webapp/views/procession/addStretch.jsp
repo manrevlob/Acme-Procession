@@ -26,7 +26,7 @@
 	
 	<acme:select items="${availableStretches}" itemLabel="name" code="procession.addStretch" path="stretch"/>
 	
-	<acme:submit name="addStretch" code="procession.addStretch.add"/>
+	<acme:submit name="addStretch" code="procession.addStretch.add"/> 
 	
 	<acme:cancel url="brotherhood/brother/listOwns.do" code="procession.cancel"/>
 	

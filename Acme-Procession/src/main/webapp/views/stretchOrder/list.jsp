@@ -20,19 +20,26 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jstl:if test="${param.error ne null}">
+	<span class="error">
+		<spring:message code="${param.error}"/>
+	</span>
+</jstl:if>
+
+<security:authorize access="hasRole('BROTHER')">
+	<div>
+		<a href="procession/brother/addStretch.do?processionId=${param.processionId}">
+			<spring:message	code="stretch.create" />
+		</a>
+	</div>
+</security:authorize>
+
 <display:table name="stretchOrders" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
 	<security:authorize  access="hasRole('BROTHER')">
-		<spring:message code="stretch.edit" var="editHeader" />
-		<display:column title="${editHeader}">
-			<a href="stretchOrder/brother/edit.do?brotherhoodId=${row.id}">
-				[<jstl:out value="${editHeader}"/>]
-			</a>
-		</display:column>
-		
 		<spring:message code="stretch.delete" var="deleteHeader" />
 		<display:column title="${deleteHeader}">
-			<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}&processionId=${row.procession.id}">
+			<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}">
 				[<jstl:out value="${deleteHeader}"/>]
 			</a>
 		</display:column>
@@ -58,7 +65,7 @@
 		<spring:message code="stretch.moveToUp" var="moveUpHeader" />
 		<display:column title="${moveUpHeader}">
 			<jstl:if test="${row.orderNumber > 1}">
-				<a href="stretchOrder/brother/moveToUp.do?stretchOrderId=${row.id}&processionId=${row.procession.id}">
+				<a href="stretchOrder/brother/moveToUp.do?stretchOrderId=${row.id}">
 					[<jstl:out value="${moveUpHeader}"/>]
 				</a>
 			</jstl:if>
@@ -67,7 +74,7 @@
 		<spring:message code="stretch.moveToDown" var="moveToDownHeader" />
 		<display:column title="${moveToDownHeader}">
 			<jstl:if test="${row.orderNumber != stretchOrders.size()}">
-				<a href="stretchOrder/brother/moveToDown.do?stretchOrderId=${row.id}&processionId=${row.procession.id}">
+				<a href="stretchOrder/brother/moveToDown.do?stretchOrderId=${row.id}">
 					[<jstl:out value="${moveToDownHeader}"/>]
 				</a>
 			</jstl:if>

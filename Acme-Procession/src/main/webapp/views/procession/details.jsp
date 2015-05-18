@@ -43,7 +43,14 @@ details.jsp
 	<br />
 	
 	<b><spring:message code="procession.comments" />:</b>
-	<jstl:out value="${procession.comments}" />
+	<jstl:choose>
+		<jstl:when test="${procession.comments ne ''}">
+			<jstl:out value="${procession.comments}" />
+		</jstl:when>
+		<jstl:otherwise>
+			-
+		</jstl:otherwise>
+	</jstl:choose>
 	<br />
 	
 	<b><spring:message code="procession.isClosed" />:</b>

@@ -86,7 +86,7 @@ public class RegistrationService {
 		// Comprobamos si el hermano ya esta registrado en esa misma procession
 		Assert.isTrue(findByProcessionAndBrother(
 				registration.getProcession().getId(),
-				registration.getBrother().getId()).size() == 0, "registration.otherRegistrastionCreated.error");
+				registration.getBrother().getId()).size() == 0, "registration.otherRegistrationCreated.error");
 
 		registrationRepository.save(registration);
 	}
