@@ -76,10 +76,12 @@ public class BoxService {
 	
 	// Other business methods -------------------------------------------------
 	
-	public Collection<Box> findByAdministrator(){
+	public Collection<Box> findByPrincipal(){
 	Collection<Box> result;
 	Administrator administrator;
 	int actorId;
+	
+	Assert.isTrue(actorService.isAdministrator());
  	
  	administrator= administratorService.findByPrincipal();
  	actorId = administrator.getId();

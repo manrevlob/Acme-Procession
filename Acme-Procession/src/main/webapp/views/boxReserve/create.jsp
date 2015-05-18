@@ -18,26 +18,20 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="boxInstance/administrator/edit.do" modelAttribute="boxInstance">
-
+<form:form action="boxReserve/viewer/create.do" modelAttribute="CreateBoxReserveForm">
+	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="box" />
-	<form:hidden path="boxReserves" />
 	
-	<b><spring:message code="boxInstance.box.name" />:</b>
-	<jstl:out value="${boxInstance.box.name}" />
-	<br />
+
+	<acme:textbox code="request.title" path="title"/>
 	
-	<acme:textbox code="boxInstance.date" path="date" />
+	<acme:textarea code="request.description" path="description"/>
 	
-	<acme:submit name="save" code="boxInstance.save"/>
+	<acme:submit name="save" code="boxreserve.save"/>
 	
-	<acme:cancel url="box/administrator/list.do" code="boxInstance.cancel"/>
+	<acme:cancel url="boxReserve/viewer/list.do" code="boxReserve.cancel"/>
 	
 </form:form>
-
-
-	

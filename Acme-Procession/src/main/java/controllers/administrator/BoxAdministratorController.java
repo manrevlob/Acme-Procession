@@ -53,7 +53,7 @@ public class BoxAdministratorController extends AbstractController {
 			ModelAndView result;
 			Collection<Box> boxes;
 
-			boxes = boxService.findByAdministrator();
+			boxes = boxService.findByPrincipal();
 
 			result = new ModelAndView("box/list");
 			result.addObject("requestURI", "box/administrator/list.do");
