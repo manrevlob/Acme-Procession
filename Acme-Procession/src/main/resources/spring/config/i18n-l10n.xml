@@ -42,6 +42,7 @@
 		<value>/views/box/messages</value>
 		<value>/views/boxInstance/messages</value>
 		<value>/views/registration/messages</value>
+		<value>/views/boxReserve/messages</value>
 		
 	</util:list>
 
