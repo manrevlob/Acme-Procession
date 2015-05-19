@@ -60,6 +60,7 @@ public class BrotherhoodService {
 		Collection<Brother> collectionWithcreator;
 
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(brotherService.findByPrincipal().getIsAuthorized());
 
 		result = new Brotherhood();
 
@@ -77,6 +78,7 @@ public class BrotherhoodService {
 		int actualYear;
 
 		Assert.notNull(brotherhood);
+		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
 		
 		actualYear = Calendar.getInstance().get(Calendar.YEAR);
 		
@@ -118,7 +120,7 @@ public class BrotherhoodService {
 		Collection<Brotherhood> result;
 
 		Assert.isTrue(actorService.isBrother());
-		// TODO comprobar que tenga permisos
+		Assert.isTrue(brotherService.findByPrincipal().getIsBigBrother());
 
 		result = brotherhoodRepository.findOwns(brotherService
 				.findByPrincipal());
