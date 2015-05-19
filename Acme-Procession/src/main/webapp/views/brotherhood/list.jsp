@@ -21,29 +21,35 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('BROTHER')">
-	<div>
-		<a href="brotherhood/brother/create.do">
-			<spring:message	code="brotherhood.create" />
-		</a>
-	</div>
+	<jstl:if test="${isAutorized}">
+		<div>
+			<a href="brotherhood/brother/create.do">
+				<spring:message	code="brotherhood.create" />
+			</a>
+		</div>
+	</jstl:if>
 </security:authorize>
 
 <display:table name="brotherhoods" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
 	<security:authorize  access="hasRole('BROTHER')">
-		<spring:message code="brotherhood.edit" var="editHeader" />
-		<display:column title="${editHeader}">
-			<a href="brotherhood/brother/edit.do?brotherhoodId=${row.id}">
-				[<jstl:out value="${editHeader}"/>]
-			</a>
-		</display:column>
-		
-		<spring:message code="brotherhood.addBigBrother" var="addBigBrotherHeader" />
-		<display:column title="${addBigBrotherHeader}">
-			<a href="brotherhood/brother/addBigBrother.do?brotherhoodId=${row.id}">
-				[<jstl:out value="${addBigBrotherHeader}"/>]
-			</a>
-		</display:column>
+			<spring:message code="brotherhood.edit" var="editHeader" />
+			<display:column>
+				<jstl:if test="${row.userIsOwner}">
+					<a href="brotherhood/brother/edit.do?brotherhoodId=${row.id}">
+						[<jstl:out value="${editHeader}"/>]
+					</a>
+				</jstl:if>
+			</display:column>
+			
+			<spring:message code="brotherhood.addBigBrother" var="addBigBrotherHeader" />
+			<display:column>
+				<jstl:if test="${row.userIsOwner}">
+					<a href="brotherhood/brother/addBigBrother.do?brotherhoodId=${row.id}">
+						[<jstl:out value="${addBigBrotherHeader}"/>]
+					</a>
+				</jstl:if>
+			</display:column>
 	</security:authorize>
 	
 	<spring:message code="brotherhood.name" var="nameHeader" />

@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import security.LoginService;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Brotherhood extends DomainEntity {
@@ -60,6 +62,27 @@ public class Brotherhood extends DomainEntity {
 	@Transient
 	public Integer getNumberOfBrothers() {
 		return getBrothers().size();
+	}
+
+	@Transient
+	public boolean getUserIsOwner() {
+		boolean result;
+		int principalId;
+		
+		result = false;
+		
+		if(LoginService.getPrincipal() != null) {
+			principalId = LoginService.getPrincipal().getId();
+			
+			for(Brother o : getBigBrothers()) {
+				if(o.getUserAccount().getId() == principalId) {
+					result = true;
+					break;
+				}
+			}
+		}
+		
+		return result;
 	}
 
 	// Relationships ----------------------------------------------------------

@@ -23,8 +23,10 @@
 
 <security:authorize access="hasRole('BROTHER')">
 	<div>
-		<a href="carving/brother/create.do"><spring:message
-				code="carving.create" /></a>
+		<jstl:if test="${isBigBrother}">
+			<a href="carving/brother/create.do"><spring:message
+					code="carving.create" /></a>
+		</jstl:if>
 	</div>
 </security:authorize>
 
@@ -34,9 +36,11 @@
 	<security:authorize access="hasRole('BROTHER')">
 		<spring:message code="carving.edit" var="editHeader" />
 		<display:column title="${editHeader}">
-			<a href="carving/brother/edit.do?carvingId=${row.id}"> [<jstl:out
-					value="${editHeader}" />]
-			</a>
+			<jstl:if test="${row.brotherhood.userIsOwner}">
+				<a href="carving/brother/edit.do?carvingId=${row.id}"> [<jstl:out
+						value="${editHeader}" />]
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.ActorService;
+import services.BrotherService;
 import services.BrotherhoodService;
 import domain.Brotherhood;
 
@@ -19,6 +22,12 @@ public class BrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
+
+	@Autowired
+	private BrotherService brotherService;
+
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -32,14 +41,23 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
+		boolean isAuthorized;
 		String uri;
 
 		brotherhoods = brotherhoodService.findAll();
+		try {
+			isAuthorized = LoginService.getPrincipal() != null
+					&& actorService.isBrother()
+					&& brotherService.findByPrincipal().getIsAuthorized();
+		} catch (Throwable oops) {
+			isAuthorized = false;
+		}
 		uri = "brotherhood/list.do";
 
 		result = new ModelAndView("brotherhood/list");
-		result.addObject("requestURI", uri);
 		result.addObject("brotherhoods", brotherhoods);
+		result.addObject("isAuthorized", isAuthorized);
+		result.addObject("requestURI", uri);
 
 		return result;
 	}

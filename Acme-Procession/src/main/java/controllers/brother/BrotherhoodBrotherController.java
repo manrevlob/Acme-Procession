@@ -43,14 +43,17 @@ public class BrotherhoodBrotherController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
+		boolean isAuthorized;
 		String uri;
 
 		brotherhoods = brotherhoodService.findMines();
+		isAuthorized = brotherService.findByPrincipal().getIsAuthorized();
 		uri = "brotherhood/brother/list.do";
 
 		result = new ModelAndView("brotherhood/list");
-		result.addObject("requestURI", uri);
 		result.addObject("brotherhoods", brotherhoods);
+		result.addObject("requestURI", uri);
+		result.addObject("isAuthorized", isAuthorized);
 
 		return result;
 	}
@@ -58,15 +61,18 @@ public class BrotherhoodBrotherController extends AbstractController {
 	@RequestMapping(value = "/listOwns", method = RequestMethod.GET)
 	public ModelAndView listOwns() {
 		ModelAndView result;
+		boolean isAuthorized;
 		Collection<Brotherhood> brotherhoods;
 		String uri;
 
 		brotherhoods = brotherhoodService.findOwns();
+		isAuthorized = brotherService.findByPrincipal().getIsAuthorized();
 		uri = "brotherhood/brother/listOwns.do";
 
 		result = new ModelAndView("brotherhood/list");
-		result.addObject("requestURI", uri);
 		result.addObject("brotherhoods", brotherhoods);
+		result.addObject("requestURI", uri);
+		result.addObject("isAuthorized", isAuthorized);
 
 		return result;
 	}
@@ -123,22 +129,24 @@ public class BrotherhoodBrotherController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/addBigBrother", method = RequestMethod.GET)
 	public ModelAndView addOrganiser(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		AddBigBrotherForm addBigBrotherForm;
-		
+
 		addBigBrotherForm = new AddBigBrotherForm();
-		
-		addBigBrotherForm.setBrotherhood(brotherhoodService.findOneIfPrincipal(brotherhoodId));		
+
+		addBigBrotherForm.setBrotherhood(brotherhoodService
+				.findOneIfPrincipal(brotherhoodId));
 		result = addBrotherModelAndView(addBigBrotherForm);
-		
+
 		return result;
 	}
 
 	@RequestMapping(value = "/addBigBrother", method = RequestMethod.POST, params = "save")
-	public ModelAndView addOrganiser(@Valid AddBigBrotherForm addBigBrotherForm, BindingResult binding) {
+	public ModelAndView addOrganiser(
+			@Valid AddBigBrotherForm addBigBrotherForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -146,9 +154,11 @@ public class BrotherhoodBrotherController extends AbstractController {
 		} else {
 			try {
 				brotherhoodService.addBrother(addBigBrotherForm);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = addBrotherModelAndView(addBigBrotherForm, "brotherhood.commit.error");
+				result = addBrotherModelAndView(addBigBrotherForm,
+						"brotherhood.commit.error");
 			}
 		}
 
@@ -176,25 +186,28 @@ public class BrotherhoodBrotherController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView addBrotherModelAndView(AddBigBrotherForm addBigBrotherForm) {
+	protected ModelAndView addBrotherModelAndView(
+			AddBigBrotherForm addBigBrotherForm) {
 		ModelAndView result;
-		
+
 		result = addBrotherModelAndView(addBigBrotherForm, null);
-		
+
 		return result;
 	}
 
-	protected ModelAndView addBrotherModelAndView(AddBigBrotherForm addBigBrotherForm, String message) {
+	protected ModelAndView addBrotherModelAndView(
+			AddBigBrotherForm addBigBrotherForm, String message) {
 		ModelAndView result;
 		Collection<Brother> brothers;
-		
-		brothers = brotherService.findAllBrothersNotAdded(addBigBrotherForm.getBrotherhood());
-		
+
+		brothers = brotherService.findAllBrothersNotAdded(addBigBrotherForm
+				.getBrotherhood());
+
 		result = new ModelAndView("brotherhood/addBigBrother");
 		result.addObject("addBigBrotherForm", addBigBrotherForm);
 		result.addObject("brothers", brothers);
 		result.addObject("message", message);
-		
+
 		return result;
 	}
 

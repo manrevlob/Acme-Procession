@@ -22,11 +22,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('BROTHER')">
-	<div>
-		<a href="procession/brother/create.do"> <spring:message
-				code="procession.create" />
-		</a>
-	</div>
+	<jstl:if test="${isBigBrother}">
+		<div>
+			<a href="procession/brother/create.do"> <spring:message
+					code="procession.create" />
+			</a>
+		</div>
+	</jstl:if>
 </security:authorize>
 
 <display:table name="processions" pagesize="5" class="displaytag"
@@ -34,38 +36,40 @@
 
 	<security:authorize access="hasRole('BROTHER')">
 		<spring:message code="procession.edit" var="editHeader" />
-		<display:column title="${editHeader}">
-			<a href="procession/brother/edit.do?processionId=${row.id}"> [<jstl:out
-					value="${editHeader}" />]
-			</a>
+		<display:column>
+			<jstl:if test="${row.brotherhood.userIsOwner}">
+				<a href="procession/brother/edit.do?processionId=${row.id}"> [<jstl:out
+						value="${editHeader}" />]
+				</a>
+			</jstl:if>
 		</display:column>
-	</security:authorize>
-
-	<security:authorize access="hasRole('BROTHER')">
+		
 		<spring:message code="procession.closeOpen" var="closeOpenHeader" />
-		<display:column title="${closeOpenHeader}">
-			<jstl:choose>
-				<jstl:when test="${row.isClosedByTime}">
-				-
-			</jstl:when>
-				<jstl:otherwise>
-					<jstl:choose>
-						<jstl:when test="${row.isClosedManually != true}">
-							<spring:message code="procession.close" var="closeHeader" />
-							<a href="procession/brother/close.do?processionId=${row.id}">
-								[<jstl:out value="${closeHeader}" />]
-							</a>
-						</jstl:when>
-
-						<jstl:when test="${row.isClosedManually == true}">
-							<spring:message code="procession.open" var="openHeader" />
-							<a href="procession/brother/open.do?processionId=${row.id}">
-								[<jstl:out value="${openHeader}" />]
-							</a>
-						</jstl:when>
-					</jstl:choose>
-				</jstl:otherwise>
-			</jstl:choose>
+		<display:column>
+			<jstl:if test="${row.brotherhood.userIsOwner}">
+				<jstl:choose>
+					<jstl:when test="${row.isClosedByTime}">
+						-
+					</jstl:when>
+					<jstl:otherwise>
+						<jstl:choose>
+							<jstl:when test="${row.isClosedManually != true}">
+								<spring:message code="procession.close" var="closeHeader" />
+								<a href="procession/brother/close.do?processionId=${row.id}">
+									[<jstl:out value="${closeHeader}" />]
+								</a>
+							</jstl:when>
+	
+							<jstl:when test="${row.isClosedManually == true}">
+								<spring:message code="procession.open" var="openHeader" />
+								<a href="procession/brother/open.do?processionId=${row.id}">
+									[<jstl:out value="${openHeader}" />]
+								</a>
+							</jstl:when>
+						</jstl:choose>
+					</jstl:otherwise>
+				</jstl:choose>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
@@ -94,8 +98,12 @@
 	<display:column property="numberOfRegistrations"
 		title="${numberOfRegistrationsHeader}" sortable="true" />
 
-	<spring:message code="procession.stretchesOrRegister"
-		var="stretchesOrRegisterHeader" />
+	<spring:message code="procession.stretches"
+			var="stretchesOrRegisterHeader" />
+	<security:authorize access="hasRole('BROTHER')">
+		<spring:message code="procession.stretchesOrRegister"
+			var="stretchesOrRegisterHeader" />
+	</security:authorize>
 	<display:column title="${stretchesOrRegisterHeader}">
 		<a href="stretchOrder/list.do?processionId=${row.id}"> [<jstl:out
 				value="${stretchesOrRegisterHeader}" />]
