@@ -72,6 +72,8 @@
 		
 		<security:intercept-url pattern="/boxReserve/viewer/**" access="hasRole('VIEWER')" />
 		
+		<security:intercept-url pattern="/boxInvoice/viewer/**" access="hasRole('VIEWER')" />
+		
 		<security:intercept-url pattern="/customer/register*" access="hasRole('ROLE_ANONYMOUS')" />
 	
 		<security:intercept-url pattern="/law/**" access="permitAll" />
