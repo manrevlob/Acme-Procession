@@ -1,7 +1,7 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BoxReserveRepository;
-import domain.Box;
-import domain.BoxReserve;
 import domain.BoxReserve;
 import domain.Viewer;
 
@@ -93,5 +91,34 @@ public class BoxReserveService {
 		
 		return result;
 	}
-
+	
+	public void cancel(BoxReserve boxReserve) {
+		
+		Assert.isTrue(actorService.isViewer());
+		Assert.isTrue(boxReserve.getViewer() == viewerService.findByPrincipal());
+		
+		Assert.isTrue(canBeCancelled(boxReserve));
+		
+		Assert.isTrue(!canBeCancelled(boxReserve),"cant cancelled");
+		
+		boxReserve.setIsCancelled(true);
+		
+		save(boxReserve);
+	}
+	
+	public boolean canBeCancelled(BoxReserve boxReserve) {
+		boolean result;
+		Calendar todayDate;
+		Calendar maxCancellableDate;
+		
+		todayDate = Calendar.getInstance();
+		maxCancellableDate = Calendar.getInstance();
+		
+		maxCancellableDate.setTime(boxReserve.getDate());
+		maxCancellableDate.add(Calendar.HOUR, -24);
+		
+		result = todayDate.getTimeInMillis() < maxCancellableDate.getTimeInMillis();
+		
+		return result;
+	}
 }

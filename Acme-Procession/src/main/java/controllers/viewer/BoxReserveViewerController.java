@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BoxReserveService;
 import controllers.AbstractController;
-import domain.BoxReserve;
 import domain.BoxReserve;
 
 @Controller
@@ -78,6 +78,31 @@ public class BoxReserveViewerController extends AbstractController {
 					}
 				}
 
+				return result;
+			}
+			
+			// Cancel -----------------------------------------------------------------
+			
+			@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+			public ModelAndView cancel(@RequestParam int boxReserveId) {
+				ModelAndView result;
+				BoxReserve boxReserve;
+				
+				boxReserve = boxReserveService.findOne(boxReserveId);
+				
+				try{
+					boxReserveService.cancel(boxReserve);
+				}catch (Exception e) {
+					if(e.getMessage()=="cant cancelled"){
+						result = new ModelAndView("redirect:../viewer/list.do");
+						result.addObject("error","Cant cancel");
+					}
+				}
+				
+					
+				result = new ModelAndView("redirect:../viewer/list.do");
+				
+				
 				return result;
 			}
 
