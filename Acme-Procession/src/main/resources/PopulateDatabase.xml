@@ -1160,16 +1160,29 @@
 		<property name="box" ref="box2"/>
 	</bean>
 	
+	<!-- BoxInvoice -->
+	
+	<bean id="boxInvoice1" class="domain.BoxInvoice">
+		<property name="createMoment" value="2015/05/05 21:54"/>
+		<property name="totalCost" ref="money9"/>
+	</bean>
+	
+	<bean id="boxInvoice2" class="domain.BoxInvoice">
+		<property name="createMoment" value="2015/03/05 12:05"/>
+		<property name="totalCost" ref="money9"/>
+	</bean>
+	
 	<!-- BoxReserve -->
 	
 	<bean id="boxReserve1" class="domain.BoxReserve">
-		<property name="date" value="19/05/2015" />
+		<property name="date" value="2015/07/19" />
 		<property name="reserveCode" value="codeReserve1" />
 		<property name="numberOfChair" value="2" />
-		<property name="createMoment" value="05/05/2015 12:00" />
+		<property name="createMoment" value="2015/05/05 21:50" />
 		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance1" />
+		<property name="boxInvoice" ref="boxInvoice1" />
 		<property name="viewer" ref="viewer1" />
 	</bean>
 	
@@ -1181,9 +1194,9 @@
 		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance2" />
+		<property name="boxInvoice" ref="boxInvoice2" />
 		<property name="viewer" ref="viewer2" />
 	</bean>
-
 
 	<!-- Request -->
 
