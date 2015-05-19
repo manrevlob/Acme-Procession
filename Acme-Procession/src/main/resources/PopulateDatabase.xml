@@ -1163,7 +1163,7 @@
 	<!-- BoxReserve -->
 	
 	<bean id="boxReserve1" class="domain.BoxReserve">
-		<property name="date" value="16/05/2015 12:00" />
+		<property name="date" value="19/05/2015" />
 		<property name="reserveCode" value="codeReserve1" />
 		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="05/05/2015 12:00" />
@@ -1174,7 +1174,7 @@
 	</bean>
 	
 	<bean id="boxReserve2" class="domain.BoxReserve">
-		<property name="date" value="15/05/2015 12:00" />
+		<property name="date" value="15/05/2015" />
 		<property name="reserveCode" value="codeReserve2" />
 		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="05/03/2015 12:00" />
