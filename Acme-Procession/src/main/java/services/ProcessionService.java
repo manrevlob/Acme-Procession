@@ -27,13 +27,10 @@ public class ProcessionService {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
-
 	@Autowired
 	private ActorService actorService;
-
 	@Autowired
 	private BrotherService brotherService;
-
 	@Autowired
 	private StretchOrderService stretchOrderService;
 
@@ -63,17 +60,17 @@ public class ProcessionService {
 
 	public Procession create() {
 		Procession result;
-		
+
 		result = new Procession();
-		
+
 		return result;
 	}
 
 	public Procession save(Procession procession) {
 		Assert.notNull(procession);
-		
+
 		procession = processionRepository.save(procession);
-		
+
 		return procession;
 	}
 
@@ -82,10 +79,11 @@ public class ProcessionService {
 		// Comprobamos que el usuario es hermano
 		Assert.isTrue(actorService.isBrother());
 		// Comprobamos que el usuario tiene permisos
-		Assert.isTrue(procession.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 		// Comprobamos que aún nadie está registrado en la procesión
 		Assert.isTrue(procession.getRegistrations().size() == 0);
-		
+
 		processionRepository.delete(procession);
 	}
 
@@ -94,23 +92,24 @@ public class ProcessionService {
 	public Collection<Procession> findByBrotherhood(int brotherhoodId) {
 		Collection<Procession> result;
 		Brotherhood brotherhood;
-		
+
 		brotherhood = brotherhoodService.findOne(brotherhoodId);
-		
+
 		Assert.notNull(brotherhood);
-		
+
 		result = processionRepository.findByBrotherhood(brotherhood);
-		
+
 		return result;
 	}
-	
+
 	public Procession findOneIfPrincipal(int processionId) {
 		Procession result;
-		
+
 		result = findOne(processionId);
-		
-		Assert.isTrue(result.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
-		
+
+		Assert.isTrue(result.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
+
 		return result;
 	}
 
@@ -124,10 +123,13 @@ public class ProcessionService {
 		stretch = addStretchToProcessionForm.getStretch();
 
 		Assert.isTrue(actorService.isBrother());
-		Assert.isTrue(stretch.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
-		Assert.isTrue(stretch.getBrotherhood().equals(procession.getBrotherhood()));
+		Assert.isTrue(stretch.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
+		Assert.isTrue(stretch.getBrotherhood().equals(
+				procession.getBrotherhood()));
 
-		stretchOrder = stretchOrderService.createByStretchAndProcession(stretch, procession);
+		stretchOrder = stretchOrderService.createByStretchAndProcession(
+				stretch, procession);
 
 		stretchOders = procession.getStretchOrders();
 		stretchOders.add(stretchOrder);
@@ -135,14 +137,36 @@ public class ProcessionService {
 
 		save(procession);
 	}
-	
-	public Collection<Procession> findAllAvailables(){
+
+	public Collection<Procession> findAllAvailables() {
 		Collection<Procession> result;
 		Assert.isTrue(actorService.isBrother());
-		
+
 		result = processionRepository.findAllAvailables();
-		
+
 		return result;
+	}
+
+	public void close(Procession procession) {
+		Assert.notNull(procession);
+		Assert.isTrue(!procession.getIsClosedByTime());
+		Assert.isTrue(!procession.getIsClosedManually());
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+
+		procession.setIsClosedManually(true);
+
+		save(procession);
+	}
+
+	public void open(Procession procession) {
+		Assert.notNull(procession);
+		Assert.isTrue(!procession.getIsClosedByTime());
+		Assert.isTrue(procession.getIsClosedManually());
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+
+		procession.setIsClosedManually(false);
+
+		save(procession);
 	}
 
 }

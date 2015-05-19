@@ -174,6 +174,36 @@ public class ProcessionBrotherController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/close", method = RequestMethod.GET)
+	public ModelAndView close(@RequestParam int processionId) {
+		ModelAndView result;
+		Procession procession;
+
+		procession = processionService.findOneIfPrincipal(processionId);
+
+		processionService.close(procession);
+
+		result = new ModelAndView("redirect:/procession/list.do?brotherhoodId="
+				+ procession.getBrotherhood().getId());
+
+		return result;
+	}
+
+	@RequestMapping(value = "/open", method = RequestMethod.GET)
+	public ModelAndView open(@RequestParam int processionId) {
+		ModelAndView result;
+		Procession procession;
+
+		procession = processionService.findOneIfPrincipal(processionId);
+
+		processionService.open(procession);
+
+		result = new ModelAndView("redirect:/procession/list.do?brotherhoodId="
+				+ procession.getBrotherhood().getId());
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(Procession procession) {
