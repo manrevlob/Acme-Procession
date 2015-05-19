@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -101,6 +102,8 @@ public class BoxReserve extends DomainEntity {
 
 	private BoxInstance boxInstance;
 	private Viewer viewer;
+	private BoxInvoice boxInvoice;
+
 
 	@Valid
 	@NotNull
@@ -124,6 +127,15 @@ public class BoxReserve extends DomainEntity {
 		this.viewer = viewer;
 	}
 	
+	@Valid
+	@OneToOne(optional=true)
+	public BoxInvoice getBoxInvoice() {
+		return boxInvoice;
+	}
+
+	public void setBoxInvoice(BoxInvoice boxInvoice) {
+		this.boxInvoice = boxInvoice;
+	}
 	
 	
 }
