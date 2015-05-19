@@ -97,9 +97,7 @@ public class BoxReserveService {
 		Assert.isTrue(actorService.isViewer());
 		Assert.isTrue(boxReserve.getViewer() == viewerService.findByPrincipal());
 		
-		Assert.isTrue(canBeCancelled(boxReserve));
-		
-		Assert.isTrue(!canBeCancelled(boxReserve),"cant cancelled");
+		Assert.isTrue(canBeCancelled(boxReserve),"cant cancelled");
 		
 		boxReserve.setIsCancelled(true);
 		

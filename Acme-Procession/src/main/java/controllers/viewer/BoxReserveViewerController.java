@@ -74,7 +74,7 @@ public class BoxReserveViewerController extends AbstractController {
 						boxReserveService.save(boxReserve);
 						result = new ModelAndView("redirect:/boxReserve/viewer/list.do");
 					} catch (Throwable oops) {
-							result = createEditModelAndView(boxReserve,"request.commit.error");
+							result = createEditModelAndView(boxReserve,"boxReserve.commit.error");
 					}
 				}
 
@@ -90,18 +90,17 @@ public class BoxReserveViewerController extends AbstractController {
 				
 				boxReserve = boxReserveService.findOne(boxReserveId);
 				
+				result = new ModelAndView("redirect:../viewer/list.do");
+				
 				try{
 					boxReserveService.cancel(boxReserve);
 				}catch (Exception e) {
 					if(e.getMessage()=="cant cancelled"){
-						result = new ModelAndView("redirect:../viewer/list.do");
-						result.addObject("error","Cant cancel");
+						result.addObject("error","boxReserve.cancelReserve.error");
+					}else{
+						result.addObject("error","boxReserve.cancelReserve.error");
 					}
 				}
-				
-					
-				result = new ModelAndView("redirect:../viewer/list.do");
-				
 				
 				return result;
 			}
