@@ -20,17 +20,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="boxReserve/viewer/create.do" modelAttribute="CreateBoxReserveForm">
-	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+<form:form action="${action}" modelAttribute="CreateBoxReserveForm">
 	
 
-	<acme:textbox code="request.title" path="title"/>
+	<acme:textbox code="boxReserve.reserveCode" path="reserveCode" readonly="true"/>
 	
-	<acme:textarea code="request.description" path="description"/>
+	<acme:textarea code="boxReserve.date" path="date" readonly="true"/>
 	
-	<acme:submit name="save" code="boxreserve.save"/>
+	<acme:textarea code="boxReserve.numberOfChair" path="numberOfChair" readonly="true"/>
+	
+	<fieldset>
+		<legend>
+			<spring:message code="boxReserve.totalCost" />
+		</legend>	
+
+		<acme:textarea code="boxReserve.amount" path="amount" readonly="true"/>
+		
+		<acme:textarea code="boxReserve.currency" path="currency" readonly="true"/>
+		
+	</fieldset>
+	
+	<acme:submit name="save" code="boxReserve.save"/>
 	
 	<acme:cancel url="boxReserve/viewer/list.do" code="boxReserve.cancel"/>
 	

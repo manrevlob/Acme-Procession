@@ -35,7 +35,9 @@ public class BoxReserve extends DomainEntity {
 	private Integer numberOfChair;
 	private Date date;
 	private Money totalCost;
+	private boolean isCancelled;
 	
+
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -85,6 +87,14 @@ public class BoxReserve extends DomainEntity {
 
 	public void setTotalCost(Money totalCost) {
 		this.totalCost = totalCost;
+	}
+	
+	public boolean getIsCancelled() {
+		return isCancelled;
+	}
+
+	public void setIsCancelled(boolean isCancelled) {
+		this.isCancelled = isCancelled;
 	}
 	
 	// Relationships ----------------------------------------------------------

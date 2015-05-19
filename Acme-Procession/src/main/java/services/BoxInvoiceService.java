@@ -27,6 +27,7 @@ public class BoxInvoiceService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+	
 	public BoxInvoice findOne(int boxInvoiceId) {
 		BoxInvoice result;
 
@@ -42,6 +43,7 @@ public class BoxInvoiceService {
 
 		return result;
 	}
+	
 	// Other business methods -------------------------------------------------
 
 }
