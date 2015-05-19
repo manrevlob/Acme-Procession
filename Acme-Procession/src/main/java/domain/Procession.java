@@ -121,6 +121,19 @@ public class Procession extends DomainEntity {
 		
 		return getIsClosedManually() || oneWeekBeforeArrived;
 	}
+	
+	@Transient
+	public boolean getIsClosedByTime() {
+		boolean oneWeekBeforeArrived;
+		Calendar actualDateLessOneWeek;
+		
+		actualDateLessOneWeek = Calendar.getInstance();
+		actualDateLessOneWeek.add(Calendar.WEEK_OF_YEAR, -1);
+		
+		oneWeekBeforeArrived = getStartMoment().before(actualDateLessOneWeek.getTime());
+		
+		return oneWeekBeforeArrived;
+	}
 
 	// Relationships ----------------------------------------------------------
 
