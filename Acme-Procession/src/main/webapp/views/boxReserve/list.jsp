@@ -20,22 +20,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jstl:if test="${param.error ne null}">
+	<span class="error">
+		<spring:message code="${param.error}"/>
+	</span>
+</jstl:if>
 
 <display:table name="boxReserves" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 
 	<security:authorize  access="hasRole('VIEWER')">
 	
-		<spring:message code="boxReserve.edit" var="editHeader" />
-		<display:column title="${editHeader}">
-			<a href="boxReserve/viewer/edit.do?boxInstanceId=${row.id}">
-				[<jstl:out value="${editHeader}"/>]
+		<spring:message code="boxReserve.cancelReserve" var="cancelReserveHeader" />
+		<display:column title="${cancelReserveHeader}">
+			<a href="boxReserve/viewer/cancel.do?boxReserveId=${row.id}">
+				[<jstl:out value="${cancelReserveHeader}"/>]
 			</a>
 		</display:column>
 		
 	</security:authorize>
 		
-	<spring:message code="boxReserve.createMoment" var="createMomentHeader" />
-	<display:column property="createMoment" title="${createMomentHeader}" sortable="true" />
+	<spring:message code="boxReserve.createMoment" var="createMomentHeader"  />
+	<display:column property="createMoment" title="${createMomentHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	
 	<spring:message code="boxReserve.reserveCode" var="reserveCodeHeader" />
 	<display:column property="reserveCode" title="${reserveCodeHeader}"  />
@@ -43,14 +48,17 @@
 	<spring:message code="boxReserve.numberOfChair" var="numberOfChairHeader" />
 	<display:column property="numberOfChair" title="${numberOfChairHeader}"  />
 	
-	<spring:message code="boxReserve.date" var="dateHeader" />
-	<display:column property="date" title="${dateHeader}"  />
+	<spring:message code="boxReserve.date" var="dateHeader"  />
+	<display:column property="date" title="${dateHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+	
+	<spring:message code="boxReserve.isCancelled" var="isCancelledHeader" />
+	<display:column property="isCancelled" title="${isCancelledHeader}"  />
 	
 	<spring:message code="boxReserve.amount" var="amountHeader" />
-	<display:column property="price.amount" title="${amountHeader}" />
+	<display:column property="totalCost.amount" title="${amountHeader}" />
 
 	<spring:message code="boxReserve.currency" var="currencyHeader" />
-	<display:column property="price.currency" title="${currencyHeader}" />
+	<display:column property="totalCost.currency" title="${currencyHeader}" />
 
 </display:table>
 
