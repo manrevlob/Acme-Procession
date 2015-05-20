@@ -30,14 +30,7 @@
 	<form:hidden path="stretchOrders" />
 	<form:hidden path="isClosedManually" />
 
-	<jstl:choose>
-		<jstl:when test="${procession.id == 0}">
-			<acme:select items="${brotherhoods}" itemLabel="name" code="procession.brotherhood" path="brotherhood" />
-		</jstl:when>
-		<jstl:otherwise>
-			<form:hidden path="brotherhood" />
-		</jstl:otherwise>
-	</jstl:choose>
+	<acme:textbox code="procession.brotherhood" path="brotherhood.name" readonly="true"/>
 
 	<acme:textbox code="procession.startMomentWithAdvice" path="startMoment" />
 
@@ -65,11 +58,9 @@
 	
 	<jstl:if test="${procession.id != 0}">
 		<acme:submit name="delete" code="procession.delete" />
-	</jstl:if>
-
-</form:form>
-
-<div>
+	</jstl:if> 
+	
 	<acme:cancel url="brotherhood/brother/listOwns.do"
 		code="procession.cancel" />
-</div>
+
+</form:form>
