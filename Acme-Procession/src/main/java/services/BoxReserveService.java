@@ -1,5 +1,6 @@
 package services;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -9,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BoxReserveRepository;
+import domain.BoxInvoice;
 import domain.BoxReserve;
+import domain.Money;
 import domain.Viewer;
 
 @Service
@@ -27,6 +30,8 @@ public class BoxReserveService {
 	private ActorService actorService;
 	@Autowired
 	private ViewerService viewerService;
+	@Autowired
+	private BoxInvoiceService boxInvoiceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -48,9 +53,15 @@ public class BoxReserveService {
 
 	public BoxReserve save(BoxReserve boxReserve) {
 		BoxReserve result;
+		BoxInvoice boxInvoice;
 		
 		Assert.notNull(boxReserve);
 		Assert.isTrue(actorService.isViewer());
+		
+		if(boxReserve.getId()==0){
+			boxInvoice = generateBoxInvoice(boxReserve);
+			boxReserve.setBoxInvoice(boxInvoice);
+		}
 
 		result = boxReserveRepository.save(boxReserve);
 
@@ -116,6 +127,30 @@ public class BoxReserveService {
 		maxCancellableDate.add(Calendar.HOUR, -24);
 		
 		result = todayDate.getTimeInMillis() < maxCancellableDate.getTimeInMillis();
+		
+		return result;
+	}
+	
+	public BoxInvoice generateBoxInvoice(BoxReserve boxReserve){
+		BoxInvoice result;
+		Date moment;
+		long milliseconds;
+		Money totalCost;
+		BoxInvoice boxInvoice;
+		
+		milliseconds = System.currentTimeMillis() - 100;
+		moment = new Date(milliseconds);
+		
+		boxInvoice = new BoxInvoice();
+		boxInvoice.setCreateMoment(moment);
+		
+		totalCost = new Money();
+		totalCost.setAmount(boxReserve.getBoxInstance().getBox().getPrice().getAmount());
+		totalCost.setCurrency(boxReserve.getBoxInstance().getBox().getPrice().getCurrency());
+		
+		boxInvoice.setTotalCost(totalCost);
+		
+		result = boxInvoiceService.save(boxInvoice);
 		
 		return result;
 	}
