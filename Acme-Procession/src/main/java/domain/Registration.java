@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -44,6 +45,7 @@ public class Registration extends DomainEntity {
 	private Brother brother;
 	private Procession procession;
 	private OrdinaryStretch stretch;
+	private RegistrationInvoice registrationInvoice;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -75,4 +77,17 @@ public class Registration extends DomainEntity {
 	public void setStretch(OrdinaryStretch stretch) {
 		this.stretch = stretch;
 	}
+
+	@Valid
+	@OneToOne(optional=true)
+	public RegistrationInvoice getRegistrationInvoice() {
+		return registrationInvoice;
+	}
+
+	public void setRegistrationInvoice(RegistrationInvoice registrationInvoice) {
+		this.registrationInvoice = registrationInvoice;
+	}
+	
+	
+	
 }

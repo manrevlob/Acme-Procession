@@ -1038,6 +1038,49 @@
 		<property name="stretch" ref="floatStretch4" />
 	</bean>
 
+	<!-- Registration Invoice -->
+	
+	<bean id="registrationInvoice1" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/03/29 22:34" />
+		<property name="paidMoment" value="2015/03/30 00:00" />
+		<property name="totalCost" ref="money1" />
+	</bean>
+	
+	<bean id="registrationInvoice2" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/04/02 11:45" />
+		<property name="paidMoment" value="2015/04/30 00:00" />
+		<property name="totalCost" ref="money1" />
+	</bean>
+	
+	<bean id="registrationInvoice3" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/05/10 08:05" />
+		<property name="paidMoment" value="2015/05/11 00:00" />
+		<property name="totalCost" ref="money2" />
+	</bean>
+	
+	<bean id="registrationInvoice4" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/05/11 19:43" />
+		<property name="paidMoment" value="2015/05/11 00:00" />
+		<property name="totalCost" ref="money2" />
+	</bean>
+	
+	<bean id="registrationInvoice5" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/05/12 15:11" />
+		<property name="paidMoment" value="2015/05/12 00:00" />
+		<property name="totalCost" ref="money2" />
+	</bean>
+	
+	<bean id="registrationInvoice6" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/05/12 15:11" />
+		<property name="paidMoment" value="2015/05/13 00:00" />
+		<property name="totalCost" ref="money3" />
+	</bean>
+	
+	<bean id="registrationInvoice7" class="domain.RegistrationInvoice">
+		<property name="createMoment" value="2015/05/12 15:11" />
+		<property name="paidMoment" value="2015/05/13 00:00" />
+		<property name="totalCost" ref="money3" />
+	</bean>
 
 	<!-- Registration -->
 
@@ -1046,6 +1089,7 @@
 		<property name="brother" ref="brother1" />
 		<property name="procession" ref="procession1" />
 		<property name="stretch" ref="ordinaryStretch1" />
+		<property name="registrationInvoice" ref="registrationInvoice1" />
 	</bean>
 
 	<bean id="registration2" class="domain.Registration">
@@ -1053,6 +1097,7 @@
 		<property name="brother" ref="brother2" />
 		<property name="procession" ref="procession1" />
 		<property name="stretch" ref="ordinaryStretch2" />
+		<property name="registrationInvoice" ref="registrationInvoice2" />
 	</bean>
 
 	<bean id="registration3" class="domain.Registration">
@@ -1060,6 +1105,7 @@
 		<property name="brother" ref="brother1" />
 		<property name="procession" ref="procession2" />
 		<property name="stretch" ref="ordinaryStretch1" />
+		<property name="registrationInvoice" ref="registrationInvoice3" />
 	</bean>
 
 	<bean id="registration4" class="domain.Registration">
@@ -1067,6 +1113,7 @@
 		<property name="brother" ref="brother2" />
 		<property name="procession" ref="procession2" />
 		<property name="stretch" ref="ordinaryStretch2" />
+		<property name="registrationInvoice" ref="registrationInvoice4" />
 	</bean>
 
 	<bean id="registration5" class="domain.Registration">
@@ -1074,6 +1121,7 @@
 		<property name="brother" ref="brother3" />
 		<property name="procession" ref="procession2" />
 		<property name="stretch" ref="ordinaryStretch2" />
+		<property name="registrationInvoice" ref="registrationInvoice5" />
 	</bean>
 
 	<bean id="registration6" class="domain.Registration">
@@ -1081,6 +1129,7 @@
 		<property name="brother" ref="brother2" />
 		<property name="procession" ref="procession3" />
 		<property name="stretch" ref="ordinaryStretch3" />
+		<property name="registrationInvoice" ref="registrationInvoice6" />
 	</bean>
 
 	<bean id="registration7" class="domain.Registration">
@@ -1088,6 +1137,7 @@
 		<property name="brother" ref="brother4" />
 		<property name="procession" ref="procession3" />
 		<property name="stretch" ref="ordinaryStretch4" />
+		<property name="registrationInvoice" ref="registrationInvoice7" />
 	</bean>
 	
 	<!-- Box -->
