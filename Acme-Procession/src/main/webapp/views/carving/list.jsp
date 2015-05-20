@@ -24,7 +24,8 @@
 <security:authorize access="hasRole('BROTHER')">
 	<div>
 		<jstl:if test="${isBigBrother}">
-			<a href="carving/brother/create.do"><spring:message
+			<a
+				href="carving/brother/create.do?brotherhoodId=${param.brotherhoodId}"><spring:message
 					code="carving.create" /></a>
 		</jstl:if>
 	</div>

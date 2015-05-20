@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CarvingRepository;
+import domain.Brotherhood;
 import domain.Carving;
 
 @Service
@@ -32,16 +33,6 @@ public class CarvingService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Carving create() {
-		Carving result;
-
-		Assert.isTrue(actorService.isBrother());
-
-		result = new Carving();
-
-		return result;
-	}
-
 	public Carving findOne(int carvingId) {
 		Carving result;
 
@@ -58,13 +49,24 @@ public class CarvingService {
 		return result;
 	}
 
+	public Carving create(Brotherhood brotherhood) {
+		Carving result;
+
+		Assert.isTrue(actorService.isBrother());
+
+		result = new Carving();
+		result.setBrotherhood(brotherhood);
+
+		return result;
+	}
+
 	public void save(Carving carving) {
 		Assert.notNull(carving);
 		Assert.isTrue(actorService.isBrother());
 
 		carvingRepository.save(carving);
 	}
-	
+
 	public void delete(Carving carving) {
 		Assert.notNull(carving);
 		Assert.isTrue(actorService.isBrother());
@@ -81,7 +83,5 @@ public class CarvingService {
 
 		return result;
 	}
-
-	
 
 }

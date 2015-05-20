@@ -687,6 +687,7 @@
 	<!-- Procession -->
 
 	<bean id="procession1" class="domain.Procession">
+		<property name="name" value="Procession1Name" />
 		<property name="startMoment" value="2015/04/06 19:15" />
 		<property name="endMoment" value="2015/04/07 01:30" />
 		<property name="locality" value="Locality1" />
@@ -711,6 +712,7 @@
 	</bean>
 
 	<bean id="procession2" class="domain.Procession">
+		<property name="name" value="Procession2Name" />
 		<property name="startMoment" value="2016/04/22 19:15" />
 		<property name="endMoment" value="2016/04/23 01:30" />
 		<property name="locality" value="Locality1" />
@@ -737,6 +739,7 @@
 	</bean>
 
 	<bean id="procession3" class="domain.Procession">
+		<property name="name" value="Procession3Name" />
 		<property name="startMoment" value="2016/04/23 12:30" />
 		<property name="endMoment" value="2016/04/24 20:00" />
 		<property name="locality" value="Locality1" />
@@ -1038,6 +1041,7 @@
 		<property name="stretch" ref="floatStretch4" />
 	</bean>
 
+
 	<!-- Registration Invoice -->
 	
 	<bean id="registrationInvoice1" class="domain.RegistrationInvoice">
@@ -1081,6 +1085,7 @@
 		<property name="paidMoment" value="2015/05/13 00:00" />
 		<property name="totalCost" ref="money3" />
 	</bean>
+
 
 	<!-- Registration -->
 
@@ -1139,7 +1144,8 @@
 		<property name="stretch" ref="ordinaryStretch4" />
 		<property name="registrationInvoice" ref="registrationInvoice7" />
 	</bean>
-	
+
+
 	<!-- Box -->
 	
 	<bean id="box1" class="domain.Box">
@@ -1179,7 +1185,8 @@
 		<property name="numberOfChairs" value="10" />
 		<property name="administrator" ref="administrator1" />
 	</bean>
-	
+
+
 	<!-- BoxInstance -->
 	
 	<bean id="boxInstance1" class="domain.BoxInstance">
@@ -1237,7 +1244,8 @@
 			</list>
 		</property>
 	</bean>
-	
+
+
 	<!-- BoxInvoice -->
 	
 	<bean id="boxInvoice1" class="domain.BoxInvoice">
@@ -1249,7 +1257,8 @@
 		<property name="createMoment" value="2015/03/05 12:05"/>
 		<property name="totalCost" ref="money9"/>
 	</bean>
-	
+
+
 	<!-- BoxReserve -->
 	
 	<bean id="boxReserve1" class="domain.BoxReserve">
@@ -1275,6 +1284,7 @@
 		<property name="boxInvoice" ref="boxInvoice2" />
 		<property name="viewer" ref="viewer2" />
 	</bean>
+
 
 	<!-- Request -->
 

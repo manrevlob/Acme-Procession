@@ -29,6 +29,7 @@ public class Procession extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
+	private String name;
 	private Date startMoment;
 	private Date endMoment;
 	private String locality;
@@ -36,6 +37,15 @@ public class Procession extends DomainEntity {
 	private Money associatedCost;
 	private String comments;
 	private boolean isClosedManually;
+
+	@NotBlank
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

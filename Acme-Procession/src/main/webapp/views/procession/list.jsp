@@ -79,6 +79,9 @@
 	<spring:message code="procession.isClosed" var="isClosedHeader" />
 	<display:column property="isClosed" title="${isClosedHeader}" />
 
+	<spring:message code="procession.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}" />
+
 	<spring:message code="procession.startMoment" var="startMomentHeader" />
 	<display:column property="startMoment" title="${startMomentHeader}"
 		sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />

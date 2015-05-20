@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.CarvingService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.Carving;
 
 @Controller
@@ -22,6 +24,9 @@ public class CarvingBrotherController extends AbstractController {
 
 	@Autowired
 	private CarvingService carvingService;
+
+	@Autowired
+	private BrotherhoodService brotherhoodService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -36,11 +41,14 @@ public class CarvingBrotherController extends AbstractController {
 	// Create -----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		Carving carving;
+		Brotherhood brotherhood;
 
-		carving = carvingService.create();
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+	
+		carving = carvingService.create(brotherhood);
 
 		result = createEditModelAndView(carving);
 
