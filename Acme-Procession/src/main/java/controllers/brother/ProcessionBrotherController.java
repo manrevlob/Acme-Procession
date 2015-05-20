@@ -137,8 +137,8 @@ public class ProcessionBrotherController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/addStage", method = RequestMethod.GET)
-	public ModelAndView addStage(@RequestParam int processionId) {
+	@RequestMapping(value = "/addStretch", method = RequestMethod.GET)
+	public ModelAndView addStretch(@RequestParam int processionId) {
 		ModelAndView result;
 		AddStretchToProcessionForm addStretchToProcessionForm;
 		Collection<Stretch> availableStretches;
@@ -158,8 +158,8 @@ public class ProcessionBrotherController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/addStage", method = RequestMethod.POST, params = "addStage")
-	public ModelAndView addStageSave(
+	@RequestMapping(value = "/addStretch", method = RequestMethod.POST, params = "addStretch")
+	public ModelAndView addStretchSave(
 			@Valid AddStretchToProcessionForm addStretchToProcessionForm,
 			BindingResult binding) {
 		ModelAndView result;

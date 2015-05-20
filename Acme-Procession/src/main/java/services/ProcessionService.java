@@ -123,13 +123,21 @@ public class ProcessionService {
 		stretch = addStretchToProcessionForm.getStretch();
 
 		Assert.isTrue(actorService.isBrother());
+		// Comprobamos que el usuario tenga permisos sobre la hermandad
 		Assert.isTrue(stretch.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
+		// Comprobamos que la hermandad del paso seleccionado es la misma que la
+		// hermandad de la procesión
 		Assert.isTrue(stretch.getBrotherhood().equals(
 				procession.getBrotherhood()));
+		// Comprobamos que, si es un tramo de paso, sus carvings no estén ya en
+		// otro paso.
+		// TODO
 
 		stretchOrder = stretchOrderService.createByStretchAndProcession(
 				stretch, procession);
+
+		stretchOrder = stretchOrderService.save(stretchOrder);
 
 		stretchOders = procession.getStretchOrders();
 		stretchOders.add(stretchOrder);
@@ -151,7 +159,8 @@ public class ProcessionService {
 		Assert.notNull(procession);
 		Assert.isTrue(!procession.getIsClosedByTime());
 		Assert.isTrue(!procession.getIsClosedManually());
-		Assert.isTrue(procession.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 
 		procession.setIsClosedManually(true);
 
@@ -162,7 +171,8 @@ public class ProcessionService {
 		Assert.notNull(procession);
 		Assert.isTrue(!procession.getIsClosedByTime());
 		Assert.isTrue(procession.getIsClosedManually());
-		Assert.isTrue(procession.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 
 		procession.setIsClosedManually(false);
 

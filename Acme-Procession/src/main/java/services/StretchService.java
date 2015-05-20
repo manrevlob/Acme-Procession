@@ -49,7 +49,7 @@ public class StretchService {
 	public Collection<Stretch> findAvailables(Procession procession) {
 		Collection<Stretch> result;
 		
-		result = stretchRepository.findAvailableStretches(procession);
+		result = stretchRepository.findAvailableStretches(procession.getBrotherhood(), procession);
 		
 		return result;
 	}
