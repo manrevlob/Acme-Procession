@@ -26,6 +26,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="brotherhood" />
 	<form:hidden path="registrations" />
 	<form:hidden path="stretchOrders" />
 	<form:hidden path="isClosedManually" />
