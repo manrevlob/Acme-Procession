@@ -27,6 +27,7 @@ public class BoxInstance extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	
 	private Date date;
+	private Money price;
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -37,6 +38,16 @@ public class BoxInstance extends DomainEntity {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@Valid
+	@NotNull
+	public Money getPrice() {
+		return price;
+	}
+
+	public void setPrice(Money price) {
+		this.price = price;
 	}
 	
 	// Relationships ----------------------------------------------------------
