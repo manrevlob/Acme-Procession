@@ -21,7 +21,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('BROTHER')">
-	<jstl:if test="${isAutorized}">
+	<jstl:if test="${isAuthorized}">
 		<div>
 			<a href="brotherhood/brother/create.do">
 				<spring:message	code="brotherhood.create" />

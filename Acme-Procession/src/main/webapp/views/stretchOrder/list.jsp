@@ -38,10 +38,12 @@
 	
 	<security:authorize  access="hasRole('BROTHER')">
 		<spring:message code="stretch.delete" var="deleteHeader" />
-		<display:column title="${deleteHeader}">
-			<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}">
-				[<jstl:out value="${deleteHeader}"/>]
-			</a>
+		<display:column>
+			<jstl:if test="${row.stretch.brotherhood.userIsOwner}">
+				<a href="stretchOrder/brother/delete.do?stretchOrderId=${row.id}">
+					[<jstl:out value="${deleteHeader}"/>]
+				</a>
+			</jstl:if>
 		</display:column>
 
 		<spring:message code="stretch.register" var="registerHeader" />
@@ -63,8 +65,8 @@
 	
 	<security:authorize  access="hasRole('BROTHER')">
 		<spring:message code="stretch.moveToUp" var="moveUpHeader" />
-		<display:column title="${moveUpHeader}">
-			<jstl:if test="${row.orderNumber > 1}">
+		<display:column>
+			<jstl:if test="${row.stretch.brotherhood.userIsOwner && row.orderNumber > 1}">
 				<a href="stretchOrder/brother/moveToUp.do?stretchOrderId=${row.id}">
 					[<jstl:out value="${moveUpHeader}"/>]
 				</a>
@@ -72,8 +74,8 @@
 		</display:column>
 
 		<spring:message code="stretch.moveToDown" var="moveToDownHeader" />
-		<display:column title="${moveToDownHeader}">
-			<jstl:if test="${row.orderNumber != stretchOrders.size()}">
+		<display:column>
+			<jstl:if test="${row.stretch.brotherhood.userIsOwner && row.orderNumber != stretchOrders.size()}">
 				<a href="stretchOrder/brother/moveToDown.do?stretchOrderId=${row.id}">
 					[<jstl:out value="${moveToDownHeader}"/>]
 				</a>

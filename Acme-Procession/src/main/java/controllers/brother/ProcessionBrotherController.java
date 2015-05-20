@@ -72,11 +72,16 @@ public class ProcessionBrotherController extends AbstractController {
 	// Create -----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		Procession procession;
+		Brotherhood brotherhood;
 
 		procession = processionService.create();
+		
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		
+		procession.setBrotherhood(brotherhood);
 
 		result = createEditModelAndView(procession);
 

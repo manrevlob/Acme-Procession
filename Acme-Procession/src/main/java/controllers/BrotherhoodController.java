@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
 import services.BrotherService;
 import services.BrotherhoodService;
 import domain.Brotherhood;
@@ -25,9 +23,6 @@ public class BrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherService brotherService;
-
-	@Autowired
-	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -46,9 +41,7 @@ public class BrotherhoodController extends AbstractController {
 
 		brotherhoods = brotherhoodService.findAll();
 		try {
-			isAuthorized = LoginService.getPrincipal() != null
-					&& actorService.isBrother()
-					&& brotherService.findByPrincipal().getIsAuthorized();
+			isAuthorized = brotherService.findByPrincipal().getIsAuthorized();
 		} catch (Throwable oops) {
 			isAuthorized = false;
 		}
