@@ -1147,7 +1147,7 @@
 		<property name="description" value="box1description" />
 		<property name="locality" value="box1locality" />
 		<property name="location" value="box1location" />
-		<property name="numberOfChairs" value="15" />
+		<property name="numberOfChairs" value="5" />
 		<property name="administrator" ref="administrator1" />
 		<property name="boxInstances">
 			<list>
@@ -1162,7 +1162,7 @@
 		<property name="description" value="box2description" />
 		<property name="locality" value="box2locality" />
 		<property name="location" value="box2location" />
-		<property name="numberOfChairs" value="20" />
+		<property name="numberOfChairs" value="6" />
 		<property name="administrator" ref="administrator1" />
 		<property name="boxInstances">
 			<list>
@@ -1191,6 +1191,15 @@
 				<ref bean="boxReserve1" />
 			</list>
 		</property>
+		<property name="chairs">
+			<list>
+				<value>1</value>
+				<value>1</value>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="boxInstance2" class="domain.BoxInstance">
@@ -1202,12 +1211,31 @@
 				<ref bean="boxReserve2" />
 			</list>
 		</property>
+			<property name="chairs">
+			<list>
+				<value>1</value>
+				<value>1</value>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="boxInstance3" class="domain.BoxInstance">
 		<property name="date" value="15/06/2015" />
 		<property name="price" ref="money3"  />
 		<property name="box" ref="box2"/>
+			<property name="chairs">
+			<list>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+				<value>0</value>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- BoxInvoice -->

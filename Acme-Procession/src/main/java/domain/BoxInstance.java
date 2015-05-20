@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,6 +29,7 @@ public class BoxInstance extends DomainEntity {
 	
 	private Date date;
 	private Money price;
+	private Collection<Integer> chairs;
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -49,6 +51,16 @@ public class BoxInstance extends DomainEntity {
 	public void setPrice(Money price) {
 		this.price = price;
 	}
+	
+	@ElementCollection
+	public Collection<Integer> getChairs() {
+		return chairs;
+	}
+
+	public void setChairs(Collection<Integer> chairs) {
+		this.chairs = chairs;
+	}
+	
 	
 	// Relationships ----------------------------------------------------------
 
