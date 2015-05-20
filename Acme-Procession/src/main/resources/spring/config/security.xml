@@ -55,6 +55,8 @@
 
 		<security:intercept-url pattern="/stretch/brother/**" access="hasRole('BROTHER')" /> 
 	
+		<security:intercept-url pattern="/registrationInvoice/brother/**" access="hasRole('BROTHER')" /> 
+		
 		<security:intercept-url pattern="/stretchOrder/**" access="permitAll" />
 		<security:intercept-url pattern="/stretchOrder/brother/**" access="hasRole('BROTHER')" />  
 		
