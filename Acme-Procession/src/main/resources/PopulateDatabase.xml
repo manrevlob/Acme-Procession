@@ -1264,25 +1264,35 @@
 	<bean id="boxReserve1" class="domain.BoxReserve">
 		<property name="date" value="2015/07/19" />
 		<property name="reserveCode" value="codeReserve1" />
-		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="2015/05/05 21:50" />
 		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance1" />
 		<property name="boxInvoice" ref="boxInvoice1" />
 		<property name="viewer" ref="viewer1" />
+		<property name="numbersOfchairs">
+			<list>
+				<value>1</value>
+				<value>2</value>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="boxReserve2" class="domain.BoxReserve">
 		<property name="date" value="15/05/2015" />
 		<property name="reserveCode" value="codeReserve2" />
-		<property name="numberOfChair" value="2" />
 		<property name="createMoment" value="05/03/2015 12:00" />
 		<property name="isCancelled" value="false" />
 		<property name="totalCost" ref="money9"  />
 		<property name="boxInstance" ref="boxInstance2" />
 		<property name="boxInvoice" ref="boxInvoice2" />
 		<property name="viewer" ref="viewer2" />
+		<property name="numbersOfchairs">
+			<list>
+				<value>1</value>
+				<value>2</value>
+			</list>
+		</property>
 	</bean>
 
 

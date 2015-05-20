@@ -54,6 +54,7 @@
 					<li><a href="assessment/viewer/list.do"><spring:message code="master.page.viewer.assessByViewer" /></a></li>
 					<li><a href="boxReserve/viewer/list.do"><spring:message code="master.page.viewer.boxReserveByViewer" /></a></li>
 					<li><a href="boxInvoice/viewer/list.do"><spring:message code="master.page.viewer.boxInvoice.list" /></a></li>
+					<li><a href="box/viewer/list.do"><spring:message code="master.page.viewer.box.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
