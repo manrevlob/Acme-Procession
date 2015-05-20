@@ -21,4 +21,7 @@ public interface RegistrationRepository extends
 	@Query("select r from Registration r where r.brother.id = ?1")
 	Collection<Registration> findAllByBrother(int brotherId);
 	
+	@Query("select r from Registration r where r.registrationInvoice.id = ?1")
+	Registration findByRegistrationInvoice(int registrationInvoiceId);
+	
 }

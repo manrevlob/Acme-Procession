@@ -13,6 +13,7 @@ import domain.Brother;
 import domain.OrdinaryStretch;
 import domain.Procession;
 import domain.Registration;
+import domain.RegistrationInvoice;
 import domain.Stretch;
 import domain.StretchOrder;
 
@@ -31,6 +32,8 @@ public class RegistrationService {
 	private BrotherService brotherService;
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private RegistrationInvoiceService registrationInvoiceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -46,13 +49,14 @@ public class RegistrationService {
 		long milliseconds;
 		Date date;
 		OrdinaryStretch ordinaryStretch;
+		RegistrationInvoice registrationInvoice;
 
 		brother = brotherService.findByPrincipal();
 		ordinaryStretch = (OrdinaryStretch) stretchOrder.getStretch();
 
 		Assert.notNull(stretchOrder);
+		
 		milliseconds = System.currentTimeMillis();
-
 		date = new Date(milliseconds - 10);
 		result = new Registration();
 
@@ -60,6 +64,9 @@ public class RegistrationService {
 		result.setProcession(stretchOrder.getProcession());
 		result.setStretch(ordinaryStretch);
 		result.setMoment(date);
+		
+		registrationInvoice = registrationInvoiceService.generateInvoice(result);
+		result.setRegistrationInvoice(registrationInvoice);
 
 		return result;
 	}
@@ -121,6 +128,16 @@ public class RegistrationService {
 		Assert.isTrue(actorService.isBrother());
 		
 		result = registrationRepository.findAllByBrother(brotherId);
+		
+		return result;
+	}
+
+	public Registration findByRegistrationInvoice(int registrationInvoiceId) {
+		Registration result;
+		
+		Assert.isTrue(actorService.isBrother());
+		
+		result = registrationRepository.findByRegistrationInvoice(registrationInvoiceId);
 		
 		return result;
 	}

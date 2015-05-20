@@ -39,6 +39,7 @@
 		<value>/views/registration/tiles.xml</value>
 		<value>/views/boxReserve/tiles.xml</value>
 		<value>/views/boxInvoice/tiles.xml</value>
+		<value>/views/invoice/tiles.xml</value>
 		
 	</util:list>
 

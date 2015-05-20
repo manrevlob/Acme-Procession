@@ -40,15 +40,17 @@
 					<li><a href="procession/brother/listAvailables.do"><spring:message code="master.page.brother.processionAvailable" /></a></li>
 					<li><a href="registration/brother/list.do"><spring:message code="master.page.brother.listOwnRegistrations" /></a></li>
 					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
+					<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoices" /></a></li>
 				</ul>
 			</li>
 			
 			<li><a class="fNiv"><spring:message	code="master.page.bigBrother" />[+]</a>
-			<ul>
+				<ul>
 					<li class="arrow"></li>
 					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
 					<li><a href="stretch/brother/findByBrotherhood.do"><spring:message code="master.page.brother.findStretches" /></a></li>
 				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('VIEWER')">
