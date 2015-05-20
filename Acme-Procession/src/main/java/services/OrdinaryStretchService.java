@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.OrdinaryStretchRepository;
+import domain.Brotherhood;
 import domain.OrdinaryStretch;
 
 @Service
@@ -51,16 +52,16 @@ public class OrdinaryStretchService {
 		return result;
 	}
 
-	public OrdinaryStretch create() {
+	public OrdinaryStretch create(Brotherhood brotherhood) {
 		OrdinaryStretch result;
 
 		// Comprobamos que sea hermano.
 		Assert.isTrue(actorService.isBrother());
-		// Comprobamos que al menos tenga permisos sobre una hermandad.
-		Assert.isTrue(brotherService.findByPrincipal().getOwnBrotherhoods()
-				.size() > 0);
+		// Comprobamos que el usuario tenga permisos sobre la hermandad.
+		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
 
 		result = new OrdinaryStretch();
+		result.setBrotherhood(brotherhood);
 
 		return result;
 	}
@@ -121,6 +122,16 @@ public class OrdinaryStretchService {
 
 		result = ordinaryStretchRepository.findMines(brotherService
 				.findByPrincipal().getOwnBrotherhoods());
+
+		return result;
+	}
+
+	public Collection<OrdinaryStretch> findByBrotherhood(Brotherhood brotherhood) {
+		Collection<OrdinaryStretch> result;
+
+		Assert.notNull(brotherhood);
+
+		result = ordinaryStretchRepository.findByBrotherhood(brotherhood);
 
 		return result;
 	}

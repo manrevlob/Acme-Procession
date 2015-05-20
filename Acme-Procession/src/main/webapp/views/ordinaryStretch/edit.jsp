@@ -25,17 +25,9 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="brotherhood" />
 	
-	<jstl:choose>
-		<jstl:when test="${ordinaryStretch.id != 0}">
-			<form:hidden path="brotherhood" />
-			<spring:message code="stretch.brotherhood"/>: 
-			<jstl:out value="${ordinaryStretch.brotherhood.name}"/>
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
-		</jstl:otherwise>
-	</jstl:choose>
+	<acme:textbox code="stretch.brotherhood" path="brotherhood.name"/>
 
 	<acme:textbox code="stretch.name" path="name" />
 

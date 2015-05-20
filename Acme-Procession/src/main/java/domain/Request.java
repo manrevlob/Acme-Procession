@@ -36,8 +36,7 @@ public class Request extends DomainEntity {
 	private String status;
 	private String comments;
 
-	
-	
+
 	public String getCode() {
 		return code;
 	}

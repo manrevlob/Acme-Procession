@@ -37,13 +37,15 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
-	@RequestMapping(value = "/listOwns", method = RequestMethod.GET)
-	public ModelAndView list() {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		Collection<OrdinaryStretch> ordinaryStretches;
+		Brotherhood brotherhood;
 		String uri;
 
-		ordinaryStretches = ordinaryStretchService.findMines();
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		ordinaryStretches = ordinaryStretchService.findByBrotherhood(brotherhood);
 		uri = "ordinaryStretch/brother/listOwns.do";
 
 		result = new ModelAndView("ordinaryStretch/list");
@@ -56,11 +58,13 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		OrdinaryStretch ordinaryStretch;
+		Brotherhood brotherhood;
 
-		ordinaryStretch = ordinaryStretchService.create();
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		ordinaryStretch = ordinaryStretchService.create(brotherhood);
 
 		result = createEditModelAndView(ordinaryStretch);
 
@@ -92,7 +96,8 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 			try {
 				ordinaryStretchService.save(ordinaryStretch);
 				result = new ModelAndView(
-						"redirect:/ordinaryStretch/brother/listOwns.do");
+						"redirect:/ordinaryStretch/brother/list.do?brotherhoodId="
+								+ ordinaryStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(ordinaryStretch,
 						"stretch.commit.error");

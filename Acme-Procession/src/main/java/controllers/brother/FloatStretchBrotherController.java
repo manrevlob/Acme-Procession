@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import services.FloatStretchService;
-
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.FloatStretch;
@@ -30,22 +29,24 @@ public class FloatStretchBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
-	
+
 	// Constructors -----------------------------------------------------------
-	
+
 	public FloatStretchBrotherController() {
 		super();
 	}
-	
+
 	// Listing ----------------------------------------------------------------
 
-	@RequestMapping(value = "/listOwns", method = RequestMethod.GET)
-	public ModelAndView list() {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		Collection<FloatStretch> floatStretches;
+		Brotherhood brotherhood;
 		String uri;
 
-		floatStretches = floatStretchService.findMines();
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		floatStretches = floatStretchService.findByBrotherhood(brotherhood);
 		uri = "floatStretch/brother/listOwns.do";
 
 		result = new ModelAndView("floatStretch/list");
@@ -58,11 +59,13 @@ public class FloatStretchBrotherController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		FloatStretch floatStretch;
+		Brotherhood brotherhood;
 
-		floatStretch = floatStretchService.create();
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		floatStretch = floatStretchService.create(brotherhood);
 
 		result = createEditModelAndView(floatStretch);
 
@@ -83,7 +86,8 @@ public class FloatStretchBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid FloatStretch floatStretch, BindingResult binding) {
+	public ModelAndView save(@Valid FloatStretch floatStretch,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -91,9 +95,12 @@ public class FloatStretchBrotherController extends AbstractController {
 		} else {
 			try {
 				floatStretchService.save(floatStretch);
-				result = new ModelAndView("redirect:/floatStretch/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/floatStretch/brother/list.do?brotherhoodId="
+								+ floatStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(floatStretch, "stretch.commit.error");
+				result = createEditModelAndView(floatStretch,
+						"stretch.commit.error");
 			}
 		}
 
@@ -101,7 +108,8 @@ public class FloatStretchBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid FloatStretch floatStretch, BindingResult binding) {
+	public ModelAndView delete(@Valid FloatStretch floatStretch,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -109,9 +117,11 @@ public class FloatStretchBrotherController extends AbstractController {
 		} else {
 			try {
 				floatStretchService.delete(floatStretch);
-				result = new ModelAndView("redirect:/floatStretch/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/floatStretch/brother/listOwns.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(floatStretch, "stretch.commit.error");
+				result = createEditModelAndView(floatStretch,
+						"stretch.commit.error");
 			}
 		}
 
@@ -132,7 +142,7 @@ public class FloatStretchBrotherController extends AbstractController {
 			String message) {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
-		
+
 		brotherhoods = brotherhoodService.findOwns();
 
 		result = new ModelAndView("floatStretch/edit");

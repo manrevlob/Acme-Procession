@@ -16,4 +16,7 @@ public interface OrdinaryStretchRepository extends
 	@Query("select os from OrdinaryStretch os where os.brotherhood IN ?1")
 	Collection<OrdinaryStretch> findMines(Collection<Brotherhood> brotherhoods);
 
+	@Query("select os from OrdinaryStretch os where os.brotherhood = ?1")
+	Collection<OrdinaryStretch> findByBrotherhood(Brotherhood brotherhood);
+
 }

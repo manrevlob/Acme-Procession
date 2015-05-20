@@ -22,7 +22,7 @@
 
 <security:authorize access="hasRole('BROTHER')">
 	<div>
-		<a href="floatStretch/brother/create.do">
+		<a href="floatStretch/brother/create.do?brotherhoodId=${param.brotherhoodId}">
 			<spring:message	code="fStretch.create" />
 		</a>
 	</div>

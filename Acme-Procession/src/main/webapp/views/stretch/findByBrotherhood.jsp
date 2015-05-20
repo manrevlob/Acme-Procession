@@ -1,5 +1,5 @@
 <%--
- * edit.jsp
+ * findByContest.jsp
  *
  * Copyright (C) 2014 Universidad de Sevilla
  * 
@@ -16,30 +16,20 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="floatStretch/brother/edit.do" modelAttribute="floatStretch">
-
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="brotherhood" />
+<form:form action="stretch/brother/findByBrotherhood.do" modelAttribute="brotherhoodAndStretchTypeSelectForm">
+	<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
 	
-	<acme:textbox code="stretch.brotherhood" path="brotherhood.name"/>
+	<form:radiobutton path="type" value="ordinary"/><spring:message code="stretch.ordinary" />
+	<form:radiobutton path="type" value="float"/><spring:message code="stretch.float" />
+	<form:errors path="type"/>
 
-	<acme:textbox code="stretch.name" path="name" />
+	<br/>
 
-	<acme:textbox code="stretch.description" path="description" />
+	<acme:submit name="search" code="stretch.search"/> 
 
-	<acme:submit name="save" code="stretch.save" /> 
-	
-	<jstl:if test="${floatStretch.id != 0}">
-		<acme:submit name="delete" code="stretch.delete" />
-	</jstl:if> 
-	
-	<acme:cancel url="floatStretch/brother/listOwns.do"
-		code="stretch.cancel" />
-
+	<acme:cancel url="welcome/index.do" code="stretch.cancel"/>
 </form:form>

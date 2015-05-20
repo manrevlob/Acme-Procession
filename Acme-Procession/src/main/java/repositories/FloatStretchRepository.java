@@ -16,4 +16,7 @@ public interface FloatStretchRepository extends
 	@Query("select fs from FloatStretch fs where fs.brotherhood IN ?1")
 	Collection<FloatStretch> findMines(Collection<Brotherhood> brotherhoods);
 
+	@Query("select fs from FloatStretch fs where fs.brotherhood = ?1")
+	Collection<FloatStretch> findByBrotherhood(Brotherhood brotherhood);
+
 }

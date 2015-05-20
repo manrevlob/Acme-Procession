@@ -21,7 +21,7 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" />[+] - (<security:authentication property="principal.username" />)</a>
+			<li><a class="fNiv"><spring:message	code="master.page.administrator" />[+]</a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="request/administrator/list.do"><spring:message code="master.page.administrator.request" /></a></li>
@@ -33,22 +33,26 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BROTHER')">
-			<li><a class="fNiv"><spring:message	code="master.page.brother" />[+] - (<security:authentication property="principal.username" />)</a>
+			<li><a class="fNiv"><spring:message	code="master.page.brother" />[+]</a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="brotherhood/brother/list.do"><spring:message code="master.page.brother.listMyBrotherhoods" /></a></li>
-					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
-					<li><a href="ordinaryStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnOrdinary" /></a></li>
-					<li><a href="floatStretch/brother/listOwns.do"><spring:message code="master.page.brother.listOwnFloat" /></a></li>
-					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 					<li><a href="procession/brother/listAvailables.do"><spring:message code="master.page.brother.processionAvailable" /></a></li>
 					<li><a href="registration/brother/list.do"><spring:message code="master.page.brother.listOwnRegistrations" /></a></li>
+					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 				</ul>
 			</li>
+			
+			<li><a class="fNiv"><spring:message	code="master.page.bigBrother" />[+]</a>
+			<ul>
+					<li class="arrow"></li>
+					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
+					<li><a href="stretch/brother/findByBrotherhood.do"><spring:message code="master.page.brother.findStretches" /></a></li>
+				</ul>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('VIEWER')">
-			<li><a class="fNiv"><spring:message	code="master.page.viewer" />[+] - (<security:authentication property="principal.username" />)</a>
+			<li><a class="fNiv"><spring:message	code="master.page.viewer" />[+]</a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="assessment/viewer/list.do"><spring:message code="master.page.viewer.assessByViewer" /></a></li>
@@ -68,7 +72,7 @@
 		<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
 		
 		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv" href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
+			<li><a class="fNiv" href="j_spring_security_logout"><spring:message code="master.page.logout" /> - (<security:authentication property="principal.username" />)</a></li>
 		</security:authorize>
 	</ul>
 </div>
