@@ -33,6 +33,8 @@
 
 	<acme:textbox code="procession.brotherhood" path="brotherhood.name" readonly="true"/>
 
+	<acme:textbox code="procession.name" path="name" />
+
 	<acme:textbox code="procession.startMomentWithAdvice" path="startMoment" />
 
 	<acme:textbox code="procession.endMomentWithAdvice" path="endMoment" />

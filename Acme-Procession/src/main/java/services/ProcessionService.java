@@ -27,10 +27,13 @@ public class ProcessionService {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
+
 	@Autowired
 	private ActorService actorService;
+
 	@Autowired
 	private BrotherService brotherService;
+
 	@Autowired
 	private StretchOrderService stretchOrderService;
 
@@ -58,10 +61,11 @@ public class ProcessionService {
 		return result;
 	}
 
-	public Procession create() {
+	public Procession create(Brotherhood brotherhood) {
 		Procession result;
 
 		result = new Procession();
+		result.setBrotherhood(brotherhood);
 
 		return result;
 	}

@@ -26,14 +26,20 @@
 	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />
 	
+	<acme:textbox code="carving.brotherhood" path="brotherhood.name" readonly="true" />
+
 	<acme:textbox code="carving.name" path="name"/>
+
 	<acme:textbox code="carving.description" path="description"/>
+
 	<acme:textbox code="carving.author" path="author"/>
+
 	<acme:textbox code="carving.year" path="year"/>
+
 	<acme:textbox code="carving.comments" path="comments"/>
 	
 	<acme:submit name="save" code="carving.save"/>
 	
-	<acme:cancel url="carving/list" code="carving.cancel"/>
+	<acme:cancel url="carving/list.do" code="carving.cancel"/>
 	
 </form:form>

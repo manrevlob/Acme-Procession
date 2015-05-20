@@ -77,11 +77,9 @@ public class ProcessionBrotherController extends AbstractController {
 		Procession procession;
 		Brotherhood brotherhood;
 
-		procession = processionService.create();
-		
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
-		
-		procession.setBrotherhood(brotherhood);
+
+		procession = processionService.create(brotherhood);
 
 		result = createEditModelAndView(procession);
 
