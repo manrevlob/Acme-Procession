@@ -33,7 +33,7 @@
 
 	<definition name="procession/addStretch" extends="master.page">
 		<put-attribute name="title" value="Añadir tramo a la procesión" />
-		<put-attribute name="body" value="/views/procession/addStrecth.jsp" />
+		<put-attribute name="body" value="/views/procession/addStretch.jsp" />
 	</definition>
 
 </tiles-definitions>
