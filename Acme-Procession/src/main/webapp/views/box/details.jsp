@@ -42,19 +42,6 @@ details.jsp
 	<jstl:out value="${box.numberOfChairs}" />
 	<br />
 	
-	<fieldset>
-	<legend><spring:message code="box.Price" /></legend>
-	
-		<b><spring:message code="box.amount" />:</b>
-		<jstl:out value="${box.price.amount}" />
-		<br />
-		
-		<b><spring:message code="box.currency" />:</b>
-		<jstl:out value="${box.price.currency}" />
-		<br />
-	
-	</fieldset>
-	
 </div>
 
 <div>

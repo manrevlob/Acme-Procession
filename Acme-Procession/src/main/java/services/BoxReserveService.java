@@ -145,8 +145,8 @@ public class BoxReserveService {
 		boxInvoice.setCreateMoment(moment);
 		
 		totalCost = new Money();
-		totalCost.setAmount(boxReserve.getBoxInstance().getBox().getPrice().getAmount());
-		totalCost.setCurrency(boxReserve.getBoxInstance().getBox().getPrice().getCurrency());
+		totalCost.setAmount(boxReserve.getBoxInstance().getPrice().getAmount());
+		totalCost.setCurrency(boxReserve.getBoxInstance().getPrice().getCurrency());
 		
 		boxInvoice.setTotalCost(totalCost);
 		

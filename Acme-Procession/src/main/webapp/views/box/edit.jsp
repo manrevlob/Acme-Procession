@@ -36,15 +36,6 @@
 	
 	<acme:textbox code="box.numberOfChairs" path="numberOfChairs" />
 	
-	<fieldset>
-	<legend><spring:message code="box.Price" /></legend>
-	
-		<acme:textbox code="box.amount" path="price.amount" />
-		
-		<acme:textbox code="box.currency" path="price.currency" />
-	
-	</fieldset>
-	
 	<acme:submit name="save" code="box.save"/>
 	
 	<acme:cancel url="box/administrator/list.do" code="box.cancel"/>

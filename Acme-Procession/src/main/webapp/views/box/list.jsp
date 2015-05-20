@@ -60,12 +60,6 @@
 
 	<spring:message code="box.location" var="locationHeader" />
 	<display:column property="location" title="${locationHeader}" />
-	
-	<spring:message code="box.amount" var="amountHeader" />
-	<display:column property="price.amount" title="${amountHeader}" />
-
-	<spring:message code="box.currency" var="currencyHeader" />
-	<display:column property="price.currency" title="${currencyHeader}" />
 
 	<spring:message code="box.details" var="detailsHeader" />
 	<display:column title="${detailsHeader}">

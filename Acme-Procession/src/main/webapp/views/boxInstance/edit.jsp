@@ -33,6 +33,15 @@
 	
 	<acme:textbox code="boxInstance.date" path="date" />
 	
+	<fieldset>
+	<legend><spring:message code="boxInstance.Price" /></legend>
+	
+		<acme:textbox code="boxInstance.amount" path="price.amount" />
+		
+		<acme:textbox code="boxInstance.currency" path="price.currency" />
+	
+	</fieldset>
+	
 	<acme:submit name="save" code="boxInstance.save"/>
 	
 	<acme:cancel url="box/administrator/list.do" code="boxInstance.cancel"/>
