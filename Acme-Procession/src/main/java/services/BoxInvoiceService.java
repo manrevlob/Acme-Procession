@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.BoxInvoiceRepository;
 import domain.BoxInvoice;
@@ -27,6 +28,16 @@ public class BoxInvoiceService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+	
+	public BoxInvoice save(BoxInvoice boxInvoice) {
+		BoxInvoice result;
+		
+		Assert.notNull(boxInvoice);	
+		
+		result = boxInvoiceRepository.save(boxInvoice);
+		
+		return result;
+	}
 	
 	public BoxInvoice findOne(int boxInvoiceId) {
 		BoxInvoice result;
