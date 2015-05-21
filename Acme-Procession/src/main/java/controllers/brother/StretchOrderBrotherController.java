@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RegistrationInvoiceService;
 import services.RegistrationService;
 import services.StretchOrderService;
 import controllers.AbstractController;
 import domain.Registration;
+import domain.RegistrationInvoice;
 import domain.StretchOrder;
 
 @Controller
@@ -25,6 +27,8 @@ public class StretchOrderBrotherController extends AbstractController {
 	private StretchOrderService stretchOrderService;
 	@Autowired
 	private RegistrationService registrationService;
+	@Autowired
+	private RegistrationInvoiceService registrationInvoiceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -40,10 +44,14 @@ public class StretchOrderBrotherController extends AbstractController {
 		ModelAndView result;
 		StretchOrder stretchOrder;
 		Registration registration;
+		RegistrationInvoice registrationInvoice;
 		String error;
 
 		stretchOrder = stretchOrderService.findOne(stretchOrderId);
-		registration = registrationService.create(stretchOrder);
+		
+		registrationInvoice = registrationInvoiceService.generateInvoice(stretchOrder);
+		
+		registration = registrationService.create(stretchOrder, registrationInvoice);
 		error = null;
 
 		try {

@@ -96,6 +96,18 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="brother5" />
+		<property name="password" value="fe78a9d17921b55bea6e74d323d44fa9" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Other domain beans come here -->
 
 	<!-- CreditCard -->
@@ -153,7 +165,15 @@
 		<property name="expirationYear" value="2017" />
 		<property name="CVV" value="897" />
 	</bean>
-
+	
+	<bean id="creditCard7" class="domain.CreditCard">
+		<property name="holderName" value="HolderName7" />
+		<property name="brandName" value="Visa" />
+		<property name="number" value="4467148530087167" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="2020" />
+		<property name="CVV" value="123" />
+	</bean>
 
 	<!-- Money -->
 
@@ -375,6 +395,29 @@
 		</property>
 	</bean>
 
+	<bean id="inbox8" class="domain.MessageFolder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox8" class="domain.MessageFolder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox8" class="domain.MessageFolder">
+		<property name="name" value="Trashbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Brotherhood -->
 
@@ -615,6 +658,34 @@
 		<property name="userAccount" ref="userAccount5" />
 	</bean>
 
+	<bean id="brother5" class="domain.Brother">
+		<property name="name" value="Brother5Name" />
+		<property name="surname" value="Brother5Surname" />
+		<property name="email" value="brother5@acme-procession.com" />
+		<property name="nationality" value="French" />
+		<property name="creditCard" ref="creditCard7" />
+		<property name="isAuthorized" value="false" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox8" />
+				<ref bean="outbox8" />
+				<ref bean="trashbox8" />
+			</list>
+		</property>
+		<property name="brotherhoods">
+			<list>
+			</list>
+		</property>
+		<property name="ownBrotherhoods">
+			<list>
+			</list>
+		</property>
+		<property name="registrations">
+			<list>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount8" />
+	</bean>
 
 	<!-- Viewer -->
 

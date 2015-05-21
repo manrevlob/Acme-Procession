@@ -32,8 +32,6 @@ public class RegistrationService {
 	private BrotherService brotherService;
 	@Autowired
 	private ActorService actorService;
-	@Autowired
-	private RegistrationInvoiceService registrationInvoiceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,19 +41,20 @@ public class RegistrationService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Registration create(StretchOrder stretchOrder) {
+	public Registration create(StretchOrder stretchOrder,
+			RegistrationInvoice registrationInvoice) {
 		Registration result;
 		Brother brother;
 		long milliseconds;
 		Date date;
 		OrdinaryStretch ordinaryStretch;
-		RegistrationInvoice registrationInvoice;
+
+		Assert.notNull(stretchOrder);
+		Assert.notNull(registrationInvoice);
 
 		brother = brotherService.findByPrincipal();
 		ordinaryStretch = (OrdinaryStretch) stretchOrder.getStretch();
 
-		Assert.notNull(stretchOrder);
-		
 		milliseconds = System.currentTimeMillis();
 		date = new Date(milliseconds - 10);
 		result = new Registration();
@@ -64,8 +63,6 @@ public class RegistrationService {
 		result.setProcession(stretchOrder.getProcession());
 		result.setStretch(ordinaryStretch);
 		result.setMoment(date);
-		
-		registrationInvoice = registrationInvoiceService.generateInvoice(result);
 		result.setRegistrationInvoice(registrationInvoice);
 
 		return result;
@@ -91,11 +88,14 @@ public class RegistrationService {
 		Assert.notNull(registration);
 		Assert.isTrue(actorService.isBrother());
 		// Comprobamos que el registro no está cerrado
-		Assert.isTrue(!registration.getProcession().getIsClosed(), "registration.registerIsClosed.error");
+		Assert.isTrue(!registration.getProcession().getIsClosed(),
+				"registration.registerIsClosed.error");
 		// Comprobamos si el hermano ya esta registrado en esa misma procession
-		Assert.isTrue(findByProcessionAndBrother(
-				registration.getProcession().getId(),
-				registration.getBrother().getId()).size() == 0, "registration.otherRegistrationCreated.error");
+		Assert.isTrue(
+				findByProcessionAndBrother(
+						registration.getProcession().getId(),
+						registration.getBrother().getId()).size() == 0,
+				"registration.otherRegistrationCreated.error");
 
 		registrationRepository.save(registration);
 	}
@@ -121,24 +121,25 @@ public class RegistrationService {
 
 		return result;
 	}
-	
-	public Collection<Registration> findAllByBrother(int brotherId){
+
+	public Collection<Registration> findAllByBrother(int brotherId) {
 		Collection<Registration> result;
-		
+
 		Assert.isTrue(actorService.isBrother());
-		
+
 		result = registrationRepository.findAllByBrother(brotherId);
-		
+
 		return result;
 	}
 
 	public Registration findByRegistrationInvoice(int registrationInvoiceId) {
 		Registration result;
-		
+
 		Assert.isTrue(actorService.isBrother());
-		
-		result = registrationRepository.findByRegistrationInvoice(registrationInvoiceId);
-		
+
+		result = registrationRepository
+				.findByRegistrationInvoice(registrationInvoiceId);
+
 		return result;
 	}
 
