@@ -36,7 +36,14 @@
 	<security:authorize access="hasRole('BROTHER')">
 		<display:column>
 			<a href="registrationInvoice/brother/details.do?registrationInvoiceId=${row.id}">
-				<spring:message	code="invoice.details" />
+				<jstl:choose>
+					<jstl:when test="${row.paidMoment == null}">
+						<spring:message	code="invoice.detailsPay" />
+					</jstl:when>
+					<jstl:otherwise>
+						<spring:message	code="invoice.details" />
+					</jstl:otherwise>
+				</jstl:choose>
 			</a>
 		</display:column>
 	</security:authorize>
