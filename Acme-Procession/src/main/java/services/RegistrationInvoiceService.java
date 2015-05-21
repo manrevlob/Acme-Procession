@@ -10,8 +10,8 @@ import org.springframework.util.Assert;
 
 import repositories.RegistrationInvoiceRepository;
 import domain.Money;
-import domain.Registration;
 import domain.RegistrationInvoice;
+import domain.StretchOrder;
 
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class RegistrationInvoiceService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public RegistrationInvoice create(Registration registration) {
+	public RegistrationInvoice create(StretchOrder stretchOrder) {
 		RegistrationInvoice result;
 		long milliseconds;
 		Date date;
@@ -45,7 +45,7 @@ public class RegistrationInvoiceService {
 		milliseconds = System.currentTimeMillis();
 		date = new Date(milliseconds - 10);
 
-		totalCost = registration.getProcession().getAssociatedCost();
+		totalCost = stretchOrder.getProcession().getAssociatedCost();
 
 		result = new RegistrationInvoice();
 
@@ -79,27 +79,26 @@ public class RegistrationInvoiceService {
 
 	// Other business methods -------------------------------------------------
 
-	public RegistrationInvoice generateInvoice(Registration registration) {
+	public RegistrationInvoice generateInvoice(StretchOrder stretchOrder) {
 		RegistrationInvoice result;
-		
+
 		Assert.isTrue(actorService.isBrother());
 
-		result = create(registration);
-		save(result);
+		result = create(stretchOrder);
 
 		return result;
 	}
-	
-	public void paidInvoice(RegistrationInvoice registrationInvoice){
+
+	public void paidInvoice(RegistrationInvoice registrationInvoice) {
 		long milliseconds;
 		Date date;
 		Assert.isTrue(actorService.isBrother());
-		
+
 		milliseconds = System.currentTimeMillis();
 		date = new Date(milliseconds - 10);
-		
+
 		registrationInvoice.setPaidMoment(date);
-		
+
 		save(registrationInvoice);
 	}
 

@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -80,6 +82,7 @@ public class Registration extends DomainEntity {
 
 	@Valid
 	@OneToOne(optional=true)
+	@Cascade(CascadeType.ALL)
 	public RegistrationInvoice getRegistrationInvoice() {
 		return registrationInvoice;
 	}
