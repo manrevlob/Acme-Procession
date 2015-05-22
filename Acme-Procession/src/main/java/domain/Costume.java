@@ -2,7 +2,11 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -49,6 +53,12 @@ public class Costume extends DomainEntity {
 
 	@Valid
 	@NotNull
+	@AttributeOverrides({
+		@AttributeOverride(name="amount",
+				column=@Column(name="salePriceAmount")),
+		@AttributeOverride(name="currency",
+				column=@Column(name="salePriceCurrency"))
+	})
 	public Money getSalePrice() {
 		return salePrice;
 	}
@@ -59,6 +69,12 @@ public class Costume extends DomainEntity {
 
 	@Valid
 	@NotNull
+	@AttributeOverrides({
+		@AttributeOverride(name="amount",
+				column=@Column(name="rentalPriceAmount")),
+		@AttributeOverride(name="currency",
+				column=@Column(name="rentalPriceCurrency"))
+	})
 	public Money getRentalPrice() {
 		return rentalPrice;
 	}
@@ -89,6 +105,7 @@ public class Costume extends DomainEntity {
 
 	@Valid
 	@NotNull
+	@ManyToOne(optional = false)
 	public Brotherhood getBrotherhood() {
 		return brotherhood;
 	}
