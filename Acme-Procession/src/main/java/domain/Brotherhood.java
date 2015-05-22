@@ -112,6 +112,7 @@ public class Brotherhood extends DomainEntity {
 	private Collection<Procession> processions;
 	private Collection<Stretch> stretches;
 	private Collection<Carving> carvings;
+	private Collection<Costume> costumes;
 
 	@Valid
 	@NotNull
@@ -163,6 +164,16 @@ public class Brotherhood extends DomainEntity {
 
 	public void setCarvings(Collection<Carving> carvings) {
 		this.carvings = carvings;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "brotherhood")
+	public Collection<Costume> getCostumes() {
+		return costumes;
+	}
+
+	public void setCostumes(Collection<Costume> costumes) {
+		this.costumes = costumes;
 	}
 
 }
