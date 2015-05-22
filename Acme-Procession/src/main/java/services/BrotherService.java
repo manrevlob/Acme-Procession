@@ -179,13 +179,12 @@ public class BrotherService {
 		return result;
 	}
 
-
 	public Collection<Brother> findAllBrothersNotAdded(Brotherhood brotherhood) {
 		Collection<Brother> result;
 
 		Assert.notNull(brotherhood);
 
-		result = brotherRepository.findAllBrothersNotAdded(brotherhood.getId());
+		result = brotherRepository.findAll();
 
 		return result;
 	}

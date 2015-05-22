@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.BrotherService;
 import services.BrotherhoodService;
 import services.ProcessionService;
 import services.StretchService;
@@ -39,9 +38,6 @@ public class ProcessionBrotherController extends AbstractController {
 	@Autowired
 	private StretchService stretchService;
 
-	@Autowired
-	private BrotherService brotherService;
-
 	// Constructors -----------------------------------------------------------
 
 	public ProcessionBrotherController() {
@@ -58,7 +54,7 @@ public class ProcessionBrotherController extends AbstractController {
 		String uri;
 
 		processions = processionService.findAllAvailables();
-		isBigBrother = brotherService.findByPrincipal().getIsBigBrother();
+		isBigBrother = false;
 		uri = "procession/brother/listAvailables.do";
 
 		result = new ModelAndView("procession/list");

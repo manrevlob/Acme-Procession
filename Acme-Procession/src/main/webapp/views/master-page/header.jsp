@@ -12,6 +12,7 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div>
 	<img src="images/logo.png" alt="Acme-Procession Co., Inc." />
@@ -43,7 +44,9 @@
 					<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoices" /></a></li>
 				</ul>
 			</li>
-			
+		</security:authorize>
+		
+		<security:authorize access="hasRole('BIGBROTHER')">
 			<li><a class="fNiv"><spring:message	code="master.page.bigBrother" />[+]</a>
 				<ul>
 					<li class="arrow"></li>
