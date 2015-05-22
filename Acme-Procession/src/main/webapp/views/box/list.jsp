@@ -53,7 +53,7 @@
 		
 		<spring:message code="boxReserve.create" var="createHeader" />
 		<display:column title="${createHeader}">
-			<a href="boxReserve/viewer/createForm.do?boxId=${row.id}">
+			<a href="boxReserve/viewer/selectInstance.do?boxId=${row.id}">
 				[<jstl:out value="${createHeader}"/>]
 			</a>
 		</display:column>
