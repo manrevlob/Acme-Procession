@@ -57,7 +57,7 @@ public class Brotherhood extends DomainEntity {
 	public void setHistory(String history) {
 		this.history = history;
 	}
-	
+
 	// Derived attributes -----------------------------------------------------
 	@Transient
 	public Integer getNumberOfBrothers() {
@@ -68,20 +68,40 @@ public class Brotherhood extends DomainEntity {
 	public boolean getUserIsOwner() {
 		boolean result;
 		int principalId;
+
+		result = false;
+
+		if (LoginService.getPrincipal() != null) {
+			principalId = LoginService.getPrincipal().getId();
+
+			for (Brother o : getBigBrothers()) {
+				if (o.getUserAccount().getId() == principalId) {
+					result = true;
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	@Transient
+	public boolean getUserIsRegiter(){
+		boolean result;
+		int principalId;
 		
 		result = false;
 		
 		if(LoginService.getPrincipal() != null) {
 			principalId = LoginService.getPrincipal().getId();
 			
-			for(Brother o : getBigBrothers()) {
+			for(Brother o : getBrothers()) {
 				if(o.getUserAccount().getId() == principalId) {
 					result = true;
 					break;
 				}
 			}
 		}
-		
 		return result;
 	}
 

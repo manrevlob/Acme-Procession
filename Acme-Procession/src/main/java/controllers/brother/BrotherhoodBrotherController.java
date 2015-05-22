@@ -165,6 +165,35 @@ public class BrotherhoodBrotherController extends AbstractController {
 		return result;
 	}
 
+	// Register ---------------------------------------------------------------
+
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView register(@RequestParam int brotherhoodId) {
+		ModelAndView result;
+		Brotherhood brotherhood;
+		Brother brother;
+		String error;
+
+		brotherhood = brotherhoodService.findOne(brotherhoodId);
+		brother = brotherService.registerToBrotherhood(brotherhood);
+		error = null;
+
+		try {
+			brotherService.save(brother);
+			result = new ModelAndView("redirect:/brotherhood/brother/list.do");
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:/brotherhood/list.do");
+			if (oops.getMessage().equals("brotherhood.otherRegistrationCreated.error")) {
+				error = "brotherhood.otherRegistrationCreated.error";
+			}else{
+				error = "brotherhood.commit.error";
+			}
+		}
+
+		result.addObject("error", error);
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(Brotherhood brotherhood) {
