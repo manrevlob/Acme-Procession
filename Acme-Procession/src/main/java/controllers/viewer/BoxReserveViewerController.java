@@ -1,6 +1,7 @@
 package controllers.viewer;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BoxInstanceService;
 import services.BoxReserveService;
 import controllers.AbstractController;
 import domain.BoxReserve;
@@ -21,127 +23,132 @@ import forms.CreateBoxReserveForm;
 @RequestMapping("/boxReserve/viewer")
 public class BoxReserveViewerController extends AbstractController {
 	
-	// Services ---------------------------------------------------------------
+		// Services ---------------------------------------------------------------
 
-			@Autowired
-			private BoxReserveService boxReserveService;
+		@Autowired
+		private BoxReserveService boxReserveService;
+		@Autowired
+		private BoxInstanceService boxInstanceService;
 
-			// Constructors -----------------------------------------------------------
+		// Constructors -----------------------------------------------------------
 
-			public BoxReserveViewerController() {
-				super();
-			}
+		public BoxReserveViewerController() {
+			super();
+		}
 
-			// Listing ----------------------------------------------------------------
+		// Listing ----------------------------------------------------------------
 
-			@RequestMapping(value = "/list", method = RequestMethod.GET)
-			public ModelAndView list() {
-				ModelAndView result;
-				Collection<BoxReserve> boxReserves;
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public ModelAndView list() {
+			ModelAndView result;
+			Collection<BoxReserve> boxReserves;
 
-				boxReserves = boxReserveService.findByPrincipal();
+			boxReserves = boxReserveService.findByPrincipal();
 
-				result = new ModelAndView("boxReserve/list");
-				result.addObject("requestURI", "boxReserve/viewer/list.do");
-				result.addObject("boxReserves", boxReserves);
+			result = new ModelAndView("boxReserve/list");
+			result.addObject("requestURI", "boxReserve/viewer/list.do");
+			result.addObject("boxReserves", boxReserves);
 
-				return result;
-			}
-			
-			// Creation ---------------------------------------------------------------
+			return result;
+		}
+		
+		// Creation ---------------------------------------------------------------
 
-			@RequestMapping(value = "/create", method = RequestMethod.GET)
-			public ModelAndView create() {
-				ModelAndView result;
-				BoxReserve boxReserve;
+		@RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView create() {
+			ModelAndView result;
+			BoxReserve boxReserve;
 
-				boxReserve = boxReserveService.create();
+			boxReserve = boxReserveService.create();
 
+			result = createEditModelAndView(boxReserve);
+
+			return result;
+		}
+
+		// Edition ----------------------------------------------------------------
+
+		@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid BoxReserve boxReserve, BindingResult binding) {
+			ModelAndView result;
+
+			if (binding.hasErrors()) {
 				result = createEditModelAndView(boxReserve);
-
-				return result;
-			}
-
-			// Edition ----------------------------------------------------------------
-
-			@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-			public ModelAndView save(@Valid BoxReserve boxReserve, BindingResult binding) {
-				ModelAndView result;
-
-				if (binding.hasErrors()) {
-					result = createEditModelAndView(boxReserve);
-				} else {
-					try {
-						boxReserveService.save(boxReserve);
-						result = new ModelAndView("redirect:/boxReserve/viewer/list.do");
-					} catch (Throwable oops) {
-							result = createEditModelAndView(boxReserve,"boxReserve.commit.error");
-					}
+			} else {
+				try {
+					boxReserveService.save(boxReserve);
+					result = new ModelAndView("redirect:/boxReserve/viewer/list.do");
+				} catch (Throwable oops) {
+						result = createEditModelAndView(boxReserve,"boxReserve.commit.error");
 				}
-
-				return result;
 			}
+
+			return result;
+		}
+		
+		// Cancel -----------------------------------------------------------------
+		
+		@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+		public ModelAndView cancel(@RequestParam int boxReserveId) {
+			ModelAndView result;
+			BoxReserve boxReserve;
 			
-			// Cancel -----------------------------------------------------------------
+			boxReserve = boxReserveService.findOne(boxReserveId);
 			
-			@RequestMapping(value = "/cancel", method = RequestMethod.GET)
-			public ModelAndView cancel(@RequestParam int boxReserveId) {
-				ModelAndView result;
-				BoxReserve boxReserve;
-				
-				boxReserve = boxReserveService.findOne(boxReserveId);
-				
-				result = new ModelAndView("redirect:../viewer/list.do");
-				
-				try{
-					boxReserveService.cancel(boxReserve);
-				}catch (Exception e) {
-					if(e.getMessage()=="cant cancelled"){
-						result.addObject("error","boxReserve.cancelReserve.error");
-					}else{
-						result.addObject("error","boxReserve.cancelReserve.error");
-					}
+			result = new ModelAndView("redirect:../viewer/list.do");
+			
+			try{
+				boxReserveService.cancel(boxReserve);
+			}catch (Exception e) {
+				if(e.getMessage()=="cant cancelled"){
+					result.addObject("error","boxReserve.cancelReserve.error");
+				}else{
+					result.addObject("error","boxReserve.cancelReserve.error");
 				}
-				
-				return result;
 			}
 			
-			// Cancel -----------------------------------------------------------------
+			return result;
+		}
+		
+		// Cancel -----------------------------------------------------------------
+		
+		@RequestMapping(value = "/selectInstance", method = RequestMethod.GET)
+		public ModelAndView selectInstance(@RequestParam int boxId) {
+			ModelAndView result;
+			CreateBoxReserveForm createBoxReserveForm;
+			Collection<Date> boxInstanceDates;
 			
-			@RequestMapping(value = "/createForm", method = RequestMethod.GET)
-			public ModelAndView createForm(@RequestParam int boxId) {
-				ModelAndView result;
-				CreateBoxReserveForm createBoxReserveForm;
-				
-				createBoxReserveForm = new CreateBoxReserveForm();
+			createBoxReserveForm = boxReserveService.createBoxReserveForm(boxId);
+			boxInstanceDates = boxInstanceService.findDateAvailablesByBox(boxId);
 
-				result = new ModelAndView("boxReserve/selectInstance");
-				result.addObject("createBoxReserveForm", createBoxReserveForm);
-				
+			result = new ModelAndView("boxReserve/selectInstance");
+			result.addObject("createBoxReserveForm", createBoxReserveForm);
+			result.addObject("boxInstanceDates", boxInstanceDates);
+			
 
-				return result;
-			}
+			return result;
+		}
 
-			// Ancillary methods ------------------------------------------------------
+		// Ancillary methods ------------------------------------------------------
 
-			protected ModelAndView createEditModelAndView(BoxReserve boxReserve) {
-				ModelAndView result;
+		protected ModelAndView createEditModelAndView(BoxReserve boxReserve) {
+			ModelAndView result;
 
-				result = createEditModelAndView(boxReserve, null);
+			result = createEditModelAndView(boxReserve, null);
 
-				return result;
-			}
+			return result;
+		}
 
-			protected ModelAndView createEditModelAndView(BoxReserve boxReserve,
-					String message) {
-				ModelAndView result;
+		protected ModelAndView createEditModelAndView(BoxReserve boxReserve,
+				String message) {
+			ModelAndView result;
 
-				result = new ModelAndView("boxReserve/create");
-				result.addObject("boxReserve", boxReserve);
-				result.addObject("message", message);
+			result = new ModelAndView("boxReserve/create");
+			result.addObject("boxReserve", boxReserve);
+			result.addObject("message", message);
 
-				return result;
-			}
+			return result;
+		}
 			
 			
 

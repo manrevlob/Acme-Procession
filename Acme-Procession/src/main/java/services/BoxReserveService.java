@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BoxReserveRepository;
+import domain.Box;
 import domain.BoxInvoice;
 import domain.BoxReserve;
 import domain.Money;
 import domain.Viewer;
+import forms.CreateBoxReserveForm;
 
 @Service
 @Transactional
@@ -32,6 +34,8 @@ public class BoxReserveService {
 	private ViewerService viewerService;
 	@Autowired
 	private BoxInvoiceService boxInvoiceService;
+	@Autowired
+	private BoxService boxService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -151,6 +155,18 @@ public class BoxReserveService {
 		boxInvoice.setTotalCost(totalCost);
 		
 		result = boxInvoiceService.save(boxInvoice);
+		
+		return result;
+	}
+	
+	public CreateBoxReserveForm createBoxReserveForm(int boxId){
+		CreateBoxReserveForm result;
+		Box box;
+		
+		box = boxService.findOne(boxId);
+		
+		result = new CreateBoxReserveForm();
+		result.setBox(box);
 		
 		return result;
 	}

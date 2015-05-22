@@ -90,7 +90,7 @@ public class BoxInstanceService {
 	
 	// Other business methods -------------------------------------------------
 	
-	public void isEditable(BoxInstance boxInstance){
+	public void isEditable(BoxInstance boxInstance) {
 		Collection<BoxReserve> boxReserves;
 		
 		boxReserves = boxInstance.getBoxReserves();
@@ -107,7 +107,7 @@ public class BoxInstanceService {
 		return result;
 	}
 	
-	public void saveBoxInstance(BoxInstance boxInstance){
+	public void saveBoxInstance(BoxInstance boxInstance) {
 		Box box;
 		BoxInstance result;
 		Collection<BoxInstance>boxInstances;
@@ -128,6 +128,14 @@ public class BoxInstanceService {
 			result = save(boxInstance);
 		}
 		
+	}
+	
+	public Collection<Date> findDateAvailablesByBox(int boxId) {
+		Collection<Date> result;
+
+		result = boxInstanceRepository.findDatesAvailablesByBox(boxId);
+		
+		return result;
 	}
 
 }
