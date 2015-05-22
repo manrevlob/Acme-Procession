@@ -184,7 +184,7 @@ public class BrotherService {
 
 		Assert.notNull(brotherhood);
 
-		result = brotherRepository.findAll();
+		result = brotherRepository.findAllBrothersNotAdded(brotherhood.getId());
 
 		return result;
 	}
