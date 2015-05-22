@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BoxReserveService;
 import controllers.AbstractController;
 import domain.BoxReserve;
+import forms.CreateBoxReserveForm;
 
 @Controller
 @RequestMapping("/boxReserve/viewer")
@@ -102,6 +103,22 @@ public class BoxReserveViewerController extends AbstractController {
 					}
 				}
 				
+				return result;
+			}
+			
+			// Cancel -----------------------------------------------------------------
+			
+			@RequestMapping(value = "/createForm", method = RequestMethod.GET)
+			public ModelAndView createForm(@RequestParam int boxId) {
+				ModelAndView result;
+				CreateBoxReserveForm createBoxReserveForm;
+				
+				createBoxReserveForm = new CreateBoxReserveForm();
+
+				result = new ModelAndView("boxReserve/selectInstance");
+				result.addObject("createBoxReserveForm", createBoxReserveForm);
+				
+
 				return result;
 			}
 

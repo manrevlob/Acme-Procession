@@ -21,7 +21,7 @@ import domain.Box;
 @RequestMapping("/box/administrator")
 public class BoxAdministratorController extends AbstractController {
 	
-	// Services ---------------------------------------------------------------
+		// Services ---------------------------------------------------------------
 
 		@Autowired
 		private BoxService boxService;
