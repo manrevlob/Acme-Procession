@@ -44,6 +44,18 @@ details.jsp
 	
 </div>
 
-<div>
-	<acme:cancel url="box/administrator/list.do" code="brotherhood.cancel"/>
-</div>
+<security:authorize  access="hasRole('ADMINISTRATOR')">
+
+	<div>
+		<acme:cancel url="box/administrator/list.do" code="box.cancel"/>
+	</div>
+	
+</security:authorize>
+
+<security:authorize  access="hasRole('VIEWER')">
+
+	<div>
+		<acme:cancel url="box/viewer/list.do" code="box.cancel"/>
+	</div>
+	
+</security:authorize>

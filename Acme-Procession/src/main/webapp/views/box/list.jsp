@@ -49,6 +49,17 @@
 		
 	</security:authorize>
 	
+	<security:authorize  access="hasRole('VIEWER')">
+		
+		<spring:message code="boxReserve.create" var="createHeader" />
+		<display:column title="${createHeader}">
+			<a href="boxReserve/viewer/createForm.do?boxId=${row.id}">
+				[<jstl:out value="${createHeader}"/>]
+			</a>
+		</display:column>
+	
+	</security:authorize>
+	
 	<spring:message code="box.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
 
@@ -60,16 +71,16 @@
 
 	<spring:message code="box.location" var="locationHeader" />
 	<display:column property="location" title="${locationHeader}" />
-
-	<spring:message code="box.details" var="detailsHeader" />
-	<display:column title="${detailsHeader}">
-		<a href="box/administrator/details.do?boxId=${row.id}">
-			[<jstl:out value="${detailsHeader}"/>]
-		</a>
-	</display:column>
 	
 	<security:authorize  access="hasRole('ADMINISTRATOR')">
-		
+	
+		<spring:message code="box.details" var="detailsHeader" />
+		<display:column title="${detailsHeader}">
+			<a href="box/administrator/details.do?boxId=${row.id}">
+				[<jstl:out value="${detailsHeader}"/>]
+			</a>
+		</display:column>
+	
 		<spring:message code="box.listInstance" var="listInstanceHeader" />
 		<display:column title="${listInstanceHeader}">
 			<a href="boxInstance/administrator/list.do?boxId=${row.id}">
@@ -77,6 +88,18 @@
 			</a>
 		</display:column>
 		
+	</security:authorize>
+	
+	<security:authorize  access="hasRole('VIEWER')">
+	
+		<spring:message code="box.details" var="detailsHeader" />
+		<display:column title="${detailsHeader}">
+			<a href="box/viewer/details.do?boxId=${row.id}">
+				[<jstl:out value="${detailsHeader}"/>]
+			</a>
+		</display:column>
+		
+	
 	</security:authorize>
 
 </display:table>

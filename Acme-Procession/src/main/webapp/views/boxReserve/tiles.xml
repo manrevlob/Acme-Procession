@@ -26,5 +26,9 @@
 		<put-attribute name="body" value="/views/boxReserve/create.jsp" />
 	</definition>
 	
+	<definition name="boxReserve/selectInstance" extends="master.page">
+		<put-attribute name="title" value="Select date and number of chairs" />
+		<put-attribute name="body" value="/views/boxReserve/selectInstance.jsp" />
+	</definition>
 
 </tiles-definitions>
