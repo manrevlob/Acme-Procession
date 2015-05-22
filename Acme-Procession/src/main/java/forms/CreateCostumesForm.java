@@ -1,8 +1,7 @@
-package domain;
+package forms;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -10,23 +9,45 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-@Entity
+import domain.Brotherhood;
+import domain.Money;
+
 @Access(AccessType.PROPERTY)
-public class Costume extends DomainEntity {
+public class CreateCostumesForm {
 
-	// Constructors -----------------------------------------------------------
+	// Constructors ---------------------------------------------------
 
-	public Costume() {
+	public CreateCostumesForm() {
 	}
 
-	// Attributes -------------------------------------------------------------
+	// Attributes -----------------------------------------------------
 
+	private Brotherhood brotherhood;
+	private int numberOfCostumes;
 	private int size;
 	private String status;
 	private Money salePrice;
 	private Money rentalPrice;
 	private String comments;
-	private boolean isAvailable;
+
+	@Valid
+	@NotNull
+	public Brotherhood getBrotherhood() {
+		return brotherhood;
+	}
+
+	public void setBrotherhood(Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
+	}
+
+	@Range(min = 1, max = 15)
+	public int getNumberOfCostumes() {
+		return numberOfCostumes;
+	}
+
+	public void setNumberOfCosumes(int numberOfCostumes) {
+		this.numberOfCostumes = numberOfCostumes;
+	}
 
 	@Range(min = 1, max = 100)
 	public int getSize() {
@@ -73,28 +94,6 @@ public class Costume extends DomainEntity {
 
 	public void setComments(String comments) {
 		this.comments = comments;
-	}
-
-	public boolean isAvailable() {
-		return isAvailable;
-	}
-
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
-	}
-
-	// Relationships ----------------------------------------------------------
-
-	private Brotherhood brotherhood;
-
-	@Valid
-	@NotNull
-	public Brotherhood getBrotherhood() {
-		return brotherhood;
-	}
-
-	public void setBrotherhood(Brotherhood brotherhood) {
-		this.brotherhood = brotherhood;
 	}
 
 }
