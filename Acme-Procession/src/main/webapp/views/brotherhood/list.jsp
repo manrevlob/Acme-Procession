@@ -60,6 +60,17 @@
 	
 	<spring:message code="brotherhood.numberOfBrothers" var="numberOfBrothersHeader" />
 	<display:column property="numberOfBrothers" title="${numberOfBrothersHeader}" sortable="true" />
+	
+	<security:authorize access="hasRole('BROTHER')">
+		<spring:message code="brotherhood.register" var="registerHeader" />
+		<display:column>
+			<jstl:if test="${!row.userIsOwner && !row.userIsRegiter}">
+				<a href="brotherhood/brother/register.do?brotherhoodId=${row.id}">
+					[<jstl:out value="${registerHeader}"/>]
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="brotherhood.processions" var="processionsHeader" />
 	<display:column title="${processionsHeader}">

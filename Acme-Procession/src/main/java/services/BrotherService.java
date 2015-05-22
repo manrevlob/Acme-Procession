@@ -29,9 +29,11 @@ public class BrotherService {
 	private BrotherRepository brotherRepository;
 
 	// Supporting services ----------------------------------------------------
-	
+
 	@Autowired
 	private MessageFolderService messageFolderService;
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -40,30 +42,31 @@ public class BrotherService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	
+
 	public Brother create() {
 		Brother result;
-		
+
 		result = new Brother();
-		
+
 		result.setUserAccount(createUserAccount());
 		result.setMessageFolders(createMessageFolders());
-		
+
 		return result;
 	}
-	
+
 	public void save(Brother brother) {
-		
+
 		Assert.notNull(brother);
-		
-		if(brother.getId()==0){
+
+		if (brother.getId() == 0) {
 			String passwordCoded;
-			
-			passwordCoded = PasswordCode.encode(brother.getUserAccount().getPassword());
+
+			passwordCoded = PasswordCode.encode(brother.getUserAccount()
+					.getPassword());
 			brother.getUserAccount().setPassword(passwordCoded);
 			brother.setIsAuthorized(false);
 		}
-		
+
 		brotherRepository.save(brother);
 	}
 
@@ -96,86 +99,86 @@ public class BrotherService {
 
 		return result;
 	}
-	
+
 	public UserAccount createUserAccount() {
 		UserAccount result;
 		Collection<Authority> authorities;
 		Authority authority;
-		
+
 		authority = new Authority();
 		authority.setAuthority("BROTHER");
-		
+
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
-		
+
 		result = new UserAccount();
 		result.setAuthorities(authorities);
-		
+
 		return result;
 	}
-	
+
 	public Collection<MessageFolder> createMessageFolders() {
 		Collection<MessageFolder> result;
 		MessageFolder inbox;
 		MessageFolder outbox;
 		MessageFolder trashbox;
-		
+
 		inbox = new MessageFolder();
 		outbox = new MessageFolder();
 		trashbox = new MessageFolder();
-		
+
 		result = new ArrayList<MessageFolder>();
 		result.add(inbox);
 		result.add(outbox);
 		result.add(trashbox);
-		
+
 		return result;
 	}
-	
+
 	public void registerToTheSystem(Brother brother) {
 		Integer year;
-	 	Integer month;
+		Integer month;
 
-	 	year = Calendar.getInstance().get(Calendar.YEAR);
-	 	month = Calendar.getInstance().get(Calendar.MONTH);
-		
-	 	Assert.isTrue(brother.getCreditCard().getExpirationYear()>= year);
-	 	
-	 	if(brother.getCreditCard().getExpirationYear().equals(year)){
-	 		Assert.isTrue(brother.getCreditCard().getExpirationMonth() > month, "credit card expired");
-	 	}
-	 	
-	 	brother.setMessageFolders(saveSystemFolders(brother));
-	 	 	
-	 	save(brother);
+		year = Calendar.getInstance().get(Calendar.YEAR);
+		month = Calendar.getInstance().get(Calendar.MONTH);
+
+		Assert.isTrue(brother.getCreditCard().getExpirationYear() >= year);
+
+		if (brother.getCreditCard().getExpirationYear().equals(year)) {
+			Assert.isTrue(brother.getCreditCard().getExpirationMonth() > month,
+					"credit card expired");
+		}
+
+		brother.setMessageFolders(saveSystemFolders(brother));
+
+		save(brother);
 	}
-	
+
 	public Collection<MessageFolder> saveSystemFolders(Brother brother) {
 		List<MessageFolder> result;
 		List<MessageFolder> aux;
 		MessageFolder inbox;
 		MessageFolder outbox;
 		MessageFolder trashbox;
-		
-		aux = (List<MessageFolder>)brother.getMessageFolders();
+
+		aux = (List<MessageFolder>) brother.getMessageFolders();
 		inbox = aux.get(0);
 		outbox = aux.get(1);
 		trashbox = aux.get(2);
-		
-		
+
 		inbox.setName("Inbox");
 		outbox.setName("Outbox");
 		trashbox.setName("Trashbox");
-		
+
 		inbox = messageFolderService.save(inbox);
 		outbox = messageFolderService.save(outbox);
 		trashbox = messageFolderService.save(trashbox);
-		
+
 		result = new ArrayList<MessageFolder>();
 		result.add(inbox);
 		result.add(outbox);
 		result.add(trashbox);
-		
+
 		return result;
 	}
 
@@ -185,6 +188,38 @@ public class BrotherService {
 		Assert.notNull(brotherhood);
 
 		result = brotherRepository.findAllBrothersNotAdded(brotherhood.getId());
+
+		return result;
+	}
+
+	public Brother registerToBrotherhood(Brotherhood brotherhood) {
+		Brother result;
+		Collection<Brotherhood> brotherhoods;
+
+		Assert.notNull(brotherhood);
+		Assert.isTrue(actorService.isBrother());
+		// Comprobamos si el hermano ya esta registrado en esa misma hermandad
+		Assert.isTrue(
+				findByBrotherhoodAndBrother(brotherhood.getId(),
+						findByPrincipal()).size() == 0,
+				"brotherhood.otherRegistrationCreated.error");
+
+		result = findByPrincipal();
+
+		brotherhoods = result.getBrotherhoods();
+		brotherhoods.add(brotherhood);
+
+		result.setBrotherhoods(brotherhoods);
+
+		return result;
+	}
+
+	private Collection<Brother> findByBrotherhoodAndBrother(int brotherhoodId,
+			Brother brother) {
+		Collection<Brother> result;
+
+		result = brotherRepository.findByBrotherhoodAndBrother(brotherhoodId,
+				brother.getId());
 
 		return result;
 	}
