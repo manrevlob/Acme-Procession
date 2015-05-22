@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BrotherhoodRepository;
+import security.Authority;
+import security.UserAccount;
 import domain.Brother;
 import domain.Brotherhood;
 import forms.AddBigBrotherForm;
@@ -78,11 +80,13 @@ public class BrotherhoodService {
 		int actualYear;
 
 		Assert.notNull(brotherhood);
-		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
-		
+		Assert.isTrue(brotherhood.getBigBrothers().contains(
+				brotherService.findByPrincipal()));
+
 		actualYear = Calendar.getInstance().get(Calendar.YEAR);
-		
-		Assert.isTrue(brotherhood.getFoundationYear() <= actualYear, "brotherhood.invalidYear.error");
+
+		Assert.isTrue(brotherhood.getFoundationYear() <= actualYear,
+				"brotherhood.invalidYear.error");
 
 		result = brotherhoodRepository.save(brotherhood);
 
@@ -99,8 +103,9 @@ public class BrotherhoodService {
 		Brotherhood result;
 
 		result = brotherhoodRepository.findOne(brotherhoodId);
-		
-		Assert.isTrue(result.getBigBrothers().contains(brotherService.findByPrincipal()));
+
+		Assert.isTrue(result.getBigBrothers().contains(
+				brotherService.findByPrincipal()));
 
 		return result;
 	}
@@ -120,7 +125,8 @@ public class BrotherhoodService {
 		Collection<Brotherhood> result;
 
 		Assert.isTrue(actorService.isBrother());
-		Assert.isTrue(brotherService.findByPrincipal().getIsBigBrother());
+		Assert.isTrue(brotherService.findByPrincipal().getOwnBrotherhoods() != null
+				&& brotherService.findByPrincipal().getOwnBrotherhoods().size() > 0);
 
 		result = brotherhoodRepository.findOwns(brotherService
 				.findByPrincipal());
@@ -150,24 +156,38 @@ public class BrotherhoodService {
 	public void addBrother(AddBigBrotherForm addBrotherForm) {
 		Brotherhood brotherhood;
 		Brother brother;
+		UserAccount updatedUserAccount;
+		Authority bigBrotherAuthority;
+		Collection<Authority> authorities;
 		Collection<Brotherhood> newOwnBrotherhoods;
 		Collection<Brother> newBigBrothers;
-		
+
 		Assert.notNull(addBrotherForm);
-		Assert.isTrue(addBrotherForm.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
-		
+		Assert.isTrue(addBrotherForm.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
+
 		brotherhood = addBrotherForm.getBrotherhood();
 		brother = addBrotherForm.getBrother();
 		
+		updatedUserAccount = brother.getUserAccount();
+		authorities = updatedUserAccount.getAuthorities();
+		
+		if(!authorities.contains(Authority.BIGBROTHER)) {
+			bigBrotherAuthority = new Authority();
+			bigBrotherAuthority.setAuthority(Authority.BIGBROTHER);
+			updatedUserAccount.addAuthority(bigBrotherAuthority);
+			brother.setUserAccount(updatedUserAccount);
+		}
+
 		newOwnBrotherhoods = brother.getOwnBrotherhoods();
 		newOwnBrotherhoods.add(brotherhood);
-		
+
 		newBigBrothers = brotherhood.getBigBrothers();
 		newBigBrothers.add(brother);
-		
+
 		brotherhood.setBigBrothers(newBigBrothers);
 		brother.setOwnBrotherhoods(newOwnBrotherhoods);
-		
+
 		brotherService.save(brother);
 		save(brotherhood);
 	}

@@ -36,15 +36,16 @@ public class Authority implements GrantedAuthority {
 	// Values -----------------------------------------------------------------
 
 	public static final String ADMINISTRATOR = "ADMINISTRATOR";
-	public static final String VIEWER = "VIEWER";
 	public static final String BROTHER = "BROTHER";
+	public static final String BIGBROTHER = "BIGBROTHER";
+	public static final String VIEWER = "VIEWER";
 
 	// Attributes -------------------------------------------------------------
 
 	private String authority;
 
 	@NotBlank
-	@Pattern(regexp = "^" + ADMINISTRATOR + "|" + VIEWER + "|" + BROTHER + "$")
+	@Pattern(regexp = "^" + ADMINISTRATOR + "|" + BROTHER + "|" + BIGBROTHER + "|" + VIEWER + "$")
 	@Override
 	public String getAuthority() {
 		return authority;
@@ -63,13 +64,17 @@ public class Authority implements GrantedAuthority {
 		authority = new Authority();
 		authority.setAuthority(ADMINISTRATOR);
 		result.add(authority);
-
-		authority = new Authority();
-		authority.setAuthority(VIEWER);
-		result.add(authority);
 		
 		authority = new Authority();
 		authority.setAuthority(BROTHER);
+		result.add(authority);
+		
+		authority = new Authority();
+		authority.setAuthority(BIGBROTHER);
+		result.add(authority);
+		
+		authority = new Authority();
+		authority.setAuthority(VIEWER);
 		result.add(authority);
 
 		return result;

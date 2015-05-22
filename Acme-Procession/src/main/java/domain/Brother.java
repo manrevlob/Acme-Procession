@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 
 @Entity
@@ -31,12 +30,6 @@ public class Brother extends Customer {
 
 	public void setIsAuthorized(boolean isAuthorized) {
 		this.isAuthorized = isAuthorized;
-	}
-
-	// Derived attributes -----------------------------------------------------
-	@Transient
-	public boolean getIsBigBrother() {
-		return getOwnBrotherhoods() != null && getOwnBrotherhoods().size() > 0;
 	}
 
 	// Relationships ----------------------------------------------------------
