@@ -22,10 +22,9 @@
 
 <form:form action="costume/brother/create.do" modelAttribute="createCostumesForm">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />
-	<form:hidden path="isAvailable" />
+	
+	<acme:textbox code="costume.numberOfCostumes" path="numberOfCostumes" />
 	
 	<acme:textbox code="costume.size" path="size" />
 	
