@@ -150,11 +150,21 @@ public class BoxReserveService {
 	}
 	
 	public void cancel(BoxReserve boxReserve) {
+		BoxInstance boxInstance;
+		int chairs;
+		int newCHairs;
 		
 		Assert.isTrue(actorService.isViewer());
 		Assert.isTrue(boxReserve.getViewer() == viewerService.findByPrincipal());
 		
 		Assert.isTrue(canBeCancelled(boxReserve),"cant cancelled");
+		
+		boxInstance = boxReserve.getBoxInstance();
+		chairs = boxReserve.getNumbersOfchairs();
+		newCHairs = boxInstance.getAvailableChairs() + chairs;
+		boxInstance.setAvailableChairs(newCHairs);
+		
+		boxInstanceService.save(boxInstance);
 		
 		boxReserve.setIsCancelled(true);
 		
