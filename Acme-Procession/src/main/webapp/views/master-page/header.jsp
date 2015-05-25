@@ -50,8 +50,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.bigBrother" />[+]</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="brotherhood/brother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
-					<li><a href="stretch/brother/findByBrotherhood.do"><spring:message code="master.page.brother.findStretches" /></a></li>
+					<li><a href="brotherhood/bigBrother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
+					<li><a href="stretch/bigBrother/findByBrotherhood.do"><spring:message code="master.page.brother.findStretches" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

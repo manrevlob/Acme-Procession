@@ -24,7 +24,7 @@
 <security:authorize access="hasRole('BROTHER')">
 	<jstl:if test="${isBigBrother}">
 		<div>
-			<a href="procession/brother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
+			<a href="procession/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
 					code="procession.create" />
 			</a>
 		</div>
@@ -39,7 +39,7 @@
 		<display:column>
 			<jstl:choose>
 				<jstl:when test="${row.brotherhood.userIsOwner && !row.isClosed}">
-					<a href="procession/brother/edit.do?processionId=${row.id}"> [<jstl:out
+					<a href="procession/bigBrother/edit.do?processionId=${row.id}"> [<jstl:out
 							value="${editHeader}" />]
 					</a>
 				</jstl:when>
@@ -59,14 +59,14 @@
 					<jstl:choose>
 						<jstl:when test="${row.isClosedManually != true}">
 							<spring:message code="procession.close" var="closeHeader" />
-							<a href="procession/brother/close.do?processionId=${row.id}">
+							<a href="procession/bigBrother/close.do?processionId=${row.id}">
 								[<jstl:out value="${closeHeader}" />]
 							</a>
 						</jstl:when>
 
 						<jstl:when test="${row.isClosedManually == true}">
 							<spring:message code="procession.open" var="openHeader" />
-							<a href="procession/brother/open.do?processionId=${row.id}">
+							<a href="procession/bigBrother/open.do?processionId=${row.id}">
 								[<jstl:out value="${openHeader}" />]
 							</a>
 						</jstl:when>

@@ -21,13 +21,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="brotherhood/brother/addBigBrother.do" modelAttribute="addBigBrotherForm">
+<form:form action="brotherhood/bigBrother/addBigBrother.do" modelAttribute="addBigBrotherForm">
 	<form:hidden path="brotherhood"/>
 	
 	<acme:select items="${brothers}" itemLabel="name" code="brotherhood.addBigBrother" path="brother"/>
 	
 	<acme:submit name="save" code="brotherhood.save" />
 	
-	<acme:cancel url="brotherhood/brother/listOwns.do" code="brotherhood.cancel" />
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="brotherhood.cancel" />
 
 </form:form>

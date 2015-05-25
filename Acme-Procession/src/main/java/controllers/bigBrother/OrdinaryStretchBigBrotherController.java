@@ -1,4 +1,4 @@
-package controllers.brother;
+package controllers.bigBrother;
 
 import java.util.Collection;
 
@@ -19,8 +19,8 @@ import domain.Brotherhood;
 import domain.OrdinaryStretch;
 
 @Controller
-@RequestMapping("/ordinaryStretch/brother")
-public class OrdinaryStretchBrotherController extends AbstractController {
+@RequestMapping("/ordinaryStretch/bigBrother")
+public class OrdinaryStretchBigBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -31,7 +31,7 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public OrdinaryStretchBrotherController() {
+	public OrdinaryStretchBigBrotherController() {
 		super();
 	}
 
@@ -46,7 +46,7 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
 		ordinaryStretches = ordinaryStretchService.findByBrotherhood(brotherhood);
-		uri = "ordinaryStretch/brother/listOwns.do";
+		uri = "ordinaryStretch/bigBrother/listOwns.do";
 
 		result = new ModelAndView("ordinaryStretch/list");
 		result.addObject("requestURI", uri);
@@ -96,7 +96,7 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 			try {
 				ordinaryStretchService.save(ordinaryStretch);
 				result = new ModelAndView(
-						"redirect:/ordinaryStretch/brother/list.do?brotherhoodId="
+						"redirect:/ordinaryStretch/bigBrother/list.do?brotherhoodId="
 								+ ordinaryStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(ordinaryStretch,
@@ -118,7 +118,7 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 			try {
 				ordinaryStretchService.delete(ordinaryStretch);
 				result = new ModelAndView(
-						"redirect:/ordinaryStretch/brother/listOwns.do");
+						"redirect:/brotherhood/bigBrother/listOwns.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(ordinaryStretch,
 						"stretch.commit.error");
@@ -142,14 +142,10 @@ public class OrdinaryStretchBrotherController extends AbstractController {
 	protected ModelAndView createEditModelAndView(
 			OrdinaryStretch ordinaryStretch, String message) {
 		ModelAndView result;
-		Collection<Brotherhood> brotherhoods;
-
-		brotherhoods = brotherhoodService.findOwns();
 
 		result = new ModelAndView("ordinaryStretch/edit");
 		result.addObject("ordinaryStretch", ordinaryStretch);
 		result.addObject("message", message);
-		result.addObject("brotherhoods", brotherhoods);
 
 		return result;
 	}

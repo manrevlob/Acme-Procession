@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="procession/brother/edit.do"
+<form:form action="procession/bigBrother/edit.do"
 	modelAttribute="procession">
 
 	<form:hidden path="id" />
@@ -63,7 +63,7 @@
 		<acme:submit name="delete" code="procession.delete" />
 	</jstl:if> 
 	
-	<acme:cancel url="brotherhood/brother/listOwns.do"
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do"
 		code="procession.cancel" />
 
 </form:form>

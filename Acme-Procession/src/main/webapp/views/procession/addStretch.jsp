@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="procession/brother/addStretch.do" modelAttribute="addStretchToProcessionForm">
+<form:form action="procession/bigBrother/addStretch.do" modelAttribute="addStretchToProcessionForm">
 	
 	<form:hidden path="procession" />
 	
@@ -28,6 +28,6 @@
 	
 	<acme:submit name="addStretch" code="procession.addStretch.add"/> 
 	
-	<acme:cancel url="brotherhood/brother/listOwns.do" code="procession.cancel"/>
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="procession.cancel"/>
 	
 </form:form>

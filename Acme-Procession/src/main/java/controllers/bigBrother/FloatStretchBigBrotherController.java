@@ -1,4 +1,4 @@
-package controllers.brother;
+package controllers.bigBrother;
 
 import java.util.Collection;
 
@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
+import services.CarvingService;
 import services.FloatStretchService;
 import controllers.AbstractController;
 import domain.Brotherhood;
+import domain.Carving;
 import domain.FloatStretch;
 
 @Controller
-@RequestMapping("/floatStretch/brother")
-public class FloatStretchBrotherController extends AbstractController {
+@RequestMapping("/floatStretch/bigBrother")
+public class FloatStretchBigBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -30,9 +32,12 @@ public class FloatStretchBrotherController extends AbstractController {
 	@Autowired
 	private BrotherhoodService brotherhoodService;
 
+	@Autowired
+	private CarvingService carvingService;
+
 	// Constructors -----------------------------------------------------------
 
-	public FloatStretchBrotherController() {
+	public FloatStretchBigBrotherController() {
 		super();
 	}
 
@@ -47,7 +52,7 @@ public class FloatStretchBrotherController extends AbstractController {
 
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
 		floatStretches = floatStretchService.findByBrotherhood(brotherhood);
-		uri = "floatStretch/brother/listOwns.do";
+		uri = "floatStretch/bigBrother/listOwns.do";
 
 		result = new ModelAndView("floatStretch/list");
 		result.addObject("requestURI", uri);
@@ -96,7 +101,7 @@ public class FloatStretchBrotherController extends AbstractController {
 			try {
 				floatStretchService.save(floatStretch);
 				result = new ModelAndView(
-						"redirect:/floatStretch/brother/list.do?brotherhoodId="
+						"redirect:/floatStretch/bigBrother/list.do?brotherhoodId="
 								+ floatStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(floatStretch,
@@ -118,7 +123,7 @@ public class FloatStretchBrotherController extends AbstractController {
 			try {
 				floatStretchService.delete(floatStretch);
 				result = new ModelAndView(
-						"redirect:/floatStretch/brother/listOwns.do");
+						"redirect:/brotherhood/bigBrother/listOwns.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(floatStretch,
 						"stretch.commit.error");
@@ -141,14 +146,14 @@ public class FloatStretchBrotherController extends AbstractController {
 	protected ModelAndView createEditModelAndView(FloatStretch floatStretch,
 			String message) {
 		ModelAndView result;
-		Collection<Brotherhood> brotherhoods;
+		Collection<Carving> carvings;
 
-		brotherhoods = brotherhoodService.findOwns();
+		carvings = carvingService.findByBrotherhood(floatStretch.getBrotherhood().getId());
 
 		result = new ModelAndView("floatStretch/edit");
 		result.addObject("floatStretch", floatStretch);
 		result.addObject("message", message);
-		result.addObject("brotherhoods", brotherhoods);
+		result.addObject("carvings", carvings);
 
 		return result;
 	}

@@ -1,4 +1,4 @@
-package controllers.brother;
+package controllers.bigBrother;
 
 import java.util.Collection;
 
@@ -17,8 +17,8 @@ import domain.Brotherhood;
 import forms.BrotherhoodAndStretchTypeSelectForm;
 
 @Controller
-@RequestMapping("/stretch/brother")
-public class StretchBrotherController extends AbstractController {
+@RequestMapping("/stretch/bigBrother")
+public class StretchBigBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -27,7 +27,7 @@ public class StretchBrotherController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public StretchBrotherController() {
+	public StretchBigBrotherController() {
 		super();
 	}
 
@@ -59,14 +59,14 @@ public class StretchBrotherController extends AbstractController {
 				if (brotherhoodAndStretchTypeSelectForm.getType().equals(
 						"ordinary")) {
 					result = new ModelAndView(
-							"redirect:/ordinaryStretch/brother/list.do?brotherhoodId="
+							"redirect:/ordinaryStretch/bigBrother/list.do?brotherhoodId="
 									+ brotherhoodAndStretchTypeSelectForm
 											.getBrotherhood().getId());
 				} else {
 					if (brotherhoodAndStretchTypeSelectForm.getType().equals(
 							"float")) {
 						result = new ModelAndView(
-								"redirect:/floatStretch/brother/list.do?brotherhoodId="
+								"redirect:/floatStretch/bigBrother/list.do?brotherhoodId="
 										+ brotherhoodAndStretchTypeSelectForm
 												.getBrotherhood().getId());
 					} else {
