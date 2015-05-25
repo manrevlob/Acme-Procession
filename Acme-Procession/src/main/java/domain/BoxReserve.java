@@ -99,6 +99,7 @@ public class BoxReserve extends DomainEntity {
 		this.isCancelled = isCancelled;
 	}
 	
+	
 	// Relationships ----------------------------------------------------------
 
 	private BoxInstance boxInstance;

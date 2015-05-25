@@ -56,6 +56,15 @@
 		}
 		window.location.replace(loc);
 	}
+	
+	
+	function reloadChairsAndPrice() {
+		var boxInstanceId = $('select#boxInstances').val();
+		var placeholder = $('select#chairsAvaiblables'); 
+
+		placeholder.load("boxReserve/viewer/selectChairs.do?boxInstanceId=" + boxInstanceId);			
+	}
+
 </script>
 
 </head>

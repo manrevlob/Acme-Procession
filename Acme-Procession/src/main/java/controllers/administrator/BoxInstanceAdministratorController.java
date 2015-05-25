@@ -90,6 +90,8 @@ public class BoxInstanceAdministratorController extends AbstractController {
 					
 					if(oops.getMessage().equals("cant edit")){
 						result = createEditModelAndView(boxInstance,"boxInstance.cantEdit.error");
+					}else if(oops.getMessage().equals("date invalid")){
+						result = createEditModelAndView(boxInstance,"boxInstance.dateInvalid.error");
 					}else{
 						result = createEditModelAndView(boxInstance,"boxInstance.commit.error");
 					}

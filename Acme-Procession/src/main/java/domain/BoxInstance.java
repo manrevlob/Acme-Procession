@@ -10,8 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,8 +41,7 @@ public class BoxInstance extends DomainEntity {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	@Min(1)	
+		
 	public int getAvailableChairs() {
 		return availableChairs;
 	}
@@ -51,6 +50,12 @@ public class BoxInstance extends DomainEntity {
 		this.availableChairs = availableChairs;
 	}
 	
+	// Derived attributes -----------------------------------------------------
+	
+		@Transient
+		public String getDateAndChairs() {
+			return getDate()+ "," + " " + getAvailableChairs();
+		}
 	
 	// Relationships ----------------------------------------------------------
 

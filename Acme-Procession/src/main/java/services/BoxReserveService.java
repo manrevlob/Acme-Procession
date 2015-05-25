@@ -10,9 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BoxReserveRepository;
+import utilities.CodeGenerator;
 import domain.Box;
+import domain.BoxInstance;
 import domain.BoxInvoice;
 import domain.BoxReserve;
+import domain.Money;
 import domain.Viewer;
 import forms.CreateBoxReserveForm;
 
@@ -35,6 +38,8 @@ public class BoxReserveService {
 	private BoxInvoiceService boxInvoiceService;
 	@Autowired
 	private BoxService boxService;
+	@Autowired
+	private BoxInstanceService boxInstanceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -44,12 +49,41 @@ public class BoxReserveService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	
-	public BoxReserve create() {
+	public BoxReserve create(CreateBoxReserveForm createBoxReserveForm) {
 		BoxReserve result;
+		String code;
+		Date creationMoment;
+		long milliseconds;
+		Viewer viewer;
+		Integer chairs;
+		Money cost;
+		double amount;
+		String currency;
 
 		Assert.isTrue(actorService.isViewer());
+		Assert.isTrue(createBoxReserveForm.getChairs()<=createBoxReserveForm.getBoxInstance().getAvailableChairs(),"cant reserve");
+		
+		code = CodeGenerator.generate();
+		milliseconds = System.currentTimeMillis() - 100;
+		creationMoment = new Date(milliseconds);
+		viewer = viewerService.findByPrincipal();
+		chairs = createBoxReserveForm.getChairs();
 
 		result = new BoxReserve();
+		result.setBoxInstance(createBoxReserveForm.getBoxInstance());
+		result.setDate(createBoxReserveForm.getBoxInstance().getDate());
+		result.setReserveCode(code);
+		result.setCreateMoment(creationMoment);
+		result.setNumbersOfchairs(chairs);
+		result.setViewer(viewer);
+		
+		cost = new Money();
+		amount = createBoxReserveForm.getBox().getPrice().getAmount();
+		currency = createBoxReserveForm.getBox().getPrice().getCurrency();
+		amount= amount * chairs;
+		cost.setAmount(amount);
+		cost.setCurrency(currency);
+		result.setTotalCost(cost);
 		
 		return result;
 	}
@@ -57,6 +91,8 @@ public class BoxReserveService {
 	public BoxReserve save(BoxReserve boxReserve) {
 		BoxReserve result;
 		BoxInvoice boxInvoice;
+		BoxInstance boxInstance;
+		int chairs;
 		
 		Assert.notNull(boxReserve);
 		Assert.isTrue(actorService.isViewer());
@@ -64,6 +100,13 @@ public class BoxReserveService {
 		if(boxReserve.getId()==0){
 			boxInvoice = generateBoxInvoice(boxReserve);
 			boxReserve.setBoxInvoice(boxInvoice);
+			
+			chairs = boxReserve.getBoxInstance().getAvailableChairs();
+			chairs = chairs - boxReserve.getNumbersOfchairs();
+			
+			boxInstance = boxReserve.getBoxInstance();
+			boxInstance.setAvailableChairs(chairs);
+			boxInstanceService.save(boxInstance);
 		}
 
 		result = boxReserveRepository.save(boxReserve);
@@ -139,12 +182,15 @@ public class BoxReserveService {
 		Date moment;
 		long milliseconds;
 		BoxInvoice boxInvoice;
+		Money cost;
 		
 		milliseconds = System.currentTimeMillis() - 100;
 		moment = new Date(milliseconds);
+		cost = boxReserve.getTotalCost();
 		
 		boxInvoice = new BoxInvoice();
 		boxInvoice.setCreateMoment(moment);
+		boxInvoice.setTotalCost(cost);
 		
 		result = boxInvoiceService.save(boxInvoice);
 		

@@ -1,18 +1,13 @@
 package forms;
 
-import java.util.Collection;
-import java.util.Date;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import domain.Box;
+import domain.BoxInstance;
 
 @Access(AccessType.PROPERTY)
 public class CreateBoxReserveForm {
@@ -25,28 +20,29 @@ public class CreateBoxReserveForm {
 
 	// Attributes -----------------------------------------------------
 
-	private Date date;
-	private Collection<Integer> numbersOfChairs;
 	private Box box;
+	private BoxInstance boxInstance;
+	private int chairs;
 	
+	
+	@Min(1)	
+	public Integer getChairs() {
+		return chairs;
+	}
+
+	public void setChairs(int chairs) {
+		this.chairs = chairs;
+	}
+	
+	@Valid
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
+	public BoxInstance getBoxInstance() {
+		return boxInstance;
 	}
 	
-	@ElementCollection
-	public Collection<Integer> getNumbersOfChairs() {
-		return numbersOfChairs;
+	public void setBoxInstance(BoxInstance boxInstance) {
+		this.boxInstance = boxInstance;
 	}
-	public void setNumbersOfChairs(Collection<Integer> numbersOfChairs) {
-		this.numbersOfChairs = numbersOfChairs;
-	}
-	
 	
 	public Box getBox() {
 		return box;
