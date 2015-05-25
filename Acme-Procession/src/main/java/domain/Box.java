@@ -29,6 +29,7 @@ public class Box extends DomainEntity {
 	private String locality;
 	private String location;
 	private Integer numberOfChairs;
+	private Money price;
 	
 	
 	@NotBlank
@@ -74,6 +75,16 @@ public class Box extends DomainEntity {
 
 	public void setNumberOfChairs(Integer numberOfChairs) {
 		this.numberOfChairs = numberOfChairs;
+	}
+	
+	@Valid
+	@NotNull
+	public Money getPrice() {
+		return price;
+	}
+
+	public void setPrice(Money price) {
+		this.price = price;
 	}
 	
 	// Relationships ----------------------------------------------------------

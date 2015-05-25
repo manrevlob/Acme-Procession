@@ -5,13 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,8 +28,8 @@ public class BoxInstance extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	
 	private Date date;
-	private Money price;
-	private Collection<Integer> chairs;
+	private int availableChairs;
+	
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -42,23 +42,13 @@ public class BoxInstance extends DomainEntity {
 		this.date = date;
 	}
 	
-	@Valid
-	@NotNull
-	public Money getPrice() {
-		return price;
+	@Min(1)	
+	public int getAvailableChairs() {
+		return availableChairs;
 	}
 
-	public void setPrice(Money price) {
-		this.price = price;
-	}
-	
-	@ElementCollection
-	public Collection<Integer> getChairs() {
-		return chairs;
-	}
-
-	public void setChairs(Collection<Integer> chairs) {
-		this.chairs = chairs;
+	public void setAvailableChairs(int availableChairs) {
+		this.availableChairs = availableChairs;
 	}
 	
 	

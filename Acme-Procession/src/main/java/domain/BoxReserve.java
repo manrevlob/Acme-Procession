@@ -1,11 +1,9 @@
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -14,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -34,7 +33,7 @@ public class BoxReserve extends DomainEntity {
 	
 	private Date createMoment;
 	private String reserveCode;
-	private Collection<Integer> numbersOfchairs;
+	private int numbersOfchairs;
 	private Date date;
 	private Money totalCost;
 	private boolean isCancelled;
@@ -61,12 +60,13 @@ public class BoxReserve extends DomainEntity {
 		this.reserveCode = reserveCode;
 	}
 
-	@ElementCollection
-	public Collection<Integer> getNumbersOfchairs() {
+	
+	@Min(1)
+	public int getNumbersOfchairs() {
 		return numbersOfchairs;
 	}
 
-	public void setNumbersOfchairs(Collection<Integer> numbersOfchairs) {
+	public void setNumbersOfchairs(int numbersOfchairs) {
 		this.numbersOfchairs = numbersOfchairs;
 	}
 
