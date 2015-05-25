@@ -18,5 +18,8 @@ public interface BrotherhoodRepository extends
 
 	@Query("select b from Brotherhood b where ?1 MEMBER OF b.bigBrothers")
 	Collection<Brotherhood> findOwns(Brother brother);
+	
+	@Query("select b from Brotherhood b where b.logo.id = ?1")
+	Brotherhood findByImage(int logoId);
 
 }

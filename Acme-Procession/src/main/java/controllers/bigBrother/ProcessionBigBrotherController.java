@@ -1,7 +1,9 @@
 package controllers.bigBrother;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
+import javax.sql.rowset.serial.SerialException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
+import services.ImageService;
 import services.ProcessionService;
 import services.StretchService;
 import controllers.AbstractController;
 import domain.Brotherhood;
+import domain.Image;
 import domain.Procession;
 import domain.Stretch;
+import forms.AddImageToProcessionForm;
 import forms.AddStretchToProcessionForm;
 
 @Controller
@@ -34,9 +39,10 @@ public class ProcessionBigBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
-
 	@Autowired
 	private StretchService stretchService;
+	@Autowired
+	private ImageService imageService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -192,6 +198,64 @@ public class ProcessionBigBrotherController extends AbstractController {
 				+ procession.getBrotherhood().getId());
 
 		return result;
+	}
+
+	// Image ------------------------------------------------------------------
+
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.GET)
+	public ModelAndView get(@RequestParam int processionId) {
+		Image image;
+		Procession procession;
+		AddImageToProcessionForm addImageToProcessionForm;
+
+		procession = processionService.findOneIfPrincipal(processionId);
+
+		addImageToProcessionForm = new AddImageToProcessionForm();
+		image = new Image();
+
+		addImageToProcessionForm.setImage(image);
+		addImageToProcessionForm.setProcession(procession);
+
+		return new ModelAndView("procession/uploadImage").addObject(
+				"addImageToProcessionForm", addImageToProcessionForm);
+	}
+
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+	public ModelAndView uploadFileHandler(
+			@Valid AddImageToProcessionForm addImageToProcessionForm,
+			BindingResult binding) throws SerialException, SQLException {
+		ModelAndView result;
+		Procession procession;
+		Image image;
+
+		procession = addImageToProcessionForm.getProcession();
+
+		try {
+			imageService.checkImage(addImageToProcessionForm.getImage());
+			image = imageService.save(addImageToProcessionForm.getImage());
+
+			procession.setImage(image);
+			processionService.save(procession);
+
+			result = new ModelAndView("redirect:/brotherhood/bigBrother/listOwns.do");
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("commit.image.error");
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/viewImage", method = RequestMethod.GET)
+	public ModelAndView view(@RequestParam int processionId) {
+		Image image;
+		Procession procession;
+
+		procession = processionService.findOne(processionId);
+
+		image = procession.getImage();
+
+		return new ModelAndView("procession/viewImage").addObject("image",
+				image);
 	}
 
 	// Ancillary methods ------------------------------------------------------

@@ -1,7 +1,9 @@
 package controllers.bigBrother;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
+import javax.sql.rowset.serial.SerialException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherService;
 import services.BrotherhoodService;
+import services.ImageService;
 import controllers.AbstractController;
 import domain.Brother;
 import domain.Brotherhood;
+import domain.Image;
 import forms.AddBigBrotherForm;
+import forms.AddImageToBrotherhoodForm;
 
 @Controller
 @RequestMapping("/brotherhood/bigBrother")
@@ -27,9 +32,10 @@ public class BrotherhoodBigBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
-
 	@Autowired
 	private BrotherService brotherService;
+	@Autowired
+	private ImageService imageService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -144,6 +150,64 @@ public class BrotherhoodBigBrotherController extends AbstractController {
 		}
 
 		return result;
+	}
+
+	// Image ------------------------------------------------------------------
+
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.GET)
+	public ModelAndView get(@RequestParam int brotherhoodId) {
+		Image image;
+		Brotherhood brotherhood;
+		AddImageToBrotherhoodForm addImageToBrotherhoodForm;
+
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+
+		addImageToBrotherhoodForm = new AddImageToBrotherhoodForm();
+		image = new Image();
+
+		addImageToBrotherhoodForm.setImage(image);
+		addImageToBrotherhoodForm.setBrotherhood(brotherhood);
+
+		return new ModelAndView("brotherhood/uploadImage").addObject(
+				"addImageToBrotherhoodForm", addImageToBrotherhoodForm);
+	}
+
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+	public ModelAndView uploadFileHandler(
+			@Valid AddImageToBrotherhoodForm addImageToBrotherhoodForm,
+			BindingResult binding) throws SerialException, SQLException {
+		ModelAndView result;
+		Brotherhood brotherhood;
+		Image image;
+
+		brotherhood = addImageToBrotherhoodForm.getBrotherhood();
+
+		try {
+			imageService.checkImage(addImageToBrotherhoodForm.getImage());
+			image = imageService.save(addImageToBrotherhoodForm.getImage());
+
+			brotherhood.setLogo(image);
+			brotherhoodService.save(brotherhood);
+
+			result = new ModelAndView("redirect:/brotherhood/brother/list.do");
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("commit.image.error");
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/viewImage", method = RequestMethod.GET)
+	public ModelAndView view(@RequestParam int brotherhoodId) {
+		Image image;
+		Brotherhood brotherhood;
+
+		brotherhood = brotherhoodService.findOne(brotherhoodId);
+
+		image = brotherhood.getLogo();
+
+		return new ModelAndView("brotherhood/viewImage").addObject("image",
+				image);
 	}
 
 	// Ancillary methods ------------------------------------------------------

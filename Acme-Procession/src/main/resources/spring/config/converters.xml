@@ -91,6 +91,9 @@
 		<bean class="converters.RegistrationInvoiceToStringConverter" />
 		<bean class="converters.StringToRegistrationInvoiceConverter" />
 		
+		<bean class="converters.ImageToStringConverter" />
+		<bean class="converters.StringToImageConverter" />
+		
 	</util:list>
 	
 </beans>

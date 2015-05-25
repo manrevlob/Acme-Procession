@@ -23,7 +23,6 @@ public class BrotherhoodBrotherController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService brotherhoodService;
-
 	@Autowired
 	private BrotherService brotherService;
 

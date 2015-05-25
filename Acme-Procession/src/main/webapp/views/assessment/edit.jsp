@@ -26,7 +26,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="viewer" />
 	
-	<acme:select items="${processions}" itemLabel="startMoment" code="assessment.procession" path="procession"/>
+	<acme:select items="${processions}" itemLabel="name" code="assessment.procession" path="procession"/>
 	
 	<acme:textbox code="assessment.valoration" path="valoration"/>
 	<acme:textbox code="assessment.street" path="street"/>

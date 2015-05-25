@@ -27,6 +27,10 @@
 	<form:hidden path="brothers" />
 	<form:hidden path="bigBrothers" />
 	
+	<jstl:if test="${brotherhood.logo ne null}">
+		<form:hidden path="logo" />
+	</jstl:if>
+	
 	<acme:textbox code="brotherhood.name" path="name" />
 	
 	<acme:textbox code="brotherhood.foundationYear" path="foundationYear" />

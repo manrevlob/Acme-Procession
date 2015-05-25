@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -122,6 +123,7 @@ public class Brotherhood extends DomainEntity {
 	private Collection<Stretch> stretches;
 	private Collection<Carving> carvings;
 	private Collection<Costume> costumes;
+	private Image logo; 
 
 	@Valid
 	@NotNull
@@ -185,4 +187,12 @@ public class Brotherhood extends DomainEntity {
 		this.costumes = costumes;
 	}
 
+	@OneToOne(optional = true)
+	public Image getLogo() {
+		return logo;
+	}
+	public void setLogo(Image logo) {
+		this.logo = logo;
+	}
+	
 }
