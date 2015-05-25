@@ -20,23 +20,29 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${action}" modelAttribute="createBoxReserveForm">
+<form:form action="boxReserve/viewer/create.do" modelAttribute="boxReserve">
 	
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="viewer" />
+	<form:hidden path="boxInstance" />
+	<form:hidden path="reserveCode" />
+	<form:hidden path="createMoment" />
 
 	<acme:textbox code="boxReserve.reserveCode" path="reserveCode" readonly="true"/>
 	
 	<acme:textarea code="boxReserve.date" path="date" readonly="true"/>
 	
-	<acme:textarea code="boxReserve.numberOfChair" path="numberOfChair" readonly="true"/>
+	<acme:textarea code="boxReserve.numberOfChair" path="numbersOfchairs" readonly="true"/>
 	
 	<fieldset>
 		<legend>
 			<spring:message code="boxReserve.totalCost" />
 		</legend>	
 
-		<acme:textarea code="boxReserve.amount" path="amount" readonly="true"/>
+		<acme:textarea code="boxReserve.amount" path="totalCost.amount" readonly="true"/>
 		
-		<acme:textarea code="boxReserve.currency" path="currency" readonly="true"/>
+		<acme:textarea code="boxReserve.currency" path="totalCost.currency" readonly="true"/>
 		
 	</fieldset>
 	

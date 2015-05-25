@@ -22,12 +22,10 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <form:form action="boxReserve/viewer/selectInstance.do" modelAttribute="createBoxReserveForm">
+
+	<form:hidden path="box" />
 	
-	<acme:select items="${boxInstances}" itemLabel="date" code="boxReserve.date" path="boxInstance"/>
-	
-	<b><spring:message code="boxReserve.chairsAvailables" />:</b>
-	<jstl:out value="${createBoxReserveForm.availableChairs}" />
-	<br />
+	<acme:select items="${boxInstances}" itemLabel="dateAndChairs" code="boxReserve.dateAndChairs" path="boxInstance"/>
 	
 	<acme:textbox code="boxReserve.chairs" path="chairs" />
 	

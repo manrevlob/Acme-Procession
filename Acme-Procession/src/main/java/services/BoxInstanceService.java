@@ -59,7 +59,7 @@ public class BoxInstanceService {
 		Date actual;
 		
 		Assert.notNull(boxInstance);
-		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(actorService.isViewer()|| actorService.isAdministrator());
 		
 		actual = new Date();
 		
@@ -110,6 +110,14 @@ public class BoxInstanceService {
 		return result;
 	}
 	
+	public Collection<BoxInstance> findAvailablesByBox(int boxId) {
+		Collection<BoxInstance> result;
+
+		result = boxInstanceRepository.findAvailablesByBox(boxId);
+
+		return result;
+	}
+	
 	public void saveBoxInstance(BoxInstance boxInstance) {
 		Box box;
 		BoxInstance result;
@@ -133,33 +141,5 @@ public class BoxInstanceService {
 		}
 		
 	}
-	
-	public Collection<Date> findDateAvailablesByBox(int boxId) {
-		Collection<Date> result;
-		
-		result = boxInstanceRepository.findDatesAvailablesByBox(boxId);
-		
-		return result;
-	}
-	
-//	public Collection<Integer> findChairsByBox(int boxInstanceId) {
-//		Collection<Integer> result;
-//		BoxInstance boxInstance;
-//		Integer count = 0;
-//		
-//		boxInstance = findOne(boxInstanceId);
-//		result = new ArrayList<Integer>();
-//		
-//		for(Integer e : boxInstance.getChairs()){
-//			if(e==0){
-//				result.add(count+1);
-//				count = count+1;
-//			}else{
-//				count = count+1;
-//			}
-//		}				
-//
-//		return result;
-//	}
 
 }

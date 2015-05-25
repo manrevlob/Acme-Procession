@@ -45,8 +45,8 @@
 	<spring:message code="boxReserve.reserveCode" var="reserveCodeHeader" />
 	<display:column property="reserveCode" title="${reserveCodeHeader}"  />
 	
-	<spring:message code="boxReserve.numberOfChair" var="numberOfChairHeader" />
-	<display:column property="numberOfChair" title="${numberOfChairHeader}"  />
+	<spring:message code="boxReserve.numberOfChair" var="numbersOfchairsHeader" />
+	<display:column property="numbersOfchairs" title="${numbersOfchairsHeader}"  />
 	
 	<spring:message code="boxReserve.date" var="dateHeader"  />
 	<display:column property="date" title="${dateHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />

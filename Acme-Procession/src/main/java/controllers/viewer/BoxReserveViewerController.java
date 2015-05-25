@@ -1,7 +1,6 @@
 package controllers.viewer;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BoxInstanceService;
 import services.BoxReserveService;
 import controllers.AbstractController;
+import domain.BoxInstance;
 import domain.BoxReserve;
 import forms.CreateBoxReserveForm;
 
@@ -48,20 +48,6 @@ public class BoxReserveViewerController extends AbstractController {
 			result = new ModelAndView("boxReserve/list");
 			result.addObject("requestURI", "boxReserve/viewer/list.do");
 			result.addObject("boxReserves", boxReserves);
-
-			return result;
-		}
-		
-		// Creation ---------------------------------------------------------------
-
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			BoxReserve boxReserve;
-
-			boxReserve = boxReserveService.create();
-
-			result = createEditModelAndView(boxReserve);
 
 			return result;
 		}
@@ -116,19 +102,39 @@ public class BoxReserveViewerController extends AbstractController {
 		public ModelAndView selectInstance(@RequestParam int boxId) {
 			ModelAndView result;
 			CreateBoxReserveForm createBoxReserveForm;
-			Collection<Date> boxInstanceDates;
 			
 			createBoxReserveForm = boxReserveService.createBoxReserveForm(boxId);
-			boxInstanceDates = boxInstanceService.findDateAvailablesByBox(boxId);
-
-			result = new ModelAndView("boxReserve/selectInstance");
-			result.addObject("createBoxReserveForm", createBoxReserveForm);
-			result.addObject("boxInstanceDates", boxInstanceDates);
+		
+			result = selecInstanceModelAndView(createBoxReserveForm);
 			
+			return result;
+		}
+		
+		@RequestMapping(value = "/selectInstance", method = RequestMethod.POST, params = "save")
+		public ModelAndView selectInstance(@Valid CreateBoxReserveForm createBoxReserveForm, BindingResult binding) {
+			ModelAndView result;
+			BoxReserve boxReserve;
+
+			if (binding.hasErrors()) {
+				result = selecInstanceModelAndView(createBoxReserveForm);
+				
+			} else {
+				try {
+					boxReserve = boxReserveService.create(createBoxReserveForm);
+					result = createEditModelAndView(boxReserve);
+					
+				} catch (Throwable oops) {	
+					if(oops.getMessage()=="cant reserve"){
+						result = selecInstanceModelAndView(createBoxReserveForm,"boxReserve.cantReserve.error");
+					}else{
+					result = selecInstanceModelAndView(createBoxReserveForm,"boxReserve.commit.error");
+				}
+					}
+			}
 
 			return result;
 		}
-
+		
 		// Ancillary methods ------------------------------------------------------
 
 		protected ModelAndView createEditModelAndView(BoxReserve boxReserve) {
@@ -149,7 +155,28 @@ public class BoxReserveViewerController extends AbstractController {
 
 			return result;
 		}
-			
-			
+		
+		protected ModelAndView selecInstanceModelAndView(CreateBoxReserveForm createBoxReserveForm) {
+			ModelAndView result;
 
+			result = selecInstanceModelAndView(createBoxReserveForm, null);
+
+			return result;
+		}
+
+		protected ModelAndView selecInstanceModelAndView(CreateBoxReserveForm createBoxReserveForm,
+				String message) {
+			ModelAndView result;
+			Collection<BoxInstance> boxInstances;
+			
+			boxInstances = boxInstanceService.findAvailablesByBox(createBoxReserveForm.getBox().getId());
+
+			result = new ModelAndView("boxReserve/selectInstance");
+			result.addObject("createBoxReserveForm", createBoxReserveForm);
+			result.addObject("message", message);
+			result.addObject("boxInstances", boxInstances);
+
+			return result;
+		}
+		
 }
