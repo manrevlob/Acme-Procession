@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('BROTHER')">
+<security:authorize access="hasRole('BIGBROTHER')">
 	<jstl:if test="${isBigBrother}">
 		<div>
 			<a href="procession/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
@@ -34,7 +34,7 @@
 <display:table name="processions" pagesize="5" class="displaytag"
 	requestURI="${requestURI}" id="row">
 
-	<security:authorize access="hasRole('BROTHER')">
+	<security:authorize access="hasRole('BIGBROTHER')">
 		<spring:message code="procession.edit" var="editHeader" />
 		<display:column>
 			<jstl:choose>
@@ -77,7 +77,16 @@
 	</security:authorize>
 
 	<spring:message code="procession.isClosed" var="isClosedHeader" />
-	<display:column property="isClosed" title="${isClosedHeader}" />
+	<display:column title="${isClosedHeader}">
+		<jstl:choose>
+			<jstl:when test="${row.isClosed}">
+				<spring:message code="procession.isClosed.true"/>
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="procession.isClosed.false"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 
 	<spring:message code="procession.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" />

@@ -26,7 +26,7 @@
 	</span>
 </jstl:if>
 
-<security:authorize access="hasRole('BROTHER')">
+<security:authorize access="hasRole('BIGBROTHER')">
 	<div>
 		<a href="procession/bigBrother/addStretch.do?processionId=${param.processionId}">
 			<spring:message	code="stretch.create" />
@@ -36,7 +36,7 @@
 
 <display:table name="stretchOrders" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<security:authorize  access="hasRole('BROTHER')">
+	<security:authorize  access="hasRole('BIGBROTHER')">
 		<spring:message code="stretch.delete" var="deleteHeader" />
 		<display:column>
 			<jstl:if test="${row.stretch.brotherhood.userIsOwner}">
@@ -63,7 +63,7 @@
 	<spring:message code="stretch.description" var="descriptionHeader" />
 	<display:column property="stretch.description" title="${descriptionHeader}" />
 	
-	<security:authorize  access="hasRole('BROTHER')">
+	<security:authorize  access="hasRole('BIGBROTHER')">
 		<spring:message code="stretch.moveToUp" var="moveUpHeader" />
 		<display:column>
 			<jstl:if test="${row.stretch.brotherhood.userIsOwner && row.orderNumber > 1}">

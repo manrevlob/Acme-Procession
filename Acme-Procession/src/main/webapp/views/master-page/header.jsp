@@ -52,6 +52,7 @@
 					<li class="arrow"></li>
 					<li><a href="brotherhood/bigBrother/listOwns.do"><spring:message code="master.page.brother.listOwnBrotherhoods" /></a></li>
 					<li><a href="stretch/bigBrother/findByBrotherhood.do"><spring:message code="master.page.brother.findStretches" /></a></li>
+					<li><a href="costume/bigBrother/findByBrotherhood.do"><spring:message code="master.page.brother.findCostumes" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

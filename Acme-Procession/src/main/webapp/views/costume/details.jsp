@@ -27,11 +27,24 @@ details.jsp
 	<br />
 	
 	<b><spring:message code="costume.status" />:</b>
-	<fmt:formatDate value="${costume.status}"/>
+	<jstl:choose>
+		<jstl:when test="${costume.status == 'new'}">
+			<spring:message code="costume.new"/>
+		</jstl:when>
+		<jstl:when test="${costume.status == 'used'}">
+			<spring:message code="costume.used"/>
+		</jstl:when>
+		<jstl:when test="${costume.status == 'old'}">
+			<spring:message code="costume.old"/>
+		</jstl:when>
+		<jstl:otherwise>
+			ERROR
+		</jstl:otherwise>
+	</jstl:choose>
 	<br />
  	
  	<b><spring:message code="costume.salePrice" />:</b>
- 	<fmt:formatDate value="${costume.salePrice}"/>
+ 	<jstl:out value="${costume.salePrice}"/>
  	<br />
  	
 	<b><spring:message code="costume.rentalPrice" />:</b>
@@ -51,5 +64,5 @@ details.jsp
 </div>
 
 <div>
-	<acme:cancel url="brotherhood/brother/listOwns.do" code="costume.cancel"/>
+	<input type="button" onclick="javascript:history.back();" value="<spring:message code='costume.cancel' />" />
 </div>

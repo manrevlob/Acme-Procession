@@ -1379,4 +1379,86 @@
 		<property name="brother" ref="brother2" />
 	</bean>
 
+	<!-- Costume -->
+
+	<bean id="costume1" class="domain.Costume">
+		<property name="size" value="44"/>
+		<property name="status" value="new"/>
+		<property name="comments" value="Costume1Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+
+	<bean id="costume2" class="domain.Costume">
+		<property name="size" value="46"/>
+		<property name="status" value="new"/>
+		<property name="comments" value="Costume2Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+
+	<bean id="costume3" class="domain.Costume">
+		<property name="size" value="46"/>
+		<property name="status" value="used"/>
+		<property name="comments" value="Costume3Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+
+	<bean id="costume4" class="domain.Costume">
+		<property name="size" value="48"/>
+		<property name="status" value="new"/>
+		<!-- WITHOUT COMMENTS -->
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+
+	<bean id="costume5" class="domain.Costume">
+		<property name="size" value="36"/>
+		<property name="status" value="old"/>
+		<property name="comments" value="Costume5Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+
+	<bean id="costume6" class="domain.Costume">
+		<property name="size" value="48"/>
+		<property name="status" value="new"/>
+		<property name="comments" value="Costume6Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood2"/>
+	</bean>
+
+	<bean id="costume7" class="domain.Costume">
+		<property name="size" value="46"/>
+		<property name="status" value="used"/>
+		<property name="comments" value="Costume7Comments"/>
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood2"/>
+	</bean>
+
+	<bean id="costume8" class="domain.Costume">
+		<property name="size" value="45"/>
+		<property name="status" value="new"/>
+		<!-- WITHOUT COMMENTS -->
+		<property name="salePrice" ref="money1"/>
+		<property name="rentalPrice" ref="money2"/>
+		<property name="isAvailable" value="true"/>
+		<property name="brotherhood" ref="brotherhood2"/>
+	</bean>
+
 </beans>

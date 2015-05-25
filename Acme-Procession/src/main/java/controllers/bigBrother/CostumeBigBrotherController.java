@@ -1,5 +1,7 @@
 package controllers.bigBrother;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import services.CostumeService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Costume;
+import forms.BrotherhoodSelectForm;
 import forms.CreateCostumesForm;
 
 @Controller
@@ -38,6 +41,24 @@ public class CostumeBigBrotherController extends AbstractController {
 	}
 
 	// Listing ----------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int brotherhoodId) {
+		ModelAndView result;
+		Collection<Costume> costumes;
+		Brotherhood brotherhood;
+		String uri;
+
+		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
+		costumes = costumeService.findByBrotherhood(brotherhood);
+		uri = "costume/bigBrother/list.do";
+
+		result = new ModelAndView("costume/list");
+		result.addObject("costumes", costumes);
+		result.addObject("requestURI", uri);
+
+		return result;
+	}
 
 	// Create -----------------------------------------------------------------
 
@@ -78,7 +99,7 @@ public class CostumeBigBrotherController extends AbstractController {
 		return result;
 	}
 
-	// Edit -------------------------------------------------------------------
+	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int costumeId) {
@@ -104,6 +125,59 @@ public class CostumeBigBrotherController extends AbstractController {
 						"redirect:/brotherhood/bigBrother/listOwns.do");
 			} catch (Throwable oops) {
 				result = editModelAndView(costume, "costume.commit.error");
+			}
+		}
+
+		return result;
+	}
+
+	// Details ----------------------------------------------------------------
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int costumeId) {
+		ModelAndView result;
+		Costume costume;
+
+		costume = costumeService.findOneIfPrincipal(costumeId);
+
+		result = new ModelAndView("costume/details");
+		result.addObject("costume", costume);
+
+		return result;
+	}
+
+	// Search -----------------------------------------------------------------
+
+	@RequestMapping(value = "/findByBrotherhood", method = RequestMethod.GET)
+	public ModelAndView find() {
+		ModelAndView result;
+		BrotherhoodSelectForm brotherhoodSelectForm;
+
+		brotherhoodSelectForm = new BrotherhoodSelectForm();
+
+		result = findModelAndView(brotherhoodSelectForm);
+		result.addObject(brotherhoodSelectForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/findByBrotherhood", method = RequestMethod.POST, params = "search")
+	public ModelAndView find(
+			@Valid BrotherhoodSelectForm brotherhoodSelectForm,
+			BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = findModelAndView(brotherhoodSelectForm);
+		} else {
+			try {
+				result = new ModelAndView(
+						"redirect:/costume/bigBrother/list.do?brotherhoodId="
+								+ brotherhoodSelectForm.getBrotherhood()
+										.getId());
+			} catch (Throwable oops) {
+				result = findModelAndView(brotherhoodSelectForm,
+						"costume.commit.error");
 			}
 		}
 
@@ -145,6 +219,29 @@ public class CostumeBigBrotherController extends AbstractController {
 
 		result = new ModelAndView("costume/edit");
 		result.addObject("costume", costume);
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	protected ModelAndView findModelAndView(
+			BrotherhoodSelectForm brotherhoodSelectForm) {
+		ModelAndView result;
+
+		result = findModelAndView(brotherhoodSelectForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView findModelAndView(
+			BrotherhoodSelectForm brotherhoodSelectForm, String message) {
+		ModelAndView result;
+		Collection<Brotherhood> brotherhoods;
+
+		brotherhoods = brotherhoodService.findOwns();
+
+		result = new ModelAndView("costume/findByBrotherhood");
+		result.addObject("brotherhoods", brotherhoods);
 		result.addObject("message", message);
 
 		return result;
