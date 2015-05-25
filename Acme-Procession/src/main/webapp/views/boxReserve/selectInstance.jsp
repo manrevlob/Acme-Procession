@@ -21,39 +21,18 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${action}" modelAttribute="CreateBoxReserveForm">
+<form:form action="boxReserve/viewer/selectInstance.do" modelAttribute="createBoxReserveForm">
 	
-
-	<acme:select items="${boxInstanceDates}" itemLabel="date" onchange="javascript: reloadChairsAndPrice()" code="boxReserve.date" path="CreateBoxReserveForm"/>
+	<acme:select items="${boxInstances}" itemLabel="date" code="boxReserve.date" path="boxInstance"/>
 	
+	<b><spring:message code="boxReserve.chairsAvailables" />:</b>
+	<jstl:out value="${createBoxReserveForm.availableChairs}" />
+	<br />
 	
-	
-	<jstl:choose>
-		<jstl:when test="${fn:length(chairsAvaiblables) ne 0}">
-			<form:select multiple="true" path="chairs">
-			    <form:options items="${chairsAvaiblables}" itemValue="id" itemLabel=""/>
-			</form:select>
-			
-			<form:errors path="essays" cssClass="error" />
-		</jstl:when>
-		<jstl:otherwise>
-			<span class="error"><spring:message code="publicSession.essays.error" /></span>
-		</jstl:otherwise>
-	</jstl:choose>
-	
-	<br/>
+	<acme:textbox code="boxReserve.chairs" path="chairs" />
 	
 	<acme:submit name="save" code="boxReserve.save"/>
 	
 	<acme:cancel url="box/viewer/list.do" code="boxReserve.cancel"/>
-	
-	<script type="text/javascript">
-		function reloadChairsAndPrice() {
-			var boxInstanceId = $('select#boxInstanceDates').val();
-			var placeholder = $('select#chairs'); 
 
-			placeholder.load("boxInstance/findByBoxInstanceId.do?boxInstanceId=" + boxInstanceId);			
-		}
-	</script>
-	
 </form:form>

@@ -13,7 +13,6 @@ import repositories.BoxReserveRepository;
 import domain.Box;
 import domain.BoxInvoice;
 import domain.BoxReserve;
-import domain.Money;
 import domain.Viewer;
 import forms.CreateBoxReserveForm;
 
@@ -139,7 +138,6 @@ public class BoxReserveService {
 		BoxInvoice result;
 		Date moment;
 		long milliseconds;
-		Money totalCost;
 		BoxInvoice boxInvoice;
 		
 		milliseconds = System.currentTimeMillis() - 100;
@@ -147,12 +145,6 @@ public class BoxReserveService {
 		
 		boxInvoice = new BoxInvoice();
 		boxInvoice.setCreateMoment(moment);
-		
-		totalCost = new Money();
-		totalCost.setAmount(boxReserve.getBoxInstance().getPrice().getAmount());
-		totalCost.setCurrency(boxReserve.getBoxInstance().getPrice().getCurrency());
-		
-		boxInvoice.setTotalCost(totalCost);
 		
 		result = boxInvoiceService.save(boxInvoice);
 		

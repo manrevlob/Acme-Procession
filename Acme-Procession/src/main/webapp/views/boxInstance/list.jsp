@@ -33,11 +33,8 @@
 	<spring:message code="boxInstance.date" var="dateHeader" />
 	<display:column property="date" title="${dateHeader}" sortable="true" />
 	
-		<spring:message code="boxInstance.amount" var="amountHeader" />
-	<display:column property="price.amount" title="${amountHeader}" />
-
-	<spring:message code="boxInstance.currency" var="currencyHeader" />
-	<display:column property="price.currency" title="${currencyHeader}" />
+	<spring:message code="boxInstance.availableChairs" var="availableChairsHeader" />
+	<display:column property="availableChairs" title="${availableChairsHeader}" sortable="true" />
 
 </display:table>
 
