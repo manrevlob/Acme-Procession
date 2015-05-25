@@ -30,6 +30,10 @@
 	<form:hidden path="registrations" />
 	<form:hidden path="stretchOrders" />
 	<form:hidden path="isClosedManually" />
+	
+	<jstl:if test="${procession.image ne null}">
+		<form:hidden path="image" />
+	</jstl:if>
 
 	<acme:textbox code="procession.brotherhood" path="brotherhood.name" readonly="true"/>
 

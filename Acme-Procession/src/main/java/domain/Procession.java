@@ -9,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -151,6 +152,7 @@ public class Procession extends DomainEntity {
 	private Collection<StretchOrder> stretchOrders;
 	private Collection<Registration> registrations;
 	private Collection<Assessment> assessments;
+	private Image image;
 
 	@Valid
 	@NotNull
@@ -191,6 +193,15 @@ public class Procession extends DomainEntity {
 	}
 	public void setAssessments(Collection<Assessment> assessments) {
 		this.assessments = assessments;
+	}
+	
+	@Valid
+	@OneToOne(optional = true)
+	public Image getImage() {
+		return image;
+	}
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 }

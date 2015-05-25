@@ -140,6 +140,24 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('BIGBROTHER')">
+		<display:column>
+			<jstl:if test="${row.brotherhood.userIsOwner && !row.isClosed}">
+				<a href="procession/bigBrother/uploadImage.do?processionId=${row.id}">
+					[<spring:message code="procession.uploadImage" />]
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
+	<display:column>
+		<jstl:if test="${row.image != null}">
+			<a href="procession/bigBrother/viewImage.do?processionId=${row.id}">
+				[<spring:message code="procession.viewImage" />]
+			</a>
+		</jstl:if>
+	</display:column>
 
 </display:table>
 

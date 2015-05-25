@@ -191,5 +191,15 @@ public class BrotherhoodService {
 		brotherService.save(brother);
 		save(brotherhood);
 	}
+	
+	public Brotherhood findByImage(int logoId){
+		Brotherhood result;
+		
+		Assert.isTrue(actorService.isBrother());
+		
+		result = brotherhoodRepository.findByImage(logoId);
+		
+		return result;
+	}
 
 }

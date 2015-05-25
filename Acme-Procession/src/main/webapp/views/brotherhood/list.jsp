@@ -92,6 +92,24 @@
 			[<jstl:out value="${detailsHeader}"/>]
 		</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('BIGBROTHER')">
+		<display:column>
+			<jstl:if test="${row.userIsOwner}">
+				<a href="brotherhood/bigBrother/uploadImage.do?brotherhoodId=${row.id}">
+					[<spring:message code="brotherhood.uploadImage" />]
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
+	<display:column>
+		<jstl:if test="${row.logo != null}">
+			<a href="brotherhood/bigBrother/viewImage.do?brotherhoodId=${row.id}">
+				[<spring:message code="brotherhood.viewImage" />]
+			</a>
+		</jstl:if>
+	</display:column>
 
 </display:table>
 
