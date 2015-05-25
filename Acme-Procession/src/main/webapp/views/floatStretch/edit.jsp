@@ -19,9 +19,10 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="floatStretch/brother/edit.do" modelAttribute="floatStretch">
+<form:form action="floatStretch/bigBrother/edit.do" modelAttribute="floatStretch">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -32,6 +33,23 @@
 	<acme:textbox code="stretch.name" path="name" />
 
 	<acme:textbox code="stretch.description" path="description" />
+	
+	<spring:message code="stretch.carvings" />
+	
+	<jstl:choose>
+		<jstl:when test="${fn:length(carvings) ne 0}">
+			<form:select multiple="true" path="carvings">
+			    <form:options items="${carvings}" itemValue="id" itemLabel="name"/>
+			</form:select>
+			
+			<form:errors path="carvings" cssClass="error" />
+		</jstl:when>
+		<jstl:otherwise>
+			<span class="error"><spring:message code="stretch.noCarvings.error" /></span>
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<br/>
 
 	<acme:submit name="save" code="stretch.save" /> 
 	
@@ -39,7 +57,7 @@
 		<acme:submit name="delete" code="stretch.delete" />
 	</jstl:if> 
 	
-	<acme:cancel url="floatStretch/brother/listOwns.do"
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do"
 		code="stretch.cancel" />
 
 </form:form>

@@ -25,7 +25,7 @@
 	<div>
 		<jstl:if test="${isBigBrother}">
 			<a
-				href="carving/brother/create.do?brotherhoodId=${param.brotherhoodId}"><spring:message
+				href="carving/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}"><spring:message
 					code="carving.create" /></a>
 		</jstl:if>
 	</div>
@@ -38,7 +38,7 @@
 		<spring:message code="carving.edit" var="editHeader" />
 		<display:column title="${editHeader}">
 			<jstl:if test="${row.brotherhood.userIsOwner}">
-				<a href="carving/brother/edit.do?carvingId=${row.id}"> [<jstl:out
+				<a href="carving/bigBrother/edit.do?carvingId=${row.id}"> [<jstl:out
 						value="${editHeader}" />]
 				</a>
 			</jstl:if>

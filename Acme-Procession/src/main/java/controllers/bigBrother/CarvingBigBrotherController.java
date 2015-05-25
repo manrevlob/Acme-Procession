@@ -1,4 +1,4 @@
-package controllers.brother;
+package controllers.bigBrother;
 
 import javax.validation.Valid;
 
@@ -17,8 +17,8 @@ import domain.Brotherhood;
 import domain.Carving;
 
 @Controller
-@RequestMapping("/carving/brother")
-public class CarvingBrotherController extends AbstractController {
+@RequestMapping("/carving/bigBrother")
+public class CarvingBigBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -32,7 +32,7 @@ public class CarvingBrotherController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public CarvingBrotherController() {
+	public CarvingBigBrotherController() {
 		super();
 	}
 
@@ -47,7 +47,7 @@ public class CarvingBrotherController extends AbstractController {
 		Brotherhood brotherhood;
 
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
-	
+
 		carving = carvingService.create(brotherhood);
 
 		result = createEditModelAndView(carving);
@@ -55,7 +55,7 @@ public class CarvingBrotherController extends AbstractController {
 		return result;
 	}
 
-	// Edit -------------------------------------------------------------------
+	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int carvingId) {
@@ -77,7 +77,8 @@ public class CarvingBrotherController extends AbstractController {
 		} else {
 			try {
 				carvingService.save(carving);
-				result = new ModelAndView("redirect:/brotherhood/brother/listOwns.do");
+				result = new ModelAndView(
+						"redirect:/brotherhood/bigBrother/listOwns.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(carving, "carving.commit.error");
 			}

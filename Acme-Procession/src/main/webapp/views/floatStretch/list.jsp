@@ -22,7 +22,7 @@
 
 <security:authorize access="hasRole('BROTHER')">
 	<div>
-		<a href="floatStretch/brother/create.do?brotherhoodId=${param.brotherhoodId}">
+		<a href="floatStretch/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}">
 			<spring:message	code="fStretch.create" />
 		</a>
 	</div>
@@ -33,7 +33,7 @@
 	<security:authorize  access="hasRole('BROTHER')">
 		<spring:message code="stretch.edit" var="editHeader" />
 		<display:column title="${editHeader}">
-			<a href="floatStretch/brother/edit.do?floatStretchId=${row.id}">
+			<a href="floatStretch/bigBrother/edit.do?floatStretchId=${row.id}">
 				[<jstl:out value="${editHeader}"/>]
 			</a>
 		</display:column>

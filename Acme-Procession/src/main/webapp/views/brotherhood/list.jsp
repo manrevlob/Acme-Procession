@@ -23,7 +23,7 @@
 <security:authorize access="hasRole('BROTHER')">
 	<jstl:if test="${isAuthorized}">
 		<div>
-			<a href="brotherhood/brother/create.do">
+			<a href="brotherhood/bigBrother/create.do">
 				<spring:message	code="brotherhood.create" />
 			</a>
 		</div>
@@ -36,7 +36,7 @@
 			<spring:message code="brotherhood.edit" var="editHeader" />
 			<display:column>
 				<jstl:if test="${row.userIsOwner}">
-					<a href="brotherhood/brother/edit.do?brotherhoodId=${row.id}">
+					<a href="brotherhood/bigBrother/edit.do?brotherhoodId=${row.id}">
 						[<jstl:out value="${editHeader}"/>]
 					</a>
 				</jstl:if>
@@ -45,7 +45,7 @@
 			<spring:message code="brotherhood.addBigBrother" var="addBigBrotherHeader" />
 			<display:column>
 				<jstl:if test="${row.userIsOwner}">
-					<a href="brotherhood/brother/addBigBrother.do?brotherhoodId=${row.id}">
+					<a href="brotherhood/bigBrother/addBigBrother.do?brotherhoodId=${row.id}">
 						[<jstl:out value="${addBigBrotherHeader}"/>]
 					</a>
 				</jstl:if>

@@ -43,27 +43,30 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/brotherhood/**" access="permitAll" /> 
-		<security:intercept-url pattern="/brotherhood/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/brotherhood/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
+		<security:intercept-url pattern="/brotherhood/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
 		
 		<security:intercept-url pattern="/procession/**" access="permitAll" /> 
-		<security:intercept-url pattern="/procession/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/procession/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
+		<security:intercept-url pattern="/procession/bigBrother/**" access="hasRole('BIGROTHER')" /> 
 	
 		<security:intercept-url pattern="/carving/**" access="permitAll" /> 
-		<security:intercept-url pattern="/carving/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/carving/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
 		
-		<security:intercept-url pattern="/registration/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/registration/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
 	
-		<security:intercept-url pattern="/registrationInvoice/brother/**" access="hasRole('BROTHER')" />
+		<security:intercept-url pattern="/registrationInvoice/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" />
 		
-		<security:intercept-url pattern="/costume/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/costume/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
+		<security:intercept-url pattern="/costume/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
 		
-		<security:intercept-url pattern="/stretch/brother/**" access="hasRole('BROTHER')" />  
+		<security:intercept-url pattern="/stretch/bigBrother/**" access="hasRole('BIGBROTHER')" />  
 		
 		<security:intercept-url pattern="/stretchOrder/**" access="permitAll" />
-		<security:intercept-url pattern="/stretchOrder/brother/**" access="hasRole('BROTHER')" />  
+		<security:intercept-url pattern="/stretchOrder/bigBrother/**" access="hasRole('BIGBROTHER')" />  
 		
-		<security:intercept-url pattern="/ordinaryStretch/brother/**" access="hasRole('BROTHER')" /> 
-		<security:intercept-url pattern="/floatStretch/brother/**" access="hasRole('BROTHER')" /> 
+		<security:intercept-url pattern="/ordinaryStretch/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
+		<security:intercept-url pattern="/floatStretch/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
 		
 		<security:intercept-url pattern="/request/brother/**" access="hasRole('BROTHER')" /> 
 		<security:intercept-url pattern="/request/administrator/**" access="hasRole('ADMINISTRATOR')" /> 

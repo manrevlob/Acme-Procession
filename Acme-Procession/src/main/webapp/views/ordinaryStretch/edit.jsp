@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="ordinaryStretch/brother/edit.do" modelAttribute="ordinaryStretch">
+<form:form action="ordinaryStretch/bigBrother/edit.do" modelAttribute="ordinaryStretch">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -41,7 +41,7 @@
 		<acme:submit name="delete" code="stretch.delete" />
 	</jstl:if> 
 	
-	<acme:cancel url="ordinaryStretch/brother/listOwns.do"
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do"
 		code="stretch.cancel" />
 
 </form:form>

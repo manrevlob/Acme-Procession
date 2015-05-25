@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="brotherhood/brother/edit.do" modelAttribute="brotherhood">
+<form:form action="brotherhood/bigBrother/edit.do" modelAttribute="brotherhood">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -38,5 +38,5 @@
 </form:form>
 
 <div>
-	<acme:cancel url="brotherhood/brother/listOwns.do" code="brotherhood.cancel"/>
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="brotherhood.cancel"/>
 </div>

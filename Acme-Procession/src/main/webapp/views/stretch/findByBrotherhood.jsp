@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="stretch/brother/findByBrotherhood.do" modelAttribute="brotherhoodAndStretchTypeSelectForm">
+<form:form action="stretch/bigBrother/findByBrotherhood.do" modelAttribute="brotherhoodAndStretchTypeSelectForm">
 	<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
 	
 	<form:radiobutton path="type" value="ordinary"/><spring:message code="stretch.ordinary" />
