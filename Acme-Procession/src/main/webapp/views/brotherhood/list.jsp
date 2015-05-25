@@ -32,7 +32,7 @@
 
 <display:table name="brotherhoods" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<security:authorize  access="hasRole('BROTHER')">
+	<security:authorize  access="hasRole('BIGBROTHER')">
 			<spring:message code="brotherhood.edit" var="editHeader" />
 			<display:column>
 				<jstl:if test="${row.userIsOwner}">

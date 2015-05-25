@@ -481,7 +481,6 @@
 		<property name="brothers">
 			<list>
 				<ref bean="brother2" />
-				<ref bean="brother3" />
 				<ref bean="brother4" />
 			</list>
 		</property>
