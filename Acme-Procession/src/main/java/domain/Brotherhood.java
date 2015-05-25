@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -60,8 +61,16 @@ public class Brotherhood extends DomainEntity {
 
 	// Derived attributes -----------------------------------------------------
 	@Transient
-	public Integer getNumberOfBrothers() {
-		return getBrothers().size();
+	public int getNumberOfBrothers() {
+		int result;
+		
+		result = 0;
+		
+		if(getBrothers() != null) {
+			result = getBrothers().size();
+		}
+		
+		return result;
 	}
 
 	@Transient
@@ -116,7 +125,7 @@ public class Brotherhood extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToMany(mappedBy = "brotherhoods")
+	@ManyToMany(mappedBy = "brotherhoods", fetch = FetchType.EAGER)
 	public Collection<Brother> getBrothers() {
 		return brothers;
 	}
