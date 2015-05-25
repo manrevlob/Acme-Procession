@@ -26,21 +26,13 @@
 	<form:hidden path="version" />
 	<form:hidden path="box" />
 	<form:hidden path="boxReserves" />
+	<form:hidden path="availableChairs" />
 	
 	<b><spring:message code="boxInstance.box.name" />:</b>
 	<jstl:out value="${boxInstance.box.name}" />
 	<br />
 	
 	<acme:textbox code="boxInstance.date" path="date" />
-	
-	<fieldset>
-	<legend><spring:message code="boxInstance.Price" /></legend>
-	
-		<acme:textbox code="boxInstance.amount" path="price.amount" />
-		
-		<acme:textbox code="boxInstance.currency" path="price.currency" />
-	
-	</fieldset>
 	
 	<acme:submit name="save" code="boxInstance.save"/>
 	

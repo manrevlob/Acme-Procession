@@ -42,6 +42,19 @@ details.jsp
 	<jstl:out value="${box.numberOfChairs}" />
 	<br />
 	
+	<fieldset>
+	<legend><spring:message code="box.Price" /></legend>
+	
+		<b><spring:message code="box.amount" />:</b>
+		<jstl:out value="${box.amount}" />
+		<br />
+		
+		<b><spring:message code="box.currency" />:</b>
+		<jstl:out value="${box.currency}" />
+		<br />
+	
+	</fieldset>
+	
 </div>
 
 <security:authorize  access="hasRole('ADMINISTRATOR')">

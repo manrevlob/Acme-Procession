@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${action}" modelAttribute="CreateBoxReserveForm">
+<form:form action="${action}" modelAttribute="createBoxReserveForm">
 	
 
 	<acme:textbox code="boxReserve.reserveCode" path="reserveCode" readonly="true"/>

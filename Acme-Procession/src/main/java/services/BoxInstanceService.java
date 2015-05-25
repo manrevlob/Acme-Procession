@@ -40,13 +40,16 @@ public class BoxInstanceService {
 	public BoxInstance create(int boxId) {
 		BoxInstance result;
 		Box box;
+		int availableChairs;
 
 		Assert.isTrue(actorService.isAdministrator());
 		
 		box = boxService.findOne(boxId);
-
+		availableChairs = box.getNumberOfChairs();
+		
 		result = new BoxInstance();
 		result.setBox(box);
+		result.setAvailableChairs(availableChairs);
 
 		return result;
 	}
@@ -60,7 +63,7 @@ public class BoxInstanceService {
 		
 		actual = new Date();
 		
-		Assert.isTrue(boxInstance.getDate().after(actual));
+		Assert.isTrue(boxInstance.getDate().after(actual),"date invalid");
 		
 		if(boxInstance.getId()!=0){
 			isEditable(boxInstance);
@@ -117,6 +120,7 @@ public class BoxInstanceService {
 		box = boxInstance.getBox();
 		
 		if(boxInstance.getId()==0){
+			
 			result = save(boxInstance);
 			
 			boxInstances = box.getBoxInstances();
@@ -132,10 +136,30 @@ public class BoxInstanceService {
 	
 	public Collection<Date> findDateAvailablesByBox(int boxId) {
 		Collection<Date> result;
-
+		
 		result = boxInstanceRepository.findDatesAvailablesByBox(boxId);
 		
 		return result;
 	}
+	
+//	public Collection<Integer> findChairsByBox(int boxInstanceId) {
+//		Collection<Integer> result;
+//		BoxInstance boxInstance;
+//		Integer count = 0;
+//		
+//		boxInstance = findOne(boxInstanceId);
+//		result = new ArrayList<Integer>();
+//		
+//		for(Integer e : boxInstance.getChairs()){
+//			if(e==0){
+//				result.add(count+1);
+//				count = count+1;
+//			}else{
+//				count = count+1;
+//			}
+//		}				
+//
+//		return result;
+//	}
 
 }
