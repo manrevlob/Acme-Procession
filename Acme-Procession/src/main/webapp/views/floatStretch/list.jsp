@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('BROTHER')">
+<security:authorize access="hasRole('BIGBROTHER')">
 	<div>
 		<a href="floatStretch/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}">
 			<spring:message	code="fStretch.create" />
@@ -30,7 +30,7 @@
 
 <display:table name="floatStretches" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<security:authorize  access="hasRole('BROTHER')">
+	<security:authorize  access="hasRole('BIGBROTHER')">
 		<spring:message code="stretch.edit" var="editHeader" />
 		<display:column title="${editHeader}">
 			<a href="floatStretch/bigBrother/edit.do?floatStretchId=${row.id}">

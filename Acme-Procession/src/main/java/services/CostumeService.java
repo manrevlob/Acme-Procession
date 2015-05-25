@@ -23,6 +23,12 @@ public class CostumeService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+
+	@Autowired
+	private BrotherService brotherService;
+
 	// Constructors -----------------------------------------------------------
 
 	public CostumeService() {
@@ -52,7 +58,7 @@ public class CostumeService {
 
 		costume = new Costume();
 		costume.setBrotherhood(brotherhood);
-		costume.setAvailable(true);
+		costume.setIsAvailable(true);
 
 		return costume;
 	}
@@ -68,6 +74,26 @@ public class CostumeService {
 	}
 
 	// Other business methods -------------------------------------------------
+
+	public Costume findOneIfPrincipal(int costumeId) {
+		Costume result;
+
+		result = findOne(costumeId);
+
+		Assert.isTrue(result.getBrotherhood().getBigBrothers().contains(brotherService.findByPrincipal()));
+
+		return result;
+	}
+
+	public Costume findOneIfAvailable(int costumeId) {
+		Costume result;
+
+		result = findOne(costumeId);
+
+		Assert.isTrue(result.getIsAvailable() == true);
+
+		return result;
+	}
 
 	public void saveAll(CreateCostumesForm createCostumesForm) {
 		int loops;
@@ -87,6 +113,25 @@ public class CostumeService {
 			
 			save(costume);
 		}
+	}
+
+	public Collection<Costume> findByBrotherhood(Brotherhood brotherhood) {
+		Collection<Costume> result;
+
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
+		
+		result = costumeRepository.findByBrotherhood(brotherhood);
+		
+		return result;
+	}
+
+	public Collection<Costume> findAvailablesByBrotherhood(Brotherhood brotherhood) {
+		Collection<Costume> result;
+
+		result = costumeRepository.findAvailablesByBrotherhood(brotherhood);
+		
+		return result;
 	}
 
 }

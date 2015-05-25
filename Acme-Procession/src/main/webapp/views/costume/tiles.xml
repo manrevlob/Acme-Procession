@@ -36,8 +36,13 @@
 		<put-attribute name="body" value="/views/costume/details.jsp" />
 	</definition>
 	
+	<definition name="costume/findByBrotherhood" extends="master.page">
+		<put-attribute name="title" value="Search brotherhood costumes" />
+		<put-attribute name="body" value="/views/costume/findByBrotherhood.jsp" />
+	</definition>
+	
 	<definition name="costume/findBySize" extends="master.page">
-		<put-attribute name="title" value="Search costumes" />
+		<put-attribute name="title" value="Search costumes by size" />
 		<put-attribute name="body" value="/views/costume/findBySize.jsp" />
 	</definition>
 

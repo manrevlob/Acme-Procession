@@ -1,5 +1,5 @@
 <%--
- * edit.jsp
+ * findByContest.jsp
  *
  * Copyright (C) 2014 Universidad de Sevilla
  * 
@@ -20,28 +20,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="costume/brother/edit.do" modelAttribute="costume">
+<form:form action="costume/bigBrother/findByBrotherhood.do" modelAttribute="brotherhoodSelectForm">
+	<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="brotherhood" />
-	<form:hidden path="isAvailable" />
-	
-	<acme:textbox code="costume.size" path="size" />
-	
-	<form:radiobutton path="status" value="new"/><spring:message code="costume.new" />
-	<form:radiobutton path="status" value="used"/><spring:message code="costume.used" />
-	<form:radiobutton path="status" value="old"/><spring:message code="costume.old" />
-	<form:errors path="status"/>
-	
-	<acme:textarea code="costume.salePrice" path="salePrice" />
-	
-	<acme:textarea code="costume.rentalPrice" path="rentalPrice" />
-	
-	<acme:textarea code="costume.comments" path="comments" />
-	
-	<acme:submit name="save" code="costume.save" />
-	
+	<acme:submit name="search" code="costume.search"/> 
+
 	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="costume.cancel"/>
-	
 </form:form>

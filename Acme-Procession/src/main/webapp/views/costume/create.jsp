@@ -41,6 +41,6 @@
 	
 	<acme:submit name="save" code="costume.save" />
 	
-	<acme:cancel url="brotherhood/brother/listOwns.do" code="costume.cancel"/>
+	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="costume.cancel"/>
 	
 </form:form>

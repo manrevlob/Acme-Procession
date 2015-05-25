@@ -31,6 +31,12 @@ public class StretchBigBrotherController extends AbstractController {
 		super();
 	}
 
+	// Listing ----------------------------------------------------------------
+
+	// Creation ---------------------------------------------------------------
+
+	// Edition ----------------------------------------------------------------
+
 	// Search -----------------------------------------------------------------
 
 	@RequestMapping(value = "/findByBrotherhood", method = RequestMethod.GET)
@@ -83,12 +89,6 @@ public class StretchBigBrotherController extends AbstractController {
 
 		return result;
 	}
-
-	// Listing ----------------------------------------------------------------
-
-	// Creation ---------------------------------------------------------------
-
-	// Edition ----------------------------------------------------------------
 
 	// Ancillary methods ------------------------------------------------------
 

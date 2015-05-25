@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('BROTHER')">
+<security:authorize access="hasRole('BIGBROTHER')">
 	<jstl:if test="${isBigBrother}">
 		<div>
 			<a href="costume/brother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
@@ -39,7 +39,7 @@
 		<display:column>
 			<jstl:choose>
 				<jstl:when test="${row.brotherhood.userIsOwner}">
-					<a href="costume/brother/edit.do?costumeId=${row.id}"> [<jstl:out
+					<a href="costume/bigBrother/edit.do?costumeId=${row.id}"> [<jstl:out
 							value="${editHeader}" />]
 					</a>
 				</jstl:when>
@@ -51,16 +51,40 @@
 	</security:authorize>
 	
 	<spring:message code="costume.brotherhood" var="brotherhoodHeader" />
-	<display:column property="brotherhood" title="${brotherhoodHeader}" />
+	<display:column property="brotherhood.name" title="${brotherhoodHeader}" />
 	
 	<spring:message code="costume.isAvailable" var="isAvailableHeader" />
-	<display:column property="isAvailable" title="${isAvailableHeader}" />
+	<display:column title="${isAvailableHeader}">
+		<jstl:choose>
+			<jstl:when test="${row.isAvailable}">
+				<spring:message code="costume.true"/>
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="costume.false"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 
 	<spring:message code="costume.size" var="sizeHeader" />
 	<display:column property="size" title="${sizeHeader}" />
 
 	<spring:message code="costume.status" var="statusHeader" />
-	<display:column property="status" title="${statusHeader}" />
+	<display:column title="${statusHeader}">
+		<jstl:choose>
+			<jstl:when test="${row.status == 'new'}">
+				<spring:message code="costume.new"/>
+			</jstl:when>
+			<jstl:when test="${row.status == 'used'}">
+				<spring:message code="costume.used"/>
+			</jstl:when>
+			<jstl:when test="${row.status == 'old'}">
+				<spring:message code="costume.old"/>
+			</jstl:when>
+			<jstl:otherwise>
+				ERROR
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 	
 	<spring:message code="costume.salePrice" var="salePriceHeader" />
 	<display:column property="salePrice" title="${salePriceHeader}" />
@@ -70,9 +94,18 @@
 
 	<spring:message code="costume.details" var="detailsHeader" />
 	<display:column title="${detailsHeader}">
-		<a href="costume/details.do?costumeId=${row.id}"> [<jstl:out
-				value="${detailsHeader}" />]
-		</a>
+		<jstl:choose>
+			<jstl:when test="${requestURI == 'costume/bigBrother/list.do'}">
+				<a href="costume/bigBrother/details.do?costumeId=${row.id}"> [<jstl:out
+						value="${detailsHeader}" />]
+				</a>
+			</jstl:when>
+			<jstl:otherwise>
+				<a href="costume/brother/details.do?costumeId=${row.id}"> [<jstl:out
+						value="${detailsHeader}" />]
+				</a>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 
 </display:table>

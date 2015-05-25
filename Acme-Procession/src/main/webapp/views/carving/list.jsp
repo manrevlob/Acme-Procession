@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('BROTHER')">
+<security:authorize access="hasRole('BIGBROTHER')">
 	<div>
 		<jstl:if test="${isBigBrother}">
 			<a
@@ -34,7 +34,7 @@
 <display:table name="carvings" pagesize="5" class="displaytag"
 	requestURI="${requestURI}" id="row">
 
-	<security:authorize access="hasRole('BROTHER')">
+	<security:authorize access="hasRole('BIGBROTHER')">
 		<spring:message code="carving.edit" var="editHeader" />
 		<display:column title="${editHeader}">
 			<jstl:if test="${row.brotherhood.userIsOwner}">
