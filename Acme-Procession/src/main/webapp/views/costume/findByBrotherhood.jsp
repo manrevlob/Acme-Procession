@@ -21,7 +21,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="costume/bigBrother/findByBrotherhood.do" modelAttribute="brotherhoodSelectForm">
-	<acme:select items="${brotherhoods}" itemLabel="name" code="stretch.brotherhood" path="brotherhood"/>
+	<acme:select items="${brotherhoods}" itemLabel="name" code="costume.brotherhood" path="brotherhood"/>
 
 	<acme:submit name="search" code="costume.search"/> 
 

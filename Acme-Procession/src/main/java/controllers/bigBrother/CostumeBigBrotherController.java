@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherService;
 import services.BrotherhoodService;
 import services.CostumeService;
 import controllers.AbstractController;
@@ -32,6 +33,9 @@ public class CostumeBigBrotherController extends AbstractController {
 	@Autowired
 	private BrotherhoodService brotherhoodService;
 
+	@Autowired
+	private BrotherService brotherService;
+
 	// Supporting services ----------------------------------------------------
 
 	// Constructors -----------------------------------------------------------
@@ -48,14 +52,23 @@ public class CostumeBigBrotherController extends AbstractController {
 		Collection<Costume> costumes;
 		Brotherhood brotherhood;
 		String uri;
+		boolean isBigBrother;
 
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
 		costumes = costumeService.findByBrotherhood(brotherhood);
 		uri = "costume/bigBrother/list.do";
 
+		try {
+			isBigBrother = brotherhood.getBigBrothers().contains(
+					brotherService.findByPrincipal());
+		} catch (Throwable opps) {
+			isBigBrother = false;
+		}
+
 		result = new ModelAndView("costume/list");
 		result.addObject("costumes", costumes);
 		result.addObject("requestURI", uri);
+		result.addObject("isBigBrother", isBigBrother);
 
 		return result;
 	}
@@ -237,12 +250,22 @@ public class CostumeBigBrotherController extends AbstractController {
 			BrotherhoodSelectForm brotherhoodSelectForm, String message) {
 		ModelAndView result;
 		Collection<Brotherhood> brotherhoods;
+		boolean isBigBrother;
 
 		brotherhoods = brotherhoodService.findOwns();
+
+		try {
+			isBigBrother = brotherhoodSelectForm.getBrotherhood()
+					.getBigBrothers()
+					.contains(brotherService.findByPrincipal());
+		} catch (Throwable opps) {
+			isBigBrother = false;
+		}
 
 		result = new ModelAndView("costume/findByBrotherhood");
 		result.addObject("brotherhoods", brotherhoods);
 		result.addObject("message", message);
+		result.addObject("isBigBrother", isBigBrother);
 
 		return result;
 	}
