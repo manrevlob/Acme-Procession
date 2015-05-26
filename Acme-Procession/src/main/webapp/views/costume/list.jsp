@@ -24,7 +24,7 @@
 <security:authorize access="hasRole('BIGBROTHER')">
 	<jstl:if test="${isBigBrother}">
 		<div>
-			<a href="costume/brother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
+			<a href="costume/bigBrother/create.do?brotherhoodId=${param.brotherhoodId}"> <spring:message
 					code="costume.create" />
 			</a>
 		</div>

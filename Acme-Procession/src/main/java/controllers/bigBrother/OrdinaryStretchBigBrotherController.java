@@ -45,7 +45,8 @@ public class OrdinaryStretchBigBrotherController extends AbstractController {
 		String uri;
 
 		brotherhood = brotherhoodService.findOneIfPrincipal(brotherhoodId);
-		ordinaryStretches = ordinaryStretchService.findByBrotherhood(brotherhood);
+		ordinaryStretches = ordinaryStretchService
+				.findByBrotherhood(brotherhood);
 		uri = "ordinaryStretch/bigBrother/listOwns.do";
 
 		result = new ModelAndView("ordinaryStretch/list");
@@ -118,7 +119,8 @@ public class OrdinaryStretchBigBrotherController extends AbstractController {
 			try {
 				ordinaryStretchService.delete(ordinaryStretch);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/ordinaryStretch/bigBrother/list.do?brotherhoodId="
+								+ ordinaryStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(ordinaryStretch,
 						"stretch.commit.error");

@@ -45,7 +45,7 @@ public class CreateCostumesForm {
 		return numberOfCostumes;
 	}
 
-	public void setNumberOfCosumes(int numberOfCostumes) {
+	public void setNumberOfCostumes(int numberOfCostumes) {
 		this.numberOfCostumes = numberOfCostumes;
 	}
 

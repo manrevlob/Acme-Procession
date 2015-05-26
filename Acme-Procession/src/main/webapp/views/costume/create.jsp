@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="costume/brother/create.do" modelAttribute="createCostumesForm">
+<form:form action="costume/bigBrother/create.do" modelAttribute="createCostumesForm">
 
 	<form:hidden path="brotherhood" />
 	
@@ -31,11 +31,19 @@
 	<form:radiobutton path="status" value="new"/><spring:message code="costume.new" />
 	<form:radiobutton path="status" value="used"/><spring:message code="costume.used" />
 	<form:radiobutton path="status" value="old"/><spring:message code="costume.old" />
-	<form:errors path="status"/>
+	<span class="error"><form:errors path="status"/></span>
 	
-	<acme:textarea code="costume.salePrice" path="salePrice" />
+	<fieldset>
+		<legend><spring:message code="costume.salePrice"/></legend>
+		<acme:textbox code="costume.amount" path="salePrice.amount" />
+		<acme:textbox code="costume.currency" path="salePrice.currency" />
+	</fieldset>
 	
-	<acme:textarea code="costume.rentalPrice" path="rentalPrice" />
+	<fieldset>
+		<legend><spring:message code="costume.rentalPrice"/></legend>
+		<acme:textbox code="costume.amount" path="rentalPrice.amount" />
+		<acme:textbox code="costume.currency" path="rentalPrice.currency" />
+	</fieldset>
 	
 	<acme:textarea code="costume.comments" path="comments" />
 	

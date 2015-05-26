@@ -123,7 +123,8 @@ public class FloatStretchBigBrotherController extends AbstractController {
 			try {
 				floatStretchService.delete(floatStretch);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/floatStretch/bigBrother/list.do?brotherhoodId="
+								+ floatStretch.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(floatStretch,
 						"stretch.commit.error");
@@ -148,7 +149,8 @@ public class FloatStretchBigBrotherController extends AbstractController {
 		ModelAndView result;
 		Collection<Carving> carvings;
 
-		carvings = carvingService.findByBrotherhood(floatStretch.getBrotherhood().getId());
+		carvings = carvingService.findByBrotherhood(floatStretch
+				.getBrotherhood().getId());
 
 		result = new ModelAndView("floatStretch/edit");
 		result.addObject("floatStretch", floatStretch);

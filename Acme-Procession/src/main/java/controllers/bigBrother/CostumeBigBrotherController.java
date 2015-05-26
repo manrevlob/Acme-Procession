@@ -102,7 +102,8 @@ public class CostumeBigBrotherController extends AbstractController {
 			try {
 				costumeService.saveAll(createCostumesForm);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/costume/bigBrother/list.do?brotherhoodId="
+								+ createCostumesForm.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createModelAndView(createCostumesForm,
 						"costume.commit.error");
@@ -135,7 +136,8 @@ public class CostumeBigBrotherController extends AbstractController {
 			try {
 				costumeService.save(costume);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/costume/bigBrother/list.do?brotherhoodId="
+								+ costume.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = editModelAndView(costume, "costume.commit.error");
 			}
