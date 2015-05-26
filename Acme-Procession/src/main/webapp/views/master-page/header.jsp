@@ -40,8 +40,9 @@
 					<li><a href="brotherhood/brother/list.do"><spring:message code="master.page.brother.listMyBrotherhoods" /></a></li>
 					<li><a href="procession/brother/listAvailables.do"><spring:message code="master.page.brother.processionAvailable" /></a></li>
 					<li><a href="registration/brother/list.do"><spring:message code="master.page.brother.listOwnRegistrations" /></a></li>
-					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 					<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoices" /></a></li>
+					<li><a href="costume/brother/findBySize.do"><spring:message code="master.page.brother.searchCostumes" /></a></li>
+					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

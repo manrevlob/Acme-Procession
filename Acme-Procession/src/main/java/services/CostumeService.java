@@ -126,10 +126,12 @@ public class CostumeService {
 		return result;
 	}
 
-	public Collection<Costume> findAvailablesByBrotherhood(Brotherhood brotherhood) {
+	public Collection<Costume> findAvailablesByBrotherhoodAndSize(Brotherhood brotherhood, int minSize, int maxSize) {
 		Collection<Costume> result;
+		
+		Assert.isTrue(minSize < maxSize);
 
-		result = costumeRepository.findAvailablesByBrotherhood(brotherhood);
+		result = costumeRepository.findAvailablesByBrotherhoodAndSize(brotherhood, minSize, maxSize);
 		
 		return result;
 	}
