@@ -92,7 +92,8 @@ public class ProcessionBigBrotherController extends AbstractController {
 			try {
 				processionService.save(procession);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/procession/list.do?brotherhoodId="
+								+ procession.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(procession,
 						"procession.commit.error");
@@ -113,7 +114,8 @@ public class ProcessionBigBrotherController extends AbstractController {
 			try {
 				processionService.delete(procession);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/procession/list.do?brotherhoodId="
+								+ procession.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(procession,
 						"procession.commit.error");
@@ -158,7 +160,9 @@ public class ProcessionBigBrotherController extends AbstractController {
 			try {
 				processionService.addStretch(addStretchToProcessionForm);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/stretchOrder/list.do?processionId="
+								+ addStretchToProcessionForm.getProcession()
+										.getId());
 			} catch (Throwable oops) {
 				result = new ModelAndView("procession/addStretch");
 				result.addObject("message", "procession.commit.error");
@@ -237,7 +241,8 @@ public class ProcessionBigBrotherController extends AbstractController {
 			procession.setImage(image);
 			processionService.save(procession);
 
-			result = new ModelAndView("redirect:/brotherhood/bigBrother/listOwns.do");
+			result = new ModelAndView(
+					"redirect:/brotherhood/bigBrother/listOwns.do");
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("commit.image.error");
 		}

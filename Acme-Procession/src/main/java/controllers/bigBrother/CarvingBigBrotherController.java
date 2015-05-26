@@ -78,7 +78,8 @@ public class CarvingBigBrotherController extends AbstractController {
 			try {
 				carvingService.save(carving);
 				result = new ModelAndView(
-						"redirect:/brotherhood/bigBrother/listOwns.do");
+						"redirect:/carving/list.do?brotherhoodId="
+								+ carving.getBrotherhood().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(carving, "carving.commit.error");
 			}
