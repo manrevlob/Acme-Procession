@@ -104,5 +104,16 @@ public class ActorService {
 
 		return result;
 	}
+	
+	public Collection<Actor> findAllExceptMe() {
+		Collection<Actor> result;
+		
+		Assert.isTrue(findByPrincipal() != null);
+		
+		result = actorRepository.findAll();
+		result.remove(findByPrincipal());
+		
+		return result;
+	}
 
 }

@@ -78,6 +78,8 @@
 		<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a href="messageFolder/actor/list.do"><spring:message code="master.page.privateMessages" /></a></li>
+		
 			<li><a class="fNiv" href="j_spring_security_logout"><spring:message code="master.page.logout" /> - (<security:authentication property="principal.username" />)</a></li>
 		</security:authorize>
 	</ul>
