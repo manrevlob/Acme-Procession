@@ -37,6 +37,7 @@ public class Brother extends Customer {
 	private Collection<Brotherhood> brotherhoods;
 	private Collection<Brotherhood> ownBrotherhoods;
 	private Collection<Registration> registrations;
+	private Collection<CostumeReserve> costumeReserves;
 	private Collection<Request> requests;
 
 	@Valid
@@ -68,6 +69,16 @@ public class Brother extends Customer {
 
 	public void setRegistrations(Collection<Registration> registrations) {
 		this.registrations = registrations;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "brother")
+	public Collection<CostumeReserve> getCostumeReserves() {
+		return costumeReserves;
+	}
+
+	public void setCostumeReserves(Collection<CostumeReserve> costumeReserves) {
+		this.costumeReserves = costumeReserves;
 	}
 
 	@Valid

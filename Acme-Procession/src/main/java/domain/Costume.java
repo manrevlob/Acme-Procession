@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
@@ -7,6 +9,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -54,11 +57,8 @@ public class Costume extends DomainEntity {
 	@Valid
 	@NotNull
 	@AttributeOverrides({
-		@AttributeOverride(name="amount",
-				column=@Column(name="salePriceAmount")),
-		@AttributeOverride(name="currency",
-				column=@Column(name="salePriceCurrency"))
-	})
+			@AttributeOverride(name = "amount", column = @Column(name = "salePriceAmount")),
+			@AttributeOverride(name = "currency", column = @Column(name = "salePriceCurrency")) })
 	public Money getSalePrice() {
 		return salePrice;
 	}
@@ -70,11 +70,8 @@ public class Costume extends DomainEntity {
 	@Valid
 	@NotNull
 	@AttributeOverrides({
-		@AttributeOverride(name="amount",
-				column=@Column(name="rentalPriceAmount")),
-		@AttributeOverride(name="currency",
-				column=@Column(name="rentalPriceCurrency"))
-	})
+			@AttributeOverride(name = "amount", column = @Column(name = "rentalPriceAmount")),
+			@AttributeOverride(name = "currency", column = @Column(name = "rentalPriceCurrency")) })
 	public Money getRentalPrice() {
 		return rentalPrice;
 	}
@@ -102,6 +99,7 @@ public class Costume extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 
 	private Brotherhood brotherhood;
+	private Collection<CostumeReserve> costumeReserves;
 
 	@Valid
 	@NotNull
@@ -112,6 +110,16 @@ public class Costume extends DomainEntity {
 
 	public void setBrotherhood(Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "costume")
+	public Collection<CostumeReserve> getCostumeReserves() {
+		return costumeReserves;
+	}
+
+	public void setCostumeReserves(Collection<CostumeReserve> costumeReserves) {
+		this.costumeReserves = costumeReserves;
 	}
 
 }

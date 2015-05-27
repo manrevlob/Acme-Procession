@@ -60,6 +60,8 @@
 		<security:intercept-url pattern="/costume/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
 		<security:intercept-url pattern="/costume/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
 		
+		<security:intercept-url pattern="/costumeReserve/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
+		
 		<security:intercept-url pattern="/stretch/bigBrother/**" access="hasRole('BIGBROTHER')" />  
 		
 		<security:intercept-url pattern="/stretchOrder/**" access="permitAll" />

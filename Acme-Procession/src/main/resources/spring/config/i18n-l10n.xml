@@ -44,6 +44,7 @@
 		<value>/views/boxInstance/messages</value>
 		<value>/views/registration/messages</value>
 		<value>/views/costume/messages</value>
+		<value>/views/costumeReserve/messages</value>
 		<value>/views/boxReserve/messages</value>
 		<value>/views/boxInvoice/messages</value>
 		<value>/views/invoice/messages</value>
