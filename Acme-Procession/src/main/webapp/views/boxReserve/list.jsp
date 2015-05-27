@@ -27,18 +27,21 @@
 </jstl:if>
 
 <display:table name="boxReserves" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
-
-	<security:authorize  access="hasRole('VIEWER')">
 	
+	<security:authorize  access="hasRole('VIEWER')">
+		
 		<spring:message code="boxReserve.cancelReserve" var="cancelReserveHeader" />
 		<display:column title="${cancelReserveHeader}">
-			<a href="boxReserve/viewer/cancel.do?boxReserveId=${row.id}">
-				[<jstl:out value="${cancelReserveHeader}"/>]
-			</a>
+			<jstl:if test="${row.isCancelled==false}">
+					<a href="boxReserve/viewer/cancel.do?boxReserveId=${row.id}">
+					[<jstl:out value="${cancelReserveHeader}"/>]
+				</a>
+			</jstl:if>
 		</display:column>
 		
 	</security:authorize>
-		
+	
+	
 	<spring:message code="boxReserve.createMoment" var="createMomentHeader"  />
 	<display:column property="createMoment" title="${createMomentHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	
@@ -59,6 +62,12 @@
 
 	<spring:message code="boxReserve.currency" var="currencyHeader" />
 	<display:column property="totalCost.currency" title="${currencyHeader}" />
+	
+	<display:column>
+			<a href="boxReserve/viewer/details.do?boxReserveId=${row.id}">
+				<spring:message	code="boxReserve.details" />
+			</a>
+		</display:column>
 
 </display:table>
 

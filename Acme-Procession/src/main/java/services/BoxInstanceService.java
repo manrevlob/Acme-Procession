@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,11 +95,12 @@ public class BoxInstanceService {
 	// Other business methods -------------------------------------------------
 	
 	public void isEditable(BoxInstance boxInstance) {
-		Collection<BoxReserve> boxReserves;
+		List<BoxReserve> boxReserves;
 		
-		boxReserves = boxInstance.getBoxReserves();
+		boxReserves = (List<BoxReserve>) boxInstance.getBoxReserves();
 		
-		Assert.isTrue(!boxReserves.isEmpty(),"cant edit");
+		
+		Assert.isTrue(!boxReserves.isEmpty()&& boxInstance.getDate()!=boxReserves.get(0).getDate(),"cant edit");
 		
 	}
 	

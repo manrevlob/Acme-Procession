@@ -21,14 +21,27 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div>
+	<security:authorize access="hasRole('BROTHER')">
 	
-	<b><spring:message code="invoice.brotherhood" />:</b>
-	<jstl:out value="${registration.procession.brotherhood.name}" />
-	<br />
- 	
- 	<b><spring:message code="invoice.processionName" />:</b>
-	<jstl:out value="${registration.procession.name}" />
-	<br />
+		<b><spring:message code="invoice.brotherhood" />:</b>
+		<jstl:out value="${registration.procession.brotherhood.name}" />
+		<br />
+	 	
+	 	<b><spring:message code="invoice.processionName" />:</b>
+		<jstl:out value="${registration.procession.name}" />
+		<br />
+		
+	</security:authorize>
+	
+	<security:authorize access="hasRole('VIEWER')">
+		<b><spring:message code="invoice.box" />:</b>
+		<jstl:out value="${boxReserve.boxInstance.box.name}" />
+		<br />
+		
+		<b><spring:message code="invoice.boxReserveCode" />:</b>
+		<jstl:out value="${boxReserve.reserveCode}" />
+		<br />
+	</security:authorize>
  	
 	<b><spring:message code="invoice.createMoment" />:</b>
 	<jstl:out value="${registrationInvoice.createMoment}" />

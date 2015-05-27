@@ -117,7 +117,7 @@ public class BoxReserveService {
 	
 	public BoxReserve findOne(int boxReserveId) {
 		BoxReserve result;
-
+		
 		result = boxReserveRepository.findOne(boxReserveId);
 
 		return result;
@@ -156,6 +156,7 @@ public class BoxReserveService {
 		
 		Assert.isTrue(actorService.isViewer());
 		Assert.isTrue(boxReserve.getViewer() == viewerService.findByPrincipal());
+		Assert.isTrue(boxReserve.getIsCancelled()==false);
 		
 		Assert.isTrue(canBeCancelled(boxReserve),"cant cancelled");
 		
@@ -215,6 +216,25 @@ public class BoxReserveService {
 		
 		result = new CreateBoxReserveForm();
 		result.setBox(box);
+		
+		return result;
+	}
+	
+	public BoxReserve findOneByPrincipal(int boxReserveId){
+		BoxReserve result;
+		
+		result = findOne(boxReserveId);
+		
+		Assert.isTrue(result.getViewer() == viewerService.findByPrincipal());
+		Assert.isTrue(actorService.isViewer());	
+		
+		return result;
+	}
+	
+	public BoxReserve findByBoxInvoice(int boxInvoiceId){
+		BoxReserve	result;
+		
+		result = boxReserveRepository.findByBoxInvoice(boxInvoiceId);
 		
 		return result;
 	}

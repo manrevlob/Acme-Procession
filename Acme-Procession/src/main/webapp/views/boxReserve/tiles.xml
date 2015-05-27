@@ -30,5 +30,10 @@
 		<put-attribute name="title" value="Select date and number of chairs" />
 		<put-attribute name="body" value="/views/boxReserve/selectInstance.jsp" />
 	</definition>
+	
+	<definition name="boxReserve/details" extends="master.page">
+		<put-attribute name="title" value="Box reserve details" />
+		<put-attribute name="body" value="/views/boxReserve/details.jsp" />
+	</definition>
 
 </tiles-definitions>
