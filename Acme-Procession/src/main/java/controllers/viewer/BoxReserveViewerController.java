@@ -134,6 +134,20 @@ public class BoxReserveViewerController extends AbstractController {
 
 			return result;
 		}
+		// Details --------------------------------------------------------------------------------
+		
+		@RequestMapping(value = "/details", method = RequestMethod.GET)
+		public ModelAndView details(@RequestParam int boxReserveId) {
+			ModelAndView result;
+			BoxReserve boxReserve;
+
+			boxReserve = boxReserveService.findOneByPrincipal(boxReserveId);
+
+			result = new ModelAndView("boxReserve/details");
+			result.addObject("boxReserve", boxReserve);
+
+			return result;
+		}
 		
 		// Ancillary methods ------------------------------------------------------
 

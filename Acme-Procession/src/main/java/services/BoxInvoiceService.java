@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.BoxInvoiceRepository;
 import domain.BoxInvoice;
+import domain.Viewer;
 
 @Service
 @Transactional
@@ -18,6 +19,10 @@ public class BoxInvoiceService {
 
 	@Autowired
 	private BoxInvoiceRepository boxInvoiceRepository;
+	@Autowired
+	private ActorService actorService;
+	@Autowired
+	private ViewerService viewerService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -56,5 +61,21 @@ public class BoxInvoiceService {
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Collection<BoxInvoice> findByPrincipal(){
+		Collection<BoxInvoice> result;
+		Viewer viewer;
+		int actorId;
+		
+		Assert.isTrue(actorService.isViewer());
+	 	
+	 	viewer= viewerService.findByPrincipal();
+	 	actorId = viewer.getId();
+
+		result = boxInvoiceRepository.findByViewerId(actorId);
+		
+		
+		return result;
+	}
 
 }

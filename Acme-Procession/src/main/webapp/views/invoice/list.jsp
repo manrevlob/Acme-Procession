@@ -47,6 +47,21 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('VIEWER')">
+		<display:column>
+			<a href="boxInvoice/viewer/details.do?boxInvoiceId=${row.id}">
+				<jstl:choose>
+					<jstl:when test="${row.paidMoment == null}">
+						<spring:message	code="invoice.detailsPay" />
+					</jstl:when>
+					<jstl:otherwise>
+						<spring:message	code="invoice.details" />
+					</jstl:otherwise>
+				</jstl:choose>
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 

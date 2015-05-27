@@ -22,35 +22,40 @@ details.jsp
 
 <div>
 	
-	<b><spring:message code="box.name" />:</b>
-	<jstl:out value="${box.name}" />
+	<b><spring:message code="boxReserve.reserveCode" />:</b>
+	<jstl:out value="${boxReserve.reserveCode}" />
 	<br />
  	
- 	<b><spring:message code="box.description" />:</b>
- 	<jstl:out value="${box.description}" />
+ 	<b><spring:message code="boxReserve.date" />:</b>
+ 	<jstl:out value="${boxReserve.date}" />
  	<br />
  	
-	<b><spring:message code="box.locality" />:</b>
-	<jstl:out value="${box.locality}" />
-	<br />
-
-	<b><spring:message code="box.location" />:</b>
-	<jstl:out value="${box.location}" />
+	<b><spring:message code="boxReserve.numberOfChair" />:</b>
+	<jstl:out value="${boxReserve.numbersOfchairs}" />
 	<br />
 	
-	<b><spring:message code="box.numberOfChairs" />:</b>
-	<jstl:out value="${box.numberOfChairs}" />
+	<b><spring:message code="boxReserve.createMoment" />:</b>
+	<jstl:out value="${boxReserve.createMoment}" />
+	<br />
+	
+	<b><spring:message code="boxReserve.isCancelled" />:</b>
+		<jstl:if test="${boxReserve.isCancelled==true}">
+			<spring:message code="boxReserve.true" />
+		</jstl:if>
+		<jstl:if test="${boxReserve.isCancelled==false}">
+			<spring:message code="boxReserve.false" />
+		</jstl:if>
 	<br />
 	
 	<fieldset>
-	<legend><spring:message code="box.price" /></legend>
+	<legend><spring:message code="boxReserve.totalCost" /></legend>
 	
-		<b><spring:message code="box.amount" />:</b>
-		<jstl:out value="${box.price.amount}" />
+		<b><spring:message code="boxReserve.amount" />:</b>
+		<jstl:out value="${boxReserve.totalCost.amount}" />
 		<br />
 		
-		<b><spring:message code="box.currency" />:</b>
-		<jstl:out value="${box.price.currency}" />
+		<b><spring:message code="boxReserve.currency" />:</b>
+		<jstl:out value="${boxReserve.totalCost.currency}" />
 		<br />
 	
 	</fieldset>
