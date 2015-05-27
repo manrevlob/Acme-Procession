@@ -111,5 +111,5 @@
 </display:table>
 
 <div>
-	<acme:cancel url="welcome/index.do" code="brotherhood.cancel" />
+	<acme:cancel url="welcome/index.do" code="costume.cancel" />
 </div>

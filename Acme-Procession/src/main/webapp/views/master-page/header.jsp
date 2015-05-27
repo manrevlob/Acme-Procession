@@ -42,6 +42,7 @@
 					<li><a href="registration/brother/list.do"><spring:message code="master.page.brother.listOwnRegistrations" /></a></li>
 					<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoices" /></a></li>
 					<li><a href="costume/brother/findBySize.do"><spring:message code="master.page.brother.searchCostumes" /></a></li>
+					<li><a href="costumeReserve/brother/list.do"><spring:message code="master.page.brother.listCostumeReserves" /></a></li>
 					<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>
 				</ul>
 			</li>
