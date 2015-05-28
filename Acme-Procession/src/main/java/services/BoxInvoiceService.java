@@ -61,6 +61,14 @@ public class BoxInvoiceService {
 		return result;
 	}
 	
+	public void delete(BoxInvoice boxInvoice) {
+		Assert.notNull(boxInvoice);
+		
+		Assert.isTrue(actorService.isViewer());
+		
+		boxInvoiceRepository.delete(boxInvoice);
+	}
+	
 	// Other business methods -------------------------------------------------
 	
 	public Collection<BoxInvoice> findByPrincipal(){

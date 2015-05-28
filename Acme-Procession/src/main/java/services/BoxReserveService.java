@@ -153,6 +153,7 @@ public class BoxReserveService {
 		BoxInstance boxInstance;
 		int chairs;
 		int newCHairs;
+		BoxInvoice boxInvoice;
 		
 		Assert.isTrue(actorService.isViewer());
 		Assert.isTrue(boxReserve.getViewer() == viewerService.findByPrincipal());
@@ -165,11 +166,17 @@ public class BoxReserveService {
 		newCHairs = boxInstance.getAvailableChairs() + chairs;
 		boxInstance.setAvailableChairs(newCHairs);
 		
+		boxInvoice = boxReserve.getBoxInvoice();
+		boxInvoiceService.delete(boxInvoice);
+				
 		boxInstanceService.save(boxInstance);
 		
 		boxReserve.setIsCancelled(true);
+		boxReserve.setBoxInvoice(null);
 		
 		save(boxReserve);
+		
+		
 	}
 	
 	public boolean canBeCancelled(BoxReserve boxReserve) {

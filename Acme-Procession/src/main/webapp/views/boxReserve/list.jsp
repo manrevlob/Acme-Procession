@@ -33,14 +33,13 @@
 		<spring:message code="boxReserve.cancelReserve" var="cancelReserveHeader" />
 		<display:column title="${cancelReserveHeader}">
 			<jstl:if test="${row.isCancelled==false}">
-					<a href="boxReserve/viewer/cancel.do?boxReserveId=${row.id}">
+					<a href="boxReserve/viewer/cancel.do?boxReserveId=${row.id}" onclick="return confirm('<spring:message code="boxReserve.confirm.cancel"/>')">
 					[<jstl:out value="${cancelReserveHeader}"/>]
 				</a>
 			</jstl:if>
 		</display:column>
 		
-	</security:authorize>
-	
+	</security:authorize>	
 	
 	<spring:message code="boxReserve.createMoment" var="createMomentHeader"  />
 	<display:column property="createMoment" title="${createMomentHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
@@ -52,7 +51,7 @@
 	<display:column property="numbersOfchairs" title="${numbersOfchairsHeader}"  />
 	
 	<spring:message code="boxReserve.date" var="dateHeader"  />
-	<display:column property="date" title="${dateHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+	<display:column property="date" title="${dateHeader}" sortable="true" format="{0,date,dd/MM/yyyy}" />
 	
 	<spring:message code="boxReserve.isCancelled" var="isCancelledHeader" />
 	<display:column property="isCancelled" title="${isCancelledHeader}"  />
