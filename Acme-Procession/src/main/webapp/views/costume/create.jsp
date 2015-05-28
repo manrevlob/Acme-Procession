@@ -35,14 +35,48 @@
 	
 	<fieldset>
 		<legend><spring:message code="costume.salePrice"/></legend>
-		<acme:textbox code="costume.amount" path="salePrice.amount" />
-		<acme:textbox code="costume.currency" path="salePrice.currency" />
+		
+		<form:checkbox path="noToSale" onclick="document.getElementById('salePriceAmount').disabled=this.checked;document.getElementById('salePriceAmount').value=0,0;document.getElementById('salePriceCurrency').disabled=this.checked;document.getElementById('salePriceCurrency').value='-';"/>
+		<spring:message code="costume.noToSale"/>
+		
+		<br/>
+		
+		<form:label path="salePrice.amount">
+			<spring:message code="costume.amount" />:
+		</form:label>
+		<form:input id="salePriceAmount" path="salePrice.amount"/>
+		<form:errors cssClass="error" path="salePrice.amount" />
+		
+		<br/>
+		
+		<form:label path="salePrice.currency">
+			<spring:message code="costume.currency" />:
+		</form:label>
+		<form:input id="salePriceCurrency" path="salePrice.currency"/>
+		<form:errors cssClass="error" path="salePrice.currency" />
 	</fieldset>
 	
 	<fieldset>
 		<legend><spring:message code="costume.rentalPrice"/></legend>
-		<acme:textbox code="costume.amount" path="rentalPrice.amount" />
-		<acme:textbox code="costume.currency" path="rentalPrice.currency" />
+		
+		<form:checkbox path="noToRental" onclick="document.getElementById('rentalPriceAmount').disabled=this.checked;document.getElementById('rentalPriceAmount').value=0,0;document.getElementById('rentalPriceCurrency').disabled=this.checked;document.getElementById('rentalPriceCurrency').value='-';"/>
+		<spring:message code="costume.noToRental"/>
+		
+		<br/>
+		
+		<form:label path="rentalPrice.amount">
+			<spring:message code="costume.amount" />:
+		</form:label>
+		<form:input id="rentalPriceAmount" path="rentalPrice.amount"/>
+		<form:errors cssClass="error" path="rentalPrice.amount" />
+		
+		<br/>
+		
+		<form:label path="rentalPrice.currency">
+			<spring:message code="costume.currency" />:
+		</form:label>
+		<form:input id="rentalPriceCurrency" path="rentalPrice.currency"/>
+		<form:errors cssClass="error" path="rentalPrice.currency" />
 	</fieldset>
 	
 	<acme:textarea code="costume.comments" path="comments" />

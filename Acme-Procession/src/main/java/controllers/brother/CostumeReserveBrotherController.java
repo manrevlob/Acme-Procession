@@ -64,6 +64,7 @@ public class CostumeReserveBrotherController {
 			costume = costumeService.findOneIfAvailable(costumeId);
 			costume.setSituation("sold");
 			costumeReserve = costumeReserveService.create(costume);
+			costumeReserve.setType("purchase");
 			costumeReserveService.save(costumeReserve);
 			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
 		} catch (Throwable oops) {
@@ -83,6 +84,7 @@ public class CostumeReserveBrotherController {
 			costume = costumeService.findOneIfAvailable(costumeId);
 			costume.setSituation("rented");
 			costumeReserve = costumeReserveService.create(costume);
+			costumeReserve.setType("rental");
 			costumeReserveService.save(costumeReserve);
 			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
 		} catch (Throwable oops) {

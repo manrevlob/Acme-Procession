@@ -20,33 +20,65 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="costume/bigBrother/edit.do" modelAttribute="costume">
-
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="brotherhood" />
-	<form:hidden path="isAvailable" />
+<form:form action="costume/bigBrother/edit.do" modelAttribute="editCostumeForm">
 	
-	<acme:textbox code="costume.size" path="size" />
+	<form:hidden path="costume.brotherhood"/>
+	<form:hidden path="costume.situation"/>
 	
-	<form:radiobutton path="status" value="new"/><spring:message code="costume.new" />
-	<form:radiobutton path="status" value="used"/><spring:message code="costume.used" />
-	<form:radiobutton path="status" value="old"/><spring:message code="costume.old" />
-	<span class="error"><form:errors path="status"/></span>
+	<acme:textbox code="costume.size" path="costume.size" />
+	
+	<form:radiobutton path="costume.status" value="new"/><spring:message code="costume.new" />
+	<form:radiobutton path="costume.status" value="used"/><spring:message code="costume.used" />
+	<form:radiobutton path="costume.status" value="old"/><spring:message code="costume.old" />
+	<span class="error"><form:errors path="costume.status"/></span>
 	
 	<fieldset>
 		<legend><spring:message code="costume.salePrice"/></legend>
-		<acme:textbox code="costume.amount" path="salePrice.amount" />
-		<acme:textbox code="costume.currency" path="salePrice.currency" />
+		
+		<form:checkbox path="noToSale" onclick="document.getElementById('salePriceAmount').disabled=this.checked;document.getElementById('salePriceAmount').value=0,0;document.getElementById('salePriceCurrency').disabled=this.checked;document.getElementById('salePriceCurrency').value='-';"/>
+		<spring:message code="costume.noToSale"/>
+		
+		<br/>
+		
+		<form:label path="costume.salePrice.amount">
+			<spring:message code="costume.amount" />:
+		</form:label>
+		<form:input id="salePriceAmount" path="costume.salePrice.amount"/>
+		<form:errors cssClass="error" path="costume.salePrice.amount" />
+		
+		<br/>
+		
+		<form:label path="costume.salePrice.currency">
+			<spring:message code="costume.currency" />:
+		</form:label>
+		<form:input id="salePriceCurrency" path="costume.salePrice.currency"/>
+		<form:errors cssClass="error" path="costume.salePrice.currency" />
 	</fieldset>
 	
 	<fieldset>
 		<legend><spring:message code="costume.rentalPrice"/></legend>
-		<acme:textbox code="costume.amount" path="rentalPrice.amount" />
-		<acme:textbox code="costume.currency" path="rentalPrice.currency" />
+		
+		<form:checkbox path="noToRental" onclick="document.getElementById('rentalPriceAmount').disabled=this.checked;document.getElementById('rentalPriceAmount').value=0,0;document.getElementById('rentalPriceCurrency').disabled=this.checked;document.getElementById('rentalPriceCurrency').value='-';"/>
+		<spring:message code="costume.noToRental"/>
+		
+		<br/>
+		
+		<form:label path="costume.rentalPrice.amount">
+			<spring:message code="costume.amount" />:
+		</form:label>
+		<form:input id="rentalPriceAmount" path="costume.rentalPrice.amount"/>
+		<form:errors cssClass="error" path="costume.rentalPrice.amount" />
+		
+		<br/>
+		
+		<form:label path="costume.rentalPrice.currency">
+			<spring:message code="costume.currency" />:
+		</form:label>
+		<form:input id="rentalPriceCurrency" path="costume.rentalPrice.currency"/>
+		<form:errors cssClass="error" path="costume.rentalPrice.currency" />
 	</fieldset>
 	
-	<acme:textarea code="costume.comments" path="comments" />
+	<acme:textarea code="costume.comments" path="costume.comments" />
 	
 	<acme:submit name="save" code="costume.save" />
 	

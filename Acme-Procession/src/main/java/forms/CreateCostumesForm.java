@@ -29,6 +29,8 @@ public class CreateCostumesForm {
 	private Money salePrice;
 	private Money rentalPrice;
 	private String comments;
+	private boolean noToSale;
+	private boolean noToRental;
 
 	@Valid
 	@NotNull
@@ -69,7 +71,6 @@ public class CreateCostumesForm {
 	}
 
 	@Valid
-	@NotNull
 	public Money getSalePrice() {
 		return salePrice;
 	}
@@ -79,7 +80,6 @@ public class CreateCostumesForm {
 	}
 
 	@Valid
-	@NotNull
 	public Money getRentalPrice() {
 		return rentalPrice;
 	}
@@ -94,6 +94,22 @@ public class CreateCostumesForm {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	
+	public boolean getNoToSale() {
+		return noToSale;
+	}
+
+	public void setNoToSale(boolean noToSale) {
+		this.noToSale = noToSale;
+	}
+
+	public boolean getNoToRental() {
+		return noToRental;
+	}
+
+	public void setNoToRental(boolean noToRental) {
+		this.noToRental = noToRental;
 	}
 
 }
