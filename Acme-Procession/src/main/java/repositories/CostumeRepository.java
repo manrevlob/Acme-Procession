@@ -15,7 +15,7 @@ public interface CostumeRepository extends JpaRepository<Costume, Integer> {
 	@Query("select c from Costume c where c.brotherhood = ?1")
 	Collection<Costume> findByBrotherhood(Brotherhood brotherhood);
 
-	@Query("select c from Costume c where c.brotherhood = ?1 and c.isAvailable is true and c.size >= ?2 and c.size <= ?3")
+	@Query("select c from Costume c where c.brotherhood = ?1 and c.situation like 'available' and c.size >= ?2 and c.size <= ?3")
 	Collection<Costume> findAvailablesByBrotherhoodAndSize(Brotherhood brotherhood, int minSize, int maxSize);
 
 }

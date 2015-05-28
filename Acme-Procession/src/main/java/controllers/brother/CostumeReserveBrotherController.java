@@ -54,14 +54,34 @@ public class CostumeReserveBrotherController {
 
 	// Create -----------------------------------------------------------------
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int costumeId) {
+	@RequestMapping(value = "/buy", method = RequestMethod.GET)
+	public ModelAndView buy(@RequestParam int costumeId) {
 		ModelAndView result;
 		CostumeReserve costumeReserve;
 		Costume costume;
 
 		try {
 			costume = costumeService.findOneIfAvailable(costumeId);
+			costume.setSituation("sold");
+			costumeReserve = costumeReserveService.create(costume);
+			costumeReserveService.save(costumeReserve);
+			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/rent", method = RequestMethod.GET)
+	public ModelAndView rent(@RequestParam int costumeId) {
+		ModelAndView result;
+		CostumeReserve costumeReserve;
+		Costume costume;
+
+		try {
+			costume = costumeService.findOneIfAvailable(costumeId);
+			costume.setSituation("rented");
 			costumeReserve = costumeReserveService.create(costume);
 			costumeReserveService.save(costumeReserve);
 			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");

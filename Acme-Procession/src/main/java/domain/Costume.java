@@ -33,7 +33,7 @@ public class Costume extends DomainEntity {
 	private Money salePrice;
 	private Money rentalPrice;
 	private String comments;
-	private boolean isAvailable;
+	private String situation;
 
 	@Range(min = 1, max = 100)
 	public int getSize() {
@@ -55,7 +55,6 @@ public class Costume extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@AttributeOverrides({
 			@AttributeOverride(name = "amount", column = @Column(name = "salePriceAmount")),
 			@AttributeOverride(name = "currency", column = @Column(name = "salePriceCurrency")) })
@@ -68,7 +67,6 @@ public class Costume extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@AttributeOverrides({
 			@AttributeOverride(name = "amount", column = @Column(name = "rentalPriceAmount")),
 			@AttributeOverride(name = "currency", column = @Column(name = "rentalPriceCurrency")) })
@@ -88,12 +86,14 @@ public class Costume extends DomainEntity {
 		this.comments = comments;
 	}
 
-	public boolean getIsAvailable() {
-		return isAvailable;
+	@NotBlank
+	@Pattern(regexp = "^sold$|^rented$|^available$")
+	public String getSituation() {
+		return situation;
 	}
 
-	public void setIsAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
+	public void setSituation(String situation) {
+		this.situation = situation;
 	}
 
 	// Relationships ----------------------------------------------------------

@@ -44,16 +44,30 @@ details.jsp
 	<br />
  	
  	<b><spring:message code="costume.salePrice" />:</b>
- 	<jstl:out value="${costume.salePrice}"/>
+ 	<jstl:choose>
+		<jstl:when test="${costume.salePrice ne null}">
+			<jstl:out value="${costume.salePrice}" />
+		</jstl:when>
+		<jstl:otherwise>
+			-
+		</jstl:otherwise>
+	</jstl:choose>
  	<br />
  	
 	<b><spring:message code="costume.rentalPrice" />:</b>
-	<jstl:out value="${costume.rentalPrice}" />
+	<jstl:choose>
+		<jstl:when test="${costume.rentalPrice ne null}">
+			<jstl:out value="${costume.rentalPrice}" />
+		</jstl:when>
+		<jstl:otherwise>
+			-
+		</jstl:otherwise>
+	</jstl:choose>
 	<br />
 	
 	<b><spring:message code="costume.comments" />:</b>
 	<jstl:choose>
-		<jstl:when test="${costume.comments ne ''}">
+		<jstl:when test="${costume.comments ne '' && costume.comments ne null}">
 			<jstl:out value="${costume.comments}" />
 		</jstl:when>
 		<jstl:otherwise>

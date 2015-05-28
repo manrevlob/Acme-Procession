@@ -24,8 +24,14 @@
 <display:table name="costumeReserves" pagesize="5" class="displaytag"
 	requestURI="${requestURI}" id="row">
 	
+	<spring:message code="costumeReserve.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true" />
+	
 	<spring:message code="costumeReserve.brotherhood" var="brotherhoodHeader" />
-	<display:column property="brotherhood.name" title="${brotherhoodHeader}" />
+	<display:column property="costume.brotherhood.name" title="${brotherhoodHeader}" />
+	
+	<spring:message code="costumeReserve.costume" var="costumeHeader" />
+	<display:column property="costume.size" title="${costumeHeader}" />
 
 </display:table>
 
