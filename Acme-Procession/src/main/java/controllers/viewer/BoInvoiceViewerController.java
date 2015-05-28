@@ -66,6 +66,22 @@ public class BoInvoiceViewerController extends AbstractController {
 
 			return result;
 		}
+		
+		// Pay -------------------------------------------------------------------
+
+		@RequestMapping(value = "/pay", method = RequestMethod.GET)
+		public ModelAndView pay(@RequestParam int boxInvoiceId) {
+			ModelAndView result;
+			BoxInvoice boxInvoice;
+
+			boxInvoice = boxInvoiceService.findOne(boxInvoiceId);
+
+			boxInvoiceService.payInvoice(boxInvoice);
+
+			result = new ModelAndView("redirect:/boxInvoice/viewer/list.do");
+
+			return result;
+		}
 
 		
 		
