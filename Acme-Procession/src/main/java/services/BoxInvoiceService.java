@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,21 @@ public class BoxInvoiceService {
 		
 		
 		return result;
+	}
+	
+	public void payInvoice(BoxInvoice boxInvoice) {
+		long milliseconds;
+		Date date;
+		
+		Assert.isTrue(actorService.isViewer());
+		Assert.isTrue(boxInvoice.getPaidMoment() == null);
+
+		milliseconds = System.currentTimeMillis();
+		date = new Date(milliseconds - 10);
+
+		boxInvoice.setPaidMoment(date);
+
+		save(boxInvoice);
 	}
 
 }

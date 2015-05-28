@@ -58,10 +58,21 @@
 </div>
 
 <div>
+	<security:authorize access="hasRole('BROTHER')">
 	<br />
 	<input type="button" onclick="javascript:history.back();" value="<spring:message code='invoice.cancel' />" />
 	<jstl:if test="${registrationInvoice.paidMoment == null}">
 		<input type="button" onclick="location.href='./registrationInvoice/brother/pay.do?registrationInvoiceId=${registrationInvoice.id}'" value="<spring:message code='invoice.pay' />" >
 	</jstl:if>
 	<br />
+	</security:authorize>
+	
+	<security:authorize access="hasRole('VIEWER')">
+	<br />
+	<input type="button" onclick="javascript:history.back();" value="<spring:message code='invoice.cancel' />" />
+	<jstl:if test="${registrationInvoice.paidMoment == null}">
+		<input type="button" onclick="location.href='./boxInvoice/viewer/pay.do?boxInvoiceId=${registrationInvoice.id}'" value="<spring:message code='invoice.pay' />" >
+	</jstl:if>
+	<br />
+	</security:authorize>
 </div>
