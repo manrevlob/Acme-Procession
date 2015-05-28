@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,13 +55,19 @@ public class CostumeReserveService {
 
 	public CostumeReserve create(Costume costume) {
 		CostumeReserve result;
+		Date moment;
+		long milliseconds;
 
 		Assert.isTrue(actorService.isBrother());
 
 		result = new CostumeReserve();
+		
+		milliseconds = System.currentTimeMillis();
+		moment = new Date(milliseconds);
 
 		result.setBrother(brotherService.findByPrincipal());
 		result.setCostume(costume);
+		result.setMoment(moment);
 
 		return result;
 	}

@@ -58,7 +58,7 @@ public class CostumeService {
 
 		costume = new Costume();
 		costume.setBrotherhood(brotherhood);
-		costume.setIsAvailable(true);
+		costume.setSituation("available");
 
 		return costume;
 	}
@@ -67,6 +67,7 @@ public class CostumeService {
 		Costume result;
 
 		Assert.notNull(costume);
+		Assert.isTrue(costume.getSalePrice() != null || costume.getRentalPrice() != null, "costume.bothPricesNull.error");
 
 		result = costumeRepository.save(costume);
 
@@ -90,7 +91,7 @@ public class CostumeService {
 
 		result = findOne(costumeId);
 
-		Assert.isTrue(result.getIsAvailable() == true);
+		Assert.isTrue(result.getSituation().equals("available"));
 
 		return result;
 	}

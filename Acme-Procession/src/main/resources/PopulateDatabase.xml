@@ -567,6 +567,12 @@
 				<ref bean="registration3" />
 			</list>
 		</property>
+		<property name="costumeReserves">
+			<list>
+				<ref bean="costumeReserve1"/>
+				<ref bean="costumeReserve3"/>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
 
@@ -600,6 +606,12 @@
 				<ref bean="registration2" />
 				<ref bean="registration4" />
 				<ref bean="registration6" />
+			</list>
+		</property>
+		<property name="costumeReserves">
+			<list>
+				<ref bean="costumeReserve2"/>
+				<ref bean="costumeReserve4"/>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount3" />
@@ -1387,37 +1399,53 @@
 		<property name="comments" value="Costume1Comments"/>
 		<property name="salePrice" ref="money1"/>
 		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="situation" value="rented"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="costumeReserves">
+			<list>
+				<ref bean="costumeReserve1" />
+				<ref bean="costumeReserve3" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="costume2" class="domain.Costume">
 		<property name="size" value="46"/>
 		<property name="status" value="new"/>
 		<property name="comments" value="Costume2Comments"/>
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money3"/>
+		<property name="rentalPrice" ref="money4"/>
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="costumeReserves">
+			<list>
+				<ref bean="costumeReserve2" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="costume3" class="domain.Costume">
 		<property name="size" value="46"/>
 		<property name="status" value="used"/>
 		<property name="comments" value="Costume3Comments"/>
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money5"/>
+		<property name="rentalPrice" ref="money6"/>
+		<property name="situation" value="sold"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="costumeReserves">
+			<list>
+				<ref bean="costumeReserve4" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="costume4" class="domain.Costume">
 		<property name="size" value="48"/>
 		<property name="status" value="new"/>
 		<!-- WITHOUT COMMENTS -->
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money2"/>
+		<!-- WITHOUT RENTAL PRICE -->
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 
@@ -1425,9 +1453,9 @@
 		<property name="size" value="36"/>
 		<property name="status" value="old"/>
 		<property name="comments" value="Costume5Comments"/>
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<!-- WITHOUT SALE PRICE -->
+		<property name="rentalPrice" ref="money4"/>
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 
@@ -1435,9 +1463,9 @@
 		<property name="size" value="48"/>
 		<property name="status" value="new"/>
 		<property name="comments" value="Costume6Comments"/>
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money2"/>
+		<property name="rentalPrice" ref="money4"/>
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood2"/>
 	</bean>
 
@@ -1445,9 +1473,9 @@
 		<property name="size" value="46"/>
 		<property name="status" value="used"/>
 		<property name="comments" value="Costume7Comments"/>
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money7"/>
+		<property name="rentalPrice" ref="money9"/>
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood2"/>
 	</bean>
 
@@ -1455,10 +1483,36 @@
 		<property name="size" value="45"/>
 		<property name="status" value="new"/>
 		<!-- WITHOUT COMMENTS -->
-		<property name="salePrice" ref="money1"/>
-		<property name="rentalPrice" ref="money2"/>
-		<property name="isAvailable" value="true"/>
+		<property name="salePrice" ref="money8"/>
+		<property name="rentalPrice" ref="money1"/>
+		<property name="situation" value="available"/>
 		<property name="brotherhood" ref="brotherhood2"/>
+	</bean>
+	
+	<!-- Costume reserve -->
+	
+	<bean id="costumeReserve1" class="domain.CostumeReserve">
+		<property name="moment" value="2015/03/28 20:10" />
+		<property name="costume" ref="costume1" />
+		<property name="brother" ref="brother1" />
+	</bean>
+	
+	<bean id="costumeReserve2" class="domain.CostumeReserve">
+		<property name="moment" value="2015/04/02 11:24" />
+		<property name="costume" ref="costume2" />
+		<property name="brother" ref="brother2" />
+	</bean>
+	
+	<bean id="costumeReserve3" class="domain.CostumeReserve">
+		<property name="moment" value="2015/05/22 17:32" />
+		<property name="costume" ref="costume1" />
+		<property name="brother" ref="brother1" />
+	</bean>
+	
+	<bean id="costumeReserve4" class="domain.CostumeReserve">
+		<property name="moment" value="2015/05/24 19:01" />
+		<property name="costume" ref="costume3" />
+		<property name="brother" ref="brother2" />
 	</bean>
 
 </beans>

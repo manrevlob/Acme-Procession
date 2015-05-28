@@ -50,20 +50,45 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('BROTHER')">
+		<spring:message code="costume.buy" var="buyHeader" />
+		<display:column title="${buyHeader}">
+			<jstl:if test="${row.salePrice ne null && row.situation == 'available'}">
+				<a href="costume/brother/buy.do?costumeId=${row.id}"> [<jstl:out
+						value="${buyHeader}" />]
+				</a>
+			</jstl:if>
+		</display:column>
+		
+		<spring:message code="costume.rent" var="rentHeader" />
+		<display:column title="${rentHeader}">
+			<jstl:if test="${row.rentalPrice ne null && row.situation == 'available'}">
+				<a href="costume/brother/rent.do?costumeId=${row.id}"> [<jstl:out
+						value="${rentHeader}" />]
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
 	<spring:message code="costume.brotherhood" var="brotherhoodHeader" />
 	<display:column property="brotherhood.name" title="${brotherhoodHeader}" />
 	
-	<spring:message code="costume.isAvailable" var="isAvailableHeader" />
-	<display:column title="${isAvailableHeader}">
-		<jstl:choose>
-			<jstl:when test="${row.isAvailable}">
-				<spring:message code="costume.true"/>
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="costume.false"/>
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
+	<security:authorize access="hasRole('BIGBROTHER')">
+		<spring:message code="costume.isAvailable" var="isAvailableHeader" />
+		<display:column title="${isAvailableHeader}">
+			<jstl:choose>
+				<jstl:when test="${row.situation == 'sold'}">
+					<spring:message code="costume.sold"/>
+				</jstl:when>
+				<jstl:when test="${row.situation == 'rented'}">
+					<spring:message code="costume.rented"/>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="costume.available"/>
+				</jstl:otherwise>
+			</jstl:choose>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="costume.size" var="sizeHeader" />
 	<display:column property="size" title="${sizeHeader}" />

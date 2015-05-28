@@ -105,8 +105,13 @@ public class CostumeBigBrotherController extends AbstractController {
 						"redirect:/costume/bigBrother/list.do?brotherhoodId="
 								+ createCostumesForm.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				result = createModelAndView(createCostumesForm,
-						"costume.commit.error");
+				if(oops.getMessage().equals("costume.bothPricesNull.error")) {
+					result = createModelAndView(createCostumesForm,
+							"costume.bothPricesNull.error");
+				} else {
+					result = createModelAndView(createCostumesForm,
+							"costume.commit.error");
+				}
 			}
 		}
 
