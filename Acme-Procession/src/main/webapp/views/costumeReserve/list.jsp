@@ -27,6 +27,21 @@
 	<spring:message code="costumeReserve.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true" />
 	
+	<spring:message code="costumeReserve.moment" var="typeHeader" />
+	<display:column title="${typeHeader}">
+		<jstl:choose>
+			<jstl:when test="${row.situation == 'purchase'}">
+				<spring:message code="costume.purchase"/>
+			</jstl:when>
+			<jstl:when test="${row.situation == 'rental'}">
+				<spring:message code="costume.rental"/>
+			</jstl:when>
+			<jstl:otherwise>
+				ERROR
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
+	
 	<spring:message code="costumeReserve.brotherhood" var="brotherhoodHeader" />
 	<display:column property="costume.brotherhood.name" title="${brotherhoodHeader}" />
 	

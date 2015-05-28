@@ -11,7 +11,9 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,6 +28,7 @@ public class CostumeReserve extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	
 	private Date moment;
+	private String type;
 	
 	@Past
 	@NotNull
@@ -37,6 +40,16 @@ public class CostumeReserve extends DomainEntity {
 
 	public void setMoment(Date moment) {
 		this.moment = moment;
+	}
+	
+	@NotBlank
+	@Pattern(regexp = "^purchase$|^rental$")
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	// Relationships ----------------------------------------------------------

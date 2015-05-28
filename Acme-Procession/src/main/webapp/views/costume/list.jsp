@@ -48,13 +48,22 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
+		
+		<spring:message code="costume.markAsAvailable" var="maskAsAvailableHeader" />
+		<display:column>
+			<jstl:if test="${row.situation == 'rented'}">
+				<a href="costume/bigBrother/markAsAvailable.do?costumeId=${row.id}"> [<jstl:out
+						value="${maskAsAvailableHeader}" />]
+				</a>
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('BROTHER')">
 		<spring:message code="costume.buy" var="buyHeader" />
 		<display:column title="${buyHeader}">
 			<jstl:if test="${row.salePrice ne null && row.situation == 'available'}">
-				<a href="costume/brother/buy.do?costumeId=${row.id}"> [<jstl:out
+				<a href="costumeReserve/brother/buy.do?costumeId=${row.id}"> [<jstl:out
 						value="${buyHeader}" />]
 				</a>
 			</jstl:if>
@@ -63,7 +72,7 @@
 		<spring:message code="costume.rent" var="rentHeader" />
 		<display:column title="${rentHeader}">
 			<jstl:if test="${row.rentalPrice ne null && row.situation == 'available'}">
-				<a href="costume/brother/rent.do?costumeId=${row.id}"> [<jstl:out
+				<a href="costumeReserve/brother/rent.do?costumeId=${row.id}"> [<jstl:out
 						value="${rentHeader}" />]
 				</a>
 			</jstl:if>
@@ -83,8 +92,11 @@
 				<jstl:when test="${row.situation == 'rented'}">
 					<spring:message code="costume.rented"/>
 				</jstl:when>
-				<jstl:otherwise>
+				<jstl:when test="${row.situation == 'available'}">
 					<spring:message code="costume.available"/>
+				</jstl:when>
+				<jstl:otherwise>
+					ERROR
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>

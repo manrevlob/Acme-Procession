@@ -1493,24 +1493,28 @@
 	
 	<bean id="costumeReserve1" class="domain.CostumeReserve">
 		<property name="moment" value="2015/03/28 20:10" />
+		<property name="type" value="rental" />
 		<property name="costume" ref="costume1" />
 		<property name="brother" ref="brother1" />
 	</bean>
 	
 	<bean id="costumeReserve2" class="domain.CostumeReserve">
 		<property name="moment" value="2015/04/02 11:24" />
+		<property name="type" value="rental" />
 		<property name="costume" ref="costume2" />
 		<property name="brother" ref="brother2" />
 	</bean>
 	
 	<bean id="costumeReserve3" class="domain.CostumeReserve">
 		<property name="moment" value="2015/05/22 17:32" />
+		<property name="type" value="rental" />
 		<property name="costume" ref="costume1" />
 		<property name="brother" ref="brother1" />
 	</bean>
 	
 	<bean id="costumeReserve4" class="domain.CostumeReserve">
 		<property name="moment" value="2015/05/24 19:01" />
+		<property name="type" value="purchase" />
 		<property name="costume" ref="costume3" />
 		<property name="brother" ref="brother2" />
 	</bean>

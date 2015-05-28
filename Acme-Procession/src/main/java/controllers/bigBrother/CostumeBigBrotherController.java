@@ -20,6 +20,7 @@ import domain.Brotherhood;
 import domain.Costume;
 import forms.BrotherhoodSelectForm;
 import forms.CreateCostumesForm;
+import forms.EditCostumeForm;
 
 @Controller
 @RequestMapping("/costume/bigBrother")
@@ -92,8 +93,8 @@ public class CostumeBigBrotherController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ModelAndView create(@Valid CreateCostumesForm createCostumesForm,
-			BindingResult binding) {
+	public ModelAndView createSave(
+			@Valid CreateCostumesForm createCostumesForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -105,7 +106,7 @@ public class CostumeBigBrotherController extends AbstractController {
 						"redirect:/costume/bigBrother/list.do?brotherhoodId="
 								+ createCostumesForm.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				if(oops.getMessage().equals("costume.bothPricesNull.error")) {
+				if (oops.getMessage().equals("costume.bothPricesNull.error")) {
 					result = createModelAndView(createCostumesForm,
 							"costume.bothPricesNull.error");
 				} else {
@@ -123,30 +124,59 @@ public class CostumeBigBrotherController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int costumeId) {
 		ModelAndView result;
+		EditCostumeForm editCostumeForm;
 		Costume costume;
+		
+		editCostumeForm = new EditCostumeForm();
 
-		costume = costumeService.findOne(costumeId);
-		result = editModelAndView(costume);
+		costume = costumeService.findOneIfPrincipal(costumeId);
+		editCostumeForm.setCostume(costume);
+		
+		result = editModelAndView(editCostumeForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Costume costume, BindingResult binding) {
+	public ModelAndView editSave(@Valid EditCostumeForm editCostumeForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = editModelAndView(costume);
+			result = editModelAndView(editCostumeForm);
 		} else {
 			try {
-				costumeService.save(costume);
+				costumeService.editOne(editCostumeForm);
 				result = new ModelAndView(
 						"redirect:/costume/bigBrother/list.do?brotherhoodId="
-								+ costume.getBrotherhood().getId());
+								+ editCostumeForm.getCostume().getBrotherhood().getId());
 			} catch (Throwable oops) {
-				result = editModelAndView(costume, "costume.commit.error");
+				if (oops.getMessage().equals("costume.bothPricesNull.error")) {
+					result = editModelAndView(editCostumeForm,
+							"costume.bothPricesNull.error");
+				} else {
+					result = editModelAndView(editCostumeForm, "costume.commit.error");
+				}
 			}
 		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/markAsAvailable", method = RequestMethod.GET)
+	public ModelAndView markAsAvailable(@RequestParam int costumeId) {
+		ModelAndView result;
+		Costume costume;
+
+		try {
+			costume = costumeService.findOneIfRented(costumeId);
+			costumeService.markAsAvailable(costume);
+		} catch (Throwable oops) {
+		}
+
+		result = new ModelAndView(
+				"redirect:/costume/bigBrother/list.do?brotherhoodId="
+						+ costumeService.findOne(costumeId).getBrotherhood()
+								.getId());
 
 		return result;
 	}
@@ -226,19 +256,19 @@ public class CostumeBigBrotherController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView editModelAndView(Costume costume) {
+	protected ModelAndView editModelAndView(EditCostumeForm editCostumeForm) {
 		ModelAndView result;
 
-		result = editModelAndView(costume, null);
+		result = editModelAndView(editCostumeForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView editModelAndView(Costume costume, String message) {
+	protected ModelAndView editModelAndView(EditCostumeForm editCostumeForm, String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("costume/edit");
-		result.addObject("costume", costume);
+		result.addObject("editCostumeForm", editCostumeForm);
 		result.addObject("message", message);
 
 		return result;
