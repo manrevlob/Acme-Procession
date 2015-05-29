@@ -27,14 +27,14 @@
 	<spring:message code="costumeReserve.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true" />
 	
-	<spring:message code="costumeReserve.moment" var="typeHeader" />
+	<spring:message code="costumeReserve.type" var="typeHeader" />
 	<display:column title="${typeHeader}">
 		<jstl:choose>
-			<jstl:when test="${row.situation == 'purchase'}">
-				<spring:message code="costume.purchase"/>
+			<jstl:when test="${row.type eq 'purchase'}">
+				<spring:message code="costumeReserve.purchase"/>
 			</jstl:when>
-			<jstl:when test="${row.situation == 'rental'}">
-				<spring:message code="costume.rental"/>
+			<jstl:when test="${row.type eq 'rental'}">
+				<spring:message code="costumeReserve.rental"/>
 			</jstl:when>
 			<jstl:otherwise>
 				ERROR
