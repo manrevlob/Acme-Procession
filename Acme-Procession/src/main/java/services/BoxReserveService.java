@@ -161,12 +161,16 @@ public class BoxReserveService {
 		
 		Assert.isTrue(canBeCancelled(boxReserve),"cant cancelled");
 		
+		
 		boxInstance = boxReserve.getBoxInstance();
 		chairs = boxReserve.getNumbersOfchairs();
 		newCHairs = boxInstance.getAvailableChairs() + chairs;
 		boxInstance.setAvailableChairs(newCHairs);
 		
 		boxInvoice = boxReserve.getBoxInvoice();
+		
+		Assert.isTrue(boxInvoice.getPaidMoment()==null,"invoice paid");
+		
 		boxInvoiceService.delete(boxInvoice);
 				
 		boxInstanceService.save(boxInstance);
