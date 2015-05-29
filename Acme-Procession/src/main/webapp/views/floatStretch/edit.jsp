@@ -28,7 +28,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />
 	
-	<acme:textbox code="stretch.brotherhood" path="brotherhood.name"/>
+	<acme:textbox code="stretch.brotherhood" path="brotherhood.name" readonly="true" />
 
 	<acme:textbox code="stretch.name" path="name" />
 
