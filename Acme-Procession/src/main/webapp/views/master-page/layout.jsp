@@ -35,6 +35,15 @@
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
@@ -57,14 +66,12 @@
 		window.location.replace(loc);
 	}
 	
-	
-	function reloadChairsAndPrice() {
-		var boxInstanceId = $('select#boxInstances').val();
-		var placeholder = $('select#chairsAvaiblables'); 
-
-		placeholder.load("boxReserve/viewer/selectChairs.do?boxInstanceId=" + boxInstanceId);			
-	}
-
+	$(function(){
+	    $(".dropdown-toggle").click(function(e){
+	        $(this).dropdown('toggle');
+	        return false;
+	    });
+	});
 </script>
 
 </head>
