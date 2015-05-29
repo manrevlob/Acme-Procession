@@ -132,6 +132,13 @@ public class CostumeBigBrotherController extends AbstractController {
 		costume = costumeService.findOneIfPrincipal(costumeId);
 		editCostumeForm.setCostume(costume);
 		
+		if(editCostumeForm.getCostume().getSalePrice() == null) {
+			editCostumeForm.setNoToSale(true);
+		}
+		if(editCostumeForm.getCostume().getRentalPrice() == null) {
+			editCostumeForm.setNoToRental(true);
+		}
+		
 		result = editModelAndView(editCostumeForm);
 
 		return result;

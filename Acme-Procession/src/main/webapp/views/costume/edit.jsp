@@ -20,6 +20,54 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<script>
+	var salePriceAmountLoadValue;
+	var salePriceCurrencyLoadValue;
+	var rentalPriceAmountLoadValue;
+	var rentalPriceCurrencyLoadValue;
+	
+	jQuery(document).ready(function() {
+		salePriceAmountLoadValue = document.getElementById('salePriceAmount').value;
+		salePriceCurrencyLoadValue = document.getElementById('salePriceCurrency').value;
+		rentalPriceAmountLoadValue = document.getElementById('rentalPriceAmount').value;
+		rentalPriceCurrencyLoadValue = document.getElementById('rentalPriceCurrency').value;
+		
+		disableSale();
+		disableRental();
+	});
+	
+    function disableSale() {
+    	document.getElementById('salePriceAmount').disabled = noToSaleCheck.checked;
+    	document.getElementById('salePriceCurrency').disabled = noToSaleCheck.checked;
+    	
+    	if(document.getElementById('salePriceAmount').disabled) {
+    		document.getElementById('salePriceAmount').value = 0;
+    	} else {
+    		document.getElementById('salePriceAmount').value = salePriceAmountLoadValue;
+    	}
+    	if(document.getElementById('salePriceCurrency').disabled) {
+    		document.getElementById('salePriceCurrency').value = '-';
+    	} else {
+    		document.getElementById('salePriceCurrency').value = salePriceCurrencyLoadValue;
+    	}
+	}
+    
+    function disableRental() {
+    	document.getElementById('rentalPriceAmount').disabled = noToRentalCheck.checked;
+    	document.getElementById('rentalPriceCurrency').disabled = noToRentalCheck.checked;
+    	if(document.getElementById('rentalPriceAmount').disabled) {
+    		document.getElementById('rentalPriceAmount').value = 0;
+    	} else {
+    		document.getElementById('rentalPriceAmount').value = rentalPriceAmountLoadValue;
+    	}
+    	if(document.getElementById('rentalPriceCurrency').disabled) {
+    		document.getElementById('rentalPriceCurrency').value = '-';
+    	} else {
+    		document.getElementById('rentalPriceCurrency').value = rentalPriceCurrencyLoadValue;
+    	}
+    }
+</script>
+
 <form:form action="costume/bigBrother/edit.do" modelAttribute="editCostumeForm">
 	
 	<form:hidden path="costume.brotherhood"/>
@@ -35,7 +83,7 @@
 	<fieldset>
 		<legend><spring:message code="costume.salePrice"/></legend>
 		
-		<form:checkbox path="noToSale" onclick="document.getElementById('salePriceAmount').disabled=this.checked;document.getElementById('salePriceAmount').value=0,0;document.getElementById('salePriceCurrency').disabled=this.checked;document.getElementById('salePriceCurrency').value='-';"/>
+		<form:checkbox id="noToSaleCheck" path="noToSale" onclick="disableSale()"/>
 		<spring:message code="costume.noToSale"/>
 		
 		<br/>
@@ -58,7 +106,7 @@
 	<fieldset>
 		<legend><spring:message code="costume.rentalPrice"/></legend>
 		
-		<form:checkbox path="noToRental" onclick="document.getElementById('rentalPriceAmount').disabled=this.checked;document.getElementById('rentalPriceAmount').value=0,0;document.getElementById('rentalPriceCurrency').disabled=this.checked;document.getElementById('rentalPriceCurrency').value='-';"/>
+		<form:checkbox id="noToRentalCheck" path="noToRental" onclick="disableRental()"/>
 		<spring:message code="costume.noToRental"/>
 		
 		<br/>
