@@ -88,6 +88,8 @@ public class BoxReserveViewerController extends AbstractController {
 			}catch (Exception e) {
 				if(e.getMessage()=="cant cancelled"){
 					result.addObject("error","boxReserve.cancelReserve.error");
+				}else if(e.getMessage()=="invoice paid"){
+					result.addObject("error","boxReserve.invoicePaid.error");
 				}else{
 					result.addObject("error","boxReserve.commit.error");
 				}
