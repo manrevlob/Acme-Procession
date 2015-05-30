@@ -83,6 +83,7 @@ public class BoxInstanceAdministratorController extends AbstractController {
 				result = createEditModelAndView(boxInstance);
 			} else {
 				try {
+					boxInstanceService.isEditable(boxInstance);
 					boxInstanceService.saveBoxInstance(boxInstance);
 					result = new ModelAndView("redirect:/box/administrator/list.do");
 					

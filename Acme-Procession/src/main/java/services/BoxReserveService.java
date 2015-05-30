@@ -81,6 +81,8 @@ public class BoxReserveService {
 		amount = createBoxReserveForm.getBox().getPrice().getAmount();
 		currency = createBoxReserveForm.getBox().getPrice().getCurrency();
 		amount= amount * chairs;
+		amount = Math.round(amount * 100) / 100;
+
 		cost.setAmount(amount);
 		cost.setCurrency(currency);
 		result.setTotalCost(cost);
