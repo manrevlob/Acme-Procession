@@ -39,8 +39,6 @@
 	
 	<acme:submit name="save" code="brotherhood.save" />
 	
-</form:form>
-
-<div>
 	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="brotherhood.cancel"/>
-</div>
+	
+</form:form>
