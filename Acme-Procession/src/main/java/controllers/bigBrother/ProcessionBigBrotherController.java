@@ -95,8 +95,13 @@ public class ProcessionBigBrotherController extends AbstractController {
 						"redirect:/procession/list.do?brotherhoodId="
 								+ procession.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(procession,
-						"procession.commit.error");
+				if(oops.getMessage().equals("procession.date.error")) {
+					result = createEditModelAndView(procession,
+							"procession.date.error");
+				} else {
+					result = createEditModelAndView(procession,
+							"procession.commit.error");
+				}
 			}
 		}
 
