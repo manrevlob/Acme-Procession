@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-static-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -30,7 +30,6 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#"><spring:message code="master.page.start" /> <span class="sr-only">(current)</span></a></li>
 				<security:authorize access="hasRole('ADMINISTRATOR')">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message	code="master.page.administrator" /><span class="caret"></span></a>
@@ -78,21 +77,21 @@
 						</ul>
 					</li>
 				</security:authorize>
-				<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
+				<li><a href="brotherhood/list.do"><spring:message code="master.page.listBrotherhoods" /></a></li>
 				<security:authorize access="isAuthenticated()">
 					<li><a href="messageFolder/actor/list.do"><spring:message code="master.page.privateMessages" /></a></li>
 				</security:authorize>
 				<security:authorize access="isAnonymous()">
-					<li><a class="fNiv" href="customer/registerBrother.do"><spring:message code="master.page.registerAsBrother" /></a></li>
-					<li><a class="fNiv" href="customer/registerViewer.do"><spring:message code="master.page.registerAsViewer" /></a></li>
+					<li><a href="customer/registerBrother.do"><spring:message code="master.page.registerAsBrother" /></a></li>
+					<li><a href="customer/registerViewer.do"><spring:message code="master.page.registerAsViewer" /></a></li>
 				</security:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<security:authorize access="isAnonymous()">
-					<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+					<li><a href="security/login.do"><button type="button" class="btn btn-default navbar-btn"><spring:message code="master.page.login" /></button></a></li>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
-					<li><a class="fNiv" href="j_spring_security_logout"><spring:message code="master.page.logout" /> - (<security:authentication property="principal.username" />)</a></li>
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> - (<security:authentication property="principal.username" />)</a></li>
 				</security:authorize>
 			</ul>
 		</div><!-- /.navbar-collapse -->
