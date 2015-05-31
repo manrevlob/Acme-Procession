@@ -26,14 +26,7 @@
 
 <link rel="shortcut icon" href="favicon.ico"/> 
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
-
-<link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen"
-	type="text/css" />
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -44,18 +37,21 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="styles/common.css" type="text/css">
+<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
 
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();
 	}
-	
+
 	function relativeRedir(loc) {	
 		var b = document.getElementsByTagName('base');
 		if (b && b[0] && b[0].href) {
@@ -65,13 +61,7 @@
 		}
 		window.location.replace(loc);
 	}
-	
-	$(function(){
-	    $(".dropdown-toggle").click(function(e){
-	        $(this).dropdown('toggle');
-	        return false;
-	    });
-	});
+
 </script>
 
 </head>
