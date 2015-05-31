@@ -72,6 +72,10 @@ public class ProcessionService {
 
 	public Procession save(Procession procession) {
 		Assert.notNull(procession);
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
+		Assert.isTrue(procession.getStartMoment().before(procession.getEndMoment()), "procession.date.error");
 
 		procession = processionRepository.save(procession);
 
