@@ -73,6 +73,8 @@ public class BoxInstanceService {
 	public BoxInstance findOne(int boxInstanceId) {
 		BoxInstance result;
 
+		Assert.isTrue(actorService.isAdministrator());
+		
 		result = boxInstanceRepository.findOne(boxInstanceId);
 
 		return result;
@@ -80,6 +82,8 @@ public class BoxInstanceService {
 
 	public Collection<BoxInstance> findAll() {
 		Collection<BoxInstance> result;
+		
+		Assert.isTrue(actorService.isAdministrator());
 
 		result = boxInstanceRepository.findAll();
 
@@ -91,6 +95,8 @@ public class BoxInstanceService {
 	public void isEditable(BoxInstance boxInstance) {
 		Collection<BoxReserve> boxReserves;
 		
+		Assert.isTrue(actorService.isAdministrator());
+		
 		boxReserves =  boxInstance.getBoxReserves();
 		
 		
@@ -100,7 +106,9 @@ public class BoxInstanceService {
 	
 	public Collection<BoxInstance> findByBox(int boxId) {
 		Collection<BoxInstance> result;
-
+		
+		Assert.isTrue(actorService.isAdministrator());
+		
 		result = boxInstanceRepository.findByBox(boxId);
 
 		return result;
@@ -108,6 +116,8 @@ public class BoxInstanceService {
 	
 	public Collection<BoxInstance> findAvailablesByBox(int boxId) {
 		Collection<BoxInstance> result;
+		
+		Assert.isTrue(actorService.isAdministrator());
 
 		result = boxInstanceRepository.findAvailablesByBox(boxId);
 
