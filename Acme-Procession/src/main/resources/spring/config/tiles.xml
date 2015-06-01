@@ -40,7 +40,6 @@
 		<value>/views/costume/tiles.xml</value>
 		<value>/views/costumeReserve/tiles.xml</value>
 		<value>/views/boxReserve/tiles.xml</value>
-		<value>/views/boxInvoice/tiles.xml</value>
 		<value>/views/invoice/tiles.xml</value>
 		
 	</util:list>
