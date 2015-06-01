@@ -26,7 +26,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />
 	
-	<acme:textbox code="carving.brotherhood" path="brotherhood.name" readonly="true" />
+	<acme:textbox code="carving.brotherhood" path="brotherhood.name" readonly="true" disabled="true" />
 
 	<acme:textbox code="carving.name" path="name"/>
 
