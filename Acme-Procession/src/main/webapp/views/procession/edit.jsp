@@ -35,7 +35,7 @@
 		<form:hidden path="image" />
 	</jstl:if>
 
-	<acme:textbox code="procession.brotherhood" path="brotherhood.name" readonly="true"/>
+	<acme:textbox code="procession.brotherhood" path="brotherhood.name" readonly="true" disabled="true" />
 
 	<acme:textbox code="procession.name" path="name" />
 
@@ -58,6 +58,8 @@
 		<acme:textbox code="procession.associatedCost.currency"
 			path="associatedCost.currency" />
 	</fieldset>
+
+	<hr />
 
 	<acme:textarea code="procession.comments" path="comments" />
 

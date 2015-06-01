@@ -126,6 +126,8 @@
 		<form:errors cssClass="error" path="costume.rentalPrice.currency" />
 	</fieldset>
 	
+	<hr />
+	
 	<acme:textarea code="costume.comments" path="costume.comments" />
 	
 	<acme:submit name="save" code="costume.save" />
