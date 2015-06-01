@@ -210,6 +210,8 @@ public class BrotherService {
 		brotherhoods.add(brotherhood);
 
 		result.setBrotherhoods(brotherhoods);
+		
+		save(result);
 
 		return result;
 	}
@@ -220,6 +222,27 @@ public class BrotherService {
 
 		result = brotherRepository.findByBrotherhoodAndBrother(brotherhoodId,
 				brother.getId());
+
+		return result;
+	}
+
+	// Dashboard
+	public Collection<Brother> findByBrotherhoodAndBrother() {
+		Collection<Brother> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findAllOrderByNumReg();
+
+		return result;
+	}
+
+	public Collection<Brother> findByNumBrotherhood() {
+		Collection<Brother> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findByNumBrotherhood();
 
 		return result;
 	}

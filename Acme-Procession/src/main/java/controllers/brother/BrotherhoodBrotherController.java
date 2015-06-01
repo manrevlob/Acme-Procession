@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BrotherService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
-import domain.Brother;
 import domain.Brotherhood;
 
 @Controller
@@ -61,15 +60,13 @@ public class BrotherhoodBrotherController extends AbstractController {
 	public ModelAndView register(@RequestParam int brotherhoodId) {
 		ModelAndView result;
 		Brotherhood brotherhood;
-		Brother brother;
 		String error;
 
-		brotherhood = brotherhoodService.findOne(brotherhoodId);
-		brother = brotherService.registerToBrotherhood(brotherhood);
 		error = null;
 
 		try {
-			brotherService.save(brother);
+			brotherhood = brotherhoodService.findOne(brotherhoodId);
+			brotherService.registerToBrotherhood(brotherhood);
 			result = new ModelAndView("redirect:/brotherhood/brother/list.do");
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:/brotherhood/list.do");
