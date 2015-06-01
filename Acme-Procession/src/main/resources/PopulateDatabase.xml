@@ -1518,5 +1518,35 @@
 		<property name="costume" ref="costume3" />
 		<property name="brother" ref="brother2" />
 	</bean>
+	
+	<!-- Assessment -->
+	
+	<bean id="assessment1" class="domain.Assessment">
+		<property name="street" value="StreetA" />
+		<property name="valoration" value="9" />
+		<property name="procession" ref="procession1" />
+		<property name="viewer" ref="viewer1" />
+	</bean>
+	
+	<bean id="assessment2" class="domain.Assessment">
+		<property name="street" value="StreetA" />
+		<property name="valoration" value="6" />
+		<property name="procession" ref="procession1" />
+		<property name="viewer" ref="viewer2" />
+	</bean>
+	
+	<bean id="assessment3" class="domain.Assessment">
+		<property name="street" value="StreetC" />
+		<property name="valoration" value="7" />
+		<property name="procession" ref="procession2" />
+		<property name="viewer" ref="viewer1" />
+	</bean>
+	
+	<bean id="assessment4" class="domain.Assessment">
+		<property name="street" value="StreetB" />
+		<property name="valoration" value="5" />
+		<property name="procession" ref="procession3" />
+		<property name="viewer" ref="viewer1" />
+	</bean>
 
 </beans>
