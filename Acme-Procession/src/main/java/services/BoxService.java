@@ -52,6 +52,7 @@ public class BoxService {
 
 		Assert.notNull(box);
 		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(box.getAdministrator().getUserAccount().getId()== administratorService.findByPrincipal().getUserAccount().getId());
 
 		result = boxRepository.save(box);
 
