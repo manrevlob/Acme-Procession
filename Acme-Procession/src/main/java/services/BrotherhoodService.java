@@ -204,5 +204,26 @@ public class BrotherhoodService {
 		
 		return result;
 	}
+	
+	// Dashboard
+	public Collection<Brotherhood> findAllOrderByNumReg(){
+		Collection<Brotherhood> result;
+		
+		Assert.isTrue(actorService.isAdministrator());
+		
+		result = brotherhoodRepository.findAllOrderByNumReg();
+		
+		return result;
+	}
+	
+	public Collection<Object[]> findAllByAssess(){
+		Collection<Object[]> result;
+		
+		Assert.isTrue(actorService.isAdministrator());
+		
+		result = brotherhoodRepository.findAllByAssess();
+		
+		return result;
+	}
 
 }

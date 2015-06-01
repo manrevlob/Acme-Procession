@@ -17,7 +17,7 @@ import domain.BoxReserve;
 
 @Controller
 @RequestMapping("/boxInvoice/viewer")
-public class BoInvoiceViewerController extends AbstractController {
+public class BoxInvoiceViewerController extends AbstractController {
 	
 		// Services ---------------------------------------------------------------
 
@@ -28,7 +28,7 @@ public class BoInvoiceViewerController extends AbstractController {
 
 		// Constructors -----------------------------------------------------------
 
-		public BoInvoiceViewerController() {
+		public BoxInvoiceViewerController() {
 			super();
 		}
 
@@ -37,13 +37,13 @@ public class BoInvoiceViewerController extends AbstractController {
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
 		public ModelAndView list() {
 			ModelAndView result;
-			Collection<BoxInvoice> registrationInvoices;
+			Collection<BoxInvoice> invoices;
 
-			registrationInvoices = boxInvoiceService.findByPrincipal();
+			invoices = boxInvoiceService.findByPrincipal();
 
 			result = new ModelAndView("invoice/list");
 			result.addObject("requestURI", "boxInvoice/viewer/list.do");
-			result.addObject("registrationInvoices", registrationInvoices);
+			result.addObject("invoices", invoices);
 
 			return result;
 		}
@@ -61,7 +61,7 @@ public class BoInvoiceViewerController extends AbstractController {
 			
 
 			result = new ModelAndView("invoice/details");
-			result.addObject("registrationInvoice", boxInvoice);
+			result.addObject("invoice", boxInvoice);
 			result.addObject("boxReserve", boxReserve);
 
 			return result;

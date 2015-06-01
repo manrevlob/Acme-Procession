@@ -227,24 +227,54 @@ public class BrotherService {
 	}
 
 	// Dashboard
-//	public Collection<Brother> findByBrotherhoodAndBrother() {
-//		Collection<Brother> result;
-//
-//		Assert.isTrue(actorService.isAdministrator());
-//
-//		result = brotherRepository.findAllOrderByNumReg();
-//
-//		return result;
-//	}
+	public Collection<Brother> findByBrotherhoodAndBrother() {
+		Collection<Brother> result;
 
-//	public Collection<Brother> findByNumBrotherhood() {
-//		Collection<Brother> result;
-//
-//		Assert.isTrue(actorService.isAdministrator());
-//
-//		result = brotherRepository.findByNumBrotherhood();
-//
-//		return result;
-//	}
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findAllOrderByNumReg();
+
+		return result;
+	}
+
+	public Collection<Brother> findByNumBrotherhood() {
+		Collection<Brother> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findByNumBrotherhood();
+
+		return result;
+	}
+	
+	public Collection<Brother> findWithAutoAndCostumePay(){
+		Collection<Brother> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findWithAutoAndCostumePay();
+
+		return result;
+	}
+	
+	public Collection<Object[]> findAllTotalCostOfRegistration(){
+		Collection<Object[]> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findAllTotalCostOfRegistration();
+
+		return result;
+	}
+	
+	public Collection<Object[]> findAllTotalCostOfCostume(){
+		Collection<Object[]> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = brotherRepository.findAllTotalCostOfCostume();
+
+		return result;
+	}
 
 }

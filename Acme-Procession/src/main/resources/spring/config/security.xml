@@ -56,6 +56,7 @@
 		<security:intercept-url pattern="/registration/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
 	
 		<security:intercept-url pattern="/registrationInvoice/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" />
+		<security:intercept-url pattern="/costumeInvoice/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" />
 		
 		<security:intercept-url pattern="/costume/brother/**" access="hasAnyRole('BROTHER', 'BIGBROTHER')" /> 
 		<security:intercept-url pattern="/costume/bigBrother/**" access="hasRole('BIGBROTHER')" /> 
@@ -77,6 +78,8 @@
 		
 		<security:intercept-url pattern="/administrator/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		
+		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		
 		<security:intercept-url pattern="/box/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<security:intercept-url pattern="/boxInstance/administrator/**" access="hasRole('ADMINISTRATOR')" />
@@ -91,6 +94,7 @@
 		
 		<security:intercept-url pattern="/messageFolder/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/message/actor/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/pdf/actor/**" access="isAuthenticated()" /> 
 	
 		<security:intercept-url pattern="/law/**" access="permitAll" />
 	

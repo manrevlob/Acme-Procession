@@ -41,6 +41,7 @@
 		<value>/views/costumeReserve/tiles.xml</value>
 		<value>/views/boxReserve/tiles.xml</value>
 		<value>/views/invoice/tiles.xml</value>
+		<value>/views/dashboard/tiles.xml</value>
 		
 	</util:list>
 

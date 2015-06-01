@@ -20,4 +20,20 @@ public interface BrotherRepository extends JpaRepository<Brother, Integer> {
 	@Query("select b.name from Brotherhood bb join bb.brothers b where bb.id = ?1 and b.id = ?2 group by b")
 	Collection<Brother> findByBrotherhoodAndBrother(int brotherhoodId, int brotherId);
 	
+	// Dashboard
+	@Query("select b from Brother b order by b.registrations.size desc")
+	Collection<Brother> findAllOrderByNumReg();
+	
+	@Query("select b from Brother b join b.ownBrotherhoods bb group by b having count(bb) >= ALL(Select count(bb2) from Brother b2 join b2.ownBrotherhoods bb2 group by b2)")
+	Collection<Brother> findByNumBrotherhood();
+	
+	@Query("select b, SUM(bri.totalCost.amount) as amount from Brother b join b.registrations br join br.registrationInvoice bri where bri.paidMoment != null group by b order by amount desc")
+	Collection<Object[]> findAllTotalCostOfRegistration();
+	
+	@Query("select b, SUM(bci.totalCost.amount) as amount from Brother b join b.costumeReserves bc join bc.costumeInvoice bci where bci.paidMoment != null group by b order by amount desc")
+	Collection<Object[]> findAllTotalCostOfCostume();
+	
+	@Query("select b from Brother b join b.costumeReserves bc where b.isAuthorized = true and bc.type like 'purchase' group by b")
+	Collection<Brother> findWithAutoAndCostumePay();
+	
 }

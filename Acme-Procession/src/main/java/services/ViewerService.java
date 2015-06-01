@@ -31,6 +31,8 @@ public class ViewerService {
 
 	@Autowired
 	private MessageFolderService messageFolderService;
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -174,6 +176,27 @@ public class ViewerService {
 		result = viewerRepository.findByPrincipal(userAccount.getId());
 
 		Assert.notNull(result);
+
+		return result;
+	}
+
+	// Dashboard
+	public Collection<Viewer> findAllReserMorBox() {
+		Collection<Viewer> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = viewerRepository.findAllReserMorBox();
+
+		return result;
+	}
+
+	public Collection<Viewer> findAllOrderByNumAssess() {
+		Collection<Viewer> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = viewerRepository.findAllOrderByNumAssess();
 
 		return result;
 	}

@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -13,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -56,6 +59,7 @@ public class CostumeReserve extends DomainEntity {
 
 	private Costume costume;
 	private Brother brother;
+	private CostumeInvoice costumeInvoice;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -75,6 +79,17 @@ public class CostumeReserve extends DomainEntity {
 
 	public void setBrother(Brother brother) {
 		this.brother = brother;
+	}
+	
+	@Valid
+	@OneToOne(optional=true)
+	@Cascade(CascadeType.ALL)
+	public CostumeInvoice getCostumeInvoice() {
+		return costumeInvoice;
+	}
+
+	public void setCostumeInvoice(CostumeInvoice costumeInvoice) {
+		this.costumeInvoice = costumeInvoice;
 	}
 	
 }

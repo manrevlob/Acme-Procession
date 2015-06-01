@@ -19,4 +19,8 @@ public interface ProcessionRepository extends
 	@Query("select p from Procession p where p.isClosedManually is false and datediff(CURRENT_TIMESTAMP, p.startMoment) < 7")
 	Collection<Procession> findAllAvailables();
 	
+	// Dashboard
+	@Query("select p from Procession p order by p.registrations.size desc")
+	Collection<Procession> findAllOrderByNumReg();
+	
 }
