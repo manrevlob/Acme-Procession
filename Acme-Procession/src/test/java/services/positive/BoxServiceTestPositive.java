@@ -65,6 +65,27 @@ public class BoxServiceTestPositive extends AbstractTest {
 		authenticate(null);
 	}
 	
+	// Editamos una box
+	@Test
+	public void testEditBox() {
+		Box box;
+		String description;
+
+		authenticate("admin");
+
+		box = boxService.findOne(85);
+		
+		description = box.getDescription();
+
+		box.setDescription("description3");
+		
+		boxService.save(box);
+		
+		Assert.isTrue(!description.equals(box.getDescription()));
+
+		authenticate(null);
+	}
+	
 	// Probamos a obtener las boxes del usuario logueado
 	@Test
 	public void testFindByPrincipal() {

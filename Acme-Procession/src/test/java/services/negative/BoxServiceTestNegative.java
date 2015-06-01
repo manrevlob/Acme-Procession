@@ -82,31 +82,77 @@ public class BoxServiceTestNegative extends AbstractTest {
 	}
 	
 	// Comprobamos que no funciona sin estar autenticados 
-		@Test(expected = IllegalArgumentException.class)
-		public void testCreateAndSave3() {
-			Box box;
-			Money price;
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateAndSave3() {
+		Box box;
+		Money price;
 
-			authenticate(null);
+		authenticate(null);
 
-			box = boxService.create();
+		box = boxService.create();
 
-			box.setDescription("description");
-			box.setLocality("locality");
-			box.setLocation("location");
-			box.setName("name");
-			box.setNumberOfChairs(14);
-			
-			price = new Money();
-			price.setAmount(14);
-			price.setCurrency("Euro");
-			
-			box.setPrice(price);
-			
-			boxService.save(box);
+		box.setDescription("description");
+		box.setLocality("locality");
+		box.setLocation("location");
+		box.setName("name");
+		box.setNumberOfChairs(14);
+		
+		price = new Money();
+		price.setAmount(14);
+		price.setCurrency("Euro");
+		
+		box.setPrice(price);
+		
+		boxService.save(box);
 
-		}	
+	}
+		
+	// Comprobamos que no podemos editar siendo viewer
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditBox() {
+		Box box;
 
+		authenticate("viewer1");
+
+		box = boxService.findOne(85);
+
+		box.setDescription("description3");
+		
+		boxService.save(box);
+
+		authenticate(null);
+	}
+
+	// Comprobamos que no podemos editar siendo brother
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditBox2() {
+		Box box;
+
+		authenticate("brother1");
+
+		box = boxService.findOne(85);
+
+		box.setDescription("description3");
+		
+		boxService.save(box);
+
+		authenticate(null);
+	}
+	
+	// Comprobamos que no podemos editar sin estar logueados
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditBox3() {
+		Box box;
+
+		authenticate(null);
+
+		box = boxService.findOne(85);
+
+		box.setDescription("description3");
+		
+		boxService.save(box);
+	}
+	
 	// Comprobamos que no funciona con el rol de brother
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindByPrincipal() {
