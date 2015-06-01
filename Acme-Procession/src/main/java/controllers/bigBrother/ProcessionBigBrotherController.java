@@ -170,7 +170,11 @@ public class ProcessionBigBrotherController extends AbstractController {
 										.getId());
 			} catch (Throwable oops) {
 				result = new ModelAndView("procession/addStretch");
-				result.addObject("message", "procession.commit.error");
+				if(oops.getMessage().equals("procession.duplicatedCarving.error")) {
+					result.addObject("message", "procession.duplicatedCarving.error");
+				} else {
+					result.addObject("message", "procession.commit.error");
+				}
 				result.addObject("addStretchToProcessionForm",
 						addStretchToProcessionForm);
 			}

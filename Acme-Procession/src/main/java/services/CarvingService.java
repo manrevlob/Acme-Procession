@@ -10,6 +10,8 @@ import org.springframework.util.Assert;
 import repositories.CarvingRepository;
 import domain.Brotherhood;
 import domain.Carving;
+import domain.Procession;
+import domain.Stretch;
 
 @Service
 @Transactional
@@ -81,6 +83,26 @@ public class CarvingService {
 
 		result = carvingRepository.findByBrotherhood(brotherhoodId);
 
+		return result;
+	}
+	
+	public Collection<Carving> findByProcession(Procession procession) {
+		Collection<Carving> result;
+		
+		Assert.notNull(procession);
+		
+		result = carvingRepository.findByProcession(procession);
+		
+		return result;
+	}
+	
+	public Collection<Carving> findByStretch(Stretch stretch) {
+		Collection<Carving> result;
+		
+		Assert.notNull(stretch);
+		
+		result = carvingRepository.findByStretch(stretch);
+		
 		return result;
 	}
 

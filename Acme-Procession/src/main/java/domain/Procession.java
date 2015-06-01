@@ -166,7 +166,6 @@ public class Procession extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy = "procession")
 	public Collection<StretchOrder> getStretchOrders() {
 		return stretchOrders;
