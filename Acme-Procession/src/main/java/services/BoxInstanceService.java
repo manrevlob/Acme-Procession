@@ -116,8 +116,6 @@ public class BoxInstanceService {
 	
 	public Collection<BoxInstance> findAvailablesByBox(int boxId) {
 		Collection<BoxInstance> result;
-		
-		Assert.isTrue(actorService.isAdministrator());
 
 		result = boxInstanceRepository.findAvailablesByBox(boxId);
 
