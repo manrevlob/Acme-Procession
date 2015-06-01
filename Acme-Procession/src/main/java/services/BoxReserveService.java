@@ -247,6 +247,8 @@ public class BoxReserveService {
 	public BoxReserve findByBoxInvoice(int boxInvoiceId){
 		BoxReserve	result;
 		
+		Assert.isTrue(actorService.isViewer());
+		
 		result = boxReserveRepository.findByBoxInvoice(boxInvoiceId);
 		
 		return result;
