@@ -63,7 +63,7 @@ public class CostumeReserveService {
 		result = new CostumeReserve();
 		
 		milliseconds = System.currentTimeMillis();
-		moment = new Date(milliseconds);
+		moment = new Date(milliseconds - 10);
 
 		result.setBrother(brotherService.findByPrincipal());
 		result.setCostume(costume);

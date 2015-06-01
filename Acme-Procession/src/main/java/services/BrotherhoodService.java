@@ -165,6 +165,8 @@ public class BrotherhoodService {
 		Assert.notNull(addBrotherForm);
 		Assert.isTrue(addBrotherForm.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
+		Assert.isTrue(addBrotherForm.getBrotherhood().getBrothers()
+				.contains(addBrotherForm.getBrother()));
 
 		brotherhood = addBrotherForm.getBrotherhood();
 		brother = addBrotherForm.getBrother();
@@ -172,9 +174,10 @@ public class BrotherhoodService {
 		updatedUserAccount = brother.getUserAccount();
 		authorities = updatedUserAccount.getAuthorities();
 		
-		if(!authorities.contains(Authority.BIGBROTHER)) {
-			bigBrotherAuthority = new Authority();
-			bigBrotherAuthority.setAuthority(Authority.BIGBROTHER);
+		bigBrotherAuthority = new Authority();
+		bigBrotherAuthority.setAuthority(Authority.BIGBROTHER);
+		
+		if(!authorities.contains(bigBrotherAuthority)) {
 			updatedUserAccount.addAuthority(bigBrotherAuthority);
 			brother.setUserAccount(updatedUserAccount);
 		}
