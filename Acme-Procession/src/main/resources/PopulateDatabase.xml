@@ -869,6 +869,8 @@
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="associatedStretchs">
 			<list>
+				<ref bean="floatStretch1"/>
+				<ref bean="floatStretch2"/>
 			</list>
 		</property>
 	</bean>
@@ -882,6 +884,8 @@
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="associatedStretchs">
 			<list>
+				<ref bean="floatStretch1"/>
+				<ref bean="floatStretch3"/>
 			</list>
 		</property>
 	</bean>
@@ -895,6 +899,7 @@
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="associatedStretchs">
 			<list>
+				<ref bean="floatStretch3"/>
 			</list>
 		</property>
 	</bean>
@@ -908,6 +913,7 @@
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="associatedStretchs">
 			<list>
+				<ref bean="floatStretch4"/>
 			</list>
 		</property>
 	</bean>
@@ -921,6 +927,7 @@
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="associatedStretchs">
 			<list>
+				<ref bean="floatStretch4"/>
 			</list>
 		</property>
 	</bean>
@@ -1017,7 +1024,6 @@
 			<list>
 				<ref bean="carving1" />
 				<ref bean="carving2" />
-				<ref bean="carving3" />
 			</list>
 		</property>
 	</bean>
@@ -1034,7 +1040,6 @@
 		<property name="carvings">
 			<list>
 				<ref bean="carving1" />
-				<ref bean="carving2" />
 			</list>
 		</property>
 	</bean>
@@ -1050,6 +1055,7 @@
 		</property>
 		<property name="carvings">
 			<list>
+				<ref bean="carving2" />
 				<ref bean="carving3" />
 			</list>
 		</property>

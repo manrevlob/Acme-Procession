@@ -237,7 +237,7 @@ public class BrotherhoodServiceTestNegative extends AbstractTest {
 		authenticate("brother5");
 
 		// ID de la brotherhood 1
-		brotherhood = brotherhoodService.findOneIfPrincipal(33);
+		brotherhood = brotherhoodService.findOne(33);
 		addBigBrotherForm.setBrotherhood(brotherhood);
 
 		before = brotherhood.getBigBrothers().size();
@@ -276,7 +276,7 @@ public class BrotherhoodServiceTestNegative extends AbstractTest {
 		authenticate("brother1");
 
 		// ID de la brotherhood 1
-		brotherhood = brotherhoodService.findOneIfPrincipal(33);
+		brotherhood = brotherhoodService.findOne(33);
 		addBigBrotherForm.setBrotherhood(brotherhood);
 
 		before = brotherhood.getBigBrothers().size();

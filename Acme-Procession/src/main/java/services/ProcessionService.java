@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 
 import repositories.ProcessionRepository;
 import domain.Brotherhood;
+import domain.Carving;
+import domain.FloatStretch;
 import domain.Procession;
 import domain.Stretch;
 import domain.StretchOrder;
@@ -36,6 +38,9 @@ public class ProcessionService {
 
 	@Autowired
 	private StretchOrderService stretchOrderService;
+
+	@Autowired
+	private CarvingService carvingService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -75,7 +80,9 @@ public class ProcessionService {
 		Assert.isTrue(actorService.isBrother());
 		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
-		Assert.isTrue(procession.getStartMoment().before(procession.getEndMoment()), "procession.date.error");
+		Assert.isTrue(
+				procession.getStartMoment().before(procession.getEndMoment()),
+				"procession.date.error");
 
 		procession = processionRepository.save(procession);
 
@@ -90,7 +97,8 @@ public class ProcessionService {
 		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
 		// Comprobamos que aún nadie está registrado en la procesión
-		Assert.isTrue(procession.getRegistrations().size() == 0);
+		Assert.isTrue(procession.getRegistrations() == null
+				|| procession.getRegistrations().size() == 0);
 
 		processionRepository.delete(procession);
 	}
@@ -126,21 +134,33 @@ public class ProcessionService {
 		Stretch stretch;
 		StretchOrder stretchOrder;
 		Collection<StretchOrder> stretchOders;
+		Collection<Carving> carvingsInTheProcession;
+		Collection<Carving> carvingsOfTheStretch;
 
 		procession = addStretchToProcessionForm.getProcession();
 		stretch = addStretchToProcessionForm.getStretch();
 
 		Assert.isTrue(actorService.isBrother());
+		// Comprobamos que la hermandad del paso seleccionado es la misma que la
+		// hermandad de la procesión
+		Assert.isTrue(procession.getBrotherhood().equals(
+				stretch.getBrotherhood()));
 		// Comprobamos que el usuario tenga permisos sobre la hermandad
 		Assert.isTrue(stretch.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
-		// Comprobamos que la hermandad del paso seleccionado es la misma que la
-		// hermandad de la procesión
-		Assert.isTrue(stretch.getBrotherhood().equals(
-				procession.getBrotherhood()));
 		// Comprobamos que, si es un tramo de paso, sus carvings no estén ya en
 		// otro paso.
-		// TODO
+		if (addStretchToProcessionForm.getStretch().getClass()
+				.equals(FloatStretch.class)) {
+			carvingsInTheProcession = carvingService
+					.findByProcession(procession);
+			carvingsOfTheStretch = carvingService.findByStretch(stretch);
+
+			for (Carving c : carvingsOfTheStretch) {
+				Assert.isTrue(!carvingsInTheProcession.contains(c),
+						"procession.duplicatedCarving.error");
+			}
+		}
 
 		stretchOrder = stretchOrderService.createByStretchAndProcession(
 				stretch, procession);
