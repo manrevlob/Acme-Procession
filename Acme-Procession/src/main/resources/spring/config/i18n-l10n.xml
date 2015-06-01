@@ -48,6 +48,7 @@
 		<value>/views/boxReserve/messages</value>
 		<value>/views/boxInvoice/messages</value>
 		<value>/views/invoice/messages</value>
+		<value>/views/dashboard/messages</value>
 		
 	</util:list>
 

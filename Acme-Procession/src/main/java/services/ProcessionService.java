@@ -207,4 +207,15 @@ public class ProcessionService {
 		save(procession);
 	}
 
+	// Dashboard
+	public Collection<Procession> findAllOrderByNumReg() {
+		Collection<Procession> result;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		result = processionRepository.findAllOrderByNumReg();
+
+		return result;
+	}
+
 }

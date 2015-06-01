@@ -1502,6 +1502,7 @@
 		<property name="type" value="rental" />
 		<property name="costume" ref="costume1" />
 		<property name="brother" ref="brother1" />
+		<property name="costumeInvoice" ref="costumeInvoice1" />
 	</bean>
 	
 	<bean id="costumeReserve2" class="domain.CostumeReserve">
@@ -1509,6 +1510,7 @@
 		<property name="type" value="rental" />
 		<property name="costume" ref="costume2" />
 		<property name="brother" ref="brother2" />
+		<property name="costumeInvoice" ref="costumeInvoice2" />
 	</bean>
 	
 	<bean id="costumeReserve3" class="domain.CostumeReserve">
@@ -1516,6 +1518,7 @@
 		<property name="type" value="rental" />
 		<property name="costume" ref="costume1" />
 		<property name="brother" ref="brother1" />
+		<property name="costumeInvoice" ref="costumeInvoice3" />
 	</bean>
 	
 	<bean id="costumeReserve4" class="domain.CostumeReserve">
@@ -1523,6 +1526,33 @@
 		<property name="type" value="purchase" />
 		<property name="costume" ref="costume3" />
 		<property name="brother" ref="brother2" />
+		<property name="costumeInvoice" ref="costumeInvoice4" />
+	</bean>
+	
+	<!-- CostumeInvoice -->
+	
+	<bean id="costumeInvoice1" class="domain.CostumeInvoice">
+		<property name="createMoment" value="2015/03/28 20:10" />
+		<property name="paidMoment" value="2015/03/30 00:00" />
+		<property name="totalCost" ref="money2" />
+	</bean>
+	
+	<bean id="costumeInvoice2" class="domain.CostumeInvoice">
+		<property name="createMoment" value="2015/04/02 11:24" />
+		<!-- WITHOUT PAIDMOMENT -->
+		<property name="totalCost" ref="money4" />
+	</bean>
+	
+	<bean id="costumeInvoice3" class="domain.CostumeInvoice">
+		<property name="createMoment" value="2015/05/22 17:32" />
+		<!-- WITHOUT PAIDMOMENT -->
+		<property name="totalCost" ref="money2" />
+	</bean>
+	
+	<bean id="costumeInvoice4" class="domain.CostumeInvoice">
+		<property name="createMoment" value="2015/05/24 19:01" />
+		<!-- WITHOUT PAIDMOMENT -->
+		<property name="totalCost" ref="money2" />
 	</bean>
 	
 	<!-- Assessment -->

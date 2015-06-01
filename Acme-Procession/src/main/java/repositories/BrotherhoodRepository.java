@@ -21,5 +21,12 @@ public interface BrotherhoodRepository extends
 	
 	@Query("select b from Brotherhood b where b.logo.id = ?1")
 	Brotherhood findByImage(int logoId);
-
+	
+	//Dashboard
+	@Query("select b from Brotherhood b order by b.brothers.size desc")
+	Collection<Brotherhood> findAllOrderByNumReg();
+	
+	@Query("select b, avg(bpa.valoration) from Brotherhood b join b.processions bp join bp.assessments bpa group by b")
+	Collection<Object[]> findAllByAssess();
+	
 }

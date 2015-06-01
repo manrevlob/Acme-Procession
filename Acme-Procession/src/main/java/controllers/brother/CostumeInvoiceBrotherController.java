@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.RegistrationInvoiceService;
-import services.RegistrationService;
+import services.CostumeInvoiceService;
+import services.CostumeReserveService;
 import controllers.AbstractController;
-import domain.Registration;
-import domain.RegistrationInvoice;
+import domain.CostumeInvoice;
+import domain.CostumeReserve;
 
 @Controller
-@RequestMapping("/registrationInvoice/brother")
-public class RegistrationInvoiceBrotherController extends AbstractController {
+@RequestMapping("/costumeInvoice/brother")
+public class CostumeInvoiceBrotherController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private RegistrationInvoiceService registrationInvoiceService;
+	private CostumeInvoiceService costumeInvoiceService;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private RegistrationService registrationService;
+	private CostumeReserveService costumeReserveService;
 
 	// Constructors -----------------------------------------------------------
 
-	public RegistrationInvoiceBrotherController() {
+	public CostumeInvoiceBrotherController() {
 		super();
 	}
 
@@ -41,12 +41,12 @@ public class RegistrationInvoiceBrotherController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<RegistrationInvoice> invoices;
+		Collection<CostumeInvoice> invoices;
 		String uri;
 
-		invoices = registrationInvoiceService.findAllByBrother();
+		invoices = costumeInvoiceService.findAllByBrother();
 
-		uri = "registrationInvoice/brother/list.do";
+		uri = "costumeInvoices/brother/list.do";
 
 		result = new ModelAndView("invoice/list");
 		result.addObject("invoices", invoices);
@@ -58,19 +58,18 @@ public class RegistrationInvoiceBrotherController extends AbstractController {
 	// details ----------------------------------------------------------------
 
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public ModelAndView details(@RequestParam int registrationInvoiceId) {
+	public ModelAndView details(@RequestParam int costumeInvoiceId) {
 		ModelAndView result;
-		RegistrationInvoice registrationInvoice;
-		Registration registration;
+		CostumeInvoice costumeInvoice;
+		CostumeReserve costumeReserve;
 
-		registration = registrationService
-				.findByRegistrationInvoice(registrationInvoiceId);
-		registrationInvoice = registrationInvoiceService
-				.findOne(registrationInvoiceId);
+		costumeReserve = costumeReserveService
+				.findByCostumeInvoice(costumeInvoiceId);
+		costumeInvoice = costumeInvoiceService.findOne(costumeInvoiceId);
 
 		result = new ModelAndView("invoice/details");
-		result.addObject("invoice", registrationInvoice);
-		result.addObject("registration", registration);
+		result.addObject("invoice", costumeInvoice);
+		result.addObject("costumeReserve", costumeReserve);
 
 		return result;
 	}
@@ -78,18 +77,17 @@ public class RegistrationInvoiceBrotherController extends AbstractController {
 	// Pay -------------------------------------------------------------------
 
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public ModelAndView pay(@RequestParam int registrationInvoiceId) {
+	public ModelAndView pay(@RequestParam int costumeInvoiceId) {
 		ModelAndView result;
-		RegistrationInvoice registrationInvoice;
+		CostumeInvoice costumeInvoice;
 
-		registrationInvoice = registrationInvoiceService
-				.findOne(registrationInvoiceId);
+		costumeInvoice = costumeInvoiceService.findOne(costumeInvoiceId);
 
-		Assert.isTrue(registrationInvoice.getPaidMoment() == null);
+		Assert.isTrue(costumeInvoice.getPaidMoment() == null);
 
-		registrationInvoiceService.paidInvoice(registrationInvoice);
+		costumeInvoiceService.paidInvoice(costumeInvoice);
 
-		result = new ModelAndView("redirect:/registrationInvoice/brother/list.do");
+		result = new ModelAndView("redirect:/costumeInvoice/brother/list.do");
 
 		return result;
 	}

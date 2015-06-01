@@ -20,14 +20,16 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="registrationInvoices" pagesize="5" class="displaytag"
+<display:table name="invoices" pagesize="5" class="displaytag"
 	requestURI="${requestURI}" id="row">
 
 	<spring:message code="invoice.createMoment" var="createMomentHeader" />
-	<display:column property="createMoment" title="${createMomentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" sortable="true" />
+	<display:column property="createMoment" title="${createMomentHeader}"
+		format="{0,date,dd/MM/yyyy HH:mm}" sortable="true" />
 
 	<spring:message code="invoice.paidMoment" var="paidMomentHeader" />
-	<display:column property="paidMoment" title="${paidMomentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" />
+	<display:column property="paidMoment" title="${paidMomentHeader}"
+		format="{0,date,dd/MM/yyyy HH:mm}" />
 
 	<spring:message code="invoice.totalCost" var="totalCostHeader" />
 	<display:column property="totalCost" title="${totalCostHeader}" />
@@ -35,28 +37,43 @@
 
 	<security:authorize access="hasRole('BROTHER')">
 		<display:column>
-			<a href="registrationInvoice/brother/details.do?registrationInvoiceId=${row.id}">
-				<jstl:choose>
-					<jstl:when test="${row.paidMoment == null}">
-						<spring:message	code="invoice.detailsPay" />
-					</jstl:when>
-					<jstl:otherwise>
-						<spring:message	code="invoice.details" />
-					</jstl:otherwise>
-				</jstl:choose>
-			</a>
+			<jstl:choose>
+				<jstl:when test="${requestURI == 'registrationInvoice/brother/list.do'}">
+					<a href="registrationInvoice/brother/details.do?registrationInvoiceId=${row.id}">
+						<jstl:choose>
+							<jstl:when test="${row.paidMoment == null}">
+								<spring:message code="invoice.detailsPay" />
+							</jstl:when>
+							<jstl:otherwise>
+								<spring:message code="invoice.details" />
+							</jstl:otherwise>
+						</jstl:choose>
+					</a>
+				</jstl:when>
+				<jstl:when test="${requestURI == 'costumeInvoices/brother/list.do'}">
+					<a href="costumeInvoice/brother/details.do?costumeInvoiceId=${row.id}">
+						<jstl:choose>
+							<jstl:when test="${row.paidMoment == null}">
+								<spring:message code="invoice.detailsPay" />
+							</jstl:when>
+							<jstl:otherwise>
+								<spring:message code="invoice.details" />
+							</jstl:otherwise>
+						</jstl:choose>
+					</a>
+				</jstl:when>
+			</jstl:choose>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('VIEWER')">
 		<display:column>
-			<a href="boxInvoice/viewer/details.do?boxInvoiceId=${row.id}">
-				<jstl:choose>
+			<a href="boxInvoice/viewer/details.do?boxInvoiceId=${row.id}"> <jstl:choose>
 					<jstl:when test="${row.paidMoment == null}">
-						<spring:message	code="invoice.detailsPay" />
+						<spring:message code="invoice.detailsPay" />
 					</jstl:when>
 					<jstl:otherwise>
-						<spring:message	code="invoice.details" />
+						<spring:message code="invoice.details" />
 					</jstl:otherwise>
 				</jstl:choose>
 			</a>

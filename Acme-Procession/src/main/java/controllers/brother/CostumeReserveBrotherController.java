@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CostumeInvoiceService;
 import services.CostumeReserveService;
 import services.CostumeService;
 import domain.Costume;
+import domain.CostumeInvoice;
 import domain.CostumeReserve;
 
 @Controller
@@ -27,6 +29,8 @@ public class CostumeReserveBrotherController {
 
 	@Autowired
 	private CostumeService costumeService;
+	@Autowired
+	private CostumeInvoiceService costumeInvoiceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -59,12 +63,17 @@ public class CostumeReserveBrotherController {
 		ModelAndView result;
 		CostumeReserve costumeReserve;
 		Costume costume;
+		CostumeInvoice costumeInvoice;
 
 		try {
 			costume = costumeService.findOneIfAvailable(costumeId);
 			costume.setSituation("sold");
 			costumeReserve = costumeReserveService.create(costume);
 			costumeReserve.setType("purchase");
+			
+			costumeInvoice = costumeInvoiceService.generateInvoice(costume, costumeReserve.getType());
+			costumeReserve.setCostumeInvoice(costumeInvoice);
+			
 			costumeReserveService.save(costumeReserve);
 			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
 		} catch (Throwable oops) {
@@ -78,6 +87,7 @@ public class CostumeReserveBrotherController {
 	public ModelAndView rent(@RequestParam int costumeId) {
 		ModelAndView result;
 		CostumeReserve costumeReserve;
+		CostumeInvoice costumeInvoice;
 		Costume costume;
 
 		try {
@@ -85,6 +95,10 @@ public class CostumeReserveBrotherController {
 			costume.setSituation("rented");
 			costumeReserve = costumeReserveService.create(costume);
 			costumeReserve.setType("rental");
+			
+			costumeInvoice = costumeInvoiceService.generateInvoice(costume, costumeReserve.getType());
+			costumeReserve.setCostumeInvoice(costumeInvoice);
+			
 			costumeReserveService.save(costumeReserve);
 			result = new ModelAndView("redirect:/costumeReserve/brother/list.do");
 		} catch (Throwable oops) {

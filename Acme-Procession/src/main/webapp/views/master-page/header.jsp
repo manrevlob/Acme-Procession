@@ -38,6 +38,7 @@
 							<li><a href="request/administrator/list.do"><spring:message code="master.page.administrator.request" /></a></li>
 							<li><a href="box/administrator/list.do"><spring:message code="master.page.administrator.boxes" /></a></li>
 							<li><a href="box/administrator/listOwns.do"><spring:message code="master.page.administrator.boxesOwns" /></a></li>
+							<li><a href="dashboard/administrator/list.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 							<li class="divider"></li>
 							<li><a href="administrator/administrator/registerAdministrator.do"><spring:message code="master.page.registerAdministrator" /></a></li>
 						</ul>
@@ -50,7 +51,8 @@
 							<li><a href="brotherhood/brother/list.do"><spring:message code="master.page.brother.listMyBrotherhoods" /></a></li>
 							<li><a href="procession/brother/listAvailables.do"><spring:message code="master.page.brother.processionAvailable" /></a></li>
 							<li><a href="registration/brother/list.do"><spring:message code="master.page.brother.listOwnRegistrations" /></a></li>
-							<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoices" /></a></li>
+							<li><a href="registrationInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoicesReg" /></a></li>
+							<li><a href="costumeInvoice/brother/list.do"><spring:message code="master.page.brother.listInvoicesCostume" /></a></li>
 							<li><a href="costume/brother/findBySize.do"><spring:message code="master.page.brother.searchCostumes" /></a></li>
 							<li><a href="costumeReserve/brother/list.do"><spring:message code="master.page.brother.listCostumeReserves" /></a></li>
 							<li><a href="request/brother/list.do"><spring:message code="master.page.brother.requests" /></a></li>

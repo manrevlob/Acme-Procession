@@ -16,4 +16,7 @@ public interface CostumeReserveRepository extends
 	@Query("select cr from CostumeReserve cr where cr.brother = ?1")
 	Collection<CostumeReserve> findByPrincipal(Brother brother);
 
+	@Query("select r from CostumeReserve r where r.costumeInvoice.id = ?1")
+	CostumeReserve findByCostumeInvoice(int costumeInvoiceId);
+
 }

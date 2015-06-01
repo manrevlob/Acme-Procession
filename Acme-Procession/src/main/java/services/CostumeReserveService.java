@@ -105,5 +105,15 @@ public class CostumeReserveService {
 
 		return result;
 	}
+	
+	public CostumeReserve findByCostumeInvoice(int costumeInvoiceId){
+		CostumeReserve result;
+		
+		Assert.isTrue(actorService.isBrother());
+		
+		result = costumeReserveRepository.findByCostumeInvoice(costumeInvoiceId);
+		
+		return result;
+	}
 
 }
