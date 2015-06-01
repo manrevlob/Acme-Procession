@@ -227,24 +227,24 @@ public class BrotherService {
 	}
 
 	// Dashboard
-	public Collection<Brother> findByBrotherhoodAndBrother() {
-		Collection<Brother> result;
+//	public Collection<Brother> findByBrotherhoodAndBrother() {
+//		Collection<Brother> result;
+//
+//		Assert.isTrue(actorService.isAdministrator());
+//
+//		result = brotherRepository.findAllOrderByNumReg();
+//
+//		return result;
+//	}
 
-		Assert.isTrue(actorService.isAdministrator());
-
-		result = brotherRepository.findAllOrderByNumReg();
-
-		return result;
-	}
-
-	public Collection<Brother> findByNumBrotherhood() {
-		Collection<Brother> result;
-
-		Assert.isTrue(actorService.isAdministrator());
-
-		result = brotherRepository.findByNumBrotherhood();
-
-		return result;
-	}
+//	public Collection<Brother> findByNumBrotherhood() {
+//		Collection<Brother> result;
+//
+//		Assert.isTrue(actorService.isAdministrator());
+//
+//		result = brotherRepository.findByNumBrotherhood();
+//
+//		return result;
+//	}
 
 }

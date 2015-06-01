@@ -25,7 +25,7 @@
 	
 	<form:radiobutton path="type" value="ordinary"/><spring:message code="stretch.ordinary" />
 	<form:radiobutton path="type" value="float"/><spring:message code="stretch.float" />
-	<form:errors path="type"/>
+	<span class="error"><form:errors path="type"/></span>
 
 	<br/>
 

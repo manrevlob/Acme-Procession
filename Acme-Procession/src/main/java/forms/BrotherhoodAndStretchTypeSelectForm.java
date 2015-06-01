@@ -4,6 +4,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import domain.Brotherhood;
 
@@ -31,7 +32,8 @@ public class BrotherhoodAndStretchTypeSelectForm {
 		this.brotherhood = brotherhood;
 	}
 
-	//@Pattern(regexp = "^ordinary$|^float$")
+	@NotNull
+	@Pattern(regexp = "^ordinary$|^float$")
 	public String getType() {
 		return type;
 	}
