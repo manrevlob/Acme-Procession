@@ -26,6 +26,8 @@ public class CarvingService {
 
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private BrotherService brotherService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -62,11 +64,17 @@ public class CarvingService {
 		return result;
 	}
 
-	public void save(Carving carving) {
+	public Carving save(Carving carving) {
+		Carving result;
+
 		Assert.notNull(carving);
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(carving.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 
-		carvingRepository.save(carving);
+		result = carvingRepository.save(carving);
+
+		return result;
 	}
 
 	public void delete(Carving carving) {
@@ -85,24 +93,24 @@ public class CarvingService {
 
 		return result;
 	}
-	
+
 	public Collection<Carving> findByProcession(Procession procession) {
 		Collection<Carving> result;
-		
+
 		Assert.notNull(procession);
-		
+
 		result = carvingRepository.findByProcession(procession);
-		
+
 		return result;
 	}
-	
+
 	public Collection<Carving> findByStretch(Stretch stretch) {
 		Collection<Carving> result;
-		
+
 		Assert.notNull(stretch);
-		
+
 		result = carvingRepository.findByStretch(stretch);
-		
+
 		return result;
 	}
 

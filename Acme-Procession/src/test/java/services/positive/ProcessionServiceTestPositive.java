@@ -183,7 +183,8 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 		procession = processionService.findOneIfPrincipal(45);
 
 		// Nos creamos un nuevo tramo de paso
-		ordinaryStretch = ordinaryStretchService.create(procession.getBrotherhood());
+		ordinaryStretch = ordinaryStretchService.create(procession
+				.getBrotherhood());
 		ordinaryStretch.setName("Test");
 		ordinaryStretch.setDescription("Test");
 		ordinaryStretch.setMaxNumberOfBrothers(100);
