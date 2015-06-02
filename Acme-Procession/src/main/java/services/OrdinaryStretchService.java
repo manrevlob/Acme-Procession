@@ -58,7 +58,8 @@ public class OrdinaryStretchService {
 		// Comprobamos que sea hermano.
 		Assert.isTrue(actorService.isBrother());
 		// Comprobamos que el usuario tenga permisos sobre la hermandad.
-		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(brotherhood.getBigBrothers().contains(
+				brotherService.findByPrincipal()));
 
 		result = new OrdinaryStretch();
 		result.setBrotherhood(brotherhood);
@@ -119,6 +120,8 @@ public class OrdinaryStretchService {
 		Collection<OrdinaryStretch> result;
 
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(brotherService.findByPrincipal().getOwnBrotherhoods()
+				.size() > 0);
 
 		result = ordinaryStretchRepository.findMines(brotherService
 				.findByPrincipal().getOwnBrotherhoods());

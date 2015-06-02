@@ -58,7 +58,8 @@ public class FloatStretchService {
 		// Comprobamos que sea hermano.
 		Assert.isTrue(actorService.isBrother());
 		// Comprobamos que el usuario tenga permisos sobre la hermandad.
-		Assert.isTrue(brotherhood.getBigBrothers().contains(brotherService.findByPrincipal()));
+		Assert.isTrue(brotherhood.getBigBrothers().contains(
+				brotherService.findByPrincipal()));
 
 		result = new FloatStretch();
 		result.setBrotherhood(brotherhood);
@@ -119,6 +120,8 @@ public class FloatStretchService {
 		Collection<FloatStretch> result;
 
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(brotherService.findByPrincipal().getOwnBrotherhoods()
+				.size() > 0);
 
 		result = floatStretchRepository.findMines(brotherService
 				.findByPrincipal().getOwnBrotherhoods());
