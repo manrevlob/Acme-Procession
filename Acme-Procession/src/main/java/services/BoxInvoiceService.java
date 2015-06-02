@@ -39,6 +39,8 @@ public class BoxInvoiceService {
 		BoxInvoice result;
 		
 		Assert.notNull(boxInvoice);	
+		Assert.isTrue(actorService.isViewer());
+		checkIfPrincipal(boxInvoice);
 		
 		result = boxInvoiceRepository.save(boxInvoice);
 		
@@ -47,8 +49,11 @@ public class BoxInvoiceService {
 	
 	public BoxInvoice findOne(int boxInvoiceId) {
 		BoxInvoice result;
-
+		
+		Assert.isTrue(actorService.isViewer());
+		
 		result = boxInvoiceRepository.findOne(boxInvoiceId);
+		checkIfPrincipal(result);
 
 		return result;
 	}
@@ -100,6 +105,20 @@ public class BoxInvoiceService {
 		boxInvoice.setPaidMoment(date);
 
 		save(boxInvoice);
+	}
+	
+	public void checkIfPrincipal(BoxInvoice boxInvoice){
+		Viewer viewer;
+		Collection<BoxInvoice> boxInvoices;
+		
+		Assert.isTrue(actorService.isViewer());
+		
+		viewer= viewerService.findByPrincipal();
+		
+		boxInvoices = boxInvoiceRepository.findByViewerId(viewer.getId());
+		
+		Assert.isTrue(boxInvoices.contains(boxInvoice));
+		
 	}
 
 }
