@@ -116,7 +116,7 @@ public class RequestService {
 		Assert.isTrue(actorService.isBrother());
 
 		brother = brotherService.findByPrincipal();
-		result = requestRepository.AuthInnkeeper(brother.getId());
+		result = requestRepository.AuthBrother(brother.getId());
 
 		return result;
 	}
