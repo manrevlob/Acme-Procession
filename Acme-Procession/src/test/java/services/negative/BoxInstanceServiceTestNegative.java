@@ -229,22 +229,10 @@ public class BoxInstanceServiceTestNegative extends AbstractTest {
 
 		authenticate(null);
 	}
-		
-	// Comprobamos que no funciona siendo viewer
-	@Test(expected = IllegalArgumentException.class)
-	public void testFindAvailablesByBox2() {
-		
-		authenticate("viewer1");
-		
-		//ID de la box 1
-		boxInstanceService.findAvailablesByBox(85);
-
-		authenticate(null);
-	}
-		
+			
 	// Comprobamos que no funciona sin estar logueados
 	@Test(expected = IllegalArgumentException.class)
-	public void testFindAvailablesByBox3() {
+	public void testFindAvailablesByBox2() {
 		
 		authenticate(null);
 		
