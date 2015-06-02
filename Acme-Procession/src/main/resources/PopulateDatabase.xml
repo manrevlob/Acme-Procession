@@ -573,6 +573,11 @@
 				<ref bean="costumeReserve3"/>
 			</list>
 		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request1"/>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
 
@@ -614,6 +619,12 @@
 				<ref bean="costumeReserve4"/>
 			</list>
 		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request2"/>
+				<ref bean="request3"/>
+			</list>
+		</property>
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
 
@@ -644,6 +655,11 @@
 		<property name="registrations">
 			<list>
 				<ref bean="registration5" />
+			</list>
+		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request4"/>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount4" />
@@ -1381,7 +1397,7 @@
 		<property name="creationMoment" value="2015/05/03 11:54" />
 		<property name="description" value="Request2Description" />
 		<property name="status" value="rejected" />
-		<!-- Without comments -->
+		<property name="comments" value="Request2Comments" />
 		<property name="administrator" ref="administrator1" />
 		<property name="brother" ref="brother2" />
 	</bean>
@@ -1395,6 +1411,16 @@
 		<property name="comments" value="Request3Comments" />
 		<property name="administrator" ref="administrator1" />
 		<property name="brother" ref="brother2" />
+	</bean>
+	
+	<bean id="request4" class="domain.Request">
+		<property name="code" value="asrh8errgt85" />
+		<property name="title" value="Request4Title" />
+		<property name="creationMoment" value="2015/05/03 09:11" />
+		<property name="description" value="Request4Description" />
+		<property name="status" value="pending" />
+		<property name="administrator" ref="administrator1" />
+		<property name="brother" ref="brother3" />
 	</bean>
 
 	<!-- Costume -->
