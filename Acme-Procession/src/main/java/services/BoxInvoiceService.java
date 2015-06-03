@@ -40,7 +40,11 @@ public class BoxInvoiceService {
 		
 		Assert.notNull(boxInvoice);	
 		Assert.isTrue(actorService.isViewer());
-		checkIfPrincipal(boxInvoice);
+		
+		if(boxInvoice.getId()!=0){
+			checkIfPrincipal(boxInvoice);
+		}
+		
 		
 		result = boxInvoiceRepository.save(boxInvoice);
 		
