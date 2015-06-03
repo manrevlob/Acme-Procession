@@ -51,6 +51,7 @@ public class RegistrationService {
 
 		Assert.notNull(stretchOrder);
 		Assert.notNull(registrationInvoice);
+		Assert.isTrue(stretchOrder.getStretch().getClass() == OrdinaryStretch.class);
 
 		brother = brotherService.findByPrincipal();
 		ordinaryStretch = (OrdinaryStretch) stretchOrder.getStretch();

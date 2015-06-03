@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -41,6 +42,16 @@ public abstract class Stretch extends DomainEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	// Derived attributes -----------------------------------------------------
+	@Transient
+	public boolean getCanRegister() {
+		boolean result;
+		
+		result = this.getClass() == OrdinaryStretch.class;
+		
+		return result;
 	}
 
 	// Relationships ----------------------------------------------------------

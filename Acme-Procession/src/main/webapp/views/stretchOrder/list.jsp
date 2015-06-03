@@ -45,12 +45,21 @@
 				</a>
 			</jstl:if>
 		</display:column>
+	</security:authorize>
 
+	<security:authorize  access="hasRole('BROTHER')">
 		<spring:message code="stretch.register" var="registerHeader" />
 		<display:column title="${registerHeader}">
-			<a href="stretchOrder/brother/register.do?stretchOrderId=${row.id}">
-				[<jstl:out value="${registerHeader}"/>]
-			</a>
+			<jstl:choose>
+				<jstl:when test="${row.stretch.brotherhood.userIsRegiter eq true and row.procession.isClosed ne true and row.stretch.canRegister}">
+					<a href="stretchOrder/brother/register.do?stretchOrderId=${row.id}">
+						[<jstl:out value="${registerHeader}"/>]
+					</a>
+				</jstl:when>
+				<jstl:otherwise>
+					-
+				</jstl:otherwise>
+			</jstl:choose>
 		</display:column>
 	</security:authorize>
 
