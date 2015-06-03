@@ -40,6 +40,6 @@
 	
 	<acme:submit name="save" code="carving.save"/>
 	
-	<acme:cancel url="carving/list.do" code="carving.cancel"/>
+	<acme:cancel url="carving/list.do?brotherhoodId=${carving.brotherhood.id}" code="carving.cancel"/>
 	
 </form:form>
