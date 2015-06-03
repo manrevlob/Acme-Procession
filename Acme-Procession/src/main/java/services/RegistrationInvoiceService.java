@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.RegistrationInvoiceRepository;
 import domain.Brother;
 import domain.Money;
+import domain.OrdinaryStretch;
 import domain.RegistrationInvoice;
 import domain.StretchOrder;
 
@@ -87,8 +88,21 @@ public class RegistrationInvoiceService {
 		RegistrationInvoice result;
 
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(stretchOrder.getStretch().getClass() == OrdinaryStretch.class);
 
 		result = create(stretchOrder);
+
+		return result;
+	}
+	
+	public RegistrationInvoice findOneIfPrincipal(int registrationInvoiceId) {
+		RegistrationInvoice result;
+		
+		Assert.isTrue(actorService.isBrother());
+		
+		result = findOne(registrationInvoiceId);
+		
+		checkIfPrincipal(result);
 
 		return result;
 	}
@@ -96,7 +110,9 @@ public class RegistrationInvoiceService {
 	public void paidInvoice(RegistrationInvoice registrationInvoice) {
 		long milliseconds;
 		Date date;
+		
 		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(registrationInvoice.getPaidMoment() == null);
 
 		milliseconds = System.currentTimeMillis();
 		date = new Date(milliseconds - 10);

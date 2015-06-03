@@ -1162,43 +1162,43 @@
 	
 	<bean id="registrationInvoice1" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/03/29 22:34" />
-		<property name="paidMoment" value="2015/03/30 00:00" />
+		<property name="paidMoment" value="2015/03/30 01:34" />
 		<property name="totalCost" ref="money1" />
 	</bean>
 	
 	<bean id="registrationInvoice2" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/04/02 11:45" />
-		<property name="paidMoment" value="2015/04/30 00:00" />
+		<property name="paidMoment" value="2015/04/30 09:25" />
 		<property name="totalCost" ref="money1" />
 	</bean>
 	
 	<bean id="registrationInvoice3" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/05/10 08:05" />
-		<property name="paidMoment" value="2015/05/11 00:00" />
+		<!-- WITHOUT PAIDMOMENT -->
 		<property name="totalCost" ref="money2" />
 	</bean>
 	
 	<bean id="registrationInvoice4" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/05/11 19:43" />
-		<property name="paidMoment" value="2015/05/11 00:00" />
+		<!-- WITHOUT PAIDMOMENT -->
 		<property name="totalCost" ref="money2" />
 	</bean>
 	
 	<bean id="registrationInvoice5" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/05/12 15:11" />
-		<property name="paidMoment" value="2015/05/12 00:00" />
+		<property name="paidMoment" value="2015/05/12 20:10" />
 		<property name="totalCost" ref="money2" />
 	</bean>
 	
 	<bean id="registrationInvoice6" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/05/12 15:11" />
-		<property name="paidMoment" value="2015/05/13 00:00" />
+		<property name="paidMoment" value="2015/05/13 16:03" />
 		<property name="totalCost" ref="money3" />
 	</bean>
 	
 	<bean id="registrationInvoice7" class="domain.RegistrationInvoice">
 		<property name="createMoment" value="2015/05/12 15:11" />
-		<property name="paidMoment" value="2015/05/13 00:00" />
+		<property name="paidMoment" value="2015/05/13 18:23" />
 		<property name="totalCost" ref="money3" />
 	</bean>
 
