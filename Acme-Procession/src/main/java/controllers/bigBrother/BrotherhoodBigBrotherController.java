@@ -176,9 +176,9 @@ public class BrotherhoodBigBrotherController extends AbstractController {
 	public ModelAndView uploadFileHandler(
 			@Valid AddImageToBrotherhoodForm addImageToBrotherhoodForm,
 			BindingResult binding) throws SerialException, SQLException {
-		ModelAndView result;
+		ModelAndView result = null;
 		Brotherhood brotherhood;
-		Image image;
+		Image image = null;
 
 		brotherhood = addImageToBrotherhoodForm.getBrotherhood();
 
@@ -190,8 +190,8 @@ public class BrotherhoodBigBrotherController extends AbstractController {
 			brotherhoodService.save(brotherhood);
 
 			result = new ModelAndView("redirect:/brotherhood/brother/list.do");
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("commit.image.error");
+		} catch (Throwable oops) {
+			result = uploadModelAndView(addImageToBrotherhoodForm, "commit.image.error");
 		}
 
 		return result;
@@ -211,6 +211,17 @@ public class BrotherhoodBigBrotherController extends AbstractController {
 	}
 
 	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView uploadModelAndView(
+			AddImageToBrotherhoodForm addImageToBrotherhoodForm, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("brotherhood/uploadImage");
+		result.addObject("addImageToBrotherhoodForm", addImageToBrotherhoodForm);
+		result.addObject("message", message);
+
+		return result;
+	}
 
 	protected ModelAndView createEditModelAndView(Brotherhood brotherhood) {
 		ModelAndView result;

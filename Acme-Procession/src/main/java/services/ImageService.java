@@ -69,7 +69,7 @@ public class ImageService {
 
 		String contentType = image.getFiledata().getContentType().toString();
 		Assert.isTrue(contentType.contains("image/"));
-		Assert.isTrue(image.getFiledata().getSize() != 0);
+		Assert.isTrue(image.getFiledata().getSize() != 0, "commit.image.error");
 
 	}
 
