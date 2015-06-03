@@ -95,7 +95,7 @@ public class ProcessionBigBrotherController extends AbstractController {
 						"redirect:/procession/list.do?brotherhoodId="
 								+ procession.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				if(oops.getMessage().equals("procession.date.error")) {
+				if (oops.getMessage().equals("procession.date.error")) {
 					result = createEditModelAndView(procession,
 							"procession.date.error");
 				} else {
@@ -170,8 +170,10 @@ public class ProcessionBigBrotherController extends AbstractController {
 										.getId());
 			} catch (Throwable oops) {
 				result = new ModelAndView("procession/addStretch");
-				if(oops.getMessage().equals("procession.duplicatedCarving.error")) {
-					result.addObject("message", "procession.duplicatedCarving.error");
+				if (oops.getMessage().equals(
+						"procession.duplicatedCarving.error")) {
+					result.addObject("message",
+							"procession.duplicatedCarving.error");
 				} else {
 					result.addObject("message", "procession.commit.error");
 				}
@@ -252,8 +254,9 @@ public class ProcessionBigBrotherController extends AbstractController {
 
 			result = new ModelAndView(
 					"redirect:/brotherhood/bigBrother/listOwns.do");
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("commit.image.error");
+		} catch (Throwable oops) {
+			result = uploadModelAndView(addImageToProcessionForm,
+					"commit.image.error");
 		}
 
 		return result;
@@ -273,6 +276,17 @@ public class ProcessionBigBrotherController extends AbstractController {
 	}
 
 	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView uploadModelAndView(
+			AddImageToProcessionForm addImageToProcessionForm, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("procession/uploadImage");
+		result.addObject("addImageToProcessionForm", addImageToProcessionForm);
+		result.addObject("message", message);
+
+		return result;
+	}
 
 	protected ModelAndView createEditModelAndView(Procession procession) {
 		ModelAndView result;
