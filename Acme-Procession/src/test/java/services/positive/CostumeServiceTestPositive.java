@@ -18,6 +18,7 @@ import domain.Brotherhood;
 import domain.Costume;
 import domain.Money;
 import forms.CreateCostumesForm;
+import forms.EditCostumeForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/datasource.xml",
@@ -128,24 +129,38 @@ public class CostumeServiceTestPositive extends AbstractTest {
 	@Test
 	public void testEdit() {
 		Costume costume;
-		String comment;
-				
+		EditCostumeForm editCostumeForm;
+		Money salePriceToEdit;
+		Money salePriceOld;
+		
 		authenticate("brother1");
 		
-		//Id del costume2
-		costume = costumeService.findOne(100);
+		editCostumeForm = new EditCostumeForm();
 		
-		comment = costume.getComments();
+		// Id del costume 1
+		costume = costumeService.findOneIfPrincipal(99);
 		
-		costume.setComments("comments30");
+		salePriceOld = costume.getSalePrice();
 		
-		costumeService.save(costume);
+		salePriceToEdit = new Money();
 		
-		costume = costumeService.findOne(100);
-
-		Assert.isTrue(comment!=costume.getComments());
+		salePriceToEdit.setCurrency(costume.getSalePrice().getCurrency());
+		salePriceToEdit.setAmount(costume.getSalePrice().getAmount() + 10);
+		
+		costume.setSalePrice(salePriceToEdit);
+		
+		editCostumeForm.setCostume(costume);
+		editCostumeForm.setNoToRental(false);
+		editCostumeForm.setNoToSale(false);
+		
+		costumeService.editOne(editCostumeForm);
+		
+		// Id del costume 1
+		costume = costumeService.findOneIfPrincipal(99);
 
 		authenticate(null);
+		
+		Assert.isTrue(salePriceOld != costume.getSalePrice());
 	}
 	
 	// Probamos que devuelve los costumes dada una hermandad
