@@ -66,7 +66,7 @@ public class RegistrationInvoiceBrotherController extends AbstractController {
 		registration = registrationService
 				.findByRegistrationInvoice(registrationInvoiceId);
 		registrationInvoice = registrationInvoiceService
-				.findOne(registrationInvoiceId);
+				.findOneIfPrincipal(registrationInvoiceId);
 
 		result = new ModelAndView("invoice/details");
 		result.addObject("invoice", registrationInvoice);
@@ -83,7 +83,7 @@ public class RegistrationInvoiceBrotherController extends AbstractController {
 		RegistrationInvoice registrationInvoice;
 
 		registrationInvoice = registrationInvoiceService
-				.findOne(registrationInvoiceId);
+				.findOneIfPrincipal(registrationInvoiceId);
 
 		Assert.isTrue(registrationInvoice.getPaidMoment() == null);
 
