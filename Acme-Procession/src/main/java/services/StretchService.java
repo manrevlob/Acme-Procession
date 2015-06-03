@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.StretchRepository;
 import domain.Procession;
@@ -20,6 +21,12 @@ public class StretchService {
 	private StretchRepository stretchRepository;
 
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ActorService actorService;
+
+	@Autowired
+	private BrotherService brotherService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,14 +50,19 @@ public class StretchService {
 
 		return result;
 	}
-	
+
 	// Other business methods -------------------------------------------------
 
 	public Collection<Stretch> findAvailables(Procession procession) {
 		Collection<Stretch> result;
-		
-		result = stretchRepository.findAvailableStretches(procession.getBrotherhood(), procession);
-		
+
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
+
+		result = stretchRepository.findAvailableStretches(
+				procession.getBrotherhood(), procession);
+
 		return result;
 	}
 

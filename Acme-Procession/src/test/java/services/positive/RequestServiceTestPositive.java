@@ -24,7 +24,6 @@ import forms.AddCommentToRequestForm;
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
 public class RequestServiceTestPositive extends AbstractTest{
-
 	// Services under test --------------------------------------
 	
 	@Autowired
