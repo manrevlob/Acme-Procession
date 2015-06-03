@@ -63,10 +63,7 @@ public class CostumeInvoiceService {
 	public CostumeInvoice findOne(int costumeInvoiceId) {
 		CostumeInvoice result;
 
-//		Assert.isTrue(actorService.isBrother());
-
 		result = costumeInvoiceRepository.findOne(costumeInvoiceId);
-//		checkIfPrincipal(result);
 
 		return result;
 	}
