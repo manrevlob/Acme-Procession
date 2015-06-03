@@ -79,7 +79,7 @@ public class BoxReserveViewerController extends AbstractController {
 			ModelAndView result;
 			BoxReserve boxReserve;
 			
-			boxReserve = boxReserveService.findOne(boxReserveId);
+			boxReserve = boxReserveService.findOneByPrincipal(boxReserveId);
 			
 			result = new ModelAndView("redirect:../viewer/list.do");
 			

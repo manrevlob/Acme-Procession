@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CostumeInvoiceRepository;
+import domain.Brother;
 import domain.Costume;
 import domain.CostumeInvoice;
 import domain.Money;
@@ -62,7 +63,10 @@ public class CostumeInvoiceService {
 	public CostumeInvoice findOne(int costumeInvoiceId) {
 		CostumeInvoice result;
 
+//		Assert.isTrue(actorService.isBrother());
+
 		result = costumeInvoiceRepository.findOne(costumeInvoiceId);
+//		checkIfPrincipal(result);
 
 		return result;
 	}
@@ -118,6 +122,21 @@ public class CostumeInvoiceService {
 		result = create(costume, type);
 
 		return result;
+	}
+
+	public void checkIfPrincipal(CostumeInvoice costumeInvoice) {
+		Brother brother;
+		Collection<CostumeInvoice> costumeInvoices;
+
+		Assert.isTrue(actorService.isBrother());
+
+		brother = brotherService.findByPrincipal();
+
+		costumeInvoices = costumeInvoiceRepository.findAllByBrother(brother
+				.getId());
+
+		Assert.isTrue(costumeInvoices.contains(costumeInvoice));
+
 	}
 
 }

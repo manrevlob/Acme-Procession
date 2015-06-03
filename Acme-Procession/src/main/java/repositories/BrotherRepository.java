@@ -17,8 +17,14 @@ public interface BrotherRepository extends JpaRepository<Brother, Integer> {
 	@Query("select b from Brother b where ?1 in (select j.id from Brother bb join bb.brotherhoods j where bb = b) and ?1 not in (select j.id from Brother bb join bb.ownBrotherhoods j where bb = b)")
 	Collection<Brother> findAllBrothersNotAdded(int brotherhoodId);
 
-	@Query("select b.name from Brotherhood bb join bb.brothers b where bb.id = ?1 and b.id = ?2 group by b")
+	@Query("select b from Brotherhood bb join bb.brothers b where bb.id = ?1 and b.id = ?2 group by b")
 	Collection<Brother> findByBrotherhoodAndBrother(int brotherhoodId, int brotherId);
+	
+	@Query("select b from Brother b join b.costumeReserves br join br.costumeInvoice bri where bri.id = ?1 group by b")
+	Brother findByCostumeInvoice(int costumeInvoiceId);
+	
+	@Query("select b from Brother b join b.registrations br join br.registrationInvoice bri where bri.id = ?1 group by b")
+	Brother findByRegistrationInvoice(int registrationInvoiceId);
 	
 	// Dashboard
 	@Query("select b from Brother b order by b.registrations.size desc")

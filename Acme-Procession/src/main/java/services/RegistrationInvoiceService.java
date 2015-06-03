@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RegistrationInvoiceRepository;
+import domain.Brother;
 import domain.Money;
 import domain.RegistrationInvoice;
 import domain.StretchOrder;
@@ -58,7 +59,10 @@ public class RegistrationInvoiceService {
 	public RegistrationInvoice findOne(int registrationInvoiceId) {
 		RegistrationInvoice result;
 
+//		Assert.isTrue(actorService.isBrother());
+
 		result = registrationInvoiceRepository.findOne(registrationInvoiceId);
+//		checkIfPrincipal(result);
 
 		return result;
 	}
@@ -113,6 +117,21 @@ public class RegistrationInvoiceService {
 		results = registrationInvoiceRepository.findAllByBrother(brotherId);
 
 		return results;
+	}
+
+	public void checkIfPrincipal(RegistrationInvoice registrationInvoice) {
+		Brother brother;
+		Collection<RegistrationInvoice> registrationInvoices;
+
+		Assert.isTrue(actorService.isBrother());
+
+		brother = brotherService.findByPrincipal();
+
+		registrationInvoices = registrationInvoiceRepository
+				.findAllByBrother(brother.getId());
+
+		Assert.isTrue(registrationInvoices.contains(registrationInvoice));
+
 	}
 
 }

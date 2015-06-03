@@ -56,7 +56,7 @@ public class BoxInvoiceViewerController extends AbstractController {
 			BoxInvoice boxInvoice;
 			BoxReserve boxReserve;
 
-			boxInvoice = boxInvoiceService.findOne(boxInvoiceId);
+			boxInvoice = boxInvoiceService.findOneIfPrincipal(boxInvoiceId);
 			boxReserve = boxReserveService.findByBoxInvoice(boxInvoiceId);
 			
 
@@ -74,7 +74,7 @@ public class BoxInvoiceViewerController extends AbstractController {
 			ModelAndView result;
 			BoxInvoice boxInvoice;
 
-			boxInvoice = boxInvoiceService.findOne(boxInvoiceId);
+			boxInvoice = boxInvoiceService.findOneIfPrincipal(boxInvoiceId);
 
 			boxInvoiceService.payInvoice(boxInvoice);
 

@@ -179,6 +179,14 @@ public class ViewerService {
 
 		return result;
 	}
+	
+	public Viewer findByBoxInvoice(int boxInvoiceId){
+		Viewer result;
+		
+		result = viewerRepository.findByBoxInvoice(boxInvoiceId);
+		
+		return result;
+	}
 
 	// Dashboard
 	public Collection<Viewer> findAllReserMorBox() {
