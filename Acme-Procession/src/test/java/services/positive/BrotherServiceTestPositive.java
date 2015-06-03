@@ -69,25 +69,25 @@ public class BrotherServiceTestPositive extends AbstractTest {
 	//Comprobamos que el metodo devuelve los elementos correctos
 		@Test
 		public void testRegisterToBrotherhood() {
-			Collection<Brotherhood> brotherhoods;
-			Collection<Brotherhood> brotherhoodsAfter;
+			int before;
+			int after;
 			Brotherhood brotherhood;
 			Brother brother;
 
-			authenticate("brother1");
+			authenticate("brother5");
 			
-			brotherhood = brotherhoodService.findOne(34);
+			brotherhood = brotherhoodService.findOne(33);
 			brother = brotherService.findByPrincipal();
-
-			brotherhoods = brother.getBrotherhoods();
+			
+			before = brother.getBrotherhoods().size();
 			
 			brotherService.registerToBrotherhood(brotherhood);
 			
-			brotherhoodsAfter = brotherService.findByPrincipal().getBrotherhoods();
+			after = brother.getBrotherhoods().size();
 
 			authenticate(null);
-
-			Assert.isTrue(brotherhoods.size()< brotherhoodsAfter.size());
+			
+			Assert.isTrue(after > before);
 		}
 	
 	
