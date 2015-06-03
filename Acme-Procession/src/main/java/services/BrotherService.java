@@ -210,7 +210,7 @@ public class BrotherService {
 		brotherhoods.add(brotherhood);
 
 		result.setBrotherhoods(brotherhoods);
-		
+
 		save(result);
 
 		return result;
@@ -222,6 +222,22 @@ public class BrotherService {
 
 		result = brotherRepository.findByBrotherhoodAndBrother(brotherhoodId,
 				brother.getId());
+
+		return result;
+	}
+
+	public Brother findByCostumeInvoice(int costumeInvoiceId) {
+		Brother result;
+
+		result = brotherRepository.findByCostumeInvoice(costumeInvoiceId);
+
+		return result;
+	}
+
+	public Brother findByRegistrationInvoice(int registrationInvoiceId) {
+		Brother result;
+
+		result = brotherRepository.findByRegistrationInvoice(registrationInvoiceId);
 
 		return result;
 	}
@@ -246,8 +262,8 @@ public class BrotherService {
 
 		return result;
 	}
-	
-	public Collection<Brother> findWithAutoAndCostumePay(){
+
+	public Collection<Brother> findWithAutoAndCostumePay() {
 		Collection<Brother> result;
 
 		Assert.isTrue(actorService.isAdministrator());
@@ -256,8 +272,8 @@ public class BrotherService {
 
 		return result;
 	}
-	
-	public Collection<Object[]> findAllTotalCostOfRegistration(){
+
+	public Collection<Object[]> findAllTotalCostOfRegistration() {
 		Collection<Object[]> result;
 
 		Assert.isTrue(actorService.isAdministrator());
@@ -266,8 +282,8 @@ public class BrotherService {
 
 		return result;
 	}
-	
-	public Collection<Object[]> findAllTotalCostOfCostume(){
+
+	public Collection<Object[]> findAllTotalCostOfCostume() {
 		Collection<Object[]> result;
 
 		Assert.isTrue(actorService.isAdministrator());

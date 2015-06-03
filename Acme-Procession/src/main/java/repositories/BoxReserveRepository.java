@@ -18,5 +18,4 @@ public interface BoxReserveRepository extends
 	@Query("select b from BoxReserve b where b.boxInvoice.id=?1")
 	BoxReserve findByBoxInvoice(int boxInvoiceId);
 	
-
 }

@@ -94,7 +94,7 @@
 		
 		<security:intercept-url pattern="/messageFolder/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/message/actor/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/pdf/actor/**" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/pdf/customer/**" access="isAuthenticated()" /> 
 	
 		<security:intercept-url pattern="/law/**" access="permitAll" />
 	

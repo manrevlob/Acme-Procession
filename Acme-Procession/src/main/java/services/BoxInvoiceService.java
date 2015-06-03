@@ -50,10 +50,7 @@ public class BoxInvoiceService {
 	public BoxInvoice findOne(int boxInvoiceId) {
 		BoxInvoice result;
 		
-		Assert.isTrue(actorService.isViewer());
-		
 		result = boxInvoiceRepository.findOne(boxInvoiceId);
-		checkIfPrincipal(result);
 
 		return result;
 	}
@@ -75,6 +72,18 @@ public class BoxInvoiceService {
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public BoxInvoice findOneIfPrincipal(int boxInvoiceId) {
+		BoxInvoice result;
+		
+		Assert.isTrue(actorService.isViewer());
+		
+		result = findOne(boxInvoiceId);
+		
+		checkIfPrincipal(result);
+
+		return result;
+	}
 	
 	public Collection<BoxInvoice> findByPrincipal(){
 		Collection<BoxInvoice> result;

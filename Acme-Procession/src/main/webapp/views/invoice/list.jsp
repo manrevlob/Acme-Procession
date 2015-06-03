@@ -64,6 +64,22 @@
 				</jstl:when>
 			</jstl:choose>
 		</display:column>
+		<jstl:choose>
+			<jstl:when test="${requestURI == 'costumeInvoices/brother/list.do'}">
+					<jstl:if test="${row.paidMoment != null}">
+						<display:column>
+						<a href="pdf/customer/generate.do?invoiceId=${row.id}"> <spring:message code="invoice.pdf" /> </a>
+						</display:column>
+					</jstl:if>
+			</jstl:when>
+			<jstl:when test="${requestURI == 'registrationInvoice/brother/list.do'}">
+					<jstl:if test="${row.paidMoment != null}">
+						<display:column>
+						<a href="pdf/customer/generate.do?invoiceId=${row.id}"> <spring:message code="invoice.pdf" /> </a>
+						</display:column>
+					</jstl:if>
+			</jstl:when>
+		</jstl:choose>
 	</security:authorize>
 
 	<security:authorize access="hasRole('VIEWER')">
@@ -78,6 +94,11 @@
 				</jstl:choose>
 			</a>
 		</display:column>
+		<jstl:if test="${row.paidMoment != null}">
+			<display:column>
+				<a href="pdf/customer/generate.do?invoiceId=${row.id}"> <spring:message code="invoice.pdf" /> </a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 </display:table>
