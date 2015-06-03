@@ -4,12 +4,15 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.persistence.Index;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = { @Index(columnList = "orderNumber")})
 public class StretchOrder extends DomainEntity {
 	
 	// Constructors -----------------------------------------------------------
