@@ -213,6 +213,7 @@ public class CostumeServiceTestPositive extends AbstractTest {
 		
 		costumeService.markAsAvailable(costume);
 		
+		//Id de la costume1
 		costume = costumeService.findOne(99);
 
 		Assert.isTrue(costume.getSituation()=="available");

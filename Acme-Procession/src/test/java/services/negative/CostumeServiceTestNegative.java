@@ -263,7 +263,7 @@ public class CostumeServiceTestNegative extends AbstractTest {
 
 		authenticate("admin");
 
-		// ID del traje 1
+		// ID del traje 2
 		costumeService.findOneIfRented(100);
 
 		authenticate(null);
