@@ -68,6 +68,7 @@ public class CostumeService {
 		Costume result;
 
 		Assert.notNull(costume);
+		Assert.isTrue(actorService.isBrother());
 		Assert.isTrue(
 				costume.getSalePrice() != null
 						|| costume.getRentalPrice() != null,
@@ -84,7 +85,8 @@ public class CostumeService {
 		Costume result;
 
 		result = findOne(costumeId);
-
+		
+		Assert.isTrue(actorService.isBrother());
 		Assert.isTrue(result.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
 
@@ -95,7 +97,10 @@ public class CostumeService {
 		Costume result;
 
 		result = findOne(costumeId);
-
+		
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(result.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 		Assert.isTrue(result.getSituation().equals("available"));
 
 		return result;
@@ -105,7 +110,10 @@ public class CostumeService {
 		Costume result;
 
 		result = findOne(costumeId);
-
+		
+		Assert.isTrue(actorService.isBrother());
+		Assert.isTrue(result.getBrotherhood().getBigBrothers()
+				.contains(brotherService.findByPrincipal()));
 		Assert.isTrue(result.getSituation().equals("rented"));
 
 		return result;
