@@ -69,7 +69,7 @@
 		<acme:submit name="delete" code="procession.delete" />
 	</jstl:if> 
 	
-	<acme:cancel url="brotherhood/bigBrother/listOwns.do"
+	<acme:cancel url="procession/list.do?brotherhoodId=${procession.brotherhood.id}"
 		code="procession.cancel" />
 
 </form:form>
