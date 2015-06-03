@@ -142,11 +142,10 @@ public class BrotherService {
 		year = Calendar.getInstance().get(Calendar.YEAR);
 		month = Calendar.getInstance().get(Calendar.MONTH);
 
-		Assert.isTrue(brother.getCreditCard().getExpirationYear() >= year);
+		Assert.isTrue(brother.getCreditCard().getExpirationYear() >= year,"credit card expired");
 
 		if (brother.getCreditCard().getExpirationYear().equals(year)) {
-			Assert.isTrue(brother.getCreditCard().getExpirationMonth() > month,
-					"credit card expired");
+			Assert.isTrue(brother.getCreditCard().getExpirationMonth() > month,"credit card expired");
 		}
 
 		brother.setMessageFolders(saveSystemFolders(brother));

@@ -128,11 +128,10 @@ public class ViewerService {
 		year = Calendar.getInstance().get(Calendar.YEAR);
 		month = Calendar.getInstance().get(Calendar.MONTH);
 
-		Assert.isTrue(viewer.getCreditCard().getExpirationYear() >= year);
+		Assert.isTrue(viewer.getCreditCard().getExpirationYear() >= year,"credit card expired");
 
 		if (viewer.getCreditCard().getExpirationYear().equals(year)) {
-			Assert.isTrue(viewer.getCreditCard().getExpirationMonth() > month,
-					"credit card expired");
+			Assert.isTrue(viewer.getCreditCard().getExpirationMonth() > month,"credit card expired");
 		}
 
 		viewer.setMessageFolders(saveSystemFolders(viewer));
