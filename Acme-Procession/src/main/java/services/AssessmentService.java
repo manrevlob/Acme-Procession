@@ -49,6 +49,8 @@ public class AssessmentService {
 		Assert.notNull(assessment);
 		Assert.isTrue(actorService.isViewer());
 		
+		checkIsPrincipal(assessment);
+		
 		assessmentRepository.save(assessment);
 	}
 	
@@ -80,6 +82,15 @@ public class AssessmentService {
 		results = assessmentRepository.findAllByViewer(viewerId);
 		
 		return results;
+	}
+	
+	public void checkIsPrincipal(Assessment assessment){
+		Viewer viewer;
+		Assert.isTrue(actorService.isViewer());
+		
+		viewer = viewerService.findByPrincipal();
+		
+		Assert.isTrue(viewer == assessment.getViewer());
 	}
 
 }

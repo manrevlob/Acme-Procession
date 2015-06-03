@@ -1,7 +1,6 @@
 package services.positive;
  
 import java.util.Collection;
-import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import services.AssessmentService;
-import services.BoxInstanceService;
 import services.ProcessionService;
 import utilities.AbstractTest;
 import domain.Assessment;
-import domain.BoxInstance;
 import domain.Procession;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -65,57 +62,41 @@ public class AssessmentServiceTestPositive extends AbstractTest {
 		authenticate(null);
 	}
 	
-	// Editamos un boxInstance
-	@SuppressWarnings("deprecation")
+	// Editamos un assessment
 	@Test
 	public void testEdit() {
-		BoxInstance boxInstance;
-		Date date;
+		Assessment assessment;
+		Integer integer;
 		
-		authenticate("admin");
+		authenticate("viewer1");
 		
-		//Id de la boxInstance1
-		boxInstance = boxInstanceService.findOne(88);
+		//Id del assessment1
+		assessment = assessmentService.findOne(115);
 		
-		date = boxInstance.getDate();
+		integer = assessment.getValoration();
 		
-		boxInstance.setDate(new Date(2017,12,12));
+		assessment.setValoration(5);
 		
-		boxInstanceService.save(boxInstance);
+		assessmentService.save(assessment);
 
-		Assert.isTrue(!date.equals(boxInstance.getDate()));
-
-		authenticate(null);
-	}
-	
-	// Probamos a obtener las boxInstances a partir de una box
-	@Test
-	public void testFindByBox() {
-		Collection<BoxInstance> boxInstances;
-		
-		authenticate("admin");
-		
-		//ID de la box 1
-		boxInstances = boxInstanceService.findByBox(85);
-
-		Assert.isTrue(boxInstances.size()==2);
+		Assert.isTrue(!integer.equals(assessment.getValoration()));
 
 		authenticate(null);
 	}
 	
-	// Probamos a obtener las boxInstances a partir de una box
+	// Obtenemos todas las evaluaciones dado un viewer
 	@Test
-	public void testFindAvailablesByBox() {
-		Collection<BoxInstance> boxInstances;
+	public void testFindAllByViewer() {
+		Collection<Assessment> assessments;
 		
-		authenticate("admin");
+		authenticate("viewer1");
 		
-		//ID de la box 1
-		boxInstances = boxInstanceService.findAvailablesByBox(85);
+		assessments = assessmentService.findAllByViewer();
 
-		Assert.isTrue(boxInstances.size()==2);
+		// ID del assessment1 que pertenece al viewer1
+		Assert.isTrue(assessments.contains(assessmentService.findOne(115)));
 
 		authenticate(null);
 	}
-
+	
 }
