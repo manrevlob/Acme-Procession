@@ -83,7 +83,7 @@ public class BoxAdministratorController extends AbstractController {
 			ModelAndView result;
 			Box box;
 
-			box = boxService.findOne(boxId);
+			box = boxService.findOneIfPrincipal(boxId);
 			result = createEditModelAndView(box);
 
 			return result;

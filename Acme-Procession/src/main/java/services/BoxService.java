@@ -92,5 +92,15 @@ public class BoxService {
 
 		return result;
 	}
+	
+	public Box findOneIfPrincipal(int boxId) {
+		Box result;
+		
+		result = findOne(boxId);
+		
+		Assert.isTrue(result.getAdministrator() == administratorService.findByPrincipal());
+		
+		return result;
+	}
 
 }
