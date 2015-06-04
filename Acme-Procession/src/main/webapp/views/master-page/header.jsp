@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -25,7 +25,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			
-			<a class="navbar-brand" href="#"><span display="inline"><img alt="Brand" src="images/minilogo.png">Acme-Procession</span></a>
+			<a class="navbar-brand" href="<spring:url value='/' />"><span display="inline"><img alt="Brand" src="images/minilogo.png">Acme-Procession</span></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
