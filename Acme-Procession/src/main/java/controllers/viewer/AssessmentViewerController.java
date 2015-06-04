@@ -81,11 +81,12 @@ public class AssessmentViewerController extends AbstractController {
 			result = createByIdModelAndView(assessment);
 		} else {
 			try {
+				assessmentService.checkIsAssess(assessment);
 				assessmentService.save(assessment);
 				result = new ModelAndView("redirect:/assessment/viewer/list.do");
 			} catch (Throwable oops) {
 				result = createByIdModelAndView(assessment,
-						"brotherhood.commit.error");
+						"assessment.commit.error");
 			}
 		}
 		return result;
@@ -130,6 +131,7 @@ public class AssessmentViewerController extends AbstractController {
 			result = createEditModelAndView(assessment);
 		} else {
 			try {
+				assessmentService.checkIsAssess(assessment);
 				assessmentService.save(assessment);
 				result = new ModelAndView("redirect:/assessment/viewer/list.do");
 			} catch (Throwable oops) {

@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.AssessmentRepository;
 import domain.Assessment;
+import domain.Procession;
 import domain.Viewer;
 
 @Service
@@ -26,6 +27,8 @@ public class AssessmentService {
 	private ActorService actorService;
 	@Autowired
 	private ViewerService viewerService;
+	@Autowired
+	private ProcessionService processionService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -91,6 +94,14 @@ public class AssessmentService {
 		viewer = viewerService.findByPrincipal();
 		
 		Assert.isTrue(viewer == assessment.getViewer());
+	}
+	
+	public void checkIsAssess(Assessment assessment){
+		Collection<Procession> processions;
+		
+		processions = processionService.findAllPastDate();
+		
+		Assert.isTrue(processions.contains(assessment.getProcession()), "assessment.commit.error");
 	}
 
 }
