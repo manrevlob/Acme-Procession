@@ -40,6 +40,14 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<spring:message code="assessment.brotherhood" var="brotherhoodHeader" />
+	<display:column property="procession.brotherhood.name" title="${brotherhoodHeader}"
+		sortable="true" />
+
+	<spring:message code="assessment.procession" var="processionHeader" />
+	<display:column property="procession.name" title="${processionHeader}"
+		sortable="true" />
 
 	<spring:message code="assessment.valoration" var="valorationHeader" />
 	<display:column property="valoration" title="${valorationHeader}"
