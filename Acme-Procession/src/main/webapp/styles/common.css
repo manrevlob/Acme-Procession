@@ -8,6 +8,10 @@
  * 
  */
 
+body {
+	margin-top: 55px;
+}
+
 #space {
 	height: 75px;
 }
@@ -52,4 +56,9 @@
 .message {
 	color: red;
 	font-weight: bolder;
+}
+
+.navbar {
+	border-style: solid;
+    border-bottom: thick solid purple;
 }
