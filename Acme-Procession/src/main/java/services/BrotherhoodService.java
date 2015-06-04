@@ -91,6 +91,24 @@ public class BrotherhoodService {
 		result = brotherhoodRepository.save(brotherhood);
 
 		if (brotherhood.getId() == 0) {
+			UserAccount updatedUserAccount;
+			Authority bigBrotherAuthority;
+			Collection<Authority> authorities;
+			Brother brother;
+
+			brother = brotherService.findByPrincipal();
+
+			updatedUserAccount = brother.getUserAccount();
+			authorities = updatedUserAccount.getAuthorities();
+
+			bigBrotherAuthority = new Authority();
+			bigBrotherAuthority.setAuthority(Authority.BIGBROTHER);
+
+			if (!authorities.contains(bigBrotherAuthority)) {
+				updatedUserAccount.addAuthority(bigBrotherAuthority);
+				brother.setUserAccount(updatedUserAccount);
+			}
+
 			updateCreatorBrotherhoods(result);
 		}
 
@@ -170,14 +188,14 @@ public class BrotherhoodService {
 
 		brotherhood = addBrotherForm.getBrotherhood();
 		brother = addBrotherForm.getBrother();
-		
+
 		updatedUserAccount = brother.getUserAccount();
 		authorities = updatedUserAccount.getAuthorities();
-		
+
 		bigBrotherAuthority = new Authority();
 		bigBrotherAuthority.setAuthority(Authority.BIGBROTHER);
-		
-		if(!authorities.contains(bigBrotherAuthority)) {
+
+		if (!authorities.contains(bigBrotherAuthority)) {
 			updatedUserAccount.addAuthority(bigBrotherAuthority);
 			brother.setUserAccount(updatedUserAccount);
 		}
@@ -194,35 +212,35 @@ public class BrotherhoodService {
 		brotherService.save(brother);
 		save(brotherhood);
 	}
-	
-	public Brotherhood findByImage(int logoId){
+
+	public Brotherhood findByImage(int logoId) {
 		Brotherhood result;
-		
+
 		Assert.isTrue(actorService.isBrother());
-		
+
 		result = brotherhoodRepository.findByImage(logoId);
-		
+
 		return result;
 	}
-	
+
 	// Dashboard
-	public Collection<Brotherhood> findAllOrderByNumReg(){
+	public Collection<Brotherhood> findAllOrderByNumReg() {
 		Collection<Brotherhood> result;
-		
+
 		Assert.isTrue(actorService.isAdministrator());
-		
+
 		result = brotherhoodRepository.findAllOrderByNumReg();
-		
+
 		return result;
 	}
-	
-	public Collection<Object[]> findAllByAssess(){
+
+	public Collection<Object[]> findAllByAssess() {
 		Collection<Object[]> result;
-		
+
 		Assert.isTrue(actorService.isAdministrator());
-		
+
 		result = brotherhoodRepository.findAllByAssess();
-		
+
 		return result;
 	}
 

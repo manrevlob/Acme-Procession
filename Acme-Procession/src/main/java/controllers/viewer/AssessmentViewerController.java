@@ -97,13 +97,10 @@ public class AssessmentViewerController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Assessment assessment;
-		Collection<Procession> processions;
 
 		assessment = assessmentService.create();
-		processions = processionService.findAll();
 
 		result = createEditModelAndView(assessment);
-		result.addObject("processions", processions);
 
 		return result;
 	}
@@ -176,8 +173,12 @@ public class AssessmentViewerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Assessment assessment,
 			String message) {
 		ModelAndView result;
+		Collection<Procession> processions;
+
+		processions = processionService.findAll();
 
 		result = new ModelAndView("assessment/create");
+		result.addObject("processions", processions);
 		result.addObject("assessment", assessment);
 		result.addObject("message", message);
 
