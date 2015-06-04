@@ -21,7 +21,7 @@ public class BoxService {
 	private BoxRepository boxRepository;
 
 	// Supporting services ----------------------------------------------------
-	
+
 	@Autowired
 	private ActorService actorService;
 	@Autowired
@@ -34,14 +34,14 @@ public class BoxService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	
+
 	public Box create() {
 		Box result;
 
 		Assert.isTrue(actorService.isAdministrator());
 
 		result = new Box();
-		
+
 		result.setAdministrator(administratorService.findByPrincipal());
 
 		return result;
@@ -52,13 +52,14 @@ public class BoxService {
 
 		Assert.notNull(box);
 		Assert.isTrue(actorService.isAdministrator());
-		Assert.isTrue(box.getAdministrator().getUserAccount().getId()== administratorService.findByPrincipal().getUserAccount().getId());
+		Assert.isTrue(box.getAdministrator() == administratorService
+				.findByPrincipal());
 
 		result = boxRepository.save(box);
 
 		return result;
 	}
-	
+
 	public Box findOne(int boxId) {
 		Box result;
 
@@ -74,24 +75,22 @@ public class BoxService {
 
 		return result;
 	}
-	
-	// Other business methods -------------------------------------------------
-	
-	public Collection<Box> findByPrincipal(){
-	Collection<Box> result;
-	Administrator administrator;
-	int actorId;
-	
-	Assert.isTrue(actorService.isAdministrator());
- 	
- 	administrator= administratorService.findByPrincipal();
- 	actorId = administrator.getId();
 
-	result = boxRepository.findByAdministratorId(actorId);
-	
-	return result;
-}
-	
-	
+	// Other business methods -------------------------------------------------
+
+	public Collection<Box> findByPrincipal() {
+		Collection<Box> result;
+		Administrator administrator;
+		int actorId;
+
+		Assert.isTrue(actorService.isAdministrator());
+
+		administrator = administratorService.findByPrincipal();
+		actorId = administrator.getId();
+
+		result = boxRepository.findByAdministratorId(actorId);
+
+		return result;
+	}
 
 }
