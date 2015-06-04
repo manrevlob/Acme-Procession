@@ -103,10 +103,10 @@
 	</security:authorize>
 
 	<spring:message code="costume.size" var="sizeHeader" />
-	<display:column property="size" title="${sizeHeader}" />
+	<display:column property="size" title="${sizeHeader}" sortable="true"/>
 
 	<spring:message code="costume.status" var="statusHeader" />
-	<display:column title="${statusHeader}">
+	<display:column title="${statusHeader}" sortable="true">
 		<jstl:choose>
 			<jstl:when test="${row.status == 'new'}">
 				<spring:message code="costume.new"/>
@@ -124,7 +124,7 @@
 	</display:column>
 	
 	<spring:message code="costume.salePrice" var="salePriceHeader" />
-	<display:column property="salePrice" title="${salePriceHeader}" />
+	<display:column property="salePrice" title="${salePriceHeader}"  />
 	
 	<spring:message code="costume.rentalPrice" var="rentalPriceHeader" />
 	<display:column property="rentalPrice" title="${rentalPriceHeader}" />
