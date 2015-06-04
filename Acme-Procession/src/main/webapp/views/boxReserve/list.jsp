@@ -53,9 +53,6 @@
 	<spring:message code="boxReserve.date" var="dateHeader"  />
 	<display:column property="date" title="${dateHeader}" sortable="true" format="{0,date,dd/MM/yyyy}" />
 	
-	<spring:message code="boxReserve.isCancelled" var="isCancelledHeader" />
-	<display:column property="isCancelled" title="${isCancelledHeader}"  />
-	
 	<spring:message code="boxReserve.amount" var="amountHeader" />
 	<display:column property="totalCost.amount" title="${amountHeader}" />
 
