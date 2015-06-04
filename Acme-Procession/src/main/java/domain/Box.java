@@ -28,7 +28,7 @@ public class Box extends DomainEntity {
 	private String description;
 	private String locality;
 	private String location;
-	private Integer numberOfChairs;
+	private int numberOfChairs;
 	private Money price;
 	
 	
@@ -69,11 +69,11 @@ public class Box extends DomainEntity {
 	}
 
 	@Min(1)
-	public Integer getNumberOfChairs() {
+	public int getNumberOfChairs() {
 		return numberOfChairs;
 	}
 
-	public void setNumberOfChairs(Integer numberOfChairs) {
+	public void setNumberOfChairs(int numberOfChairs) {
 		this.numberOfChairs = numberOfChairs;
 	}
 	
