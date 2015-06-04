@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -205,6 +206,21 @@ public class ProcessionService {
 		procession.setIsClosedManually(false);
 
 		save(procession);
+	}
+	
+	public Collection<Procession> findAllPastDate(){
+		Date date;
+		Collection<Procession> result;
+		long milliseconds;
+		
+		Assert.isTrue(actorService.isViewer());
+		
+		milliseconds = System.currentTimeMillis() - 100;
+		date = new Date(milliseconds);
+		
+		result = processionRepository.findAllPastDate(date);
+		
+		return result;
 	}
 
 	// Dashboard

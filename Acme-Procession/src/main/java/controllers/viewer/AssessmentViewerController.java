@@ -175,7 +175,7 @@ public class AssessmentViewerController extends AbstractController {
 		ModelAndView result;
 		Collection<Procession> processions;
 
-		processions = processionService.findAll();
+		processions = processionService.findAllPastDate();
 
 		result = new ModelAndView("assessment/create");
 		result.addObject("processions", processions);
