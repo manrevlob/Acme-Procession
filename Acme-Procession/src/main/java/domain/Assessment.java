@@ -25,7 +25,7 @@ public class Assessment extends DomainEntity {
 	private String street;
 	
 	@NotNull
-	@Range(min = 1, max = 12)
+	@Range(min = 0, max = 10)
 	public Integer getValoration() {
 		return valoration;
 	}
