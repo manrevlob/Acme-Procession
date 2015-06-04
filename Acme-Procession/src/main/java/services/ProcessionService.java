@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -77,10 +78,17 @@ public class ProcessionService {
 	}
 
 	public Procession save(Procession procession) {
+		Calendar actualDate;
+		
 		Assert.notNull(procession);
 		Assert.isTrue(actorService.isBrother());
 		Assert.isTrue(procession.getBrotherhood().getBigBrothers()
 				.contains(brotherService.findByPrincipal()));
+		
+		actualDate = Calendar.getInstance();
+
+		Assert.isTrue(procession.getStartMoment().getTime() >= actualDate.getTime().getTime(),
+				"procession.dateInPast.error");
 		Assert.isTrue(
 				procession.getStartMoment().before(procession.getEndMoment()),
 				"procession.date.error");
@@ -99,7 +107,7 @@ public class ProcessionService {
 				.contains(brotherService.findByPrincipal()));
 		// Comprobamos que aún nadie está registrado en la procesión
 		Assert.isTrue(procession.getRegistrations() == null
-				|| procession.getRegistrations().size() == 0);
+				|| procession.getRegistrations().size() == 0, "procession.oneOrMoreRegisters.error");
 
 		processionRepository.delete(procession);
 	}

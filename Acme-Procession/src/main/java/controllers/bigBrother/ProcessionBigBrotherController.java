@@ -99,8 +99,13 @@ public class ProcessionBigBrotherController extends AbstractController {
 					result = createEditModelAndView(procession,
 							"procession.date.error");
 				} else {
-					result = createEditModelAndView(procession,
-							"procession.commit.error");
+					if (oops.getMessage().equals("procession.dateInPast.error")) {
+						result = createEditModelAndView(procession,
+								"procession.dateInPast.error");
+					} else {
+						result = createEditModelAndView(procession,
+								"procession.commit.error");
+					}
 				}
 			}
 		}
@@ -122,8 +127,13 @@ public class ProcessionBigBrotherController extends AbstractController {
 						"redirect:/procession/list.do?brotherhoodId="
 								+ procession.getBrotherhood().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(procession,
-						"procession.commit.error");
+				if(oops.getMessage().equals("procession.oneOrMoreRegisters.error")) {
+					result = createEditModelAndView(procession,
+							"procession.oneOrMoreRegisters.error");
+				} else {
+					result = createEditModelAndView(procession,
+							"procession.commit.error");
+				}
 			}
 		}
 
