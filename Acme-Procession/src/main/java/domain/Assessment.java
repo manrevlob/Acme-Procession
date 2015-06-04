@@ -56,6 +56,7 @@ public class Assessment extends DomainEntity {
 	}
 	
 	@Valid
+	@NotNull
 	@ManyToOne(optional = false)
 	public Procession getProcession() {
 		return procession;
