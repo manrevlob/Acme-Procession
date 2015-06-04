@@ -32,6 +32,6 @@
 
 	<acme:submit name="save" code="assessment.save"/>
 	
-	<acme:cancel url="assessment/list" code="assessment.cancel"/>
+	<acme:cancel url="assessment/viewer/list.do" code="assessment.cancel"/>
 	
 </form:form>
