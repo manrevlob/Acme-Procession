@@ -32,19 +32,24 @@
 <display:table name="boxes" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
 	<security:authorize  access="hasRole('ADMINISTRATOR')">
-	
+		<jsp:useBean id="principalId" class="security.LoginService" /> 
+		
 		<spring:message code="boxInstance.create" var="createHeader" />
 		<display:column title="${createHeader}">
-			<a href="boxInstance/administrator/create.do?boxId=${row.id}">
-				[<jstl:out value="${createHeader}"/>]
-			</a>
+			<jstl:if test="${principalId.getPrincipal().getId() == row.administrator.userAccount.id}">
+				<a href="boxInstance/administrator/create.do?boxId=${row.id}">
+					[<jstl:out value="${createHeader}"/>]
+				</a>
+			</jstl:if>
 		</display:column>
 		
 		<spring:message code="box.edit" var="editHeader" />
 		<display:column title="${editHeader}">
-			<a href="box/administrator/edit.do?boxId=${row.id}">
-				[<jstl:out value="${editHeader}"/>]
-			</a>
+			<jstl:if test="${principalId.getPrincipal().getId() == row.administrator.userAccount.id}">
+				<a href="box/administrator/edit.do?boxId=${row.id}">
+					[<jstl:out value="${editHeader}"/>]
+				</a>
+			</jstl:if>
 		</display:column>
 		
 	</security:authorize>
