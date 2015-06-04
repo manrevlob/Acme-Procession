@@ -26,7 +26,7 @@ public class CreateBoxReserveForm {
 	
 	
 	@Min(1)	
-	public Integer getChairs() {
+	public int getChairs() {
 		return chairs;
 	}
 
