@@ -148,6 +148,17 @@ public class Procession extends DomainEntity {
 		
 		return oneWeekBeforeArrived;
 	}
+	
+	@Transient
+	public boolean getIsAssertable(){
+		boolean assertable;
+		Calendar actualDate;
+		
+		actualDate = Calendar.getInstance();
+		assertable = getEndMoment().before(actualDate.getTime());
+		
+		return assertable;
+	}
 
 	// Relationships ----------------------------------------------------------
 

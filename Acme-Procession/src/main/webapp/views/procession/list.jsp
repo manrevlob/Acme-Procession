@@ -135,9 +135,11 @@
 	<security:authorize access="hasRole('VIEWER')">
 		<spring:message code="procession.assessments" var="assessmentHeader" />
 		<display:column title="${assessmentHeader}">
-			<a href="assessment/viewer/assessById.do?processionId=${row.id}">
-				[<jstl:out value="${assessmentHeader}" />]
-			</a>
+			<jstl:if test="${row.isAssertable}">
+				<a href="assessment/viewer/assessById.do?processionId=${row.id}">
+					[<jstl:out value="${assessmentHeader}" />]
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	
