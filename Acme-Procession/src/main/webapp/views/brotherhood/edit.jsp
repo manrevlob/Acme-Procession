@@ -37,6 +37,11 @@
 	
 	<acme:textarea code="brotherhood.history" path="history" />
 	
+	<jstl:if test="${brotherhood.id == 0}">
+		<span class="error"><spring:message code="brotherhood.firstTimeAdvice"/></span>
+		<br />
+	</jstl:if>
+	
 	<acme:submit name="save" code="brotherhood.save" />
 	
 	<acme:cancel url="brotherhood/bigBrother/listOwns.do" code="brotherhood.cancel"/>
