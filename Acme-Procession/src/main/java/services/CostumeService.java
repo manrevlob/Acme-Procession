@@ -190,7 +190,7 @@ public class CostumeService {
 			Brotherhood brotherhood, int minSize, int maxSize) {
 		Collection<Costume> result;
 
-		Assert.isTrue(minSize < maxSize);
+		Assert.isTrue(minSize <= maxSize, "costume.minSizeHigherThanMaxSize.error");
 
 		result = costumeRepository.findAvailablesByBrotherhoodAndSize(
 				brotherhood, minSize, maxSize);
