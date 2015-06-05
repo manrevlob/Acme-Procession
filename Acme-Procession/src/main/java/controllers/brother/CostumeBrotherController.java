@@ -120,8 +120,10 @@ public class CostumeBrotherController extends AbstractController {
 			result = findModelAndView(brotherhoodAndSizeSelectForm);
 		} else {
 			try {
-				Assert.isTrue(brotherhoodAndSizeSelectForm.getMinSize() <= brotherhoodAndSizeSelectForm
-						.getMaxSize());
+				Assert.isTrue(
+						brotherhoodAndSizeSelectForm.getMinSize() <= brotherhoodAndSizeSelectForm
+								.getMaxSize(),
+						"costume.minSizeHigherThanMaxSize.error");
 				result = new ModelAndView(
 						"redirect:/costume/brother/list.do?brotherhoodId="
 								+ brotherhoodAndSizeSelectForm.getBrotherhood()
