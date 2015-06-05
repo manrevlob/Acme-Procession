@@ -77,8 +77,8 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 		money.setCurrency("Euro");
 
 		procession.setName("Test");
-		procession.setStartMoment(new Date(System.currentTimeMillis() + 1));
-		procession.setEndMoment(new Date(System.currentTimeMillis() + 1001));
+		procession.setStartMoment(new Date(System.currentTimeMillis() + 1000000000));
+		procession.setEndMoment(new Date(System.currentTimeMillis() + 1100000000));
 		procession.setLocality("Test");
 		procession.setItinerary("Test");
 		procession.setAssociatedCost(money);
@@ -120,8 +120,8 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 		money.setCurrency("Euro");
 
 		procession.setName("Test");
-		procession.setStartMoment(new Date(System.currentTimeMillis() + 100000));
-		procession.setEndMoment(new Date(System.currentTimeMillis() + 1000001001));
+		procession.setStartMoment(new Date(System.currentTimeMillis() + 1000000000));
+		procession.setEndMoment(new Date(System.currentTimeMillis() + 1100000000));
 		procession.setLocality("Test");
 		procession.setItinerary("Test");
 		procession.setAssociatedCost(money);
