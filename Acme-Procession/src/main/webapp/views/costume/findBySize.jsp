@@ -25,7 +25,7 @@
 	
 	<acme:textbox code="costume.minSize" path="minSize"/>
 	
-	<acme:textbox code="costume.minSize" path="maxSize"/>
+	<acme:textbox code="costume.maxSize" path="maxSize"/>
 
 	<acme:submit name="search" code="costume.search"/> 
 
