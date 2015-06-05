@@ -120,8 +120,8 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 		money.setCurrency("Euro");
 
 		procession.setName("Test");
-		procession.setStartMoment(new Date(System.currentTimeMillis() + 1));
-		procession.setEndMoment(new Date(System.currentTimeMillis() + 1001));
+		procession.setStartMoment(new Date(System.currentTimeMillis() + 100000));
+		procession.setEndMoment(new Date(System.currentTimeMillis() + 1000001001));
 		procession.setLocality("Test");
 		procession.setItinerary("Test");
 		procession.setAssociatedCost(money);
@@ -179,8 +179,8 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 
 		addStretchToProcessionForm = new AddStretchToProcessionForm();
 
-		// ID de la procesión 1
-		procession = processionService.findOneIfPrincipal(45);
+		// ID de la procesión 2
+		procession = processionService.findOneIfPrincipal(46);
 
 		// Nos creamos un nuevo tramo de paso
 		ordinaryStretch = ordinaryStretchService.create(procession
@@ -220,11 +220,18 @@ public class ProcessionServiceTestPositive extends AbstractTest {
 
 		addStretchToProcessionForm = new AddStretchToProcessionForm();
 
-		// ID de la procesión 1
-		procession = processionService.findOneIfPrincipal(45);
+		// ID de la procesión 2
+		procession = processionService.findOneIfPrincipal(46);
 
 		// ID del carving 3
-		carving = carvingService.findOne(50);
+		carving = carvingService.create(procession.getBrotherhood());
+		carving.setName("Test");
+		carving.setDescription("Test");
+		carving.setAuthor("Test");
+		carving.setYear(1990);
+		carving.setComments("Test");
+		
+		carving = carvingService.save(carving);
 
 		carvings = new ArrayList<Carving>();
 		carvings.add(carving);
